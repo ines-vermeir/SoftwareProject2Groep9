@@ -1,4 +1,4 @@
-package softwareproject2Location;
+package logic;
 
 import java.util.Arrays;
 
