@@ -1,4 +1,4 @@
-package basisKlasses;
+package logic;
 
 import java.util.ArrayList;
 
