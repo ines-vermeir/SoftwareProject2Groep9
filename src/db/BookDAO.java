@@ -186,6 +186,8 @@ public boolean updateBook(Book b) throws SQLException, Exception{
 		String sql= "SELECT * FROM Books WHERE isbn = '9780062820754' ";
 		try{
 			
+			
+			
 			if(getConnection().isClosed()){
 				throw new Exception("error");
 			}
