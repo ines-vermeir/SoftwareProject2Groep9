@@ -4,20 +4,20 @@
 package logic;
 
 import java.util.Date;
-
-/**
- * @author Charles
- * import logic.Training		// --> to be activated when class Training is ready, and change of code?  27/10/2017
- */
+//
+///**
+// * @author Charles
+// * import logic.Training		// --> to be activated when class Training is ready, and change of code?  27/10/2017
+// */
 public class Certificate {
 
 	int ID;
 	Date issueDate;			// should this be a string as in the diagram?
 	Date expirationDate;
 	int trainingID;
-	/**
-	 * @param args
-	 */
+//	/**
+//	 * @param args
+//	 */
 	Certificate(int ID, Date issueDate, Date expirationDate, int trainingID){
 		this.ID = ID;
 		this.issueDate = issueDate;
@@ -61,11 +61,6 @@ public class Certificate {
 
 	public void setTrainingID(int trainingID) {
 		this.trainingID = trainingID;
-	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
 	}
 
 }
