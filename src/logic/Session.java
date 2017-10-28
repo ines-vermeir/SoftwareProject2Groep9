@@ -29,6 +29,11 @@ public class Session {
 		this.studentsEnrolled = studentsEnrolled;
 		this.studentsPresent = studentsPresent;
 	}
+	
+	public Session (int sessionID)
+	{
+		this.SessionID = sessionID;
+	}
 
 	public int getSessionID() {
 		return SessionID;
@@ -99,8 +104,5 @@ public class Session {
 				+ startTime + ", endTime=" + endTime + ", location=" + location + ", teachers=" + teachers
 				+ ", studentsEnrolled=" + studentsEnrolled + ", studentsPresent=" + studentsPresent + "]";
 	}
-
-	
-	
 	
 }
