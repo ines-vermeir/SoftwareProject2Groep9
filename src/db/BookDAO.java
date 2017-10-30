@@ -126,19 +126,27 @@ public boolean updateBook(Book b) throws SQLException, Exception{
 		
 	}
 	
-	public Book fill(ResultSet r){
+	private Book fill(ResultSet r) throws SQLException{
 		Book b= null;
+		
+		
+		while(r.next()) {
+		
 		try{
-			 long milliseconds = r.getTimestamp("releaseDate").getTime() + (r.getTimestamp("releaseDate").getNanos() / 1000000);
+		 long milliseconds = r.getTimestamp("releaseDate").getTime() + (r.getTimestamp("releaseDate").getNanos() / 1000000);
 			Calendar c = GregorianCalendar.getInstance();
-			c.setTimeInMillis(milliseconds);
+		c.setTimeInMillis(milliseconds);
 			
-			b = new Book(r.getString("isbn"),r.getString("author"), r.getString("title"), c);
+		b = new Book(r.getString("isbn"),r.getString("author"), r.getString("title"), c);
+	
 			
 		}catch(Exception e){
 			System.out.println("fout met fillen");
-		}
+		}}
 		return b;
+		
+		
+		
 	}
 	
 	
@@ -182,8 +190,8 @@ public boolean updateBook(Book b) throws SQLException, Exception{
 		
 		Statement s= null; 
 		ResultSet r = null; 
-		//String sql= "SELECT * FROM Books WHERE isbn = '"+isbn.trim()+ "'";
-		String sql= "SELECT * FROM Books WHERE isbn = '9780062820754' ";
+		String sql= "SELECT * FROM Books WHERE isbn = '"+isbn.trim()+ "'";
+		
 		try{
 			
 			
@@ -196,6 +204,8 @@ public boolean updateBook(Book b) throws SQLException, Exception{
 			
               			
 			r= s.executeQuery(sql); 
+			
+
 			
 			return fill(r);
 			

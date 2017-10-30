@@ -41,18 +41,23 @@ public class Source {
 		
 		
 		
+		if(dao.getBook("9780062820754") == null) {
+			
+			System.out.println("Sorry het boek dat jij zoekt bestaat niet");
+		}else {
+			System.out.println(dao.getBook("9780062820754").toString());
+		}
 		
-		System.out.println(dao.getBook("test").toString());
 		
 		
-//		
-//		System.out.println("---- UPDATE BOOK------------");
-//		Book b6 = dao.getBook("test");
-//		b6.setAuthor("testUpdated");
-//		b6.setTitle("New title");
-//		dao.updateBook(b6);
-//		System.out.println(dao.getBook("test").toString());
-//		
+		/*
+		System.out.println("---- UPDATE BOOK------------");
+		Book b6 = dao.getBook("test");
+	b6.setAuthor("testUpdated");
+		b6.setTitle("New title");
+		dao.updateBook(b6);
+		System.out.println(dao.getBook("test").toString());  */
+		
 		
 	}
 
