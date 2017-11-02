@@ -4,8 +4,17 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+//Deze annotation is voor uw klasse/tabel op uw database
+@Entity
+//@Table(name="") wordt gebruikt als de naam van de klasse en de naam van de table op de database anders is
+@Table(name="Books")
 public class Book {
-	
+	//Deze annotation is voor uw primary key
+    @Id	
 	private String isbn;
 	private String title; 
 	private String author;
@@ -17,6 +26,13 @@ public class Book {
 		this.title = title;
 		this.author = author;
 		this.releaseDate = releaseDate;
+	}
+   
+//Voor Hibernate moet je voorzien van een default constructor
+	
+	public Book() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 

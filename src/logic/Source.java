@@ -5,9 +5,10 @@ package logic;
 import java.sql.SQLException;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import db.BookDAO;
+import db.BookDB;
 
 public class Source {
 
@@ -33,21 +34,21 @@ public class Source {
 //		dao.insertBook(b5);
 		//dao.deleteBook("test");
 		
-		ArrayList<Book> lijst = dao.getAllBooks();
-		System.out.println(lijst.toString());
-		
-		System.out.println("---- GET BOOK by ISBN------------");
-		
-		
-		
-		if(dao.getBook("9780062820754") == null) {
-			
-			System.out.println("Sorry het boek dat jij zoekt bestaat niet");
-		}else {
-			System.out.println(dao.getBook("9780062820754").toString());
-		}
-		
-		
+//		ArrayList<Book> lijst = dao.getAllBooks();
+//		System.out.println(lijst.toString());
+//		
+//		System.out.println("---- GET BOOK by ISBN------------");
+//		
+//		
+//		
+//		if(dao.getBook("9780062820754") == null) {
+//			
+//			System.out.println("Sorry het boek dat jij zoekt bestaat niet");
+//		}else {
+//			System.out.println(dao.getBook("9780062820754").toString());
+//		}
+//		
+//		
 		
 		/*
 		System.out.println("---- UPDATE BOOK------------");
@@ -58,6 +59,45 @@ public class Source {
 		System.out.println(dao.getBook("test").toString());  */
 		
 		
+//------------ Volgende code is om de connectie met de database met Hibernate te testen (By Sebastian G)  ----------
+		Calendar myCal =  new GregorianCalendar();
+		
+		myCal.set(GregorianCalendar.YEAR, 2015);
+		myCal.set(GregorianCalendar.MONTH,8);
+		myCal.set(GregorianCalendar.DATE,23);
+	   Book myBook = new Book("test5","Last Title","Last Author", myCal);
+		
+		
+		BookDB db = new BookDB();
+		
+		//db.insertBook(myBook);
+		
+/*	 Book newBook = db.getBook("Last Book");
+		
+	 if(newBook != null) {
+		 System.out.println(newBook.toString());
+	 }else {
+		 System.out.println("Sorry, het boek bestaat niet");
+	 }
+	 
+	 */
+	
+//		
+//		newBook.setTitle("Last Book in the World");
+//		db.updateBook(newBook);
+//		
+//		System.out.println("-----UPDATE-------");
+//		
+//		System.out.println(newBook.toString());
+		
+		
+	//	db.deleteBook(myBook);
+		
+		ArrayList<Book> books = db.getAllBooks();
+		
+		for(int i=0; i< books.size(); i++) {
+			System.out.println(books.get(i).toString());
+		}
 	}
 
 	
