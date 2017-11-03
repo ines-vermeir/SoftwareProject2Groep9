@@ -9,6 +9,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import db.BookDAO;
 import db.BookDB;
+import db.TestGson;
+import db.TestJackson;
 
 public class Source {
 
@@ -93,11 +95,21 @@ public class Source {
 		
 	//	db.deleteBook(myBook);
 		
-		ArrayList<Book> books = db.getAllBooks();
+	//	ArrayList<Book> books = db.getAllBooks();
 		
-		for(int i=0; i< books.size(); i++) {
-			System.out.println(books.get(i).toString());
-		}
+//		for(int i=0; i< books.size(); i++) {
+//		//	System.out.println(books.get(i).toString());
+//		}
+		
+		//--------------- Odata lezen ---------------------------
+	//	ArrayList<Employee> employees= (ArrayList<Employee>) TestJackson.getEmployees();
+		ArrayList<Employee> employees=  TestGson.getEmployees();
+		
+		
+		for(int i=0; i< employees.size(); i++) {
+			System.out.println(employees.get(i).toString());
+			}
+		
 	}
 
 	
