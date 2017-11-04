@@ -1,11 +1,33 @@
 package logic;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 //Om te testen heb ik de klasse Employee moeten aanpassen met de parameters van de Odata - Sebastian G
-@JsonIgnoreProperties(ignoreUnknown = true)
+//@JsonIgnoreProperties(ignoreUnknown = true)
+
+
 public class Employee {
-	 private int employeeID; 
+	  @Override
+//	public String toString() {
+//		return "Employee [employeeID=" + employeeID + ", lastName=" + lastName + ", firstName=" + firstName + ", title="
+//				+ title + ", titleOfCourtesy=" + titleOfCourtesy + ", birthDate=" + birthDate + ", hireDate=" + hireDate
+//				+ ", address=" + address + ", city=" + city + ", region=" + region + ", postalCode=" + postalCode
+//				+ ", country=" + country + ", homePhone=" + homePhone + ", extension=" + extension + ", photo=" + photo
+//				+ ", notes=" + notes + ", reportsTo=" + reportsTo + ", photoPath=" + photoPath + "]";
+//	}
+
+	
+	  public String toString() {
+			return "Employee [employeeID=" + employeeID + ", lastName=" + lastName + ", firstName=" + firstName + ", title="
+					+ title + ", titleOfCourtesy=" + titleOfCourtesy + ", birthDate=" + birthDate + ", hireDate=" + hireDate
+					+ ", address=" + address +"]";
+		}
+		
+	
+	private int employeeID; 
 	  private String lastName; 
 	  private String firstName; 
 	  private String title; 
@@ -23,53 +45,8 @@ public class Employee {
 	  private String notes; 
 	  private int reportsTo; 
 	  private String photoPath; 
-	  
-//	  public Employee(int employeeID, String lastName, String firstName,String address,String title) {
-//		  
-//		  this.employeeID = employeeID; 
-//		  this.lastName = lastName; 
-//		  this.firstName = firstName; 
-//		  this.address = address; 
-//		  this.title = title;
-//		  
-//	  }
-	  public Employee(int employeeID, String lastName, String firstName, String title, String titleOfCourtesy,
-			String birthDate, String hireDate, String address, String city, String region, String postalCode,
-			String country, String homePhone, String extension, String photo, String notes, int reportsTo,
-			String photoPath) {
-		super();
-		this.employeeID = employeeID;
-		this.lastName = lastName;
-		this.firstName = firstName;
-		this.title = title;
-		this.titleOfCourtesy = titleOfCourtesy;
-		this.birthDate = birthDate;
-		this.hireDate = hireDate;
-		this.address = address;
-		this.city = city;
-		this.region = region;
-		this.postalCode = postalCode;
-		this.country = country;
-		this.homePhone = homePhone;
-		this.extension = extension;
-		this.photo = photo;
-		this.notes = notes;
-		this.reportsTo = reportsTo;
-		this.photoPath = photoPath;
-	}
-	public Employee() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	@Override
-	public String toString() {
-		return "Employee [employeeID=" + employeeID + ", lastName=" + lastName + ", firstName=" + firstName + ", title="
-				+ title + ", titleOfCourtesy=" + titleOfCourtesy + ", birthDate=" + birthDate + ", hireDate=" + hireDate
-				+ ", address=" + address + ", city=" + city + ", region=" + region + ", postalCode=" + postalCode
-				+ ", country=" + country + ", homePhone=" + homePhone + ", extension=" + extension + ", photo=" + photo
-				+ ", notes=" + notes + ", reportsTo=" + reportsTo + ", photoPath=" + photoPath + "]";
-	}
-	public int getEmployeeID(){
+
+	  public int getEmployeeID(){
 	  	return employeeID; 
 	  }
 	  public void setEmployeeID(int input){
@@ -177,6 +154,18 @@ public class Employee {
 	  public void setPhotoPath(String input){
 	  	 this.photoPath = input;
 	  }
+	  
+	  
+	  
+	 
+	  
+	  
+
+
+}
+  
+
+
 	
 	/*
 	
@@ -251,8 +240,9 @@ public class Employee {
 		this.concurrency = concurrency;
 	}
 	
+	}
 	
 	*/
 	
 
-}
+

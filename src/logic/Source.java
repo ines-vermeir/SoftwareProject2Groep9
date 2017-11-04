@@ -62,16 +62,16 @@ public class Source {
 		
 		
 //------------ Volgende code is om de connectie met de database met Hibernate te testen (By Sebastian G)  ----------
-		Calendar myCal =  new GregorianCalendar();
-		
-		myCal.set(GregorianCalendar.YEAR, 2015);
-		myCal.set(GregorianCalendar.MONTH,8);
-		myCal.set(GregorianCalendar.DATE,23);
-	   Book myBook = new Book("test5","Last Title","Last Author", myCal);
-		
-		
-		BookDB db = new BookDB();
-		
+//		Calendar myCal =  new GregorianCalendar();
+//		
+//		myCal.set(GregorianCalendar.YEAR, 2015);
+//		myCal.set(GregorianCalendar.MONTH,8);
+//		myCal.set(GregorianCalendar.DATE,23);
+//	   Book myBook = new Book("test5","Last Title","Last Author", myCal);
+//		
+//		
+//		BookDB db = new BookDB();
+//		
 		//db.insertBook(myBook);
 		
 /*	 Book newBook = db.getBook("Last Book");
@@ -102,12 +102,14 @@ public class Source {
 //		}
 		
 		//--------------- Odata lezen ---------------------------
-	//	ArrayList<Employee> employees= (ArrayList<Employee>) TestJackson.getEmployees();
-		ArrayList<Employee> employees=  TestGson.getEmployees();
+		ArrayList<Employee> employees= (ArrayList<Employee>) TestJackson.getEmployees();
+	//	ArrayList<Value> employees=  TestGson.getEmployees();
 		
+	//	System.out.println(TestGson.readUrl("http://services.odata.org/V3/Northwind/Northwind.svc/Employees?$format=json"));
 		
 		for(int i=0; i< employees.size(); i++) {
 			System.out.println(employees.get(i).toString());
+			System.out.println("\n");
 			}
 		
 	}
