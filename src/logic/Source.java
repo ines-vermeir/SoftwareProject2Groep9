@@ -1,13 +1,14 @@
 package logic;
 
 
-
 import java.sql.SQLException;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import db.BookDAO;
+import db.SessionDAO;
 
 public class Source {
 
@@ -23,7 +24,7 @@ public class Source {
 //		
 
 //		Book b5 = new Book("test1","test1","testen1",new GregorianCalendar(2017,8,16));
-		BookDAO dao = new BookDAO();
+		//BookDAO dao = new BookDAO();
 		
 
 //		dao.insertBook(b1);
@@ -33,15 +34,17 @@ public class Source {
 //		dao.insertBook(b5);
 		//dao.deleteBook("test");
 		
-		ArrayList<Book> lijst = dao.getAllBooks();
-		System.out.println(lijst.toString());
+		//ArrayList<Book> lijst = dao.getAllBooks();
+		//System.out.println(lijst.toString());
 		
-		System.out.println("---- GET BOOK by ISBN------------");
-		
-		
+		//System.out.println("---- GET BOOK by ISBN------------");
 		
 		
-		System.out.println(dao.getBook("test").toString());
+		
+		
+		
+		
+		//System.out.println(dao.getBook("test").toString());
 		
 		
 //		
@@ -52,6 +55,14 @@ public class Source {
 //		dao.updateBook(b6);
 //		System.out.println(dao.getBook("test").toString());
 //		
+		
+		//Testcode sessieDAO:
+		//int trainingID, Calendar date, String startTime, String endTime, Location location
+		//int ID, String streetName, String number, String postalCode, String city, String country, String name, String info
+		//Location l = new Location (5, "teststraat", "testnummer", "testpostalcode", "testcity", "testcountry", "testname", "testinfo");		
+		//Session s = new Session(10, new GregorianCalendar(2017,8,16), "09:00", "12:00", l);
+		//SessionDAO dao = new SessionDAO();
+		//dao.insertSession(s);
 		
 	}
 

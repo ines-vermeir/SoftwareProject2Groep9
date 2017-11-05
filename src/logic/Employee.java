@@ -9,17 +9,17 @@ public class Employee {
 	private String gender;
 	private String concurrency;
 	
-	public static void main(String[] args) {
-		Employee Gill = new Employee("Gill", "Steens", "gillsteens@gmail.com", "Hollestraat 112 1500 Halle", "m", "concurrency" );
-		Employee Gill2 = new Employee("Eva", "Bouten", "gillsteens@gmail.com", "Hollestraat 112 1500 Halle", "m", "concurrency" );
-		Employee Gill3 = new Employee("Charles", "White", "gillsteens@gmail.com", "Hollestraat 112 1500 Halle", "m", "concurrency" );
-		Employee Gill4 = new Employee("Ines", "Vermeire", "gillsteens@gmail.com", "Hollestraat 112 1500 Halle", "m", "concurrency" );
-
-		System.out.println(Gill);
-		System.out.println(Gill2);
-		System.out.println(Gill3);
-		System.out.println(Gill4);
-	}
+//	public static void main(String[] args) {
+//		Employee Gill = new Employee("Gill", "Steens", "gillsteens@gmail.com", "Hollestraat 112 1500 Halle", "m", "concurrency" );
+//		Employee Gill2 = new Employee("Eva", "Bouten", "gillsteens@gmail.com", "Hollestraat 112 1500 Halle", "m", "concurrency" );
+//		Employee Gill3 = new Employee("Charles", "White", "gillsteens@gmail.com", "Hollestraat 112 1500 Halle", "m", "concurrency" );
+//		Employee Gill4 = new Employee("Ines", "Vermeire", "gillsteens@gmail.com", "Hollestraat 112 1500 Halle", "m", "concurrency" );
+//
+//		System.out.println(Gill);
+//		System.out.println(Gill2);
+//		System.out.println(Gill3);
+//		System.out.println(Gill4);
+//	}
 	
 	@Override
 	public String toString() {
