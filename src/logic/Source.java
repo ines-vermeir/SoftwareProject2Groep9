@@ -19,13 +19,13 @@ public class Source {
 	    
 		
 //
-//		Book b1 = new Book("9781328994967","Timothy Ferriss","Tribe of mentors",new GregorianCalendar(2017,11,21));
-//		Book b2 = new Book("9781501178139","Isabel Allende","In the midst of winter",new GregorianCalendar(2017,10,31));
-//		Book b3 = new Book("9780062820754","Marc Sumerak","The Art of Harry Potter",new GregorianCalendar(2017,11,21));
-//	Book b4 = new Book("test","test","testen",new GregorianCalendar(2017,8,16));
+		Book b1 = new Book("9781328994967","Timothy Ferriss","Tribe of mentors",new GregorianCalendar(2017,11,21));
+		Book b2 = new Book("9781501178139","Isabel Allende","In the midst of winter",new GregorianCalendar(2017,10,31));
+		Book b3 = new Book("9780062820754","Marc Sumerak","The Art of Harry Potter",new GregorianCalendar(2017,11,21));
+	Book b4 = new Book("test","test","testen",new GregorianCalendar(2017,8,16));
 //		
 
-//		Book b5 = new Book("test1","test1","testen1",new GregorianCalendar(2017,8,16));
+		Book b5 = new Book("test1","test1","testen1",new GregorianCalendar(2017,8,16));
 		BookDAO dao = new BookDAO();
 		
 
@@ -34,10 +34,20 @@ public class Source {
 //		dao.insertBook(b3);
 //		dao.insertBook(b4);
 //		dao.insertBook(b5);
+		
+		//dao.archiveBook("test1");
 		//dao.deleteBook("test");
 		
-//		ArrayList<Book> lijst = dao.getAllBooks();
-//		System.out.println(lijst.toString());
+		ArrayList<Book> lijst = dao.getAllBooks();
+		
+		for(Book b: lijst) {
+			System.out.println(b.toString());
+		}
+		
+		
+	
+		
+		
 //		
 //		System.out.println("---- GET BOOK by ISBN------------");
 //		
@@ -102,17 +112,17 @@ public class Source {
 //		}
 		
 		//--------------- Odata lezen ---------------------------
-		ArrayList<Employee> employees= (ArrayList<Employee>) TestJackson.getEmployees();
+		//ArrayList<Employee> employees= (ArrayList<Employee>) TestJackson.getEmployees();
 	//	ArrayList<Value> employees=  TestGson.getEmployees();
 		
 	//	System.out.println(TestGson.readUrl("http://services.odata.org/V3/Northwind/Northwind.svc/Employees?$format=json"));
 		
-		for(int i=0; i< employees.size(); i++) {
-			System.out.println(employees.get(i).toString());
-			System.out.println("\n");
-			}
-		
-	}
+//		for(int i=0; i< employees.size(); i++) {
+//			System.out.println(employees.get(i).toString());
+//			System.out.println("\n");
+//			}
+//		
+//	}
 
 	
 	//hieronder: code afkomstig uit klasse login (Charles)
@@ -151,6 +161,6 @@ public class Source {
 //	}
 	
 }
-
+}
 
 
