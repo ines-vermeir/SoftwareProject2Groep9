@@ -1,6 +1,173 @@
 package logic;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+//Om te testen heb ik de klasse Employee moeten aanpassen met de parameters van de Odata - Sebastian G
+//@JsonIgnoreProperties(ignoreUnknown = true)
+
+
 public class Employee {
+	  @Override
+//	public String toString() {
+//		return "Employee [employeeID=" + employeeID + ", lastName=" + lastName + ", firstName=" + firstName + ", title="
+//				+ title + ", titleOfCourtesy=" + titleOfCourtesy + ", birthDate=" + birthDate + ", hireDate=" + hireDate
+//				+ ", address=" + address + ", city=" + city + ", region=" + region + ", postalCode=" + postalCode
+//				+ ", country=" + country + ", homePhone=" + homePhone + ", extension=" + extension + ", photo=" + photo
+//				+ ", notes=" + notes + ", reportsTo=" + reportsTo + ", photoPath=" + photoPath + "]";
+//	}
+
+	
+	  public String toString() {
+			return "Employee [employeeID=" + employeeID + ", lastName=" + lastName + ", firstName=" + firstName + ", title="
+					+ title + ", titleOfCourtesy=" + titleOfCourtesy + ", birthDate=" + birthDate + ", hireDate=" + hireDate
+					+ ", address=" + address +"]";
+		}
+		
+	
+	private int employeeID; 
+	  private String lastName; 
+	  private String firstName; 
+	  private String title; 
+	  private String titleOfCourtesy; 
+	  private String birthDate; 
+	  private String hireDate; 
+	  private String address; 
+	  private String city; 
+	  private String region; 
+	  private String postalCode; 
+	  private String country; 
+	  private String homePhone; 
+	  private String extension; 
+	  private String photo; 
+	  private String notes; 
+	  private int reportsTo; 
+	  private String photoPath; 
+
+	  public int getEmployeeID(){
+	  	return employeeID; 
+	  }
+	  public void setEmployeeID(int input){
+	  	 this.employeeID = input;
+	  }
+	  public String getLastName(){
+	  	return lastName; 
+	  }
+	  public void setLastName(String input){
+	  	 this.lastName = input;
+	  }
+	  public String getFirstName(){
+	  	return firstName; 
+	  }
+	  public void setFirstName(String input){
+	  	 this.firstName = input;
+	  }
+	  public String getTitle(){
+	  	return title; 
+	  }
+	  public void setTitle(String input){
+	  	 this.title = input;
+	  }
+	  public String getTitleOfCourtesy(){
+	  	return titleOfCourtesy; 
+	  }
+	  public void setTitleOfCourtesy(String input){
+	  	 this.titleOfCourtesy = input;
+	  }
+	  public String getBirthDate(){
+	  	return birthDate; 
+	  }
+	  public void setBirthDate(String input){
+	  	 this.birthDate = input;
+	  }
+	  public String getHireDate(){
+	  	return hireDate; 
+	  }
+	  public void setHireDate(String input){
+	  	 this.hireDate = input;
+	  }
+	  public String getAddress(){
+	  	return address; 
+	  }
+	  public void setAddress(String input){
+	  	 this.address = input;
+	  }
+	  public String getCity(){
+	  	return city; 
+	  }
+	  public void setCity(String input){
+	  	 this.city = input;
+	  }
+	  public String getRegion(){
+	  	return region; 
+	  }
+	  public void setRegion(String input){
+	  	 this.region = input;
+	  }
+	  public String getPostalCode(){
+	  	return postalCode; 
+	  }
+	  public void setPostalCode(String input){
+	  	 this.postalCode = input;
+	  }
+	  public String getCountry(){
+	  	return country; 
+	  }
+	  public void setCountry(String input){
+	  	 this.country = input;
+	  }
+	  public String getHomePhone(){
+	  	return homePhone; 
+	  }
+	  public void setHomePhone(String input){
+	  	 this.homePhone = input;
+	  }
+	  public String getExtension(){
+	  	return extension; 
+	  }
+	  public void setExtension(String input){
+	  	 this.extension = input;
+	  }
+	  public String getPhoto(){
+	  	return photo; 
+	  }
+	  public void setPhoto(String input){
+	  	 this.photo = input;
+	  }
+	  public String getNotes(){
+	  	return notes; 
+	  }
+	  public void setNotes(String input){
+	  	 this.notes = input;
+	  }
+	  public int getReportsTo(){
+	  	return reportsTo; 
+	  }
+	  public void setReportsTo(int input){
+	  	 this.reportsTo = input;
+	  }
+	  public String getPhotoPath(){
+	  	return photoPath; 
+	  }
+	  public void setPhotoPath(String input){
+	  	 this.photoPath = input;
+	  }
+	  
+	  
+	  
+	 
+	  
+	  
+
+
+}
+  
+
+
+	
+	/*
 	
 	private String firstName;
 	private String lastName;
@@ -73,8 +240,9 @@ public class Employee {
 		this.concurrency = concurrency;
 	}
 	
+	}
 	
-	
+	*/
 	
 
-}
+
