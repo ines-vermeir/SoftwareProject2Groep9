@@ -16,9 +16,25 @@ public class Source {
 		// TODO Auto-generated method stub
 		
 		
-		// testing Michiel
+		/* testing Michiel
 		// DAO Survey
 		
+		
+		
+		ArrayList<String> questions = new ArrayList<String>();
+		questions.add("this is a new question1");
+		questions.add("this is a new question2 ");
+		
+		
+		Survey survey1 = new Survey(1,3,questions);
+		Survey survey2 = new Survey(2,4);
+		
+		SurveyDAO sdao = new SurveyDAO();
+	 	sdao.addSurveyQuestions(survey1);
+		
+		 sdao.getAllSurveysbytrainingID(2);
+	
+
 		Survey survey1 = new Survey(1,20);
 		Survey survey2 = new Survey(3,17);
 		Survey survey3 = new Survey(4,15);
@@ -42,6 +58,8 @@ public class Source {
 		sdao.getAllSurveyByTraining(15);
 		
 		sdao.update(survey4);
+		*/
+		
 		 
 //		Book b1 = new Book("9781328994967","Timothy Ferriss","Tribe of mentors",new GregorianCalendar(2017,11,21));
 //		Book b2 = new Book("9781501178139","Isabel Allende","In the midst of winter",new GregorianCalendar(2017,10,31));
@@ -50,7 +68,7 @@ public class Source {
 //		
 
 //		Book b5 = new Book("test1","test1","testen1",new GregorianCalendar(2017,8,16));
-		BookDAO dao = new BookDAO();
+//		BookDAO dao = new BookDAO();
 		
 
 //		dao.insertBook(b1);
@@ -59,6 +77,9 @@ public class Source {
 //		dao.insertBook(b4);
 //		dao.insertBook(b5);
 		//dao.deleteBook("test");
+		
+		
+		/*
 		
 		ArrayList<Book> lijst = dao.getAllBooks();
 		System.out.println(lijst.toString());
@@ -69,7 +90,7 @@ public class Source {
 		
 		
 		System.out.println(dao.getBook("test").toString());
-		
+		*/
 		
 //		
 //		System.out.println("---- UPDATE BOOK------------");
