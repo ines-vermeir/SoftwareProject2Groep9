@@ -80,11 +80,14 @@ public class Source {
 //	   Book myBook = new Book("test5","Last Title","Last Author", myCal);
 //		
 //		
-//		BookDB db = new BookDB();
-//		
-		//db.insertBook(myBook);
+		BookDB db = new BookDB();
 		
-/*	 Book newBook = db.getBook("Last Book");
+
+//		Book myBook = new Book("testH","testH","testH",new GregorianCalendar(2017,9,22));
+//		
+//		db.insertBook(myBook);
+		
+	 Book newBook = db.getBook("testH");
 		
 	 if(newBook != null) {
 		 System.out.println(newBook.toString());
@@ -92,24 +95,23 @@ public class Source {
 		 System.out.println("Sorry, het boek bestaat niet");
 	 }
 	 
-	 */
+	 
 	
-//		
-//		newBook.setTitle("Last Book in the World");
-//		db.updateBook(newBook);
-//		
-//		System.out.println("-----UPDATE-------");
-//		
-//		System.out.println(newBook.toString());
+	
+		newBook.setTitle("Last Book Hier");
+	db.updateBook(newBook);
+		
+	System.out.println("-----UPDATE-------");		
+		System.out.println(newBook.toString());
 		
 		
 	//	db.deleteBook(myBook);
 		
-	//	ArrayList<Book> books = db.getAllBooks();
+		ArrayList<Book> books = db.getAllBooks();
 		
-//		for(int i=0; i< books.size(); i++) {
-//		//	System.out.println(books.get(i).toString());
-//		}
+	for(int i=0; i< books.size(); i++) {
+			System.out.println(books.get(i).toString());
+		}
 		
 		//--------------- Odata lezen ---------------------------
 		//ArrayList<Employee> employees= (ArrayList<Employee>) TestJackson.getEmployees();

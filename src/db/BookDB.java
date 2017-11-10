@@ -35,7 +35,7 @@ public class BookDB {
 			e.printStackTrace();
 		}finally {
 			session.close();
-			sessionFactory.close();
+		//	sessionFactory.close();
 		}
 		
 	
@@ -57,7 +57,7 @@ public class BookDB {
 			e.printStackTrace();
 		}finally {
 			session.close();
-			sessionFactory.close();
+		//	sessionFactory.close();
 		}
 		
 	
@@ -77,7 +77,7 @@ public class BookDB {
 			e.printStackTrace();
 		}finally {
 			session.close();
-			sessionFactory.close();
+		//	sessionFactory.close();
 		}
 		
 		
@@ -100,7 +100,7 @@ public class BookDB {
 			e.printStackTrace();
 		}finally {
 			session.close();
-			sessionFactory.close();
+		//	sessionFactory.close();
 		}
 		
 		return b;
@@ -127,7 +127,7 @@ public class BookDB {
 				e.printStackTrace();
 			}finally {
 				session.close();
-				sessionFactory.close();
+			//	sessionFactory.close();
 			}
 			
 			return list;
