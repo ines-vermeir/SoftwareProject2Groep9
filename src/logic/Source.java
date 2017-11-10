@@ -117,19 +117,18 @@ public class Source {
 //		
 		BookDB db = new BookDB();
 		
-<<<<<<< HEAD
+
 
 //		Book myBook = new Book("testH","testH","testH",new GregorianCalendar(2017,9,22));
 //		
 //		db.insertBook(myBook);
 		
-	 Book newBook = db.getBook("testH");
-=======
-		
+//	 Book newBook = db.getBook("testH");
+
 		//System.out.println(dao.getBook("test").toString());
 		
 /*	 Book newBook = db.getBook("Last Book");
->>>>>>> branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.git
+branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.git
 		
 	 if(newBook != null) {
 		 
@@ -156,7 +155,7 @@ public class Source {
 	for(int i=0; i< books.size(); i++) {
 			System.out.println(books.get(i).toString());
 		}
-		
+		*/
 		//--------------- Odata lezen ---------------------------
 		//ArrayList<Employee> employees= (ArrayList<Employee>) TestJackson.getEmployees();
 	//	ArrayList<Value> employees=  TestGson.getEmployees();
@@ -213,8 +212,8 @@ public class Source {
 //		}else {
 //			System.out.print("Please, provide the correct credentials.");
 //		}
-//
 //	}
-}
+//}
+//}
 }
 
