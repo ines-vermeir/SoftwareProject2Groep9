@@ -8,6 +8,7 @@ import java.util.Date;
 ///**
 // * @author Charles
 // * import logic.Training		// --> to be activated when class Training is ready, and change of code?  27/10/2017
+									// hou het maar zo, de informatie van training kan dan opgevraagd worden via getTraining (Eva)
 // */
 public class Certificate {
 
