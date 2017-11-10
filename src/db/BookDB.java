@@ -14,17 +14,18 @@ import logic.Book;
 //Deze klasse gebruikt Hibernate voor de connectie met de database en de CRUD operations
 public class BookDB {
 	
-	private SessionFactory sessionFactory = null;
+	private SessionFactory myFactory= null;
+//	private SessionFactory sessionFactory = null;
 	public BookDB() {
 		super();
-	 sessionFactory = new Configuration().configure().buildSessionFactory();
+       myFactory = HibernateFactory.getSessionFactory();
 		// TODO Auto-generated constructor stub
 	}
 
 	public  void  insertBook(Book myBook) {
 		
 		
-		Session session = sessionFactory.openSession();
+		Session session = myFactory.openSession();
 		Transaction t = null; 
 		try {
 			t = session.beginTransaction();
@@ -46,7 +47,7 @@ public class BookDB {
 	
 	public void  updateBook(Book myBook) {
 
-		Session session = sessionFactory.openSession();
+		Session session = myFactory.openSession();
 		Transaction t = null; 
 		try {
 			t = session.beginTransaction();
@@ -66,7 +67,7 @@ public class BookDB {
 	public void deleteBook(Book myBook) {
        
 
-		Session session = sessionFactory.openSession();
+		Session session = myFactory.openSession();
 		Transaction t = null; 
 		try {
 			t = session.beginTransaction();
@@ -86,7 +87,7 @@ public class BookDB {
 	
 	public Book getBook(String isbn) {
         Book b = null;
-		Session session = sessionFactory.openSession();
+		Session session = myFactory.openSession();
 		Transaction t = null; 
 		try {
 			t = session.beginTransaction();
@@ -114,7 +115,7 @@ public class BookDB {
 	public ArrayList<Book> getAllBooks(){
 		
 		   ArrayList<Book> list = null;
-		   Session session = sessionFactory.openSession();
+		   Session session = myFactory.openSession();
 			Transaction t = null; 
 			try {
 				t = session.beginTransaction();
