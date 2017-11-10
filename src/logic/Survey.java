@@ -30,7 +30,6 @@ public class Survey {
 		this.trainingsID = trainingsID;
 	}
 	
-	
 	public ArrayList<String> getMyListSurveysQuestions() {
 		return myListSurveysQuestions;
 	}

@@ -21,8 +21,9 @@ public class SessionDAO extends BaseDAO {
 		super();
 	}
 
-	
-	public boolean updateSession (Session s) throws SQLException, Exception { //deze functie update de locatie, datum en tijd van een sessie
+	//deze functie update de locatie, datum en tijd van een sessie
+	// eventueel nog toe te voegen: update van teachers, studentsEnrolled, studentsPresent
+	public boolean updateSession (Session s) throws SQLException, Exception { 
 		boolean successvol = false;
 		PreparedStatement p = null;
 		String sql = "UPDATE Sessions SET locationID = ?, date = ?, startTime = ?, endTime = ? WHERE sessionID= ?";
