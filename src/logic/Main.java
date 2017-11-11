@@ -82,7 +82,7 @@ public class Main {
 	 * 
 	 */
 	
-	public static void main(String[] args) throws SQLException, Exception {
+	//public static void main(String[] args) throws SQLException, Exception {
 //		Book b1 = new Book("9781328994967","Timothy Ferriss","Tribe of mentors",new GregorianCalendar(2017,11,21));
 //		Book b2 = new Book("9781501178139","Isabel Allende","In the midst of winter",new GregorianCalendar(2017,10,31));
 //		Book b3 = new Book("9780062820754","Marc Sumerak","The Art of Harry Potter",new GregorianCalendar(2017,11,21));
@@ -237,14 +237,14 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 		
 		//Odata google Books Api 
 		
-		ArrayList books = TestJackson.getBooksByContent("php");
-		
-		for(int i=0; i< books.size(); i++) {
-						System.out.println(books.get(i).toString());
-		}
-			System.out.println("\n");
-			}
-		
+//		ArrayList books = TestJackson.getBooksByContent("php");
+//		
+//		for(int i=0; i< books.size(); i++) {
+//						System.out.println(books.get(i).toString());
+//		}
+//			System.out.println("\n");
+//			}
+//		
 		
 		
 		
@@ -303,6 +303,5 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 //		}
 //	}
 
-	*/
 }
 
