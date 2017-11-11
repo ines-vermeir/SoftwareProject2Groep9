@@ -1,9 +1,16 @@
 package logic;
 
 import java.util.ArrayList;
+
 import java.util.Calendar;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+
 public class Session {
+	@Id
 	private int sessionID;
 	private int trainingID;
 	private  Calendar date;
@@ -13,7 +20,6 @@ public class Session {
 	private ArrayList<String> teachers;
 	private ArrayList<Integer> studentsEnrolled ; 
 	private ArrayList<Integer> studentsPresent;
-	
 	
 	
 	public Session(int sessionID, int trainingID, Calendar date, String startTime, String endTime, Location location,
