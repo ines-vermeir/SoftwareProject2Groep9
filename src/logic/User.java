@@ -1,34 +1,52 @@
-/**
- * 
- */
 package logic;
 
-/**
- * @author Charles
- *new attempt to commit 03/11/2017
- */
-import java.util.Arrays;
-import java.util.EnumSet;
-import logic.Privilege;
-//https://stackoverflow.com/questions/3396424/how-can-i-better-represent-user-permissions
-// https://stackoverflow.com/questions/28120496/how-do-i-resolve-this-error-message-to-create-an-enum-project-myfunproject-i
 public class User{
-	int userID;
-	String username;
-	String password;
-	private EnumSet<Privilege>privilege;
+	
+	public enum Privilege {EMPLOYEE, TEACHER, HR};
+	
+	
+
+	private int userID;
+	private String username;
+	private String password;
+	private Privilege privilege;
 	
 	public User(int userID, String username, String password, Privilege privilege){
 		this.userID = userID;
 		this.username = username;
 		this.password = password;
-		this.privilege = EnumSet.copyOf(Arrays.asList(privilege));
+		this.privilege = privilege;
 	}
 	
 	public String toString() {
 		return "User ID: " + this.userID + ", Username: " 
 				+ this.username + ", Password: " + this.password 
 				+ ", Privilege Assigned: " + this.privilege;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		return true;
 	}
 	
 	public int getUserID() {
@@ -56,11 +74,11 @@ public class User{
 	}
 	
 	
-	public EnumSet<Privilege> getPrivilege() {
+	public Privilege getPrivilege() {
 		return privilege;
 	}
 	
-	public void setPrivilege(EnumSet<Privilege> privilege) {
+	public void setPrivilege(Privilege privilege) {
 		this.privilege = privilege;
 	}
 }
