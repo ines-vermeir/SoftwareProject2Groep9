@@ -71,7 +71,7 @@ public class TestJackson {
 			
 			bookApi= mapper.readValue(jsonUrl, BookApi.class);
 			
-			
+		
 			  list =(ArrayList) b.getItems();
 				
 			}catch (JsonParseException e1) {
