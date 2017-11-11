@@ -22,7 +22,36 @@ public class BookDAO extends BaseDAO {
 		// TODO Auto-generated constructor stub
 	}
 
-	
+	public boolean archiveBook(String isbn) throws SQLException, Exception{
+		
+		boolean successvol = false; 
+		PreparedStatement p = null; 
+		String sql= "UPDATE Books SET archive = 1 WHERE isbn = ?"; 
+		
+		try{
+			if(getConnection().isClosed() ){
+				throw new Exception("fout"); 
+			}
+			p= getConnection().prepareStatement(sql); 
+			p.setString(1, isbn);
+			
+			if (p.executeUpdate() == 0){
+				successvol = true;
+			} 
+			return successvol;
+		
+		}finally{
+			try{
+			if( p != null){
+				p.close();
+			}
+			}catch(SQLException e){
+				System.out.println(e.getMessage());
+				throw new RuntimeException("error");
+			}
+		}
+		
+	}
 	
 	public boolean deleteBook(String isbn) throws SQLException, Exception{
 		
@@ -59,7 +88,7 @@ public class BookDAO extends BaseDAO {
 		
 		boolean successvol = false; 
 		PreparedStatement p = null; 
-		String sql= "INSERT INTO Books VALUES(?,?,?,?)"; 
+		String sql= "INSERT INTO Books(isbn, author, title, releaseDate) VALUES(?,?,?,?)"; 
 		
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		
@@ -126,19 +155,27 @@ public boolean updateBook(Book b) throws SQLException, Exception{
 		
 	}
 	
-	public Book fill(ResultSet r){
+	private Book fill(ResultSet r) throws SQLException{
 		Book b= null;
+		
+		
+	//	while(r.next()) {
+		
 		try{
-			 long milliseconds = r.getTimestamp("releaseDate").getTime() + (r.getTimestamp("releaseDate").getNanos() / 1000000);
+		 long milliseconds = r.getTimestamp("releaseDate").getTime() + (r.getTimestamp("releaseDate").getNanos() / 1000000);
 			Calendar c = GregorianCalendar.getInstance();
-			c.setTimeInMillis(milliseconds);
+		c.setTimeInMillis(milliseconds);
 			
-			b = new Book(r.getString("isbn"),r.getString("author"), r.getString("title"), c);
+		b = new Book(r.getString("isbn"),r.getString("author"), r.getString("title"), c);
+	
 			
 		}catch(Exception e){
 			System.out.println("fout met fillen");
 		}
 		return b;
+		
+		
+		
 	}
 	
 	
@@ -146,7 +183,10 @@ public boolean updateBook(Book b) throws SQLException, Exception{
 		
 		Statement stm = null; 
 		ResultSet r = null; 
-		String sql = "SELECT * FROM Books"; 
+	//	String sql = "SELECT * FROM Books"; 
+		
+		//of enkel boeken die niet gearchiveerd zijn? 
+		String sql = "SELECT * FROM Books WHERE archive IS NULL or archive <> 1"; 
 		ArrayList<Book> myListBooks = new ArrayList<Book>();
 		try{
 			if(getConnection().isClosed()){
@@ -182,8 +222,8 @@ public boolean updateBook(Book b) throws SQLException, Exception{
 		
 		Statement s= null; 
 		ResultSet r = null; 
-		//String sql= "SELECT * FROM Books WHERE isbn = '"+isbn.trim()+ "'";
-		String sql= "SELECT * FROM Books WHERE isbn = '9780062820754' ";
+		String sql= "SELECT * FROM Books WHERE isbn = '"+isbn.trim()+ "'";
+		
 		try{
 			
 			
@@ -196,6 +236,8 @@ public boolean updateBook(Book b) throws SQLException, Exception{
 			
               			
 			r= s.executeQuery(sql); 
+			
+
 			
 			return fill(r);
 			

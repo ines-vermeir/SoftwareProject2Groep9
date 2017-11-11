@@ -3,6 +3,7 @@
 
 # Log file
 
+
 # BlueJ files
 *.ctxt
 
@@ -10,6 +11,7 @@
 .mtj.tmp/
 
 # Package Files #
+*.war
 *.ear
 *.zip
 *.tar.gz
