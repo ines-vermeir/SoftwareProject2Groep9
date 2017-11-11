@@ -20,14 +20,14 @@ public class Source {
 		// TODO Auto-generated method stub
 		
 
-		Book b1 = new Book("9781328994967","Timothy Ferriss","Tribe of mentors",new GregorianCalendar(2017,11,21));
-		Book b2 = new Book("9781501178139","Isabel Allende","In the midst of winter",new GregorianCalendar(2017,10,31));
-		Book b3 = new Book("9780062820754","Marc Sumerak","The Art of Harry Potter",new GregorianCalendar(2017,11,21));
-	Book b4 = new Book("test","test","testen",new GregorianCalendar(2017,8,16));
-//		
-
-		Book b5 = new Book("test1","test1","testen1",new GregorianCalendar(2017,8,16));
-		BookDAO dao = new BookDAO();
+//		Book b1 = new Book("9781328994967","Timothy Ferriss","Tribe of mentors",new GregorianCalendar(2017,11,21));
+//		Book b2 = new Book("9781501178139","Isabel Allende","In the midst of winter",new GregorianCalendar(2017,10,31));
+//		Book b3 = new Book("9780062820754","Marc Sumerak","The Art of Harry Potter",new GregorianCalendar(2017,11,21));
+//	Book b4 = new Book("test","test","testen",new GregorianCalendar(2017,8,16));
+////		
+//
+//		Book b5 = new Book("test1","test1","testen1",new GregorianCalendar(2017,8,16));
+//		BookDAO dao = new BookDAO();
 		
 		// testing Michiel
 		// DAO Survey
@@ -75,11 +75,11 @@ public class Source {
 		//dao.archiveBook("test1");
 		//dao.deleteBook("test");
 		
-		ArrayList<Book> lijst = dao.getAllBooks();
-		
-		for(Book b: lijst) {
-			System.out.println(b.toString());
-		}
+//		ArrayList<Book> lijst = dao.getAllBooks();
+//		
+//		for(Book b: lijst) {
+//			System.out.println(b.toString());
+//		}
 		//ArrayList<Book> lijst = dao.getAllBooks();
 		//System.out.println(lijst.toString());
 		
@@ -146,16 +146,18 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 		
 	System.out.println("-----UPDATE-------");		
 		System.out.println(newBook.toString());
-		
+		*/
 		
 	//	db.deleteBook(myBook);
 		
-		ArrayList<Book> books = db.getAllBooks();
+	/*	ArrayList<Book> books = db.getAllBooks();
 		
 	for(int i=0; i< books.size(); i++) {
 			System.out.println(books.get(i).toString());
-		}
-		*/
+		}*/
+		
+		
+		
 		//--------------- Odata lezen ---------------------------
 		//ArrayList<Employee> employees= (ArrayList<Employee>) TestJackson.getEmployees();
 	//	ArrayList<Value> employees=  TestGson.getEmployees();
@@ -168,6 +170,21 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 //			}
 //		
 //	}
+		
+		//Odata google Books Api 
+		
+		ArrayList books = TestJackson.getBooksByContent("php");
+		
+		for(int i=0; i< books.size(); i++) {
+						System.out.println(books.get(i).toString());
+		}
+			System.out.println("\n");
+			}
+		
+		
+		
+		
+//tot hier code van Sebastian G--------------------------------------------------------------------------------------------------------------------------
 
 		//Testcode sessieDAO:
 		//int trainingID, Calendar date, String startTime, String endTime, Location location
@@ -179,6 +196,14 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 		
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//hieronder: code afkomstig uit klasse login (Charles)
 //	public static void main(String[] args) {
@@ -215,5 +240,5 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 //	}
 //}
 //}
-}
+
 
