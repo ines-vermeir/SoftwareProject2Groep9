@@ -67,7 +67,7 @@ public class SurveyDAO extends BaseDAO{
 			for(int i = 0; i < survey.getMyListSurveysQuestions().size();i++) {	
 				p= getConnection().prepareStatement(sql); 
 				p.setInt(1,survey.getSurveyID());
-				p.setString(2,survey.getMyListSurveysQuestions().get(i));
+				//p.setString(2,survey.getMyListSurveysQuestions().get(i));
 			}
 			
 			if (p.executeUpdate() == 0){

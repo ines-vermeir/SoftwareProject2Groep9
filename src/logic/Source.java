@@ -17,18 +17,16 @@ import db.SurveyDAO;
 public class Source {
 
 	public static void main(String[] args) throws SQLException, Exception {
-		// TODO Auto-generated method stub
-		
 
-		Book b1 = new Book("9781328994967","Timothy Ferriss","Tribe of mentors",new GregorianCalendar(2017,11,21));
-		Book b2 = new Book("9781501178139","Isabel Allende","In the midst of winter",new GregorianCalendar(2017,10,31));
-		Book b3 = new Book("9780062820754","Marc Sumerak","The Art of Harry Potter",new GregorianCalendar(2017,11,21));
-	Book b4 = new Book("test","test","testen",new GregorianCalendar(2017,8,16));
-//		
+//		Book b1 = new Book("9781328994967","Timothy Ferriss","Tribe of mentors",new GregorianCalendar(2017,11,21));
+//		Book b2 = new Book("9781501178139","Isabel Allende","In the midst of winter",new GregorianCalendar(2017,10,31));
+//		Book b3 = new Book("9780062820754","Marc Sumerak","The Art of Harry Potter",new GregorianCalendar(2017,11,21));
+//	Book b4 = new Book("test","test","testen",new GregorianCalendar(2017,8,16));
+////		
+//
+//		Book b5 = new Book("test1","test1","testen1",new GregorianCalendar(2017,8,16));
+//		BookDAO dao = new BookDAO();
 
-		Book b5 = new Book("test1","test1","testen1",new GregorianCalendar(2017,8,16));
-		BookDAO dao = new BookDAO();
-		
 		// testing Michiel
 		// DAO Survey
 		
@@ -75,11 +73,11 @@ public class Source {
 		//dao.archiveBook("test1");
 		//dao.deleteBook("test");
 		
-		ArrayList<Book> lijst = dao.getAllBooks();
-		
-		for(Book b: lijst) {
-			System.out.println(b.toString());
-		}
+//		ArrayList<Book> lijst = dao.getAllBooks();
+//		
+//		for(Book b: lijst) {
+//			System.out.println(b.toString());
+//		}
 		//ArrayList<Book> lijst = dao.getAllBooks();
 		//System.out.println(lijst.toString());
 		
@@ -116,38 +114,47 @@ public class Source {
 //		
 //		
 //		BookDB db = new BookDB();
+		
+
+
+//		Book myBook = new Book("testH","testH","testH",new GregorianCalendar(2017,9,22));
 //		
-		//db.insertBook(myBook);
+//		db.insertBook(myBook);
 		
-		
+//	 Book newBook = db.getBook("testH");
+
 		//System.out.println(dao.getBook("test").toString());
 		
 /*	 Book newBook = db.getBook("Last Book");
+branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.git
 		
 	 if(newBook != null) {
+		 
 		 System.out.println(newBook.toString());
 	 }else {
 		 System.out.println("Sorry, het boek bestaat niet");
+		 
 	 }
 	 
-	 */
+	 
 	
-//		
-//		newBook.setTitle("Last Book in the World");
-//		db.updateBook(newBook);
-//		
-//		System.out.println("-----UPDATE-------");
-//		
-//		System.out.println(newBook.toString());
+	
+		newBook.setTitle("Last Book Hier");
+	db.updateBook(newBook);
 		
+	System.out.println("-----UPDATE-------");		
+		System.out.println(newBook.toString());
+		*/
 		
 	//	db.deleteBook(myBook);
 		
-	//	ArrayList<Book> books = db.getAllBooks();
+	/*	ArrayList<Book> books = db.getAllBooks();
 		
-//		for(int i=0; i< books.size(); i++) {
-//		//	System.out.println(books.get(i).toString());
-//		}
+	for(int i=0; i< books.size(); i++) {
+			System.out.println(books.get(i).toString());
+		}*/
+		
+		
 		
 		//--------------- Odata lezen ---------------------------
 		//ArrayList<Employee> employees= (ArrayList<Employee>) TestJackson.getEmployees();
@@ -161,6 +168,21 @@ public class Source {
 //			}
 //		
 //	}
+		
+		//Odata google Books Api 
+		
+		ArrayList books = TestJackson.getBooksByContent("php");
+		
+		for(int i=0; i< books.size(); i++) {
+						System.out.println(books.get(i).toString());
+		}
+			System.out.println("\n");
+			}
+		
+		
+		
+		
+//tot hier code van Sebastian G--------------------------------------------------------------------------------------------------------------------------
 
 		//Testcode sessieDAO:
 		//int trainingID, Calendar date, String startTime, String endTime, Location location
@@ -170,8 +192,16 @@ public class Source {
 		//SessionDAO dao = new SessionDAO();
 		//dao.insertSession(s);
 		
-	}
+	//}
 
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//hieronder: code afkomstig uit klasse login (Charles)
 //	public static void main(String[] args) {
@@ -205,8 +235,8 @@ public class Source {
 //		}else {
 //			System.out.print("Please, provide the correct credentials.");
 //		}
-//
 //	}
-}
+//}
+//}
 }
 
