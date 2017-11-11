@@ -1,6 +1,6 @@
 package logic;
 
-public enum Privilege {EMPLOYEE,ADVANCED,ADMINISTRATOR;
+public enum Privilege {EMPLOYEE,DOCENT,HR;
 }
 
 // TO BE CORRECTED --> Privilege levels 27/10/2017

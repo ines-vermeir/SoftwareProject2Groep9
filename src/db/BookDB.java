@@ -12,11 +12,12 @@ import org.hibernate.cfg.Configuration;
 import antlr.collections.List;
 import logic.Book;
 //Deze klasse gebruikt Hibernate voor de connectie met de database en de CRUD operations
+
 public class BookDB {
 	
 	private SessionFactory sessionFactory = null;
 	public BookDB() {
-		super();
+	super();
 	 sessionFactory = new Configuration().configure().buildSessionFactory();
 		// TODO Auto-generated constructor stub
 	}
@@ -36,12 +37,7 @@ public class BookDB {
 		}finally {
 			session.close();
 			sessionFactory.close();
-		}
-		
-	
-		
-		
-		
+		}		
 	}
 	
 	public void  updateBook(Book myBook) {
