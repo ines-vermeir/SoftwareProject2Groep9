@@ -107,7 +107,7 @@ public class Training {
 	public void addStudent(Employee employee) {
 		studentsEnrolled.add(employee);
 	}
-	
+/*	
 	// send email to do
 	public void sendEmail(String message, username) {
 		System.Out.Println("verzender: ");
@@ -130,6 +130,7 @@ public class Training {
 		
 		
 		}
+		*/
 		
 	}
 	
@@ -146,4 +147,4 @@ public class Training {
 	
 	
 	
-}
+

@@ -1,6 +1,5 @@
-package db;
 
-/*
+
 package db;
 
 import java.sql.Connection;
@@ -22,4 +21,3 @@ public class BaseDAO {
 }
 
 
-*/
