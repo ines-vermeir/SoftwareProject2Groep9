@@ -17,8 +17,6 @@ import db.SurveyDAO;
 public class Source {
 
 	public static void main(String[] args) throws SQLException, Exception {
-		// TODO Auto-generated method stub
-		
 
 //		Book b1 = new Book("9781328994967","Timothy Ferriss","Tribe of mentors",new GregorianCalendar(2017,11,21));
 //		Book b2 = new Book("9781501178139","Isabel Allende","In the midst of winter",new GregorianCalendar(2017,10,31));
@@ -28,7 +26,7 @@ public class Source {
 //
 //		Book b5 = new Book("test1","test1","testen1",new GregorianCalendar(2017,8,16));
 //		BookDAO dao = new BookDAO();
-		
+
 		// testing Michiel
 		// DAO Survey
 		
@@ -115,7 +113,7 @@ public class Source {
 //	   Book myBook = new Book("test5","Last Title","Last Author", myCal);
 //		
 //		
-		BookDB db = new BookDB();
+//		BookDB db = new BookDB();
 		
 
 
@@ -194,7 +192,7 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 		//SessionDAO dao = new SessionDAO();
 		//dao.insertSession(s);
 		
-	}
+	//}
 
 	
 	
@@ -240,5 +238,5 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 //	}
 //}
 //}
-
+}
 
