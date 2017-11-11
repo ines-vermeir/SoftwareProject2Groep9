@@ -109,10 +109,41 @@ public class Training {
 	}
 	
 	// send email to do
-	public void sendEmail(String message) {
+	public void sendEmail(String message, username) {
+		System.Out.Println("verzender: ");
+		System.Out.println("ontvanger: ");
+		System.Out.println("onderwerp: ");
 		
+	
+	
+		
+		
+	
+	public void Training aanmaken() {
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		}
 		
 	}
+	
+
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

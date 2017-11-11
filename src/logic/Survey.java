@@ -11,10 +11,6 @@ public class Survey {
 	private int trainingsID;
 	private ArrayList<String> myListSurveysQuestions;
 	
-	//private String[] questions;
-	//private int count = 0;		// aantal elementen in array
-	
-	
 	// getters & setters
 	public int getSurveyID() {
 		return surveyID;
@@ -30,7 +26,6 @@ public class Survey {
 		this.trainingsID = trainingsID;
 	}
 	
-	
 	public ArrayList<String> getMyListSurveysQuestions() {
 		return myListSurveysQuestions;
 	}
@@ -38,21 +33,10 @@ public class Survey {
 		this.myListSurveysQuestions = myListSurveysQuestions;
 	}
 	
-	/*
-	public String[] getQuestions() {
-		return questions;
-	}
-	public void setQuestions(String[] questions) {
-		this.questions = questions;
-	}
-	*/
-	
+	// constructor
 	public Survey() {
 		
 	}
-	
-	
-	
 	
 	public Survey(int surveyID, int trainingsID, ArrayList<String> myListSurveysQuestions) {
 		super();
@@ -61,7 +45,6 @@ public class Survey {
 		this.myListSurveysQuestions = myListSurveysQuestions;
 	}
 	
-
 	public Survey(int surveyID, int trainingsID) {
 		super();
 		this.surveyID = surveyID;
@@ -69,25 +52,6 @@ public class Survey {
 	}
 	
 	
-	/*
-	// constructors
-	public Survey(int surveyID, String[] questions, int trainingsID) {
-		super();
-	
-		this.questions = new String[1]; // vergroten met 1
-		this.surveyID = surveyID;
-		this.questions = questions;
-		this.trainingsID = trainingsID;
-	}
-	*/
-
-	/*
-	public Survey() {
-		super();
-		this.questions = new String[1]; // vergroten met 1
-
-	}
-	*/
 	public void Addquestion(String question) {
 		myListSurveysQuestions.add(question);
 	}
@@ -98,33 +62,7 @@ public String toString() {
 			+ myListSurveysQuestions + "]";
 }
 	
-	/*
-	// method
-	public void Addquestion(String question) {
-		if(count <questions.length) {
-			questions[count] = question;
-		}
-		else {
-			
-	String[] temp = new String[questions.length +1];		// vergroten met 1 bij te klein
-	for (int i = 0; i < questions.length; i++){
-	      temp[i] = questions[i];
-	}
-	questions= temp;
-	questions[count] = question;	
-		}
-		count++;
-	}
-	
-	*/ 
-	
-	/*
-	@Override
-	public String toString() {
-		return "Survey [surveyID=" + surveyID + ", trainingsID=" + trainingsID + ", questions="
-				+ Arrays.toString(questions) + "]";
-	}
-	*/ 
+ 
 		
 		}
 
