@@ -18,14 +18,14 @@ public class Source {
 
 	public static void main(String[] args) throws SQLException, Exception {
 
-		Book b1 = new Book("9781328994967","Timothy Ferriss","Tribe of mentors",new GregorianCalendar(2017,11,21));
-		Book b2 = new Book("9781501178139","Isabel Allende","In the midst of winter",new GregorianCalendar(2017,10,31));
-		Book b3 = new Book("9780062820754","Marc Sumerak","The Art of Harry Potter",new GregorianCalendar(2017,11,21));
-		Book b4 = new Book("test","test","testen",new GregorianCalendar(2017,8,16));		
-
-		Book b5 = new Book("test1","test1","testen1",new GregorianCalendar(2017,8,16));
-		BookDAO dao = new BookDAO();
-		
+//		Book b1 = new Book("9781328994967","Timothy Ferriss","Tribe of mentors",new GregorianCalendar(2017,11,21));
+//		Book b2 = new Book("9781501178139","Isabel Allende","In the midst of winter",new GregorianCalendar(2017,10,31));
+//		Book b3 = new Book("9780062820754","Marc Sumerak","The Art of Harry Potter",new GregorianCalendar(2017,11,21));
+//		Book b4 = new Book("test","test","testen",new GregorianCalendar(2017,8,16));		
+//
+//		Book b5 = new Book("test1","test1","testen1",new GregorianCalendar(2017,8,16));
+//		BookDAO dao = new BookDAO();
+//		
 		// testing Michiel
 		// DAO Survey
 		
@@ -72,10 +72,10 @@ public class Source {
 		//dao.archiveBook("test1");
 		//dao.deleteBook("test");
 		
-		ArrayList<Book> lijst = dao.getAllBooks();
-		
-		for(Book b: lijst) {
-			System.out.println(b.toString());
+//		ArrayList<Book> lijst = dao.getAllBooks();
+//		
+//		for(Book b: lijst) {
+//			System.out.println(b.toString());
 		}
 		//ArrayList<Book> lijst = dao.getAllBooks();
 		//System.out.println(lijst.toString());
@@ -112,7 +112,7 @@ public class Source {
 //	   Book myBook = new Book("test5","Last Title","Last Author", myCal);
 //		
 //		
-		BookDB db = new BookDB();
+//		BookDB db = new BookDB();
 		
 
 
@@ -174,7 +174,7 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 		//SessionDAO dao = new SessionDAO();
 		//dao.insertSession(s);
 		
-	}
+	//}
 
 	
 	//hieronder: code afkomstig uit klasse login (Charles)
