@@ -1,6 +1,7 @@
 package logic;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Book {
@@ -49,6 +50,15 @@ public class Book {
 
 	public void setReleaseDate(Calendar releaseDate) {
 		this.releaseDate = releaseDate;
+	}
+
+
+	@Override
+	public String toString() {
+		SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
+		
+		
+		return "Book [isbn=" + isbn + ", title=" + title + ", author=" + author + ", releaseDate=" +  myFormat.format(releaseDate.getTime()) + "]";
 	}
 	
 	
