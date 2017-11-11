@@ -1,16 +1,14 @@
 package db;
 import java.util.ArrayList;
 
-import javax.persistence.Query;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
-import antlr.collections.List;
 import logic.Book;
+
+
 //Deze klasse gebruikt Hibernate voor de connectie met de database en de CRUD operations
 
 public class BookDB {
