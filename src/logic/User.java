@@ -1,11 +1,19 @@
 package logic;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@Entity
+
+@Table(name="Users")
+
 public class User{
 	
 	public enum Privilege {EMPLOYEE, TEACHER, HR};
 	
-	
-
+	@Id
 	private int userID;
 	private String username;
 	private String password;
@@ -16,6 +24,12 @@ public class User{
 		this.username = username;
 		this.password = password;
 		this.privilege = privilege;
+	}
+	
+	//constructor voor Hibernate
+	public User ()
+	{
+		super();
 	}
 	
 	public String toString() {
