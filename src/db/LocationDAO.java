@@ -25,7 +25,7 @@ public class LocationDAO extends BaseDAO{
 		return l;
 	}
 	
-	public ArrayList<Location> getAllLocations() throws SQLException, Exception{
+	public static ArrayList<Location> getAllLocations() throws SQLException, Exception{
 		
 		Statement stm = null; 
 		ResultSet r = null; 
@@ -60,7 +60,7 @@ public class LocationDAO extends BaseDAO{
 			}
 		}
 		}
-	public Location getLocationsById(int id) throws SQLException, Exception{
+	public static Location getLocationById(int id) throws SQLException, Exception{
 		 
 		ResultSet r = null; 
 		PreparedStatement p = null; 
@@ -92,7 +92,7 @@ public class LocationDAO extends BaseDAO{
 		}
 		}
 	
-	public boolean deleteLocation(int id) throws SQLException, Exception{
+	public static boolean deleteLocation(int id) throws SQLException, Exception{
 		
 		boolean successvol = false; 
 		PreparedStatement p = null; 
@@ -123,7 +123,7 @@ public class LocationDAO extends BaseDAO{
 		
 	}
 
-	public boolean insertLocation(Location l) throws SQLException, Exception{
+	public static boolean insertLocation(Location l) throws SQLException, Exception{
 		
 		boolean successvol = false; 
 		PreparedStatement p = null; 
@@ -160,7 +160,7 @@ public class LocationDAO extends BaseDAO{
 		
 	}
 
-	public boolean updateLocation(Location l) throws SQLException, Exception{
+	public static boolean updateLocation(Location l) throws SQLException, Exception{
 		
 		boolean successvol = false; 
 		PreparedStatement p = null; 
