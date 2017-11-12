@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 
 import logic.User;
 
+//functies zijn getest en werken
 public class UserDB {
 
 	private SessionFactory myFactory = null;
@@ -39,95 +40,124 @@ public class UserDB {
 		}
 	}
 	
+	public void updateUser (User myUser) {
+		Session session = myFactory.openSession();
+		Transaction t = null;
+		try
+		{
+			t = session.beginTransaction();
+			session.update(myUser);
+			t.commit();
+		}
+		catch (HibernateException e)
+		{
+			if (t != null) t.rollback();
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+	}
+	
+	//zelfde als update, maar eerst wordt de archive datamember aangepast waardoor die in de database op 1 komt te staan
+	public void archiveUser (User myUser) {
+		myUser.setArchive(1);
+		Session session = myFactory.openSession();
+		Transaction t = null;
+		try
+		{
+			t = session.beginTransaction();
+			session.update(myUser);
+			t.commit();
+		}
+		catch (HibernateException e)
+		{
+			if (t != null) t.rollback();
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+	}
+
+	public User getUser (int userID)
+	{
+		User u = null;
+		Session session = myFactory.openSession();
+		Transaction t = null;
+		try
+		{
+			t = session.beginTransaction();
+			// get by PRIMARY KEY
+			u = (User) session.get(User.class, userID);
+			t.commit();
+		}
+		catch (HibernateException e)
+		{
+			if (t != null) t.rollback();
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+		return u;
+	}
+	
+	public ArrayList<User> getAllUsers()
+	{
+		ArrayList<User> list = null;
+		Session session = myFactory.openSession();
+		Transaction t = null;
+		try
+		{
+			t = session.beginTransaction();
+			list = (ArrayList<User>) session.createCriteria(User.class).list();
+			t.commit();
+		}
+		catch (HibernateException e)
+		{
+			if (t != null) t.rollback();
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+		return list;
+	}
+
+//	beter om archiveUser te gebruiken	
+//	public void deleteUser (User myUser)
+//	{
+//		Session session = myFactory.openSession();
+//		Transaction t = null;
+//		try
+//		{
+//			t = session.beginTransaction();
+//			session.delete(myUser);
+//			t.commit();
+//		}
+//		catch (HibernateException e)
+//		{
+//			if (t != null) t.rollback();
+//			e.printStackTrace();
+//		}
+//		finally 
+//		{
+//			session.close();
+//		}
+//	}
+	
 }
 
-//	public void  updateBook(Book myBook) {
-//
-//		Session session = myFactory.openSession();
-//		Transaction t = null; 
-//		try {
-//			t = session.beginTransaction();
-//			session.update(myBook);
-//			t.commit();
-//		}catch(HibernateException e) {
-//			if(t!= null ) t.rollback();
-//			e.printStackTrace();
-//		}finally {
-//			session.close();
-//		//	sessionFactory.close();
-//		}
-//		
-//	
-//	}
-//	
-//	public void deleteBook(Book myBook) {
-//       
-//
-//		Session session = myFactory.openSession();
-//		Transaction t = null; 
-//		try {
-//			t = session.beginTransaction();
-//			session.delete(myBook);
-//			t.commit();
-//		}catch(HibernateException e) {
-//			if(t!= null ) t.rollback();
-//			e.printStackTrace();
-//		}finally {
-//			session.close();
-//		//	sessionFactory.close();
-//		}
-//		
-//		
-//		
-//	}
-//	
-//	public Book getBook(String isbn) {
-//        Book b = null;
-//		Session session = myFactory.openSession();
-//		Transaction t = null; 
-//		try {
-//			t = session.beginTransaction();
-//			//get by PRIMARY KEY 
-//			
-//			 b = (Book) session.get(Book.class,isbn);
-//			t.commit();
-//			
-//		}catch(HibernateException e) {
-//			if(t!= null ) t.rollback();
-//			e.printStackTrace();
-//		}finally {
-//			session.close();
-//		//	sessionFactory.close();
-//		}
-//		
-//		return b;
-//		
-//				
-//	
-//
-//		
-//	}
-//	
-//	public ArrayList<Book> getAllBooks(){
-//		
-//		   ArrayList<Book> list = null;
-//		   Session session = myFactory.openSession();
-//			Transaction t = null; 
-//			try {
-//				t = session.beginTransaction();
-//				
-//			    list = (ArrayList<Book>) session.createCriteria(Book.class).list();
-//				t.commit();
-//				
-//			}catch(HibernateException e) {
-//				if(t!= null ) t.rollback();
-//				e.printStackTrace();
-//			}finally {
-//				session.close();
-//			//	sessionFactory.close();
-//			}
-//			
-//			return list;	 	
-//	}
-//
-//}
+
+// Testcode
+//User u = new User (1, "Testnaam", "Testpasw" , Privilege.TEACHER);
+//UserDB db = new UserDB();
+//db.insertUser(u);
+//db.archiveUser(u);
+//User u = db.getUser(1);
+//System.out.println(u.toString());

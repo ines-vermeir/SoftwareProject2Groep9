@@ -21,10 +21,14 @@ import db.SurveyDAO;
 
 public class Main {
 
+	
+//----------------------------------------------------login functie----------------------------------------------------------------------------	
 	/*
 	 * LOGIN 
 	 * 
 	 */
+
+//----------------------------------------------------hoofdmenu (afhankelijk van privilege andere menu laten zien)------------------------------------------------------	
 	
 	/* MENU PRIVILEGE 1 (EMPLOYEE)  */
 	public void menuEmployee (int privilege, String naam) throws IOException {
@@ -61,6 +65,10 @@ public class Main {
 	 * MENU PRIVILEGE 3 (HR)
 	 * 
 	 */
+
+	
+//MICHIEL-------------------------------------methodes/menu klasse Training -------------------------------------------------------------------
+//(user meegeven als parameter en afhankelijk daarvan andere opties voorzien)
 	
 	/*
 	 * Trainig  methodes
@@ -68,22 +76,56 @@ public class Main {
 	 * 
 	 * 
 	 */
+
+//CHARLES-------------------------------------methodes/menu klasse Certificate------------------------------------------------------------------
+//(user meegeven als parameter en afhankelijk daarvan andere opties voorzien)	
+	
 	
 	/*
 	 * Certificate
 	 * MENU certificate
 	 * 
 	 */
+
+//SEBASTIAN-------------------------------------methodes/menu klasse Book----------------------------------------------------------------------	
+//(user meegeven als parameter en afhankelijk daarvan andere opties voorzien)	
 	
 	/*
 	 * Book
 	 * 
 	 */
+
+//SEBASTIAN-------------------------------------methodes/menu klasse Employee-------------------------------------------------------------------------	
+//(user meegeven als parameter en afhankelijk daarvan andere opties voorzien)
 	
 	/*
 	 * Employee
 	 * 
 	 */
+
+//EVA-------------------------------------	methodes/menu klasse Session-------------------------------------------------------------------------	
+//(user meegeven als parameter en afhankelijk daarvan andere opties voorzien)
+
+	
+	
+	
+	
+//INES-------------------------------------	methodes/menu klasse Location------------------------------------------------------------------------	
+//(user meegeven als parameter en afhankelijk daarvan andere opties voorzien)
+
+	
+	
+	
+	
+//MICHIEL-------------------------------------	methodes/menu klasses Survey&Question--------------------------------------------------------------
+//(user meegeven als parameter en afhankelijk daarvan andere opties voorzien)	
+
+	
+	
+//EVA-------------------------------------	methodes/menu klasse User--------------------------------------------------------------	
+	//(user meegeven als parameter en afhankelijk daarvan andere opties voorzien)	
+	
+	
 	
 	public static void main(String[] args) throws SQLException, Exception {
 		
@@ -94,10 +136,6 @@ public class Main {
 		
 
 //---------------------------------------------------Testcode Eva---------------------------------------------------------------------------------		
-		
-//		User u = new User ("Testnaam", "Testpasw" , Privilege.HR);
-//		UserDB db = new UserDB();
-//		db.insertUser(u);
 		
 //---------------------------------------------------Testcode Inès---------------------------------------------------------------------------------			
 
