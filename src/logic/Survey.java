@@ -9,7 +9,9 @@ public class Survey {
 	// datamembers
 	private int surveyID;
 	private int trainingsID;
-	private ArrayList<String> myListSurveysQuestions;
+	private String title;
+	private String description;
+	private ArrayList<Question> myListSurveysQuestions;
 	
 	//private String[] questions;
 	//private int count = 0;		// aantal elementen in array
@@ -30,10 +32,10 @@ public class Survey {
 		this.trainingsID = trainingsID;
 	}
 	
-	public ArrayList<String> getMyListSurveysQuestions() {
+	public ArrayList<Question> getMyListSurveysQuestions() {
 		return myListSurveysQuestions;
 	}
-	public void setMyListSurveysQuestions(ArrayList<String> myListSurveysQuestions) {
+	public void setMyListSurveysQuestions(ArrayList<Question> myListSurveysQuestions) {
 		this.myListSurveysQuestions = myListSurveysQuestions;
 	}
 	
@@ -53,7 +55,7 @@ public class Survey {
 	
 	
 	
-	public Survey(int surveyID, int trainingsID, ArrayList<String> myListSurveysQuestions) {
+	public Survey(int surveyID, int trainingsID, ArrayList<Question> myListSurveysQuestions) {
 		super();
 		this.surveyID = surveyID;
 		this.trainingsID = trainingsID;
@@ -87,7 +89,7 @@ public class Survey {
 
 	}
 	*/
-	public void Addquestion(String question) {
+	public void Addquestion(Question question) {
 		myListSurveysQuestions.add(question);
 	}
 	
@@ -96,6 +98,18 @@ public String toString() {
 	return "Survey [surveyID=" + surveyID + ", trainingsID=" + trainingsID + ", myListSurveysQuestions="
 			+ myListSurveysQuestions + "]";
 }
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	
 	/*
 	// method

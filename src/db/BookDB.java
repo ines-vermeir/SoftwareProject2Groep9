@@ -10,11 +10,13 @@ import logic.Book;
 
 
 //Deze klasse gebruikt Hibernate voor de connectie met de database en de CRUD operations
+
 public class BookDB {
 	
 	private SessionFactory myFactory= null;
 //	private SessionFactory sessionFactory = null;
 	public BookDB() {
+
 		super();
        myFactory = HibernateFactory.getSessionFactory();
 		// TODO Auto-generated constructor stub
@@ -39,8 +41,7 @@ public class BookDB {
 		
 	
 		
-		
-		
+	
 	}
 	
 	public void  updateBook(Book myBook) {

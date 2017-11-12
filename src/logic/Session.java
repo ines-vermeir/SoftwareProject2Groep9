@@ -1,19 +1,27 @@
 package logic;
 
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+//@Entity
+
 public class Session {
+//	@Id
 	private int sessionID;
 	private int trainingID;
-	private  Calendar date;
+	private Calendar date;
 	private String startTime;
 	private String endTime;
 	private Location location; 
 	private ArrayList<String> teachers;
 	private ArrayList<Integer> studentsEnrolled ; 
 	private ArrayList<Integer> studentsPresent;
-	
 	
 	
 	public Session(int sessionID, int trainingID, Calendar date, String startTime, String endTime, Location location,
