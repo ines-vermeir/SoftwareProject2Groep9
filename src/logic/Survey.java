@@ -13,10 +13,6 @@ public class Survey {
 	private String description;
 	private ArrayList<Question> myListSurveysQuestions;
 	
-	//private String[] questions;
-	//private int count = 0;		// aantal elementen in array
-	
-	
 	// getters & setters
 	public int getSurveyID() {
 		return surveyID;
@@ -39,22 +35,10 @@ public class Survey {
 		this.myListSurveysQuestions = myListSurveysQuestions;
 	}
 	
-	/*
-	public String[] getQuestions() {
-		return questions;
-	}
-	public void setQuestions(String[] questions) {
-		this.questions = questions;
-	}
-	*/
-	
+	// constructor
 	public Survey() {
 		
 	}
-	
-	
-	
-	
 	public Survey(int surveyID, int trainingsID, ArrayList<Question> myListSurveysQuestions) {
 		super();
 		this.surveyID = surveyID;
@@ -62,13 +46,11 @@ public class Survey {
 		this.myListSurveysQuestions = myListSurveysQuestions;
 	}
 	
-
 	public Survey(int surveyID, int trainingsID) {
 		super();
 		this.surveyID = surveyID;
 		this.trainingsID = trainingsID;
 	}
-	
 	
 	/*
 	// constructors
@@ -111,33 +93,7 @@ public String toString() {
 		this.description = description;
 	}
 	
-	/*
-	// method
-	public void Addquestion(String question) {
-		if(count <questions.length) {
-			questions[count] = question;
-		}
-		else {
-			
-	String[] temp = new String[questions.length +1];		// vergroten met 1 bij te klein
-	for (int i = 0; i < questions.length; i++){
-	      temp[i] = questions[i];
-	}
-	questions= temp;
-	questions[count] = question;	
-		}
-		count++;
-	}
-	
-	*/ 
-	
-	/*
-	@Override
-	public String toString() {
-		return "Survey [surveyID=" + surveyID + ", trainingsID=" + trainingsID + ", questions="
-				+ Arrays.toString(questions) + "]";
-	}
-	*/ 
+ 
 		
 		}
 
