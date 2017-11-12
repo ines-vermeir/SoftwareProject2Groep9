@@ -9,7 +9,9 @@ public class Survey {
 	// datamembers
 	private int surveyID;
 	private int trainingsID;
-	private ArrayList<String> myListSurveysQuestions;
+	private String title;
+	private String description;
+	private ArrayList<Question> myListSurveysQuestions;
 	
 	// getters & setters
 	public int getSurveyID() {
@@ -26,10 +28,10 @@ public class Survey {
 		this.trainingsID = trainingsID;
 	}
 	
-	public ArrayList<String> getMyListSurveysQuestions() {
+	public ArrayList<Question> getMyListSurveysQuestions() {
 		return myListSurveysQuestions;
 	}
-	public void setMyListSurveysQuestions(ArrayList<String> myListSurveysQuestions) {
+	public void setMyListSurveysQuestions(ArrayList<Question> myListSurveysQuestions) {
 		this.myListSurveysQuestions = myListSurveysQuestions;
 	}
 	
@@ -37,8 +39,7 @@ public class Survey {
 	public Survey() {
 		
 	}
-	
-	public Survey(int surveyID, int trainingsID, ArrayList<String> myListSurveysQuestions) {
+	public Survey(int surveyID, int trainingsID, ArrayList<Question> myListSurveysQuestions) {
 		super();
 		this.surveyID = surveyID;
 		this.trainingsID = trainingsID;
@@ -51,8 +52,26 @@ public class Survey {
 		this.trainingsID = trainingsID;
 	}
 	
+	/*
+	// constructors
+	public Survey(int surveyID, String[] questions, int trainingsID) {
+		super();
 	
-	public void Addquestion(String question) {
+		this.questions = new String[1]; // vergroten met 1
+		this.surveyID = surveyID;
+		this.questions = questions;
+		this.trainingsID = trainingsID;
+	}
+	*/
+
+	/*
+	public Survey() {
+		super();
+		this.questions = new String[1]; // vergroten met 1
+
+	}
+	*/
+	public void Addquestion(Question question) {
 		myListSurveysQuestions.add(question);
 	}
 	
@@ -61,6 +80,18 @@ public String toString() {
 	return "Survey [surveyID=" + surveyID + ", trainingsID=" + trainingsID + ", myListSurveysQuestions="
 			+ myListSurveysQuestions + "]";
 }
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	
  
 		

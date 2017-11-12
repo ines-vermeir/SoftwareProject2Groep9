@@ -1,5 +1,6 @@
 package logic;
 
+//Deze klasse wordt gebruikt om de odata Employee te converteren naar naar een Java object Employee
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
