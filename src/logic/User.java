@@ -18,7 +18,7 @@ public class User{
 	
 	public enum Privilege {EMPLOYEE, TEACHER, HR};
 	
-	@Id @GeneratedValue
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int userID;
 	@Column(name="username")
 	private String username;
@@ -26,18 +26,30 @@ public class User{
 	private String password;
 	@Column(name="privilege") @Enumerated(EnumType.STRING)
 	private Privilege privilege;
+	@Column(name="archive")
+	private int archive;
 
 	public User(int userID, String username, String password, Privilege privilege){
 		this.userID = userID;
 		this.username = username;
 		this.password = password;
 		this.privilege = privilege;
+		this.archive = 0;
 	}
 	
+	public int getArchive() {
+		return archive;
+	}
+
+	public void setArchive(int archive) {
+		this.archive = archive;
+	}
+
 	public User(String username, String password, Privilege privilege){
 		this.username = username;
 		this.password = password;
 		this.privilege = privilege;
+		this.archive = 0;
 	}
 	
 	//constructor voor Hibernate
