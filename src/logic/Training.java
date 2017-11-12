@@ -1,17 +1,26 @@
 package logic;
 import java.util.ArrayList;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 
+
+import java.util.Scanner;
+
+@Entity
+
+
+@Table(name="Training")
 public class Training {
-
+	@Id	
 	private int trainingID;
 	private String title;
 	private String subject;
 	private String language;
 	private String responsible;
 	private int sequentiality;
-	private int certificateID;
 	private ArrayList<Book> books;
 	private ArrayList<Employee> studentsEnrolled;
 	
@@ -52,12 +61,8 @@ public class Training {
 	public void setSequentiality(int sequentiality) {
 		this.sequentiality = sequentiality;
 	}
-	public int getCertificate() {
-		return certificateID;
-	}
-	public void setCertificate(int certificate) {
-		this.certificateID = certificate;
-	}
+
+	
 	public ArrayList<Book> getBooks() {
 		return books;
 	}
@@ -73,7 +78,7 @@ public class Training {
 	
 	// constructors
 	public Training(int trainingID, String title, String subject, String language, String responsible,
-			int sequentiality, int certificate, ArrayList<Book> books,
+			int sequentiality, ArrayList<Book> books,
 			ArrayList<Employee> studentsEnrolled) {
 		super();
 		this.trainingID = trainingID;
@@ -82,7 +87,6 @@ public class Training {
 		this.language = language;
 		this.responsible = responsible;
 		this.sequentiality = sequentiality;
-		this.certificateID = certificate;
 		this.books = books;
 		this.studentsEnrolled = studentsEnrolled;
 	}
@@ -94,8 +98,7 @@ public class Training {
 	@Override
 	public String toString() {
 		return "Training [trainingID=" + trainingID + ", title=" + title + ", subject=" + subject + ", language="
-				+ language + ", responsible=" + responsible + ", sequentiality=" + sequentiality + ", certificate="
-				+ certificateID + ", books=" + books + ", studentsEnrolled=" + studentsEnrolled + "]";
+				+ language + ", responsible=" + responsible + ", sequentiality=" + sequentiality + ", books=" + books + ", studentsEnrolled=" + studentsEnrolled + "]";
 	}
 	
 	// methoden
@@ -107,36 +110,90 @@ public class Training {
 	public void addStudent(Employee employee) {
 		studentsEnrolled.add(employee);
 	}
-/*	
-	// send email to do
-	public void sendEmail(String message, username) {
-		System.Out.Println("verzender: ");
-		System.Out.println("ontvanger: ");
-		System.Out.println("onderwerp: ");
-		
+
 	
 	
+	public void menuTraining(){
 		
+		System.out.println("MENU training");
+		System.out.println("Wat wilt u doen?");
+		System.out.println("1) trainingen bekijken");
+		System.out.println("2) training aanmaken");
 		
+		Scanner scan = new Scanner(System.in);
+		int user_input_number = scan.nextInt();
 	
-	public void Training aanmaken() {
 	
-		
-		
-		
-		
-		
-		
-		
-		
+	
+		switch (user_input_number) {
+		case 1: trainingBekijken();
+				break;
+		case 2: trainingAanmaken();
+				break;
+		default: System.out.println("U heeft foutieve invoer ingegeven");
+				menuTraining();
+				break;
+
 		}
-		*/
-		
 	}
-	
+		
 
 	
 
+public  void trainingBekijken() {
+	// get limited info	(id subject #students enrolled )
+	
+	
+	
+	
+
+	
+	
+	}
+
+public  void trainingAanmaken() {
+	
+/*	
+	String title, String subject, String language, String responsible,
+	int sequentiality, ArrayList<Book> books,
+	ArrayList<Employee> studentsEnrolled) 
+	
+	*/
+	// int user_input_number = scan.nextInt(); int 
+	
+	
+Scanner scan = new Scanner(System.in);
+
+System.out.print("What is the title?");
+String title = scan.nextLine();
+
+System.out.print("What is the Subject?");
+String subject = scan.nextLine();
+
+System.out.print("What is the language?");
+String language = scan.next();
+
+System.out.print("Who is the responsible?");
+String responsible = scan.nextLine();  
+
+System.out.print("What is the sequentiality?");
+int sequentiality = scan.nextInt();
+
+	// select alle employees welke wilt u toeveogen?
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
+
+
+}
 	
 	
 	

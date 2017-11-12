@@ -29,6 +29,7 @@
 		
 		<!-- Hier wordt de package naam en de naam van de klasse gezet-->
 		<mapping class="logic.Book"/>
+		<mapping class="logic.Training"/>
 	
 	</session-factory>
 </hibernate-configuration>
