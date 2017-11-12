@@ -14,7 +14,7 @@ public class LocationDAO extends BaseDAO{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Location fill(ResultSet r){
+	public static Location fill(ResultSet r){
 		Location l= null;
 		try{
 			l = new Location(r.getInt("locationID"),r.getString("streetName"),r.getString("number"),r.getString("postalCode"),r.getString("city"),r.getString("country"),r.getString("name"),r.getString("addInfo"));
