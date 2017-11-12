@@ -40,8 +40,7 @@ public class SurveyDAO extends BaseDAO{
 					return true;
 				else
 					return false;
-	
-				
+		
 		}finally{
 			try{
 			if( p != null){
@@ -54,7 +53,7 @@ public class SurveyDAO extends BaseDAO{
 		}
 	}
 	
-	// hier komt maar 1 vraag bij tabel
+
 	public boolean addSurveyQuestions(Survey survey) throws SQLException, Exception{
 		boolean successvol = false;
 		PreparedStatement p = null; 
@@ -102,15 +101,13 @@ public class SurveyDAO extends BaseDAO{
 				succesvol1 = true;
 			} 
 			
-			
 			boolean succesvol2 = deleteSurveyQuestions( surveyID);
 			
 			if (succesvol1 && succesvol2 == true)
 				return true;
 			else
 				return false;
-			
-		
+				
 		}finally{
 			try{
 			if( p != null){
@@ -134,16 +131,13 @@ public class SurveyDAO extends BaseDAO{
 			}
 			p= getConnection().prepareStatement(sql); 
 			p.setInt(1, surveyID);
-		
-			
+				
 			if (p.executeUpdate() == 0){
 				successvol1 = true;
 			} 
 			
-			
 			return successvol1;
 			
-		
 		}finally{
 			try{
 			if( p != null){
@@ -157,16 +151,12 @@ public class SurveyDAO extends BaseDAO{
 		}
 	
 	
-	
-	// include surveyquestions
 	public Survey getSurveyByID(int surveyID) throws SQLException, Exception{ 
 		Survey s = new Survey();
 		s.setSurveyID(surveyID);
 		
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		
-		
 		
 		try {
 			if(getConnection().isClosed()){
@@ -177,12 +167,17 @@ public class SurveyDAO extends BaseDAO{
 		
 		rs = ps.executeQuery();		
 		rs.next();	
-		
-		
+			
 		s.setSurveyID(rs.getInt(1));
 		s.setTrainingsID(rs.getInt(2));
 		
-		return s;
+		
+		ArrayList<String> questions = new ArrayList<String>();
+		questions = getAllQuestions( surveyID);
+		
+		Survey s_compleet = new Survey(s.getSurveyID(),s.getTrainingsID(),questions);
+		
+		return s_compleet;
 	
 		}finally{
 			try{
@@ -196,49 +191,50 @@ public class SurveyDAO extends BaseDAO{
 			}
 		}
 	
-/*
-	// te corrigeren
-	public ArrayList<String> getAllSurveysQuestions(int surveyID) throws SQLException, Exception{
-		ArrayList<String> myListSurveyQuestions = new ArrayList<String>();
-		
-		Statement stm = null; 
-		ResultSet rs = null; 
-		PreparedStatement ps = null;
-		
+	
+	
+	public ArrayList<String> getAllQuestions(int surveyID) throws SQLException, Exception{	
+	String question = null;
+	PreparedStatement p = null;
+	ResultSet r = null;
+	
+	String sql= "SELECT question FROM Survey_questions WHERE surveyID = ?";
+	ArrayList<String> questions = new ArrayList<String>();
+	
+	try {
+		if (getConnection().isClosed()) {
+			throw new Exception ("error");
+	}
+	p = getConnection().prepareStatement(sql);
+	p.setInt(1,surveyID);
+	r = p.executeQuery();
+	
+	while(r.next()) {
+		question = new String (r.getString("question"));
+		questions.add(question);
+	}
+	return questions;
+	} finally {
 		try {
-			if(getConnection().isClosed()){
-			throw new Exception("error");
-			}
-		
-		ps = getConnection().prepareStatement("SELECT question FROM Survey_questions where SurveyID=?");
-		ps.setInt(1, surveyID);
-		
-		rs = ps.executeQuery();
-		myListSurveyQuestions.add(rs);
-		rs.next();	
-		
-		
-		return myListSurveyQuestions;
-		
-		}finally{
-			try{
-			if( ps != null){
-				ps.close();
+			if( p != null){
+				p.close();
 			}
 			}catch(SQLException e){
 				System.out.println(e.getMessage());
 				throw new RuntimeException("error");
-				}
-			}	
+			}
+		}	
+
 	}
-	*/
 	
-	// surveyquestions nog te includen
+
 	public ArrayList<Survey> getAllSurveys() throws SQLException, Exception{
 		Statement stm = null; 
 		ResultSet r = null; 
 		String sql = "SELECT * FROM Surveys";
 		ArrayList<Survey> myListSurveys = new ArrayList<Survey>();
+		ArrayList<String> questions = new ArrayList<String>();
+		ArrayList<Survey> myListSurveysComplete = new ArrayList<Survey>();
 		
 		Survey survey = null;
 		
@@ -258,8 +254,12 @@ public class SurveyDAO extends BaseDAO{
 					System.out.println("fout");
 				}
 				myListSurveys.add(survey);
+				
+				 questions =getAllQuestions(survey.getSurveyID());
+				 Survey s_compleet = new Survey(survey.getSurveyID(),survey.getTrainingsID(),questions);
+				 myListSurveysComplete.add(s_compleet);	
 			}
-		return myListSurveys;
+		return myListSurveysComplete;
 		
 		}finally{
 			try{
@@ -277,23 +277,20 @@ public class SurveyDAO extends BaseDAO{
 		}
 }
 	
-	// werkt niet
-	public ArrayList<Survey> getAllSurveyByTraining(int trainingsID) throws SQLException, Exception{
-		
-
+	
+	// werkt nog niet
+	public ArrayList<Survey> getAllSurveysbytrainingID(int trainingID) throws SQLException, Exception{
 		Statement stm = null; 
 		ResultSet r = null; 
-		String sql = "SELECT * FROM  Surveys WHERE trainingsID=?";
+		String sql = "SELECT * FROM Surveys WHERE trainingID=?";
 		ArrayList<Survey> myListSurveys = new ArrayList<Survey>();
-		
 		Survey survey = null;
-		
+	
 		try{
 			if(getConnection().isClosed()){
 				 throw new Exception("error");
 			}
-			
-			
+	
 			stm = getConnection().createStatement(); 
 			r = stm.executeQuery(sql);
 					
@@ -306,7 +303,6 @@ public class SurveyDAO extends BaseDAO{
 				myListSurveys.add(survey);
 			}
 		return myListSurveys;
-	
 		
 		}finally{
 			try{
@@ -315,8 +311,7 @@ public class SurveyDAO extends BaseDAO{
 				}
 				if(r != null){
 					r.close();
-				}
-				
+				}	
 			}catch(SQLException e){
 				System.out.println(e.getMessage());
 				throw new RuntimeException("fout");
@@ -324,7 +319,6 @@ public class SurveyDAO extends BaseDAO{
 		}
 	}
 	
-
 	// PAS OOK (nog) SURVEYQUESTIONS AAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	public boolean update(Survey s)	throws SQLException, Exception{
 		boolean successvol = false;
@@ -356,6 +350,24 @@ public class SurveyDAO extends BaseDAO{
 			}
 		}	
 	}
+	
+	
+	/*
+	public boolean updateQuestions(Survey s) throws SQLException, Exception{
+	boolean successvol = false;
+	PreparedStatement p = null;
+	
+	String sql= "UPDATE Survey_questions SET surveyID = ?, question = ?"; 
+	try{
+		if(getConnection().isClosed() ){
+			throw new Exception("fout"); 
+		}
+		p= getConnection().prepareStatement(sql); 
+		
+		
+	}
+	*/
+	
 	
 	public boolean deleteQuestionBySID(int surveyID,String question) throws SQLException, Exception{
 		boolean successvol = false;

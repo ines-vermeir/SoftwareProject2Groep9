@@ -1,3 +1,5 @@
+
+
 package db;
 
 import java.sql.Connection;
@@ -17,3 +19,5 @@ public class BaseDAO {
 		setConnection(Singleton.getSingleton().getConnection(true));
 	}
 }
+
+
