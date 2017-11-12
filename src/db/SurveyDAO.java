@@ -151,45 +151,45 @@ public class SurveyDAO extends BaseDAO{
 		}
 	
 	
-	public Survey getSurveyByID(int surveyID) throws SQLException, Exception{ 
-		Survey s = new Survey();
-		s.setSurveyID(surveyID);
-		
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		
-		try {
-			if(getConnection().isClosed()){
-			throw new Exception("error");
-		}
-		ps = getConnection().prepareStatement("select * from Surveys where surveyID=?");
-		ps.setInt(1, surveyID);
-		
-		rs = ps.executeQuery();		
-		rs.next();	
-			
-		s.setSurveyID(rs.getInt(1));
-		s.setTrainingsID(rs.getInt(2));
-		
-		
-		ArrayList<String> questions = new ArrayList<String>();
-		questions = getAllQuestions( surveyID);
-		
-		Survey s_compleet = new Survey(s.getSurveyID(),s.getTrainingsID(),questions);
-		
-		return s_compleet;
-	
-		}finally{
-			try{
-			if( ps != null){
-				ps.close();
-			}
-			}catch(SQLException e){
-				System.out.println(e.getMessage());
-				throw new RuntimeException("error");
-				}
-			}
-		}
+//	public Survey getSurveyByID(int surveyID) throws SQLException, Exception{ 
+//		Survey s = new Survey();
+//		s.setSurveyID(surveyID);
+//		
+//		PreparedStatement ps = null;
+//		ResultSet rs = null;
+//		
+//		try {
+//			if(getConnection().isClosed()){
+//			throw new Exception("error");
+//		}
+//		ps = getConnection().prepareStatement("select * from Surveys where surveyID=?");
+//		ps.setInt(1, surveyID);
+//		
+//		rs = ps.executeQuery();		
+//		rs.next();	
+//			
+//		s.setSurveyID(rs.getInt(1));
+//		s.setTrainingsID(rs.getInt(2));
+//		
+//		
+//		ArrayList<String> questions = new ArrayList<String>();
+//		questions = getAllQuestions( surveyID);
+//		
+//		Survey s_compleet = new Survey(s.getSurveyID(),s.getTrainingsID(),questions);
+//		
+//		return s_compleet;
+//	
+//		}finally{
+//			try{
+//			if( ps != null){
+//				ps.close();
+//			}
+//			}catch(SQLException e){
+//				System.out.println(e.getMessage());
+//				throw new RuntimeException("error");
+//				}
+//			}
+//		}
 	
 	
 	
@@ -228,54 +228,54 @@ public class SurveyDAO extends BaseDAO{
 	}
 	
 
-	public ArrayList<Survey> getAllSurveys() throws SQLException, Exception{
-		Statement stm = null; 
-		ResultSet r = null; 
-		String sql = "SELECT * FROM Surveys";
-		ArrayList<Survey> myListSurveys = new ArrayList<Survey>();
-		ArrayList<String> questions = new ArrayList<String>();
-		ArrayList<Survey> myListSurveysComplete = new ArrayList<Survey>();
-		
-		Survey survey = null;
-		
-		try{
-			if(getConnection().isClosed()){
-				 throw new Exception("error");
-			}
-			stm = getConnection().createStatement(); 
-			r = stm.executeQuery(sql);
-			
-			while(r.next()){
-				
-				
-				try {
-				survey = new Survey(r.getInt(1), r.getInt(2));
-				}catch(Exception e){
-					System.out.println("fout");
-				}
-				myListSurveys.add(survey);
-				
-				 questions =getAllQuestions(survey.getSurveyID());
-				 Survey s_compleet = new Survey(survey.getSurveyID(),survey.getTrainingsID(),questions);
-				 myListSurveysComplete.add(s_compleet);	
-			}
-		return myListSurveysComplete;
-		
-		}finally{
-			try{
-				if(stm != null){
-					stm.close();
-				}
-				if(r != null){
-					r.close();
-				}
-				
-			}catch(SQLException e){
-				System.out.println(e.getMessage());
-				throw new RuntimeException("fout");
-			}
-		}
-}
+//	public ArrayList<Survey> getAllSurveys() throws SQLException, Exception{
+//		Statement stm = null; 
+//		ResultSet r = null; 
+//		String sql = "SELECT * FROM Surveys";
+//		ArrayList<Survey> myListSurveys = new ArrayList<Survey>();
+//		ArrayList<String> questions = new ArrayList<String>();
+//		ArrayList<Survey> myListSurveysComplete = new ArrayList<Survey>();
+//		
+//		Survey survey = null;
+//		
+//		try{
+//			if(getConnection().isClosed()){
+//				 throw new Exception("error");
+//			}
+//			stm = getConnection().createStatement(); 
+//			r = stm.executeQuery(sql);
+//			
+//			while(r.next()){
+//				
+//				
+//				try {
+//				survey = new Survey(r.getInt(1), r.getInt(2));
+//				}catch(Exception e){
+//					System.out.println("fout");
+//				}
+//				myListSurveys.add(survey);
+//				
+//				 questions =getAllQuestions(survey.getSurveyID());
+//				 Survey s_compleet = new Survey(survey.getSurveyID(),survey.getTrainingsID(),questions);
+//				 myListSurveysComplete.add(s_compleet);	
+//			}
+//		return myListSurveysComplete;
+//		
+//		}finally{
+//			try{
+//				if(stm != null){
+//					stm.close();
+//				}
+//				if(r != null){
+//					r.close();
+//				}
+//				
+//			}catch(SQLException e){
+//				System.out.println(e.getMessage());
+//				throw new RuntimeException("fout");
+//			}
+//		}
+//}
 	
 	
 	// werkt nog niet
