@@ -157,6 +157,35 @@ public class Employee {
 	  
 	  
 	  
+	  
+	  
+	public Employee(int employeeID, String lastName, String firstName, String title, String titleOfCourtesy,
+			String birthDate, String hireDate, String address, String city, String region, String postalCode,
+			String country, String homePhone, String extension, String photo, String notes, int reportsTo,
+			String photoPath) {
+		super();
+		this.employeeID = employeeID;
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.title = title;
+		this.titleOfCourtesy = titleOfCourtesy;
+		this.birthDate = birthDate;
+		this.hireDate = hireDate;
+		this.address = address;
+		this.city = city;
+		this.region = region;
+		this.postalCode = postalCode;
+		this.country = country;
+		this.homePhone = homePhone;
+		this.extension = extension;
+		this.photo = photo;
+		this.notes = notes;
+		this.reportsTo = reportsTo;
+		this.photoPath = photoPath;
+	}
+	  
+	  
+	  
 	 
 	  
 	  
