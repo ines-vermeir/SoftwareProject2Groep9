@@ -1,6 +1,9 @@
+
+
 package logic;
 
 import java.io.BufferedReader;
+import java.io.Console;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
@@ -8,6 +11,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
+import java.util.Scanner;
+
 import db.BookDAO;
 import db.LocationDAO;
 /*import db.TestGson;
@@ -18,6 +24,9 @@ import logic.User.Privilege;*/
 import java.util.Date;
 import db.SessionDAO;
 /*import db.SurveyDAO;*/
+import db.UserDB;
+import logic.User.Privilege;
+import db.TestJackson;
 
 public class Main {
 
@@ -28,8 +37,70 @@ public class Main {
 	 * 
 	 */
 
-	public void login () throws IOException {
-		menuEmployee(1, "Tim");
+	
+	public static void login () throws IOException //wordt nog verder uitgewerkt (Eva)
+	{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		User user = null;
+		boolean check = false;
+		int attempt = 0;
+		UserDB db = new UserDB();
+		String username = null;
+		String password = null;
+		try {			
+				System.out.println("Welcome! \nPlease log in \nUsername:");
+				username = br.readLine();
+				while (check == false)
+				{
+					user = db.getUser(username);
+					if (user == null)
+					{
+						System.out.println("Username does not exist. Please try again: \nUsername: ");
+						username = br.readLine();
+					}
+					else
+					{
+						check = true;
+					}
+				}
+				check = false;
+				System.out.println("Password: ");
+				password = br.readLine();
+				System.out.println(password);
+				while (check == false && attempt < 3)
+				{
+					if (user.getPassword().equals(password))
+					{
+						System.out.println("Login successful");
+						check = true;
+					}
+					else
+					{
+						attempt++;
+						if (attempt < 3)
+						{				
+							System.out.println(user.getPassword());
+							System.out.println("Wrong password. Please try again (" + (3 - attempt) + " attempts remaining): \nPassword:");
+							password = br.readLine();
+						}
+					} 
+				} 
+		} catch (Exception e)
+		{
+			System.out.println("ERROR");
+		}
+		if (user.getPrivilege() == Privilege.EMPLOYEE)
+		{
+			menuEmployee(user);
+		}
+		else if (user.getPrivilege() == Privilege.HR)
+		{
+			//menuHR(user);
+		}
+		else if (user.getPrivilege() == Privilege.TEACHER)
+		{
+			//menuTeacher(user);
+		}
 	}
 	/*
 	 * end LOGIN
@@ -40,8 +111,8 @@ public class Main {
 
 	
 	/* MENU PRIVILEGE 1 (EMPLOYEE)  */
-	public void menuEmployee (int privilege, String naam) throws IOException {
-		System.out.println("Welkom" + naam);
+	public static void menuEmployee (User user) throws IOException {
+		System.out.println("Welkom" + user.getUsername());
 		System.out.println("1. training");
 		System.out.println("2. Certificate");
 		System.out.println("3. Log Out");
@@ -129,6 +200,7 @@ public class Main {
 	/*
 	 * CHANGE LOCATION FUNCTIONS
 	 */
+	/*
 	public void changeStreetName (int id) throws SQLException, Exception {
 		Location l = new Location(LocationDAO.getLocationById(id));
 		System.out.println("What is the new streetName: ");
@@ -398,16 +470,17 @@ public class Main {
 	
 	public static void main(String[] args) throws SQLException, Exception {
 		
-		System.out.println("Welkom");
-		Main m = new Main();
-		m.login();
-		
-		
-		
+
+		login();
+//		System.out.println("Welkom");
+//		Main m = new Main();
+//		m.login();
+//		
+
 
 //---------------------------------------------------Testcode Eva---------------------------------------------------------------------------------		
 		
-//---------------------------------------------------Testcode Inès---------------------------------------------------------------------------------			
+//---------------------------------------------------Testcode InÃ¨s---------------------------------------------------------------------------------			
 
 //---------------------------------------------------Testcode Gill---------------------------------------------------------------------------------			
 
@@ -457,7 +530,7 @@ public class Main {
 		//ArrayList<Book> lijst = dao.getAllBooks();
 		//System.out.println(lijst.toString());
 		
-		//System.out.println("---- GET BOOK by ISBN------------");	
+//System.out.println("---- GET BOOK by ISBN------------");	
 //		if(dao.getBook("9780062820754") == null) {
 //			
 //			System.out.println("Sorry het boek dat jij zoekt bestaat niet");
@@ -535,21 +608,45 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 //		
 //	}
 		
-		//Odata google Books Api 
+//Odata google Books Api 
 		
-//		ArrayList books = TestJackson.getBooksByContent("php");
-//		
-//		for(int i=0; i< books.size(); i++) {
-//						System.out.println(books.get(i).toString());
-//		}
-//			System.out.println("\n");
+//	    ArrayList<BookGoogleAPI> books = TestJackson.getBooksByContent("php");
+		
+//			for(BookGoogleAPI book : books) {
+//							System.out.println(book.toString());
 //			}
-//		
-		
-		
+			
+	
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		
 
 	}
+	
+
+
+
+
+
 
 }
+
+
+
+
 
