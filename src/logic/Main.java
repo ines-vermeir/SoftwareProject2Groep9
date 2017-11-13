@@ -1,3 +1,5 @@
+
+
 package logic;
 
 import java.io.BufferedReader;
@@ -24,6 +26,7 @@ import db.SessionDAO;
 /*import db.SurveyDAO;*/
 import db.UserDB;
 import logic.User.Privilege;
+import db.TestJackson;
 
 public class Main {
 
@@ -197,6 +200,7 @@ public class Main {
 	/*
 	 * CHANGE LOCATION FUNCTIONS
 	 */
+	/*
 	public void changeStreetName (int id) throws SQLException, Exception {
 		Location l = new Location(LocationDAO.getLocationById(id));
 		System.out.println("What is the new streetName: ");
@@ -466,11 +470,17 @@ public class Main {
 	
 	public static void main(String[] args) throws SQLException, Exception {
 		
+
 		login();
+//		System.out.println("Welkom");
+//		Main m = new Main();
+//		m.login();
+//		
+
 
 //---------------------------------------------------Testcode Eva---------------------------------------------------------------------------------		
 		
-//---------------------------------------------------Testcode Inès---------------------------------------------------------------------------------			
+//---------------------------------------------------Testcode InÃ¨s---------------------------------------------------------------------------------			
 
 //---------------------------------------------------Testcode Gill---------------------------------------------------------------------------------			
 
@@ -520,7 +530,7 @@ public class Main {
 		//ArrayList<Book> lijst = dao.getAllBooks();
 		//System.out.println(lijst.toString());
 		
-		//System.out.println("---- GET BOOK by ISBN------------");	
+//System.out.println("---- GET BOOK by ISBN------------");	
 //		if(dao.getBook("9780062820754") == null) {
 //			
 //			System.out.println("Sorry het boek dat jij zoekt bestaat niet");
@@ -598,21 +608,45 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 //		
 //	}
 		
-		//Odata google Books Api 
+//Odata google Books Api 
 		
-//		ArrayList books = TestJackson.getBooksByContent("php");
-//		
-//		for(int i=0; i< books.size(); i++) {
-//						System.out.println(books.get(i).toString());
-//		}
-//			System.out.println("\n");
+//	    ArrayList<BookGoogleAPI> books = TestJackson.getBooksByContent("php");
+		
+//			for(BookGoogleAPI book : books) {
+//							System.out.println(book.toString());
 //			}
-//		
-		
-		
+			
+	
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		
 
 	}
+	
+
+
+
+
+
 
 }
+
+
+
+
 
