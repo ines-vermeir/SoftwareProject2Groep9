@@ -1,8 +1,8 @@
 package logic;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+//import java.io.BufferedReader;
+//import java.io.IOException;
+//import java.io.InputStreamReader;
 
 public class Location  {
 		public int ID;
@@ -93,7 +93,7 @@ public class Location  {
 					+ "]";
 		}
 
-		public void changeStreetName () {
+		/*public void changeStreetName () {
 			System.out.println("What is the new streetName: ");
 			String input;
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
@@ -207,7 +207,6 @@ public class Location  {
 			
 			switch (input) {
 			case "Y": 
-				/* l.updateLocation(l); --> DAO*/
 				System.out.println("SUCCESSFULLY UPDATED");
 				break;
 			case "N":
@@ -220,7 +219,7 @@ public class Location  {
 		}
 	
 		public void deleteLocation() {
-			/* locatie verwijderen vanuit sessie klasse en locationDAO*/
+			// locatie verwijderen vanuit sessie klasse en locationDAO
 		}
 		
 		public Location addLocation() {
@@ -235,11 +234,12 @@ public class Location  {
 				e.printStackTrace();
 			}
 			}
-		    Location l = new Location (1/*id bepaald door db*/, input[0], input[1], input[2],input[3],input[4],input[5], input[6]);
+		    Location l = new Location (, input[0], input[1], input[2],input[3],input[4],input[5], input[6]);
 		    l.toString();
-		    /* addLocation in db */
+		    // addLocation in db 
 		    return l;
 		}
+*/
 }
 		
 		/*public static void main (String args[]) {
