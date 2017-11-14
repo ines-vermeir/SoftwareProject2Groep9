@@ -1,3 +1,4 @@
+
 package logic;
 
 import javax.persistence.Column;
@@ -18,9 +19,10 @@ public class User{
 	
 	public enum Privilege {EMPLOYEE, TEACHER, HR};
 	
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name ="userID") @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int userID;
-	@Column(name="username")
+	@Id 
+	@Column(name="username") 
 	private String username;
 	@Column(name="password")
 	private String password;
@@ -60,8 +62,7 @@ public class User{
 	
 	public String toString() {
 		return "User ID: " + this.userID + ", Username: " 
-				+ this.username + ", Password: " + this.password 
-				+ ", Privilege Assigned: " + this.privilege;
+				+ this.username + ", Privilege Assigned: " + this.privilege;
 	}
 	
 	@Override
@@ -153,4 +154,5 @@ public class User{
 //			}else {
 //				System.out.print("Please, provide the correct credentials.");
 //			}
+	
 }
