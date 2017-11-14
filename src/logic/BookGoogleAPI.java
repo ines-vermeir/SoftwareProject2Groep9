@@ -1,3 +1,4 @@
+//POJO klasse gegenereerd met de online tool Jsonschema2pojo in http://www.jsonschema2pojo.org, kleine aanpassingen aan gebracht zoals toString methodes een datatypes
 package logic;
 
 import java.util.HashMap;
@@ -32,7 +33,6 @@ public class BookGoogleAPI {
 		private String publishedDate;
 		@JsonProperty("description")
 		private String description;
-		//ISBN_13 WORDT gebruikt
 		@JsonProperty("industryIdentifiers")
 		private String industryIdentifiers = null;
 		@JsonProperty("readingModes")
@@ -375,54 +375,7 @@ public class BookGoogleAPI {
 
 		}
 		
-		//-----------------------------------logic.IndustryIdentifier.java-----------------------------------
-
-
-		@JsonInclude(JsonInclude.Include.NON_NULL)
-		@JsonPropertyOrder({
-		"type",
-		"identifier"
-		})
-		static class IndustryIdentifier {
-
-		@JsonProperty("type")
-		private String type;
-		@JsonProperty("identifier")
-		private String identifier;
-		@JsonIgnore
-		private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
-		@JsonProperty("type")
-		public String getType() {
-		return type;
-		}
-
-		@JsonProperty("type")
-		public void setType(String type) {
-		this.type = type;
-		}
-
-		@JsonProperty("identifier")
-		public String getIdentifier() {
-		return identifier;
-		}
-
-		@JsonProperty("identifier")
-		public void setIdentifier(String identifier) {
-		this.identifier = identifier;
-		}
-
-		@JsonAnyGetter
-		public Map<String, Object> getAdditionalProperties() {
-		return this.additionalProperties;
-		}
-
-		@JsonAnySetter
-		public void setAdditionalProperty(String name, Object value) {
-		this.additionalProperties.put(name, value);
-		}
-
-		}
+		
 
 }
 

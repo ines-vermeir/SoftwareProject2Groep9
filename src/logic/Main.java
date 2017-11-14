@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import db.BookDAO;
+import db.BookDB;
 import db.LocationDAO;
 /*import db.TestGson;
 import db.TestJackson;
@@ -486,7 +487,7 @@ public class Main {
 //	   Book myBook = new Book("test6","Last Title","Last Author", myCal);
 //		
 //		
-//		BookDB db1 = new BookDB();
+		BookDB db = new BookDB();
 		
 
 
@@ -518,34 +519,37 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 		
 	//	db.deleteBook(myBook);
 		
-	/*	ArrayList<Book> books = db.getAllBooks();
+		ArrayList<Book> books = db.getAllBooks();
 		
 	for(int i=0; i< books.size(); i++) {
 			System.out.println(books.get(i).toString());
-		}*/
+		}
 		
 		
 		
-		//--------------- Odata lezen ---------------------------
-		//ArrayList<Employee> employees= (ArrayList<Employee>) TestJackson.getEmployees();
-	//	ArrayList<Value> employees=  TestGson.getEmployees();
+//--------------- Odata lezen Employees---------------------------
+		/*ArrayList<Employee> employees= (ArrayList<Employee>) TestJackson.getEmployees();
+	
 		
-	//	System.out.println(TestGson.readUrl("http://services.odata.org/V3/Northwind/Northwind.svc/Employees?$format=json"));
+		for(int i=0; i< employees.size(); i++) {
+			System.out.println(employees.get(i).toString());
+		    
+			System.out.println(employees.get(i).getEmployeeID());
+			
+			
+			}
+	*/
 		
-//		for(int i=0; i< employees.size(); i++) {
-//			System.out.println(employees.get(i).toString());
-//			System.out.println("\n");
-//			}
-//		
-//	}
+
 		
-//Odata google Books Api 
+ //Odata google Books Api test-----------------------------------------------------------------
 		
-	    ArrayList<BookGoogleAPI> books = TestJackson.getBooksByContent("php");
+	 /*   ArrayList<BookGoogleAPI> books = TestJackson.getBooksByContent("php");
 		
 			for(BookGoogleAPI book : books) {
-							System.out.println(book.toString());
-			}
+						System.out.println(book.toString());
+							//System.out.println(book.getTitle());
+			}*/
 			
 	
 			

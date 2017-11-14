@@ -1,4 +1,4 @@
-//POJO klasse gegenereerd met de online tool http://www.jsonschema2pojo.org, kleine aanpassingen aan gebracht zoals toString methodes
+
 package logic;
 
 import java.util.HashMap;
