@@ -62,7 +62,6 @@ public class Training {
 		this.sequentiality = sequentiality;
 	}
 
-	
 	public ArrayList<Book> getBooks() {
 		return books;
 	}
