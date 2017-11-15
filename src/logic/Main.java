@@ -497,11 +497,18 @@ public class Main {
 		ArrayList<Session> s1 = db.getAllSessions();
 		for (Session s: s1)
 		{
-			System.out.println(s.getSessionID() + "  " + s.getTeachers().size());
+			//System.out.println(s.getSessionID() + "  " + s.getTeachers().size());
 			for (Session_teachers t: s.getTeachers()) {
+				System.out.println("----Teachers-----");
 				System.out.println(t.getTeacher());
 			}
-			
+			for (Student_enrolled_session st: s.getStudentsEnrolled()) {
+				System.out.println("-----Student enrolled session-----");
+				System.out.println( "ID employee= "+ st.getEmployeeIDenrolled());
+			}/*for (Session_teachers t: s.getTeachers()) {
+				System.out.println("----Students enrolled in training-----");
+				System.out.println(t.getTeacher());
+			}*/
 		}
 		
 		
