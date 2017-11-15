@@ -24,7 +24,7 @@ public class UserDB {
 	public UserDB()
 	{
 		super();
-		myFactory = HibernateFactory.getSessionFactory();
+		myFactory = SingletonHibernate.getSessionFactory();
 	}
 	
 	public void insertUser (User myUser)
