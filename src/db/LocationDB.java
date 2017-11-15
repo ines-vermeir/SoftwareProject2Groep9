@@ -16,14 +16,14 @@ import logic.Location;
 
 
 public class LocationDB {
-	private static SessionFactory myFactory =  null;
+	private SessionFactory myFactory =  null;
 	
 	public LocationDB() {
 		super();
 		  myFactory =  SingletonHibernate.getSessionFactory();
 	}
 	
-	public static boolean insertLocation(Location l)  {
+	public boolean insertLocation(Location l)  {
 		boolean succes = false;
 		Session session = myFactory.openSession();
 		Transaction t = null; 
@@ -45,10 +45,10 @@ public class LocationDB {
 		return succes;
 		}
 
-	public static boolean updateLocation(Location l) {
+	public boolean updateLocation(Location l) {
 		boolean succes = false;
 		Session session = myFactory.openSession();
-		org.hibernate.Transaction t = null; 
+		Transaction t = null; 
 		
 		try {
 			t = session.beginTransaction();
@@ -68,7 +68,7 @@ public class LocationDB {
 		
 	}
 
-	public static Location getLocationById(int id) {
+	public Location getLocationById(int id) {
 		Location l = null;
 		Session session = myFactory.openSession();
 		Transaction t = null; 

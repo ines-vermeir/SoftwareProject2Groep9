@@ -205,9 +205,10 @@ public class Main {
 	/*
 	 * CHANGE LOCATION FUNCTIONS
 	 */
-	/*
+	
 	public void changeStreetName (int id) throws SQLException, Exception {
-		Location l = new Location(LocationDB.getLocationById(id));
+		LocationDB db = new LocationDB();
+		Location l = db.getLocationById(id);
 		System.out.println("What is the new streetName: ");
 		String input;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
@@ -220,7 +221,7 @@ public class Main {
 		System.out.println(input);
 		if (saveUpdate() ==  true) {
 			l.setStreetName(input);
-			if (LocationDB.updateLocation(l) == true) {
+			if (db.updateLocation(l) == true) {
 				System.out.println("UPDATE SUCCESFULL");
 			}
 			else {
@@ -233,7 +234,8 @@ public class Main {
 		return;
 	}
 	public void changeNumber (int id) throws SQLException, Exception { 
-		Location l = new Location(LocationDB.getLocationById(id));
+		LocationDB db = new LocationDB();
+		Location l = db.getLocationById(id);
 		System.out.println("What is the new number: ");
 		String input;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
@@ -246,7 +248,7 @@ public class Main {
 		System.out.println(input);
 		if (saveUpdate() ==  true) {
 			l.setNumber(input);
-			if (LocationDB.updateLocation(l) == true) {
+			if (db.updateLocation(l) == true) {
 				System.out.println("UPDATE SUCCESFULL");
 			}
 			else {
@@ -259,7 +261,8 @@ public class Main {
 		return;
 	}
 	public void changePostalCode (int id) throws SQLException, Exception { 
-		Location l = new Location(LocationDB.getLocationById(id));
+		LocationDB db = new LocationDB();
+		Location l = db.getLocationById(id);
 		System.out.println("What is the new postal code: ");
 		String input;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
@@ -272,7 +275,7 @@ public class Main {
 		System.out.println(input);
 		if (saveUpdate() ==  true) {
 			l.setPostalCode(input);
-			if (LocationDB.updateLocation(l) == true) {
+			if (db.updateLocation(l) == true) {
 				System.out.println("UPDATE SUCCESFULL");
 			}
 			else {
@@ -285,7 +288,8 @@ public class Main {
 		return;
 	}
 	public void changeCity (int id) throws SQLException, Exception {
-		Location l = new Location(LocationDB.getLocationById(id));
+		LocationDB db = new LocationDB();
+		Location l = db.getLocationById(id);
 		System.out.println("What is the new city: ");
 		String input;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
@@ -298,7 +302,7 @@ public class Main {
 	    System.out.println(input);
 		if (saveUpdate() ==  true) {
 			l.setCity(input);
-			if (LocationDB.updateLocation(l) == true) {
+			if (db.updateLocation(l) == true) {
 				System.out.println("UPDATE SUCCESFULL");
 			}
 			else {
@@ -311,7 +315,9 @@ public class Main {
 		return;
 	}
 	public void changeCountry (int id) throws SQLException, Exception {
-		Location l = new Location(LocationDB.getLocationById(id));
+		LocationDB db = new LocationDB();
+		Location l = db.getLocationById(id);
+		//l = new Location(2,"Nijverheidkaai","170","1080","Anderlecht","Belgium","campus Kaai","blok A, audi 1",0);
 		System.out.println("What is the new country: ");
 		String input;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
@@ -324,7 +330,7 @@ public class Main {
 	    System.out.println(input);
 		if (saveUpdate() ==  true) {
 			l.setCountry(input);
-			if (LocationDB.updateLocation(l) == true) {
+			if (db.updateLocation(l) == true) {
 				System.out.println("UPDATE SUCCESFULL");
 			}
 			else {
@@ -337,7 +343,8 @@ public class Main {
 		return;
 	}
 	public void changeName (int id) throws SQLException, Exception {
-		Location l = new Location(LocationDB.getLocationById(id));
+		LocationDB db = new LocationDB();
+		Location l = db.getLocationById(id);
 		System.out.println("What is the new name: ");
 		String input;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
@@ -350,7 +357,7 @@ public class Main {
 	    System.out.println(input);
 		if (saveUpdate() ==  true) {
 			l.setName(input);
-			if (LocationDB.updateLocation(l) == true) {
+			if (db.updateLocation(l) == true) {
 				System.out.println("UPDATE SUCCESFULL");
 			}
 			else {
@@ -362,8 +369,9 @@ public class Main {
 		}
 		return;
 	}
-	public void changeInfo (int id) throws SQLException, Exception {
-		Location l = new Location(LocationDB.getLocationById(id));
+	public void changeInfo (int id) throws Exception {
+		LocationDB db = new LocationDB();
+		Location l = db.getLocationById(id);
 		System.out.println("What is the new info: ");
 		String input;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
@@ -376,7 +384,7 @@ public class Main {
 	    System.out.println(input);
 		if (saveUpdate() ==  true) {
 			l.setInfo(input);
-			if (LocationDB.updateLocation(l) == true) {
+			if (db.updateLocation(l) == true) {
 				System.out.println("UPDATE SUCCESFULL");
 			}
 			else {
@@ -393,14 +401,15 @@ public class Main {
 	 * end CHANGE LOCATION FUNCTIONS
 	 */
 	public void deleteLocation(int id) {
+		LocationDB db = new LocationDB();
 		Location l;
 		try {
-		l = new Location(LocationDB.getLocationById(id));
+		l = db.getLocationById(id);
 		System.out.println("DELETE: " + l.toString());
 		if (saveUpdate() ==  true) {
-			l.setArchive(0);
+			l.setArchive(1);
 			try {
-				if (LocationDB.updateLocation(l) == true) {
+				if (db.updateLocation(l) == true) {
 					System.out.println("DELETE SUCCESFULL");
 				}
 				else {
@@ -416,6 +425,7 @@ public class Main {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return;
 	}
 	
 	public void addLocation() throws SQLException, Exception {
@@ -430,10 +440,12 @@ public class Main {
 			e.printStackTrace();
 		}
 		}
-	    Location l = new Location (input[0], input[1], input[2],input[3],input[4],input[5], input[6],1);
+	    Location l = new Location (input[0], input[1], input[2],input[3],input[4],input[5], input[6],0);
+	    LocationDB db = new LocationDB();
+		//Location l = new Location("Nijverheidkaai","170","1080","Anderlecht","Belgium","campus Kaai","blok A, audi 1",0);
 	    System.out.println(l.toString());
 	    if (saveUpdate() ==  true) {
-			if ( LocationDB.insertLocation(l) == true) {
+			if ( db.insertLocation(l) == true) {
 				System.out.println("INSERT SUCCESFULL");
 			}
 			else {
@@ -499,9 +511,10 @@ public class Main {
 		
 
 //		login();
-		System.out.println("Welkom");
+//		System.out.println("Welkom");
 		Main m = new Main();
-		m.login();
+		m.deleteLocation(2);
+//		m.login();
 //		
 
 
