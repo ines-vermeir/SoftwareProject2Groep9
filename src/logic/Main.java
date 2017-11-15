@@ -38,7 +38,7 @@ public class Main {
 	 * 
 	 */
 
-	/*
+	
 	public static void login () throws IOException //wordt nog verder uitgewerkt (Eva)
 	{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -104,7 +104,7 @@ public class Main {
 		}
 	}
 	
-	*/
+	
 	/*
 	 * end LOGIN
 	 */
@@ -474,7 +474,7 @@ public class Main {
 	public static void main(String[] args) throws SQLException, Exception {
 		
 
-	//	login();
+//		login();
 //		System.out.println("Welkom");
 //		Main m = new Main();
 //		m.login();
@@ -615,6 +615,7 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 		
  //Odata google Books Api test-----------------------------------------------------------------
 		
+
 /*
 	   ArrayList<BookGoogleAPI> books = TestJackson.getBooksByContent("php programming");
 
@@ -636,14 +637,21 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 			
 			
 			
+
+
+//	   ArrayList<BookGoogleAPI> books = TestJackson.getBooksByContent("php programming");
+//
+//
+//
+//			for(BookGoogleAPI book : books) {
+//						System.out.println(book.toString());
+//							//System.out.println(book.getTitle());
+//			}
+//	
+
 		
 
 	}
-	
-
-
-
-
 
 
 }
