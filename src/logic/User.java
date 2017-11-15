@@ -39,6 +39,13 @@ public class User{
 		this.archive = 0;
 	}
 	
+	public User(String username, String password, Privilege privilege){
+		this.username = username;
+		this.password = password;
+		this.privilege = privilege;
+		this.archive = 0;
+	}
+	
 	public int getArchive() {
 		return archive;
 	}
@@ -47,12 +54,7 @@ public class User{
 		this.archive = archive;
 	}
 
-	public User(String username, String password, Privilege privilege){
-		this.username = username;
-		this.password = password;
-		this.privilege = privilege;
-		this.archive = 0;
-	}
+	
 	
 	//constructor voor Hibernate
 	public User ()
