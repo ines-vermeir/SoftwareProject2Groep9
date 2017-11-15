@@ -23,7 +23,7 @@ import logic.MetadataOdata;
 public class TestJackson {
 
 	private static MetadataOdata metadata = null; 
-	private static BookApi bookApi = null;
+
 	private static ObjectMapper mapper = null;
 	public static List<Employee> getEmployees() throws MalformedURLException{
 		
@@ -59,12 +59,17 @@ public class TestJackson {
 		
 	}
 	
-//	public static ArrayList getBooksByContent(String topic) throws MalformedURLException {
+
 		
 		public static ArrayList<BookGoogleAPI> getBooksByContent(String topic) throws IOException {
 		//BookApi b = new BookApi();
+			
+			String	newTopic = topic.replaceAll(" ", "+");
 		URL jsonUrl = new URL(
-				"https://www.googleapis.com/books/v1/volumes?q=" + topic);
+			
+			//"https://www.googleapis.com/books/v1/volumes?q=" + topic);
+				//"https://www.googleapis.com/books/v1/volumes?q=" + topic+"&maxResults=40&filter=full");
+	"https://www.googleapis.com/books/v1/volumes?q=" + newTopic+"&maxResults=40");
 		mapper = new ObjectMapper(); 
 		ArrayList<BookGoogleAPI> list = new ArrayList<BookGoogleAPI>();
 		BookGoogleAPI myBook =null;
@@ -105,7 +110,21 @@ public class TestJackson {
 				  listAuthors.add(author.asText());
 			  }
 			  myBook.setAuthors(listAuthors);
-			 myBook.setIndustryIdentifiers(node.get("volumeInfo").path("industryIdentifiers").get(1).path("identifier").asText());
+			 // myBook.setIndustryIdentifiers(node.get("volumeInfo").get("industryIdentifiers").get(0).get("identifier").asText());
+			 
+			 if(node.get("volumeInfo").path("industryIdentifiers").isNull()) {
+				//Indien er geen unieke identifier bestaat 
+					 myBook.setIndustryIdentifiers("unknown");
+			 
+		 }else {
+			// indien er een andere identifier bestaat 
+			// myBook.setIndustryIdentifiers(node.path("volumeInfo").get("industryIdentifiers").get(0).get("identifier").asText());
+			  myBook.setIndustryIdentifiers(node.path("volumeInfo").path("industryIdentifiers").path(0).path("identifier").asText());
+			//  myBook.setIndustryIdentifiers("test");
+		 }
+			 
+			
+			 
 			//  myBook.setIndustryIdentifiers("test");
 //Als er geen retailPrice is in de Json wil dat zeggen dat het boek niet te koop is
 			  if(node.path("saleInfo").path("retailPrice").isNull()) {
@@ -127,33 +146,7 @@ public class TestJackson {
 		
 		
 		
-/*		ArrayList list=null;
-		
-		mapper = new ObjectMapper(); 
-		mapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
-		try {
-			
-			
-			bookApi= mapper.readValue(jsonUrl, BookApi.class);
-			
-		
-			  list =(ArrayList) b.getItems();
-				
-			}catch (JsonParseException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (JsonMappingException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-			
-			
-			return list ; */
-		
+
 		
 		
 			

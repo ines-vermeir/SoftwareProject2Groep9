@@ -15,6 +15,7 @@ import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 import db.BookDAO;
+import db.BookDB;
 import db.LocationDAO;
 /*import db.TestGson;
 import db.TestJackson;
@@ -102,6 +103,8 @@ public class Main {
 			//menuTeacher(user);
 		}
 	}
+	
+	
 	/*
 	 * end LOGIN
 	 */
@@ -471,7 +474,7 @@ public class Main {
 	public static void main(String[] args) throws SQLException, Exception {
 		
 
-		login();
+//		login();
 //		System.out.println("Welkom");
 //		Main m = new Main();
 //		m.login();
@@ -555,7 +558,7 @@ public class Main {
 //	   Book myBook = new Book("test6","Last Title","Last Author", myCal);
 //		
 //		
-//		BookDB db1 = new BookDB();
+		//BookDB db = new BookDB();
 		
 
 
@@ -591,57 +594,40 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 		
 	for(int i=0; i< books.size(); i++) {
 			System.out.println(books.get(i).toString());
-		}*/
+		}
 		
+		*/
 		
-		
-		//--------------- Odata lezen ---------------------------
-		//ArrayList<Employee> employees= (ArrayList<Employee>) TestJackson.getEmployees();
-	//	ArrayList<Value> employees=  TestGson.getEmployees();
-		
-	//	System.out.println(TestGson.readUrl("http://services.odata.org/V3/Northwind/Northwind.svc/Employees?$format=json"));
-		
-//		for(int i=0; i< employees.size(); i++) {
-//			System.out.println(employees.get(i).toString());
-//			System.out.println("\n");
-//			}
-//		
-//	}
-		
-//Odata google Books Api 
-		
-//	    ArrayList<BookGoogleAPI> books = TestJackson.getBooksByContent("php");
-		
-//			for(BookGoogleAPI book : books) {
-//							System.out.println(book.toString());
-//			}
-			
+//--------------- Odata lezen Employees---------------------------
+		/*ArrayList<Employee> employees= (ArrayList<Employee>) TestJackson.getEmployees();
 	
+		
+		for(int i=0; i< employees.size(); i++) {
+			System.out.println(employees.get(i).toString());
+		    
+			System.out.println(employees.get(i).getEmployeeID());
 			
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+			}
+	*/
+		
+
+		
+ //Odata google Books Api test-----------------------------------------------------------------
+		
+
+//	   ArrayList<BookGoogleAPI> books = TestJackson.getBooksByContent("php programming");
+//
+//
+//
+//			for(BookGoogleAPI book : books) {
+//						System.out.println(book.toString());
+//							//System.out.println(book.getTitle());
+//			}
+//	
 		
 
 	}
-	
-
-
-
-
 
 
 }
