@@ -23,7 +23,7 @@ import db.UserDB;
 import logic.User.Privilege;*/
 
 import java.util.Date;
-import db.SessionDAO;
+import db.SessionDB;
 /*import db.SurveyDAO;*/
 import db.UserDB;
 import logic.User.Privilege;
@@ -473,12 +473,33 @@ public class Main {
 	
 	public static void main(String[] args) throws SQLException, Exception {
 		
-
+//		ArrayList<String> teachers = new ArrayList<String>();
+//		teachers.add("Teacher5");
+//		teachers.add("Teacher4");
+//		ArrayList<Integer> studentsEnrolled = new ArrayList<Integer>();
+//		studentsEnrolled.add(24634);
+//		studentsEnrolled.add(2245);
+//		ArrayList<Integer> studentsPresent = new ArrayList<Integer>();
+//		studentsPresent.add(12134);
+//		studentsPresent.add(23145);
+//		Calendar myCal =  new GregorianCalendar();		
+//		myCal.set(GregorianCalendar.YEAR, 2017);
+//		myCal.set(GregorianCalendar.MONTH,12);
+//		myCal.set(GregorianCalendar.DATE,22);
+//		
+//		Session s1 = new Session(2, 1, myCal, "10:00", "12:00", 1, teachers, studentsEnrolled, studentsPresent);
+		SessionDB db = new SessionDB();
+		ArrayList<Session> s1 = db.getAllSessions();
+		for (Session s: s1)
+		{
+			System.out.println(s.getSessionID() + "  " + s.getTeachers().size());
+		}
+		
+		
 //		login();
 //		System.out.println("Welkom");
 //		Main m = new Main();
-//		m.login();
-//		
+//		m.login();		
 
 
 //---------------------------------------------------Testcode Eva---------------------------------------------------------------------------------		
