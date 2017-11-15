@@ -20,7 +20,7 @@ public class LocationDB {
 	
 	public LocationDB() {
 		super();
-		  myFactory =  SingletonHibernate.getSessionFactory()
+		  myFactory =  SingletonHibernate.getSessionFactory();
 	}
 	
 	public static boolean insertLocation(Location l)  {

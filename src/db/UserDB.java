@@ -2,14 +2,21 @@ package db;
 
 import java.util.ArrayList;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import logic.User;
 
 //functies zijn getest en werken
+
+//nog toe te voegen functies:
+//getAllUserNames   (om bij aanmaak van nieuwe user te kijken of de username reeds in gebruik is + bij inloggen checken of de user bestaat)
+//getUserByUsername (om user op te halen op basis van username en zo wachtwoordcheck te doen)
+
 public class UserDB {
 
 	private SessionFactory myFactory = null;
@@ -17,7 +24,7 @@ public class UserDB {
 	public UserDB()
 	{
 		super();
-		myFactory = HibernateFactory.getSessionFactory();
+		myFactory = SingletonHibernate.getSessionFactory();
 	}
 	
 	public void insertUser (User myUser)
@@ -82,7 +89,7 @@ public class UserDB {
 		}
 	}
 
-	public User getUser (int userID)
+	public User getUser (String username)
 	{
 		User u = null;
 		Session session = myFactory.openSession();
@@ -91,7 +98,7 @@ public class UserDB {
 		{
 			t = session.beginTransaction();
 			// get by PRIMARY KEY
-			u = (User) session.get(User.class, userID);
+			u = (User) session.get(User.class, username);
 			t.commit();
 		}
 		catch (HibernateException e)
@@ -105,6 +112,30 @@ public class UserDB {
 		}
 		return u;
 	}
+	
+//	public User getUserByUsername (String username)
+//	{
+//		User u = new User();
+//		Session session = myFactory.openSession();
+//		Transaction t = null;
+//		try
+//		{
+//			
+//			t = session.beginTransaction();
+//			u = session.createCriteria(User.class).add(eq("username", username)).uniqueResult();
+//			t.commit();
+//		}
+//		catch (HibernateException e)
+//		{
+//			if (t != null) t.rollback();
+//			e.printStackTrace();
+//		}
+//		finally
+//		{
+//			session.close();
+//		}
+//		return u;
+//	}
 	
 	public ArrayList<User> getAllUsers()
 	{
@@ -161,3 +192,21 @@ public class UserDB {
 //db.archiveUser(u);
 //User u = db.getUser(1);
 //System.out.println(u.toString());
+
+//System.out.println("Welkom");
+//Main m = new Main();
+//m.login();
+
+//User u = new User ("TestUser5", "pass", Privilege.HR);
+//UserDB db = new UserDB();
+//User u = db.getUser("TestU");
+//if (u == null)
+//{
+//	System.out.println("geen data gevonden");
+//}
+//System.out.println(u.toString());
+//ArrayList<User> list = db.getAllUsers();
+//for (User u1 : list)
+//{
+//	System.out.println(u1.toString());
+//}

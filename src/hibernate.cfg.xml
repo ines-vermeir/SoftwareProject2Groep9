@@ -22,6 +22,7 @@
 		<!-- Echo all executed SQL -->
 		<property name="show_sql">true</property>
 		<!-- Drop the existing tables and create new one -->
+<<<<<<< HEAD
 		<!-- <property name="hm2dll.auto">create</property> -->
 
 		<!-- Hier wordt de package naam en de naam van de klasse gezet -->
@@ -32,5 +33,18 @@
 		<!-- <mapping class="logic.Certificate"/> -->
 		<!-- <mapping class="logic.Survey"/> -->
 
+=======
+<!--  		<property name="hm2dll.auto">create</property> -->
+		
+		<!-- Hier wordt de package naam en de naam van de klasse gezet-->
+		<mapping class="logic.Book"/>
+<!-- 	<mapping class="logic.Session"/>  -->
+		<mapping class="logic.User"/>
+<!-- 	<mapping class="logic.Location"/>  -->	
+<!--	<mapping class="logic.Certificate"/> -->	
+<!--	<mapping class="logic.Survey"/> -->
+		<mapping class="logic.Training"/>
+	
+>>>>>>> b0630bfe3615894cc1102e654565bffcf8ab64dd
 	</session-factory>
 </hibernate-configuration>
