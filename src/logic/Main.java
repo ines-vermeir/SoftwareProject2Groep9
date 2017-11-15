@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import db.BookDAO;
-import db.LocationDAO;
 /*import db.TestGson;
 import db.TestJackson;
 import db.UserDB;
 import logic.User.Privilege;*/
+import db.LocationDB;
 
 import java.util.Date;
 import db.SessionDAO;
@@ -28,8 +28,9 @@ public class Main {
 	 * 
 	 */
 
-	public void login () throws IOException {
-		menuEmployee(1, "Tim");
+	public void login () throws SQLException, Exception {
+		//menuEmployee(1, "Tim");
+		addLocation();
 	}
 	/*
 	 * end LOGIN
@@ -120,7 +121,6 @@ public class Main {
 	
 	
 //INES-------------------------------------	methodes/menu klasse Location------------------------------------------------------------------------	
-//(user meegeven als parameter en afhankelijk daarvan andere opties voorzien)
 	/*
 	 * Location
 	 * 
@@ -130,7 +130,7 @@ public class Main {
 	 * CHANGE LOCATION FUNCTIONS
 	 */
 	public void changeStreetName (int id) throws SQLException, Exception {
-		Location l = new Location(LocationDAO.getLocationById(id));
+		Location l = new Location(LocationDB.getLocationById(id));
 		System.out.println("What is the new streetName: ");
 		String input;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
@@ -142,8 +142,8 @@ public class Main {
 		}
 		System.out.println(input);
 		if (saveUpdate() ==  true) {
-			l.streetName = input;
-			if (LocationDAO.updateLocation(l) == true) {
+			l.setStreetName(input);
+			if (LocationDB.updateLocation(l) == true) {
 				System.out.println("UPDATE SUCCESFULL");
 			}
 			else {
@@ -156,7 +156,7 @@ public class Main {
 		return;
 	}
 	public void changeNumber (int id) throws SQLException, Exception { 
-		Location l = new Location(LocationDAO.getLocationById(id));
+		Location l = new Location(LocationDB.getLocationById(id));
 		System.out.println("What is the new number: ");
 		String input;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
@@ -168,8 +168,8 @@ public class Main {
 		}
 		System.out.println(input);
 		if (saveUpdate() ==  true) {
-			l.number = input;
-			if (LocationDAO.updateLocation(l) == true) {
+			l.setNumber(input);
+			if (LocationDB.updateLocation(l) == true) {
 				System.out.println("UPDATE SUCCESFULL");
 			}
 			else {
@@ -182,7 +182,7 @@ public class Main {
 		return;
 	}
 	public void changePostalCode (int id) throws SQLException, Exception { 
-		Location l = new Location(LocationDAO.getLocationById(id));
+		Location l = new Location(LocationDB.getLocationById(id));
 		System.out.println("What is the new postal code: ");
 		String input;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
@@ -194,8 +194,8 @@ public class Main {
 		}
 		System.out.println(input);
 		if (saveUpdate() ==  true) {
-			l.postalCode = input;
-			if (LocationDAO.updateLocation(l) == true) {
+			l.setPostalCode(input);
+			if (LocationDB.updateLocation(l) == true) {
 				System.out.println("UPDATE SUCCESFULL");
 			}
 			else {
@@ -208,7 +208,7 @@ public class Main {
 		return;
 	}
 	public void changeCity (int id) throws SQLException, Exception {
-		Location l = new Location(LocationDAO.getLocationById(id));
+		Location l = new Location(LocationDB.getLocationById(id));
 		System.out.println("What is the new city: ");
 		String input;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
@@ -220,8 +220,8 @@ public class Main {
 		}
 	    System.out.println(input);
 		if (saveUpdate() ==  true) {
-			l.postalCode = input;
-			if (LocationDAO.updateLocation(l) == true) {
+			l.setCity(input);
+			if (LocationDB.updateLocation(l) == true) {
 				System.out.println("UPDATE SUCCESFULL");
 			}
 			else {
@@ -234,7 +234,7 @@ public class Main {
 		return;
 	}
 	public void changeCountry (int id) throws SQLException, Exception {
-		Location l = new Location(LocationDAO.getLocationById(id));
+		Location l = new Location(LocationDB.getLocationById(id));
 		System.out.println("What is the new country: ");
 		String input;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
@@ -246,8 +246,8 @@ public class Main {
 		}
 	    System.out.println(input);
 		if (saveUpdate() ==  true) {
-			l.postalCode = input;
-			if (LocationDAO.updateLocation(l) == true) {
+			l.setCountry(input);
+			if (LocationDB.updateLocation(l) == true) {
 				System.out.println("UPDATE SUCCESFULL");
 			}
 			else {
@@ -260,7 +260,7 @@ public class Main {
 		return;
 	}
 	public void changeName (int id) throws SQLException, Exception {
-		Location l = new Location(LocationDAO.getLocationById(id));
+		Location l = new Location(LocationDB.getLocationById(id));
 		System.out.println("What is the new name: ");
 		String input;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
@@ -272,8 +272,8 @@ public class Main {
 		}
 	    System.out.println(input);
 		if (saveUpdate() ==  true) {
-			l.postalCode = input;
-			if (LocationDAO.updateLocation(l) == true) {
+			l.setName(input);
+			if (LocationDB.updateLocation(l) == true) {
 				System.out.println("UPDATE SUCCESFULL");
 			}
 			else {
@@ -286,7 +286,7 @@ public class Main {
 		return;
 	}
 	public void changeInfo (int id) throws SQLException, Exception {
-		Location l = new Location(LocationDAO.getLocationById(id));
+		Location l = new Location(LocationDB.getLocationById(id));
 		System.out.println("What is the new info: ");
 		String input;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
@@ -298,8 +298,8 @@ public class Main {
 		}
 	    System.out.println(input);
 		if (saveUpdate() ==  true) {
-			l.postalCode = input;
-			if (LocationDAO.updateLocation(l) == true) {
+			l.setInfo(input);
+			if (LocationDB.updateLocation(l) == true) {
 				System.out.println("UPDATE SUCCESFULL");
 			}
 			else {
@@ -315,12 +315,34 @@ public class Main {
 	/* 
 	 * end CHANGE LOCATION FUNCTIONS
 	 */
-	public void deleteLocation() {
-		/* locatie verwijderen vanuit sessie klasse en locationDAO???*/
+	public void deleteLocation(int id) {
+		Location l;
+		try {
+		l = new Location(LocationDB.getLocationById(id));
+		System.out.println("DELETE: " + l.toString());
+		if (saveUpdate() ==  true) {
+			l.setArchive(0);
+			try {
+				if (LocationDB.updateLocation(l) == true) {
+					System.out.println("DELETE SUCCESFULL");
+				}
+				else {
+					System.out.println("ERROR: DELETE UNSUCCESFULL");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("CHANGES DELETED");
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void addLocation() throws SQLException, Exception {
-		String[] questions = new String[]{"What is the streetName: ","What is the number: ", "What is the new postal code: ", "What is the city: ", "What is the country: ","What is the name: ","What is the info: " };
+		String[] questions = new String[]{"What is the streetName: ","What is the number: ", "What is the postal code: ", "What is the city: ", "What is the country: ","What is the name: ","What is the info: " };
 		String[] input = new String[questions.length];
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
 		for (int i=0; i < questions.length; i++) {
@@ -331,10 +353,10 @@ public class Main {
 			e.printStackTrace();
 		}
 		}
-	    Location l = new Location (-1, input[0], input[1], input[2],input[3],input[4],input[5], input[6]);
+	    Location l = new Location (input[0], input[1], input[2],input[3],input[4],input[5], input[6],1);
 	    System.out.println(l.toString());
 	    if (saveUpdate() ==  true) {
-			if ( LocationDAO.insertLocation(l) == true) {
+			if ( LocationDB.insertLocation(l) == true) {
 				System.out.println("INSERT SUCCESFULL");
 			}
 			else {

@@ -1,20 +1,41 @@
 package logic;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 //import java.io.BufferedReader;
 //import java.io.IOException;
 //import java.io.InputStreamReader;
+@Entity
+
+@Table(name="Locations")
 
 public class Location  {
+		@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+		@Column(name="locationID")
 		public int ID;
+		@Column(name="streetName")
 		public String streetName;
+		@Column(name="number")
 		public String number;
+		@Column(name="postalCode")
 		public String postalCode;
+		@Column(name="city")
 		public String city;
+		@Column(name="country")
 		public String country;
+		@Column(name="name")
 		public String name;
+		@Column(name="addInfo")
 		public String info;
+		@Column(name="archive")
+		public int archive;
 		
-		public Location(int ID, String streetName, String number, String postalCode, String city, String country, String name, String info) {
+		public Location(int ID, String streetName, String number, String postalCode, String city, String country, String name, String info, int archive) {
 			super();
 			this.ID = ID;
 			this.streetName = streetName;
@@ -24,7 +45,30 @@ public class Location  {
 			this.country = country;
 			this.name = name;
 			this.info = info;
+			this.archive = archive;
 		}
+		
+		
+		
+		public Location(String streetName, String number, String postalCode, String city, String country, String name,
+				String info, int archive) {
+			super();
+			this.streetName = streetName;
+			this.number = number;
+			this.postalCode = postalCode;
+			this.city = city;
+			this.country = country;
+			this.name = name;
+			this.info = info;
+			this.archive = archive;
+		}
+
+
+
+		public Location() {
+			super();
+		}
+
 
 		public Location(Location addLocation) {
 			super();
@@ -86,6 +130,16 @@ public class Location  {
 		public void setInfo(String addInfo) {
 			this.info = addInfo;
 		}
+		
+		public int getArchive() {
+			return archive;
+		}
+
+		public void setArchive(int archive) {
+			this.archive = archive;
+		}
+
+
 		@Override
 		public String toString() {
 			return "Location [ID=" + ID + ", streetName=" + streetName + ", number=" + number + ", postalCode=" + postalCode
