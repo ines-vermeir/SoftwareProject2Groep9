@@ -558,7 +558,7 @@ public class Main {
 //	   Book myBook = new Book("test6","Last Title","Last Author", myCal);
 //		
 //		
-		//BookDB db = new BookDB();
+		BookDB db = new BookDB();
 		
 
 
@@ -590,32 +590,32 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 		
 	//	db.deleteBook(myBook);
 		
-	/*	ArrayList<Book> books = db.getAllBooks();
+		ArrayList<Book> books = db.getAllBooks();
 		
 	for(int i=0; i< books.size(); i++) {
 			System.out.println(books.get(i).toString());
 		}
 		
-		*/
+		
 		
 //--------------- Odata lezen Employees---------------------------
-		/*ArrayList<Employee> employees= (ArrayList<Employee>) TestJackson.getEmployees();
+		ArrayList<Employee> employees= (ArrayList<Employee>) TestJackson.getEmployees();
 	
 		
 		for(int i=0; i< employees.size(); i++) {
 			System.out.println(employees.get(i).toString());
 		    
-			System.out.println(employees.get(i).getEmployeeID());
+		//	System.out.println(employees.get(i).getEmployeeID());
 			
 			
 			}
-	*/
+	
 		
 
 		
  //Odata google Books Api test-----------------------------------------------------------------
 		
-
+/*
 	   ArrayList<BookGoogleAPI> books = TestJackson.getBooksByContent("php programming");
 
 
@@ -625,7 +625,7 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 							//System.out.println(book.getTitle());
 			}
 
-
+*/
 			
 	
 			
