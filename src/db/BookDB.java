@@ -18,7 +18,8 @@ public class BookDB {
 	public BookDB() {
 
 		super();
-       myFactory = HibernateFactory.getSessionFactory();
+      myFactory = SingletonHibernate.getSessionFactory();
+	
 		// TODO Auto-generated constructor stub
 	}
 
