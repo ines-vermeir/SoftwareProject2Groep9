@@ -99,6 +99,7 @@ public class SessionDB {
 		return s;
 	}
 	
+	
 	public ArrayList<logic.Session> getAllSessions() 
 	{
 		ArrayList<logic.Session> list = null;
@@ -108,6 +109,8 @@ public class SessionDB {
 		{
 			t = session.beginTransaction();
 			list = (ArrayList<logic.Session>) session.createCriteria(logic.Session.class).list();
+			
+			
 			t.commit();
 		} catch (HibernateException e)
 		{
