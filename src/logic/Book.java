@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Table(name="Books")
 public class Book {
 	//Extra uitleg rond Hibernate hier: https://www.youtube.com/playlist?list=PLBgMUB7xGcO0cujAlaeDDEOdZkeNZUScM
-	//Deze annotation is voor uw primary key
+	
 	//@GeneratedValue(strategy = GenerationType.IDENTITY) annotation wordt gebruikt als je parameter op MYSQL database als  AUTO_INCREMENT staat op de database
 	//@GeneratedValue(strategy = GenerationType.AUTO) kan ook gebruikt worden als jij auto increment hebt op je kolom
 	//@GeneratedValue(generator="newGenerator") 
@@ -48,6 +48,7 @@ public class Book {
 	 * }
 	 * 
 	 * */
+	//Deze annotation is voor uw primary key
     @Id	
     
     

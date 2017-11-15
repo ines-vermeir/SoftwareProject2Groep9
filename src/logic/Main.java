@@ -38,7 +38,7 @@ public class Main {
 	 * 
 	 */
 
-	
+	/*
 	public static void login () throws IOException //wordt nog verder uitgewerkt (Eva)
 	{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -103,6 +103,8 @@ public class Main {
 			//menuTeacher(user);
 		}
 	}
+	
+	*/
 	/*
 	 * end LOGIN
 	 */
@@ -472,7 +474,7 @@ public class Main {
 	public static void main(String[] args) throws SQLException, Exception {
 		
 
-		login();
+	//	login();
 //		System.out.println("Welkom");
 //		Main m = new Main();
 //		m.login();
@@ -556,7 +558,7 @@ public class Main {
 //	   Book myBook = new Book("test6","Last Title","Last Author", myCal);
 //		
 //		
-		BookDB db = new BookDB();
+		//BookDB db = new BookDB();
 		
 
 
@@ -588,13 +590,13 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 		
 	//	db.deleteBook(myBook);
 		
-		ArrayList<Book> books = db.getAllBooks();
+	/*	ArrayList<Book> books = db.getAllBooks();
 		
 	for(int i=0; i< books.size(); i++) {
 			System.out.println(books.get(i).toString());
 		}
 		
-		
+		*/
 		
 //--------------- Odata lezen Employees---------------------------
 		/*ArrayList<Employee> employees= (ArrayList<Employee>) TestJackson.getEmployees();
@@ -614,29 +616,20 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
  //Odata google Books Api test-----------------------------------------------------------------
 		
 
-	 /*   ArrayList<BookGoogleAPI> books = TestJackson.getBooksByContent("php");
+	   ArrayList<BookGoogleAPI> books = TestJackson.getBooksByContent("php programming");
 
 
 
 			for(BookGoogleAPI book : books) {
 						System.out.println(book.toString());
 							//System.out.println(book.getTitle());
-			}*/
+			}
 
 
 			
 	
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+	
 			
 			
 			
