@@ -10,7 +10,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 public class Employee {
-	  @Override
+	  public Employee() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	@Override
 //	public String toString() {
 //		return "Employee [employeeID=" + employeeID + ", lastName=" + lastName + ", firstName=" + firstName + ", title="
 //				+ title + ", titleOfCourtesy=" + titleOfCourtesy + ", birthDate=" + birthDate + ", hireDate=" + hireDate
