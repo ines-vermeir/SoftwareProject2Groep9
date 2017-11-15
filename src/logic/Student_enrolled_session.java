@@ -9,7 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity(name="logic.Students_enrolled_in_session")
+//@Entity(name="logic.Students_enrolled_in_session")
+@Entity
 @Table(name="Students_enrolled_in_session")
 
 public class Student_enrolled_session implements Serializable {
@@ -18,14 +19,14 @@ public class Student_enrolled_session implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@ManyToOne
-	@JoinColumn(name="sessionID", nullable=false)
-	private Session session;
-
+	@JoinColumn(name="sessionID",referencedColumnName="sessionID", nullable=false)
+	private Session Session;
+	
 	public Session getSession() {
-		return session;
+		return Session;
 	}
 	public void setSession(Session session) {
-		this.session = session;
+		this.Session = session;
 	}
 	@Override
 	public String toString() {

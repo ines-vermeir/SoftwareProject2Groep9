@@ -26,9 +26,9 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Proxy;
+@Entity
+//@Entity(name="logic.Session")
 
-@Entity(name="logic.Session")
-//@Entity
 @Table(name="Sessions")
 /*
 @SecondaryTables( {
@@ -68,20 +68,20 @@ public class Session {
 	
 	//-----------------------------------------------------------------------------------------------------
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany( cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="Session",cascade = CascadeType.ALL)
 	//@JoinTable(name="Session_teachers")
 	//@Fetch(value = FetchMode.SUBSELECT)
 	//@ElementCollection @CollectionTable(name="Session_teachers", joinColumns= @JoinColumn(name="sessionID")) @Column(name="Teacher")
   
 	private List<Session_teachers> teachers = new ArrayList<Session_teachers>();
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany( cascade = CascadeType.ALL)
+	@OneToMany(  mappedBy="Session",cascade = CascadeType.ALL)
 	//@JoinTable(name="Students_enrolled_in_session", joinColumns=@JoinColumn(name="sessionID"), inverseJoinColums=(name=""))
 	//@Fetch(value = FetchMode.SUBSELECT)
 	//@ElementCollection @CollectionTable(name="Students_enrolled_in_session", joinColumns= @JoinColumn(name="sessionID")) @Column(name="employeeIDenrolled")
 	private List<Student_enrolled_session> studentsEnrolled = new ArrayList<Student_enrolled_session>();
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany( cascade = CascadeType.ALL)
+	@OneToMany(  mappedBy="Session",cascade = CascadeType.ALL)
 	//@JoinTable(name="Students_present_in_session")
 	//@Fetch(value = FetchMode.SUBSELECT)
 	//@ElementCollection @CollectionTable(name="Students_present_in_session", joinColumns= @JoinColumn(name="sessionID")) @Column(name="employeeIDpresent")

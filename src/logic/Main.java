@@ -498,6 +498,10 @@ public class Main {
 		for (Session s: s1)
 		{
 			System.out.println(s.getSessionID() + "  " + s.getTeachers().size());
+			for (Session_teachers t: s.getTeachers()) {
+				System.out.println(t.getTeacher());
+			}
+			
 		}
 		
 		

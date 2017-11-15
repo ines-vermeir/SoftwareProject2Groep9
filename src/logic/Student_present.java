@@ -8,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-@Entity(name="logic.Students_present_in_session")
-
+//@Entity(name="logic.Students_present_in_session")
+@Entity
 @Table(name="Students_present_in_session")
 public class Student_present implements Serializable  {
 	/**
@@ -17,13 +17,14 @@ public class Student_present implements Serializable  {
 	 */
 	private static final long serialVersionUID = 1L;
 	@ManyToOne
-	@JoinColumn(name="sessionID", nullable=false)
-	private Session session;
+	@JoinColumn(name="sessionID" ,referencedColumnName="sessionID",nullable=false)
+	private Session Session;
+	
 	public Session getSession() {
-		return session;
+		return Session;
 	}
 	public void setSession(Session session) {
-		this.session = session;
+		this.Session = session;
 	}
 	@Override
 	public int hashCode() {
@@ -66,6 +67,7 @@ public class Student_present implements Serializable  {
 	public Student_present() {
 		// TODO Auto-generated constructor stub
 	}
+
 	public int getSessionID() {
 		return sessionID;
 	}

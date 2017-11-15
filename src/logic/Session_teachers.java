@@ -11,8 +11,8 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-@Entity(name="logic.Session_teachers")
-
+//@Entity(name="logic.Session_teachers")
+@Entity
 //Deze annotation wordt gebruikt samen met een aparte klasse voor een composite key
 //@IdClass(Teacher.class)
 @Table(name="Session_teachers")
@@ -22,9 +22,9 @@ public class Session_teachers implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-@ManyToOne
-@JoinColumn(name="sessionID", nullable=false)
-private Session session;
+	@ManyToOne
+	@JoinColumn(name="sessionID",referencedColumnName="sessionID", nullable=false)
+private Session Session;
 
 
 	@Override
@@ -35,11 +35,12 @@ private Session session;
 		result = prime * result + ((teacher == null) ? 0 : teacher.hashCode());
 		return result;
 	}
+	
 	public Session getSession() {
-		return session;
+		return Session;
 	}
 	public void setSession(Session session) {
-		this.session = session;
+		this.Session = session;
 	}
 	@Override
 	public boolean equals(Object obj) {
