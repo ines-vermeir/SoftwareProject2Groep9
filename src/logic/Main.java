@@ -390,11 +390,11 @@ public class Main {
 	/* 
 	 * end CHANGE LOCATION FUNCTIONS
 	 */
-	public void deleteLocation() {
+/*	public void deleteLocation() {
 		/* locatie verwijderen vanuit sessie klasse en locationDAO???*/
-	}
+//	}
 	
-	public void addLocation() throws SQLException, Exception {
+/*	public void addLocation() throws SQLException, Exception {
 		String[] questions = new String[]{"What is the streetName: ","What is the number: ", "What is the new postal code: ", "What is the city: ", "What is the country: ","What is the name: ","What is the info: " };
 		String[] input = new String[questions.length];
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
@@ -421,6 +421,8 @@ public class Main {
 		}
 	    return;
 	}
+	
+	*/
 	/*
 	 * end LOCATION
 	 * 
@@ -446,7 +448,7 @@ public class Main {
 	 * SAVE methode
 	 * 
 	 */
-	public boolean saveUpdate() {
+/*	public boolean saveUpdate() {
 		String input = null;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
 		do {
@@ -465,6 +467,9 @@ public class Main {
 		default: return false;
 		}
 	}
+	
+	
+	*/
 	/*
 	 * end SAVE
 	 * 
@@ -492,7 +497,18 @@ public class Main {
 		ArrayList<Session> s1 = db.getAllSessions();
 		for (Session s: s1)
 		{
-			System.out.println(s.getSessionID() + "  " + s.getTeachers().size());
+			//System.out.println(s.getSessionID() + "  " + s.getTeachers().size());
+			for (Session_teachers t: s.getTeachers()) {
+				System.out.println("----Teachers-----");
+				System.out.println(t.getTeacher());
+			}
+			for (Student_enrolled_session st: s.getStudentsEnrolled()) {
+				System.out.println("-----Student enrolled session-----");
+				System.out.println( "ID employee= "+ st.getEmployeeIDenrolled());
+			}/*for (Session_teachers t: s.getTeachers()) {
+				System.out.println("----Students enrolled in training-----");
+				System.out.println(t.getTeacher());
+			}*/
 		}
 		
 		
@@ -579,7 +595,7 @@ public class Main {
 //	   Book myBook = new Book("test6","Last Title","Last Author", myCal);
 //		
 //		
-		//BookDB db = new BookDB();
+	//	BookDB db = new BookDB();
 		
 
 
@@ -611,31 +627,54 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 		
 	//	db.deleteBook(myBook);
 		
-	/*	ArrayList<Book> books = db.getAllBooks();
+/*		ArrayList<Book> books = db.getAllBooks();
 		
 	for(int i=0; i< books.size(); i++) {
 			System.out.println(books.get(i).toString());
 		}
-		
 		*/
 		
+		
 //--------------- Odata lezen Employees---------------------------
-		/*ArrayList<Employee> employees= (ArrayList<Employee>) TestJackson.getEmployees();
+	/*	ArrayList<Employee> employees= (ArrayList<Employee>) TestJackson.getEmployees();
 	
 		
 		for(int i=0; i< employees.size(); i++) {
 			System.out.println(employees.get(i).toString());
-		    
-			System.out.println(employees.get(i).getEmployeeID());
+		*/    
+		//	System.out.println(employees.get(i).getEmployeeID());
 			
 			
 			}
-	*/
+	
 		
 
 		
  //Odata google Books Api test-----------------------------------------------------------------
 		
+
+/*
+	   ArrayList<BookGoogleAPI> books = TestJackson.getBooksByContent("php programming");
+
+
+
+			for(BookGoogleAPI book : books) {
+						System.out.println(book.toString());
+							//System.out.println(book.getTitle());
+			}
+
+*/
+			
+	
+			
+	
+			
+			
+			
+			
+			
+			
+
 
 //	   ArrayList<BookGoogleAPI> books = TestJackson.getBooksByContent("php programming");
 //
@@ -646,12 +685,13 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 //							//System.out.println(book.getTitle());
 //			}
 //	
+
 		
 
 	}
 
 
-}
+
 
 
 
