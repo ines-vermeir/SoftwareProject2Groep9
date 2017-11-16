@@ -25,7 +25,7 @@ import logic.User.Privilege;*/
 
 
 import java.util.Date;
-import db.SessionDAO;
+import db.SessionDB;
 /*import db.SurveyDAO;*/
 import db.UserDB;
 import logic.User.Privilege;
@@ -400,6 +400,7 @@ public class Main {
 	/* 
 	 * end CHANGE LOCATION FUNCTIONS
 	 */
+
 	public void deleteLocation(int id) {
 		LocationDB db = new LocationDB();
 		Location l;
@@ -457,6 +458,8 @@ public class Main {
 		}
 	    return;
 	}
+	
+	*/
 	/*
 	 * end LOCATION
 	 * 
@@ -482,7 +485,7 @@ public class Main {
 	 * SAVE methode
 	 * 
 	 */
-	public boolean saveUpdate() {
+/*	public boolean saveUpdate() {
 		String input = null;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
 		do {
@@ -501,6 +504,9 @@ public class Main {
 		default: return false;
 		}
 	}
+	
+	
+	*/
 	/*
 	 * end SAVE
 	 * 
@@ -509,13 +515,44 @@ public class Main {
 	
 	public static void main(String[] args) throws SQLException, Exception {
 		
-
+//		ArrayList<String> teachers = new ArrayList<String>();
+//		teachers.add("Teacher5");
+//		teachers.add("Teacher4");
+//		ArrayList<Integer> studentsEnrolled = new ArrayList<Integer>();
+//		studentsEnrolled.add(24634);
+//		studentsEnrolled.add(2245);
+//		ArrayList<Integer> studentsPresent = new ArrayList<Integer>();
+//		studentsPresent.add(12134);
+//		studentsPresent.add(23145);
+//		Calendar myCal =  new GregorianCalendar();		
+//		myCal.set(GregorianCalendar.YEAR, 2017);
+//		myCal.set(GregorianCalendar.MONTH,12);
+//		myCal.set(GregorianCalendar.DATE,22);
+//		
+//		Session s1 = new Session(2, 1, myCal, "10:00", "12:00", 1, teachers, studentsEnrolled, studentsPresent);
+		SessionDB db = new SessionDB();
+		ArrayList<Session> s1 = db.getAllSessions();
+		for (Session s: s1)
+		{
+			//System.out.println(s.getSessionID() + "  " + s.getTeachers().size());
+			for (Session_teachers t: s.getTeachers()) {
+				System.out.println("----Teachers-----");
+				System.out.println(t.getTeacher());
+			}
+			for (Student_enrolled_session st: s.getStudentsEnrolled()) {
+				System.out.println("-----Student enrolled session-----");
+				System.out.println( "ID employee= "+ st.getEmployeeIDenrolled());
+			}/*for (Session_teachers t: s.getTeachers()) {
+				System.out.println("----Students enrolled in training-----");
+				System.out.println(t.getTeacher());
+			}*/
+		}
+		
+		
 //		login();
 //		System.out.println("Welkom");
-		Main m = new Main();
-		m.deleteLocation(2);
-//		m.login();
-//		
+//		Main m = new Main();
+//		m.login();		
 
 
 //---------------------------------------------------Testcode Eva---------------------------------------------------------------------------------		
@@ -595,7 +632,7 @@ public class Main {
 //	   Book myBook = new Book("test6","Last Title","Last Author", myCal);
 //		
 //		
-		//BookDB db = new BookDB();
+	//	BookDB db = new BookDB();
 		
 
 
@@ -627,31 +664,54 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 		
 	//	db.deleteBook(myBook);
 		
-	/*	ArrayList<Book> books = db.getAllBooks();
+/*		ArrayList<Book> books = db.getAllBooks();
 		
 	for(int i=0; i< books.size(); i++) {
 			System.out.println(books.get(i).toString());
 		}
-		
 		*/
 		
+		
 //--------------- Odata lezen Employees---------------------------
-		/*ArrayList<Employee> employees= (ArrayList<Employee>) TestJackson.getEmployees();
+	/*	ArrayList<Employee> employees= (ArrayList<Employee>) TestJackson.getEmployees();
 	
 		
 		for(int i=0; i< employees.size(); i++) {
 			System.out.println(employees.get(i).toString());
-		    
-			System.out.println(employees.get(i).getEmployeeID());
+		*/    
+		//	System.out.println(employees.get(i).getEmployeeID());
 			
 			
 			}
-	*/
+	
 		
 
 		
  //Odata google Books Api test-----------------------------------------------------------------
 		
+
+/*
+	   ArrayList<BookGoogleAPI> books = TestJackson.getBooksByContent("php programming");
+
+
+
+			for(BookGoogleAPI book : books) {
+						System.out.println(book.toString());
+							//System.out.println(book.getTitle());
+			}
+
+*/
+			
+	
+			
+	
+			
+			
+			
+			
+			
+			
+
 
 //	   ArrayList<BookGoogleAPI> books = TestJackson.getBooksByContent("php programming");
 //
@@ -662,12 +722,13 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 //							//System.out.println(book.getTitle());
 //			}
 //	
+
 		
 
 	}
 
 
-}
+
 
 
 
