@@ -33,7 +33,7 @@
 		<mapping class="logic.User"/>
 		<mapping class="logic.Student_enrolled_session"/>
 	    <mapping class="logic.Student_present"/>
-<!-- 	<mapping class="logic.Location"/>  -->	
+ 		<mapping class="logic.Location"/> 
 <!--	<mapping class="logic.Certificate"/> -->	
 <!--	<mapping class="logic.Survey"/> -->
 		<mapping class="logic.Training"/>
