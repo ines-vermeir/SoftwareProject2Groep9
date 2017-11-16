@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -55,11 +57,18 @@ public class Student_present implements Serializable  {
 	@Id
 	@Column(name="employeeIDpresent")
 	private int employeeIDpresent;
+	
 	public Student_present(int sessionID, int employeeIDpresent) {
 		super();
 		this.sessionID = sessionID;
 		this.employeeIDpresent = employeeIDpresent;
 	}
+	
+	public Student_present(int employeeIDpresent) {
+		super();
+		this.employeeIDpresent = employeeIDpresent;
+	}
+	
 	@Override
 	public String toString() {
 		return "Student_present [sessionID=" + sessionID + ", employeeIDpresent=" + employeeIDpresent + "]";
