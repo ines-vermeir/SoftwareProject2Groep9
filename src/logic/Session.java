@@ -26,6 +26,8 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Proxy;
+
+import db.SessionDB;
 @Entity
 //@Entity(name="logic.Session")
 
@@ -271,3 +273,56 @@ public class Session {
 	}
 	
 }
+
+//Session_teachers st1 = new Session_teachers("teacher57");
+//Session_teachers st2 = new Session_teachers("teacher58");
+//ArrayList<Session_teachers> teachers = new ArrayList<Session_teachers>();
+//teachers.add(st1);
+//teachers.add(st2);
+//ArrayList<Student_enrolled_session> studentsEnrolled = new ArrayList<Student_enrolled_session>();
+//Student_enrolled_session se1 = new Student_enrolled_session(4545);
+//Student_enrolled_session se2 = new Student_enrolled_session(4545);
+//studentsEnrolled.add(se1);
+//studentsEnrolled.add(se2);
+//ArrayList<Student_present> studentsPresent = new ArrayList<Student_present>();
+//Student_present sp1 = new Student_present(4545);
+//Student_present sp2 = new Student_present(4546);
+//studentsPresent.add(sp1);
+//studentsPresent.add(sp2);
+//ArrayList<String> teachers = new ArrayList<String>();
+//teachers.add("Teacher123");
+//teachers.add("Teacher456");
+//ArrayList<Integer> studentsEnrolled = new ArrayList<Integer>();
+//studentsEnrolled.add(1111);
+//studentsEnrolled.add(2222);
+//ArrayList<Integer> studentsPresent = new ArrayList<Integer>();
+//studentsPresent.add(1111);
+//studentsPresent.add(2222);
+//Calendar myCal =  new GregorianCalendar();		
+//myCal.set(GregorianCalendar.YEAR, 2017);
+//myCal.set(GregorianCalendar.MONTH,12);
+//myCal.set(GregorianCalendar.DATE,22);
+
+//Session s1 = new Session(1, myCal, "10:00", "12:00", 1, teachers, studentsEnrolled, studentsPresent);
+
+SessionDB db = new SessionDB();
+Session s1 = db.getSessionByID(45);
+System.out.println(s1.toString());
+//db.insertSession(s1);
+//ArrayList<Session> s1 = db.getAllSessions();
+//for (Session s: s1)
+//{
+//	System.out.println(s.getSessionID() + "  " + s.getTeachers().size());
+//	//System.out.println(s.getSessionID() + "  " + s.getTeachers().size());
+//	for (s1. t: s.getTeachers()) {
+//		System.out.println("----Teachers-----");
+//		System.out.println(t.getTeacher());
+//	}
+//	for (Student_enrolled_session st: s.getStudentsEnrolled()) {
+//		System.out.println("-----Student enrolled session-----");
+//		System.out.println( "ID employee= "+ st.getEmployeeIDenrolled());
+//	}/*for (Session_teachers t: s.getTeachers()) {
+//		System.out.println("----Students enrolled in training-----");
+//		System.out.println(t.getTeacher());
+//	}
+//}
