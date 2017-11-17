@@ -1,20 +1,97 @@
 package db;
 
-import java.sql.PreparedStatement;
+
+/*import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+import java.sql.Statement;*/
+
+
+import org.hibernate.SessionFactory;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import logic.Location;
 
-public class LocationDAO extends BaseDAO{
 
-	public LocationDAO() throws SQLException {
+public class LocationDB {
+	private SessionFactory myFactory =  null;
+	
+	public LocationDB() {
 		super();
-		// TODO Auto-generated constructor stub
+		  myFactory =  SingletonHibernate.getSessionFactory();
 	}
 	
-	public static Location fill(ResultSet r){
+	public boolean insertLocation(Location l)  {
+		boolean succes = false;
+		Session session = myFactory.openSession();
+		Transaction t = null; 
+		
+		try {
+			t = session.beginTransaction();
+			session.save(l);
+			t.commit();
+			succes = true;
+		}
+		catch(HibernateException e) {
+			if(t!= null ) t.rollback();
+			e.printStackTrace();
+			succes = false;
+		}
+		finally{
+			session.close();
+		}
+		return succes;
+		}
+
+	public boolean updateLocation(Location l) {
+		boolean succes = false;
+		Session session = myFactory.openSession();
+		Transaction t = null; 
+		
+		try {
+			t = session.beginTransaction();
+			session.update(l);
+			t.commit();
+			succes = true;
+		}
+		catch(HibernateException e) {
+			if(t!= null ) t.rollback();
+			e.printStackTrace();
+			succes = false;
+		}
+		finally{
+			session.close();
+		}
+		return succes;
+		
+	}
+
+	public Location getLocationById(int id) {
+		Location l = null;
+		Session session = myFactory.openSession();
+		Transaction t = null; 
+		
+		try {
+			t = session.beginTransaction();
+			l = (Location) session.get(Location.class, id);
+			t.commit();
+		}
+		catch(HibernateException e) {
+			if(t!= null ) t.rollback();
+			e.printStackTrace();
+		}
+		finally{
+			session.close();
+		}
+		return l;
+	}
+	}
+	
+	
+	
+	/*public static Location fill(ResultSet r){
 		Location l= null;
 		try{
 			l = new Location(r.getInt("locationID"),r.getString("streetName"),r.getString("number"),r.getString("postalCode"),r.getString("city"),r.getString("country"),r.getString("name"),r.getString("addInfo"));
@@ -196,5 +273,5 @@ public class LocationDAO extends BaseDAO{
 			}
 		}
 
-	}
-}
+	}*/
+
