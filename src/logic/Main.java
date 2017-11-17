@@ -459,7 +459,7 @@ public class Main {
 	    return;
 	}
 	
-	*/
+	
 	/*
 	 * end LOCATION
 	 * 
@@ -485,7 +485,7 @@ public class Main {
 	 * SAVE methode
 	 * 
 	 */
-/*	public boolean saveUpdate() {
+public boolean saveUpdate() {
 		String input = null;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
 		do {
@@ -506,7 +506,7 @@ public class Main {
 	}
 	
 	
-	*/
+	
 	/*
 	 * end SAVE
 	 * 
