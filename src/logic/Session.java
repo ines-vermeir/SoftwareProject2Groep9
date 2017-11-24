@@ -271,8 +271,9 @@ public class Session {
 				+ startTime + ", endTime=" + endTime + ", locationID=" + locationID + ", teachers=" + teachers
 				+ ", studentsEnrolled=" + studentsEnrolled + ", studentsPresent=" + studentsPresent + "]";
 	}
-	
 }
+	
+
 
 //Session_teachers st1 = new Session_teachers("teacher57");
 //Session_teachers st2 = new Session_teachers("teacher58");
@@ -305,9 +306,9 @@ public class Session {
 
 //Session s1 = new Session(1, myCal, "10:00", "12:00", 1, teachers, studentsEnrolled, studentsPresent);
 
-SessionDB db = new SessionDB();
-Session s1 = db.getSessionByID(45);
-System.out.println(s1.toString());
+//SessionDB db = new SessionDB();
+//Session s1 = db.getSessionByID(45);
+//System.out.println(s1.toString());
 //db.insertSession(s1);
 //ArrayList<Session> s1 = db.getAllSessions();
 //for (Session s: s1)
@@ -326,3 +327,4 @@ System.out.println(s1.toString());
 //		System.out.println(t.getTeacher());
 //	}
 //}
+
