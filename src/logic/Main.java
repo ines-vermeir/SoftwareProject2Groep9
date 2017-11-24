@@ -206,7 +206,7 @@ public class Main {
 	/*
 	 * CHANGE LOCATION FUNCTIONS
 	 */
-	
+	/*
 	public void changeStreetName (int id) throws SQLException, Exception {
 		LocationDB db = new LocationDB();
 		Location l = db.getLocationById(id);
@@ -401,7 +401,7 @@ public class Main {
 	/* 
 	 * end CHANGE LOCATION FUNCTIONS
 	 */
-
+/*
 	public void deleteLocation(int id) {
 		LocationDB db = new LocationDB();
 		Location l;
@@ -429,7 +429,7 @@ public class Main {
 		}
 		return;
 	}
-	
+/*	
 	public void addLocation() throws SQLException, Exception {
 		String[] questions = new String[]{"What is the streetName: ","What is the number: ", "What is the postal code: ", "What is the city: ", "What is the country: ","What is the name: ","What is the info: " };
 		String[] input = new String[questions.length];
@@ -514,7 +514,7 @@ public class Main {
 	 */
 	
 	
-<<<<<<< HEAD
+
 	public static void main(String[] args) throws SQLException, Exception {
 		SessionDB db = new SessionDB();	
 	
@@ -529,16 +529,16 @@ public class Main {
 		
 
 		
-=======
+/*
 	public static void main(String[] args) throws SQLException, Exception {		
->>>>>>> branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.git
+
 		
 //		login();
 //		System.out.println("Welkom");
 //		Main m = new Main();
 //		m.login();		
 		
-<<<<<<< HEAD
+
 //---------------------------------------------------Testcode Inès---------------------------------------------------------------------------------			
 
 //---------------------------------------------------Testcode Gill---------------------------------------------------------------------------------			
@@ -713,12 +713,11 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 
 		
 
-=======
->>>>>>> branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.git
+
 	}
 }
 
-}
+
 
 
 
