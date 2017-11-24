@@ -516,7 +516,7 @@ public class Main {
 	
 
 	public static void main(String[] args) throws SQLException, Exception {
-		SessionDB db = new SessionDB();	
+     //	SessionDB db = new SessionDB();	
 	
 		
 		
@@ -614,7 +614,7 @@ public class Main {
 //	   Book myBook = new Book("test6","Last Title","Last Author", myCal);
 //		
 //		
-	//	BookDB db = new BookDB();
+		BookDB db = new BookDB();
 		
 
 
@@ -646,16 +646,16 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 		
 	//	db.deleteBook(myBook);
 		
-/*		ArrayList<Book> books = db.getAllBooks();
+		ArrayList<Book> booksDB = db.getAllBooks();
 		
-	for(int i=0; i< books.size(); i++) {
-			System.out.println(books.get(i).toString());
+	for(int i=0; i< booksDB.size(); i++) {
+			System.out.println(booksDB.get(i).toString());
 		}
-		*/
+		
 		
 		
 //--------------- Odata lezen Employees---------------------------
-	//	ArrayList<Employee> employees= (ArrayList<Employee>) TestJackson.getEmployees();
+		ArrayList<Employee> employees= (ArrayList<Employee>) TestJackson.getEmployees();
 	/*
 		System.out.println("--------ALLE INFO----------------");
 		for(int i=0; i< employees.size(); i++) {
@@ -666,50 +666,30 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 			
 			}
 		*/
-/*		  System.out.println("--------ID EN NAAM----------------");
+		  System.out.println("--------ID EN NAAM----------------");
 		for(Employee e: employees) {
 			
 			  System.out.println("ID employee= " + e.getEmployeeID() + "  Naam=  " + e.getLastName());
 		}
 	
 		
-*/
+
 		
  //Odata google Books Api test-----------------------------------------------------------------
 		
 
-/*
-	   ArrayList<BookGoogleAPI> books = TestJackson.getBooksByContent("php programming");
+
+			
+
+   ArrayList<BookGoogleAPI> books = TestJackson.getBooksByContent("php programming");
 
 
 
-			for(BookGoogleAPI book : books) {
+		for(BookGoogleAPI book : books) {
 						System.out.println(book.toString());
 							//System.out.println(book.getTitle());
 			}
-
-*/
-			
 	
-			
-	
-			
-			
-			
-			
-			
-			
-
-
-//	   ArrayList<BookGoogleAPI> books = TestJackson.getBooksByContent("php programming");
-//
-//
-//
-//			for(BookGoogleAPI book : books) {
-//						System.out.println(book.toString());
-//							//System.out.println(book.getTitle());
-//			}
-//	
 
 		
 
