@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -21,12 +24,13 @@ import logic.MetadataOdata;
 
 
 public class TestJackson {
-
+// Log initialiseren 
+	final static Logger logger = LogManager.getLogger(TestJackson.class);
 	private static MetadataOdata metadata = null; 
 
 	private static ObjectMapper mapper = null;
 	public static List<Employee> getEmployees() throws MalformedURLException{
-		
+		logger.info("Beginnen consumen Employee Odata methode getEmployees()");
 		URL jsonUrl = new URL(
 				"http://services.odata.org/V3/Northwind/Northwind.svc/Employees?$format=json");
 		ArrayList<Employee> list = new ArrayList<Employee>();
@@ -36,15 +40,17 @@ public class TestJackson {
 		
 		try {
 			
-			
+		
 		metadata=	mapper.readValue(jsonUrl, MetadataOdata.class);
 		
 		  list = (ArrayList<Employee>) metadata.getValue();
 			
 		} catch (JsonParseException e1) {
+			logger.error("Error bij parsen odata employee"+ e1.getMessage());
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (JsonMappingException e1) {
+			logger.error("Error bij mappen odata employee"+ e1.getMessage());
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (IOException e1) {
@@ -53,7 +59,7 @@ public class TestJackson {
 		}
 		
 		
-		
+		logger.info("Methode heeft een list teruggegeven");
 		return list ;
 		
 		
@@ -61,19 +67,33 @@ public class TestJackson {
 	
 
 		
-		public static ArrayList<BookGoogleAPI> getBooksByContent(String topic) throws IOException {
+		public static ArrayList<BookGoogleAPI> getBooksByContent(String topic)  {
 		//BookApi b = new BookApi();
-			
+			logger.info("Beginnen getBooksByContent methode om Boeken te zoeken ");
 			String	newTopic = topic.replaceAll(" ", "+");
-		URL jsonUrl = new URL(
-			
-			//"https://www.googleapis.com/books/v1/volumes?q=" + topic);
-				//"https://www.googleapis.com/books/v1/volumes?q=" + topic+"&maxResults=40&filter=full");
-	"https://www.googleapis.com/books/v1/volumes?q=" + newTopic+"&maxResults=40");
+		URL jsonUrl=null;
+		try {
+			jsonUrl = new URL(
+				
+				//"https://www.googleapis.com/books/v1/volumes?q=" + topic);
+					//"https://www.googleapis.com/books/v1/volumes?q=" + topic+"&maxResults=40&filter=full");
+"https://www.googleapis.com/books/v1/volumes?q=" + newTopic+"&maxResults=40");
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.error("Error bij lezen van URL "+ e.getMessage());
+		}
 		mapper = new ObjectMapper(); 
 		ArrayList<BookGoogleAPI> list = new ArrayList<BookGoogleAPI>();
 		BookGoogleAPI myBook =null;
-	  JsonNode root = mapper.readTree(jsonUrl);
+	  JsonNode root=null;
+	try {
+		root = mapper.readTree(jsonUrl);
+	} catch (IOException e) {
+		logger.error("Error bij mappen van de Json rootnode  "+ e.getMessage());
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	  //	  JsonNode item = root.path("items");
 	  JsonNode arrayItem = root.get("items");
 	
@@ -140,6 +160,7 @@ public class TestJackson {
 		 
 	  }
 	  
+	  logger.info("Er wordt een list teruggegeven ");
 	  return list;
 	  
 	  
