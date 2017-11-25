@@ -24,6 +24,7 @@ public class SessionDB {
 		try 
 		{
 			t = session.beginTransaction();
+		
 			session.save(mySession);
 			t.commit();
 		} catch(HibernateException e)
