@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.Console;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.security.MessageDigest;
 import java.sql.SQLException;
 
 import java.util.ArrayList;
@@ -13,6 +14,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import java.util.Scanner;
+
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import db.BookDAO;
 
@@ -520,7 +524,7 @@ public class Main {
 	
 		
 		
-		
+/*		
 		Calendar myCal =  new GregorianCalendar();		
 		myCal.set(GregorianCalendar.YEAR, 2017);
 		myCal.set(GregorianCalendar.MONTH,12);
@@ -529,7 +533,7 @@ public class Main {
 		
 
 		
-/*
+
 	public static void main(String[] args) throws SQLException, Exception {		
 
 		
@@ -614,7 +618,7 @@ public class Main {
 //	   Book myBook = new Book("test6","Last Title","Last Author", myCal);
 //		
 //		
-		BookDB db = new BookDB();
+	//	BookDB db = new BookDB();
 		
 
 
@@ -646,17 +650,17 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 		
 	//	db.deleteBook(myBook);
 		
-		ArrayList<Book> booksDB = db.getAllBooks();
+	/*	ArrayList<Book> booksDB = db.getAllBooks();
 		
 	for(int i=0; i< booksDB.size(); i++) {
 			System.out.println(booksDB.get(i).toString());
 		}
 		
-		
+	*/	
 		
 //--------------- Odata lezen Employees---------------------------
-		ArrayList<Employee> employees= (ArrayList<Employee>) TestJackson.getEmployees();
-	/*
+	/*	ArrayList<Employee> employees= (ArrayList<Employee>) TestJackson.getEmployees();
+	
 		System.out.println("--------ALLE INFO----------------");
 		for(int i=0; i< employees.size(); i++) {
 		
@@ -665,7 +669,7 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 			
 			
 			}
-		*/
+		
 		  System.out.println("--------ID EN NAAM----------------");
 		for(Employee e: employees) {
 			
@@ -673,13 +677,13 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 		}
 	
 		
-
+*/
 		
  //Odata google Books Api test-----------------------------------------------------------------
 		
 
 
-			
+	/*		
 
    ArrayList<BookGoogleAPI> books = TestJackson.getBooksByContent("php programming");
 
@@ -691,9 +695,30 @@ branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.gi
 			}
 	
 
+		*/
+
+//-------------- Testen Encryption met Apache Commons Codecs-----------------------------
+
+		UserDB myDB = new UserDB();
+		// SHA256 Encode
 		
-
-
+		//myDB.insertUser(new User("testEncode",DigestUtils.sha256Hex("EncodeThis") , User.Privilege.HR));
+		
+		
+		System.out.println(myDB.getUser("testEncode").toString());
+	//Vergelijken ingevulde password met password op database
+		Boolean gelijk = DigestUtils.sha256Hex("EncodeThis").equals(myDB.getUser("testEncode").getPassword());
+		System.out.println(gelijk);
+		
+		// Base64 Encode
+		
+		String pass ="EncodeThis64";
+	//	myDB.insertUser(new User("testEncode64",Base64.encodeBase64String(pass.getBytes()) , User.Privilege.HR));
+		
+		//Decode Base64
+		String pass2 = new String( Base64.decodeBase64(myDB.getUser("testEncode64").getPassword().getBytes()));
+		System.out.println(pass2);
+		
 	}
 }
 
