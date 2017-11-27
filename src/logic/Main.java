@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import java.util.Scanner;
 
@@ -41,7 +42,7 @@ public class Main {
 	
 //----------------------------------------------------login functie----------------------------------------------------------------------------	
 	/*
-	 * LOGI
+	 * LOGIN 
 	 * 
 	 */
 	
@@ -196,7 +197,60 @@ public class Main {
 //EVA-------------------------------------	methodes/menu klasse Session-------------------------------------------------------------------------	
 //(user meegeven als parameter en afhankelijk daarvan andere opties voorzien)
 
-	
+//	public void addNewSession (User u, int  trainingId)
+//	{
+//		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//		int trainingID = 0, locationID = 0, part = 0, archive = 0;
+//		String startTime, endTime;
+//		Calendar date;
+//		List<String> teachers;
+//		List<Integer> studentsEnrolled, studentsPresent;
+//		
+//		//onderstaande weglaten indien vanuit een training vertrokken wordt
+//		System.out.println("For which training do you want to create a new Session (give trainingID)?");
+//		try {
+//			trainingID = Integer.parseInt(br.readLine());
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		
+////		System.out.println("Give the date for the session:");
+////		try {
+////			//date = Calendar.parseCalendar(br.readLine());
+////		} catch (IOException e) {
+////			e.printStackTrace();
+////		}
+//		
+//		System.out.println("Give the times for the session:");
+//		System.out.println("Start time: ");
+//		try {
+//			startTime = br.readLine();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		System.out.println("End time: ");
+//		try {
+//			endTime = br.readLine();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		System.out.println("What location would you like to use?");
+//		System.out.println("Overview existing Locations: ");
+//		// functie getAllLocations aanspreken + alle locaties op scherm tonen
+//		System.out.println("Give the locationID of an existing location. If you would like to add a new location press '0'.");
+//		try {
+//			locationID = Integer.parseInt(br.readLine());
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		if (locationID == 0)
+//		{
+//			//addLocation();
+//			//locationID = ... id van nieuwe locatie
+//		}
+//		// check toevoegen om locaties die reeds ingepland zijn op die datum weg te laten?
+//	}
 	
 	
 	
