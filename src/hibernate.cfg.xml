@@ -29,10 +29,9 @@
 		<!-- Hier wordt de package naam en de naam van de klasse gezet-->
 		<mapping class="logic.Book"/>
  		<mapping class="logic.Session"/>
- 		<mapping class="logic.Session_teachers"/>
+ 		
 		<mapping class="logic.User"/>
-		<mapping class="logic.Student_enrolled_session"/>
-	    <mapping class="logic.Student_present"/>
+			
  		<mapping class="logic.Location"/> 
 <!--	<mapping class="logic.Certificate"/> -->	
 <!--	<mapping class="logic.Survey"/> -->
