@@ -44,7 +44,6 @@ public class Main {
 	 * LOGIN 
 	 * 
 	 */
-
 	
 	public static void login () throws IOException //wordt nog verder uitgewerkt (Eva)
 	{
@@ -97,15 +96,15 @@ public class Main {
 		{
 			System.out.println("ERROR");
 		}
-		if (user.getPrivilege() == Privilege.EMPLOYEE)
+		if (user.getPrivilege() == Privilege.ADMIN)
 		{
-			menuEmployee(user);
+			menuAdmin(user);
 		}
 		else if (user.getPrivilege() == Privilege.HR)
 		{
 			//menuHR(user);
 		}
-		else if (user.getPrivilege() == Privilege.TEACHER)
+		//else if (user.getPrivilege() == Privilege.TEACHER)
 		{
 			//menuTeacher(user);
 		}
@@ -122,7 +121,7 @@ public class Main {
 
 	
 	/* MENU PRIVILEGE 1 (EMPLOYEE)  */
-	public static void menuEmployee (User user) throws IOException {
+	public static void menuAdmin (User user) throws IOException {
 		System.out.println("Welkom" + user.getUsername());
 		System.out.println("1. training");
 		System.out.println("2. Certificate");
