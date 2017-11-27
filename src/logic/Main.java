@@ -519,28 +519,7 @@ public class Main {
 	
 	
 
-	public static void main(String[] args) throws SQLException, Exception {
-     //	SessionDB db = new SessionDB();	
-	
-		
-		
-/*		
-		Calendar myCal =  new GregorianCalendar();		
-		myCal.set(GregorianCalendar.YEAR, 2017);
-		myCal.set(GregorianCalendar.MONTH,12);
-		myCal.set(GregorianCalendar.DATE,22);
-	
-		
-
-		
-
-	public static void main(String[] args) throws SQLException, Exception {		
-
-		
-//		login();
-//		System.out.println("Welkom");
-//		Main m = new Main();
-//		m.login();		
+	public static void main(String[] args) throws SQLException, Exception {	
 		
 
 //---------------------------------------------------Testcode Inès---------------------------------------------------------------------------------			
@@ -550,24 +529,6 @@ public class Main {
 //---------------------------------------------------Testcode Charles---------------------------------------------------------------------------------			
 
 //---------------------------------------------------Testcode Michiel---------------------------------------------------------------------------------			
-		
-// 		DAO Survey				
-//		Survey survey1 = new Survey(1,20);
-//		Survey survey2 = new Survey(3,17);
-//		Survey survey3 = new Survey(4,15);
-//		Survey survey4 = new Survey(4,15);
-//		Survey survey5 = new Survey(4,80);		
-//		SurveyDAO sdao = new SurveyDAO();				
-//		sdao.addSurvey(survey1);
-//		sdao.addSurvey(survey2);
-//		sdao.addSurvey(survey3);
-//		sdao.addSurvey(survey4);
-//		sdao.addSurvey(survey5);				
-//		sdao.getSurveyByID(1);				
-//		sdao.deleteSurvey(3);			
-//		sdao.getAllSurveys();			
-//		sdao.getAllSurveyByTraining(15);				
-//		sdao.update(survey4);
 		
 //---------------------------------------------------Testcode Sebastian---------------------------------------------------------------------------------			
 		
