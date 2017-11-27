@@ -55,6 +55,8 @@ public class Session {
 	private String endTime;
 	@Column(name="locationID")
 	private int locationID;
+	@Column(name="part")
+	private int part;
 	@Column(name="archive")
 	private int archive;
 	@LazyCollection(LazyCollectionOption.FALSE)
@@ -67,28 +69,7 @@ public class Session {
 	@ElementCollection @CollectionTable(name="Students_present_in_session", joinColumns= @JoinColumn(name="sessionID")) @Column(name="employeeIDpresent")
 	private List<Integer> studentsPresent = new ArrayList<Integer>();
 	
-	//-----------------------------------------------------------------------------------------------------
-//	@LazyCollection(LazyCollectionOption.FALSE)
-//	@OneToMany(mappedBy="Session",cascade = CascadeType.ALL)
-//	//@JoinTable(name="Session_teachers")
-//	//@Fetch(value = FetchMode.SUBSELECT)
-//	//@ElementCollection @CollectionTable(name="Session_teachers", joinColumns= @JoinColumn(name="sessionID")) @Column(name="Teacher")
-//  
-//	private List<Session_teachers> teachers = new ArrayList<Session_teachers>();
-//	@LazyCollection(LazyCollectionOption.FALSE)
-//	@OneToMany(  mappedBy="Session",cascade = CascadeType.ALL)
-//	//@JoinTable(name="Students_enrolled_in_session", joinColumns=@JoinColumn(name="sessionID"), inverseJoinColums=(name=""))
-//	//@Fetch(value = FetchMode.SUBSELECT)
-//	//@ElementCollection @CollectionTable(name="Students_enrolled_in_session", joinColumns= @JoinColumn(name="sessionID")) @Column(name="employeeIDenrolled")
-//	private List<Student_enrolled_session> studentsEnrolled = new ArrayList<Student_enrolled_session>();
-//	@LazyCollection(LazyCollectionOption.FALSE)
-//	@OneToMany(  mappedBy="Session",cascade = CascadeType.ALL)
-//	//@JoinTable(name="Students_present_in_session")
-//	//@Fetch(value = FetchMode.SUBSELECT)
-//	//@ElementCollection @CollectionTable(name="Students_present_in_session", joinColumns= @JoinColumn(name="sessionID")) @Column(name="employeeIDpresent")
-//	private List<Student_present> studentsPresent = new ArrayList<Student_present>();
-//	
-	//-------------------------------------------------------------------------------------------------------
+	
 	//constructor voor Hibernate
 		public Session ()
 		{
@@ -96,7 +77,7 @@ public class Session {
 		}
 		
 	
-	public Session(int sessionID, int trainingID, Calendar date, String startTime, String endTime, int locationID,
+	public Session(int sessionID, int trainingID, Calendar date, String startTime, String endTime, int locationID, int part, 
 			ArrayList<String> teachers, ArrayList<Integer> studentsEnrolled, ArrayList<Integer> studentsPresent) {
 		super();
 		this.sessionID = sessionID;
@@ -105,6 +86,7 @@ public class Session {
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.locationID = locationID;
+		this.part = part;
 		this.teachers = teachers;
 		this.studentsEnrolled = studentsEnrolled;
 		this.studentsPresent = studentsPresent;
@@ -112,7 +94,7 @@ public class Session {
 	}
 	
 	
-	public Session(int trainingID, Calendar date, String startTime, String endTime, int locationID,
+	public Session(int trainingID, Calendar date, String startTime, String endTime, int locationID, int part, 
 			List<String> teachers, List<Integer> studentsEnrolled, List<Integer> studentsPresent) {
 		super();
 		this.trainingID = trainingID;
@@ -120,6 +102,7 @@ public class Session {
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.locationID = locationID;
+		this.part = part;
 		this.teachers = teachers;
 		this.studentsEnrolled = studentsEnrolled;
 		this.studentsPresent = studentsPresent;
@@ -221,59 +204,55 @@ public class Session {
 	public void setLocationID(int locationID) {
 		this.locationID = locationID;
 	}
-	
-	public List<String> getTeachers() {
-		return teachers;
+
+	public int getPart() {
+		return part;
 	}
-	public void setTeachers(ArrayList<String> teachers) {
-		this.teachers = teachers;
+
+	public void setPart(int part) {
+		this.part = part;
 	}
-	public List<Integer> getStudentsEnrolled() {
-		return studentsEnrolled;
-	}
-	public void setStudentsEnrolled(ArrayList<Integer> studentsEnrolled) {
-		this.studentsEnrolled = studentsEnrolled;
-	}
-//-----------------------------------	
-//	public List<Student_enrolled_session> getStudentsEnrolled() {
-//		return studentsEnrolled;
-//	}
-//	public void setStudentsEnrolled(ArrayList<Student_enrolled_session> studentsEnrolled) {
-//		this.studentsEnrolled = studentsEnrolled;
-//	}
-//	public List<Student_present> getStudentsPresent() {
-//		return studentsPresent;
-//	}
-//	public void setStudentsPresent(ArrayList<Student_present> studentsPresent) {
-//		this.studentsPresent = studentsPresent;
-//	}
-//	public List<Session_teachers> getTeachers() {
-//		return teachers;
-//	}
-//	public void setTeachers(List<Session_teachers> teachers) {
-//		this.teachers = teachers;
-//	}
-	
-//------------------------------------------------------
-	/*
+
 	public List<Integer> getStudentsPresent() {
 		return studentsPresent;
 	}
-	public void setStudentsPresent(ArrayList<Integer> studentsPresent) {
+
+	public void setStudentsPresent(List<Integer> studentsPresent) {
 		this.studentsPresent = studentsPresent;
 	}
+
+	public void setTeachers(List<String> teachers) {
+		this.teachers = teachers;
+	}
+
+	public void setStudentsEnrolled(List<Integer> studentsEnrolled) {
+		this.studentsEnrolled = studentsEnrolled;
+	}
 	
-	*/
+
+	public List<String> getTeachers() {
+		return teachers;
+	}
+
+	public List<Integer> getStudentsEnrolled() {
+		return studentsEnrolled;
+	}
+
 
 	@Override
 	public String toString() {
-		return "Session [SessionID=" + sessionID + ", TrainingID=" + trainingID + ", date=" + date + ", startTime="
-				+ startTime + ", endTime=" + endTime + ", locationID=" + locationID + ", teachers=" + teachers
-				+ ", studentsEnrolled=" + studentsEnrolled + ", studentsPresent=" + studentsPresent + "]";
+		return "Session [sessionID=" + sessionID + ", trainingID=" + trainingID + ", date=" + date + ", startTime="
+				+ startTime + ", endTime=" + endTime + ", locationID=" + locationID + ", part=" + part + ", archive="
+				+ archive + ", teachers=" + teachers + ", studentsEnrolled=" + studentsEnrolled + ", studentsPresent="
+				+ studentsPresent + "]";
 	}
+
+
 	
 }
+	
 
+// testcode
 //Session_teachers st1 = new Session_teachers("teacher57");
 //Session_teachers st2 = new Session_teachers("teacher58");
 //ArrayList<Session_teachers> teachers = new ArrayList<Session_teachers>();
@@ -305,9 +284,9 @@ public class Session {
 
 //Session s1 = new Session(1, myCal, "10:00", "12:00", 1, teachers, studentsEnrolled, studentsPresent);
 
-SessionDB db = new SessionDB();
-Session s1 = db.getSessionByID(45);
-System.out.println(s1.toString());
+//SessionDB db = new SessionDB();
+//Session s1 = db.getSessionByID(45);
+//System.out.println(s1.toString());
 //db.insertSession(s1);
 //ArrayList<Session> s1 = db.getAllSessions();
 //for (Session s: s1)
@@ -326,3 +305,27 @@ System.out.println(s1.toString());
 //		System.out.println(t.getTeacher());
 //	}
 //}
+
+// Andere manier om het via Hibernate te laten werken:
+//-----------------------------------------------------------------------------------------------------
+//@LazyCollection(LazyCollectionOption.FALSE)
+//@OneToMany(mappedBy="Session",cascade = CascadeType.ALL)
+////@JoinTable(name="Session_teachers")
+////@Fetch(value = FetchMode.SUBSELECT)
+////@ElementCollection @CollectionTable(name="Session_teachers", joinColumns= @JoinColumn(name="sessionID")) @Column(name="Teacher")
+//
+//private List<Session_teachers> teachers = new ArrayList<Session_teachers>();
+//@LazyCollection(LazyCollectionOption.FALSE)
+//@OneToMany(  mappedBy="Session",cascade = CascadeType.ALL)
+////@JoinTable(name="Students_enrolled_in_session", joinColumns=@JoinColumn(name="sessionID"), inverseJoinColums=(name=""))
+////@Fetch(value = FetchMode.SUBSELECT)
+////@ElementCollection @CollectionTable(name="Students_enrolled_in_session", joinColumns= @JoinColumn(name="sessionID")) @Column(name="employeeIDenrolled")
+//private List<Student_enrolled_session> studentsEnrolled = new ArrayList<Student_enrolled_session>();
+//@LazyCollection(LazyCollectionOption.FALSE)
+//@OneToMany(  mappedBy="Session",cascade = CascadeType.ALL)
+////@JoinTable(name="Students_present_in_session")
+////@Fetch(value = FetchMode.SUBSELECT)
+////@ElementCollection @CollectionTable(name="Students_present_in_session", joinColumns= @JoinColumn(name="sessionID")) @Column(name="employeeIDpresent")
+//private List<Student_present> studentsPresent = new ArrayList<Student_present>();
+//
+//-------------------------------------------------------------------------------------------------------
