@@ -1,2 +1,0 @@
-# SoftwareProject2Groep9
-
