@@ -6,6 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import logic.Location;
+
 
 public class SessionDB {
 
@@ -17,28 +19,34 @@ public class SessionDB {
 		myFactory = SingletonHibernate.getSessionFactory();
 	}
 	
-	public void insertSession (logic.Session mySession)
+	public boolean insertSession (logic.Session mySession)
 	{
+		boolean succes = false;
 		Session session = myFactory.openSession();
 		Transaction t = null;
 		try 
 		{
 			t = session.beginTransaction();
-		
 			session.save(mySession);
 			t.commit();
+			succes = true;
 		} catch(HibernateException e)
 		{
 			if (t != null) t.rollback();
 			e.printStackTrace();
+			succes = false;
 		} finally
 		{
 			session.close();
 		}
+		return succes;
 	}
 	
-	public void updateSession (logic.Session mySession)
+	
+	
+	public boolean updateSession (logic.Session mySession)
 	{
+		boolean succes = false;
 		Session session = myFactory.openSession();
 		Transaction t = null;
 		try
@@ -46,38 +54,48 @@ public class SessionDB {
 			t = session.beginTransaction();
 			session.update(mySession);
 			t.commit();
+			succes = true;
 		} catch(HibernateException e)
 		{
 			if (t != null) t.rollback();
 			e.printStackTrace();
+			succes = false;
 		}
 		finally
 		{
 			session.close();
 		}
+		return succes;
 	}
 	
-	public void archiveSession (logic.Session mySession)
+	
+	public boolean archiveSession (logic.Session mySession)
 	{
 		mySession.setArchive(1);
 		Session session = myFactory.openSession();
+		boolean succes = false;
 		Transaction t = null;
 		try
 		{
 			t = session.beginTransaction();
 			session.update(mySession);
 			t.commit();
+			succes = true;
 		}
 		catch (HibernateException e)
 		{
 			if ( t != null) t.rollback();
 			e.printStackTrace();
+			succes = false;
 		}
 		finally
 		{
 			session.close();
 		}
+		return succes;
 	}
+	
+
 	
 	public logic.Session getSessionByID (int sessionID)
 	{
