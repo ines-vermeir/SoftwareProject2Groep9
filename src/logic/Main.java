@@ -632,15 +632,15 @@ public class Main {
 //		
 //		List<Question> questionsOBJ = new ArrayList<>();
 //		
-//		/*
-//		List<String> questionsSTR1 = new ArrayList<String>(); 
-//		questionsSTR1.add("vraag 1 28/11");
-//		questionsSTR1.add("vraag 2 28/11");
-//		
-//		List<String> questionsSTR2 = new ArrayList<String>(); 
-//		questionsSTR2.add("vraag 3 28/11");
-//		questionsSTR2.add("vraag 4 28/11");
-//		*/
+		/*
+		List<String> questionsSTR1 = new ArrayList<String>(); 
+		questionsSTR1.add("vraag 1 28/11");
+		questionsSTR1.add("vraag 2 28/11");
+		
+		List<String> questionsSTR2 = new ArrayList<String>(); 
+		questionsSTR2.add("vraag 3 28/11");
+		questionsSTR2.add("vraag 4 28/11");
+		*/
 //		Survey s3 = new Survey();
 //		Survey s1 = new Survey();
 //		s1.setTrainingsID(23);
@@ -672,15 +672,44 @@ public class Main {
 //	//	System.out.println(s3.toString());
 //		
 //		
-//		List<String> questions = new ArrayList<String>(); 
-//		questions = surveydb.getanswersByID(1);
-//		
-//		
-//		
-//		
-//		//s3 = surveydb.getSurveybyId(18);
-//		System.out.println(questions.toString());
-//		
+//		Survey s4 = new Survey();
+//		s4.setDescription("nieuwe descriptie");
+//		s4.setTitle("nieuwe titel");
+	// 	surveydb.updateSurveyByID(18, s4);	werkt
+		
+		
+		
+		
+	//	List<Question> questions = new ArrayList<Question>(); 
+	//	questions = surveydb.getAllAnswersByid(1);		werkt
+		
+	//	questions = surveydb.getAllQuestionsByid(18);
+	//	s3=	surveydb.getSurveyByID(18);
+		
+	//	s3 = surveydb.getSurveyByID(18);			// werkt
+		
+	//	List<Question> questions = new ArrayList<Question>(); 
+	//	questions = surveydb.getAllQuestionsByid(18);
+		
+		
+	//	s3 = surveydb.getSurveyByID(18);	// werkt
+		
+	//	List<String> questions = new ArrayList<String>(); 
+	//	questions = surveydb.getAllAnswersByid(1);
+	//	s3 = surveydb.getSurveyByID(18);
+		
+		
+		// werkt surveydb.archiveSurvey(18);		werkt
+		
+		
+	//	List<Survey> surveys = new ArrayList<Survey>();
+	//	surveys = surveydb.getAllSurveys();			werkt
+		
+	//	List<Survey> activeSurveys = new ArrayList<Survey>(); werkt
+	//	activeSurveys = surveydb.getAllActiveSurveys();
+	
+	//		System.out.println(activeSurveys .toString()); werkt
+		
 //		
 //		*/
 		

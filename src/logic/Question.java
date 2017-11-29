@@ -104,6 +104,14 @@ public class Question {
 		//	this.antwoorden = antwoorden;
 			}
 
+		public Question(int questionId,String question) {
+			this.questionId = questionId;
+			this.question = question;
+			this.antwoorden = null;
+		}
+		
+		
+		
 		public Question() {
 		
 		}
