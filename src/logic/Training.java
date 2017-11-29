@@ -1,28 +1,69 @@
 package logic;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
-
+import logic.Training.Language;
 
 import java.util.Scanner;
+import db.TrainingDB;
 
 @Entity
 
 
-@Table(name="Training")
+@Table(name="Trainings")
 public class Training {
+	
 	@Id	
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
+	@Column(name="trainingID")
 	private int trainingID;
+	
+	@Column(name="title")
 	private String title;
+	
+	@Column(name="subject")
 	private String subject;
-	private String language;
+	
+	@Column(name="language")
+	@Enumerated(EnumType.STRING) 
+	private Language language;
+	
+	@Column(name="responsible")
 	private String responsible;
+	
+	@Column(name="sequentiality")
 	private int sequentiality;
-	private ArrayList<Book> books;
-	private ArrayList<Employee> studentsEnrolled;
+	
+	@Column(name="archive")
+	private int archive;
+	
+	
+	public enum Language {
+		Chinese, English, Spanish, Arabic, Russian, Portuguese,French,Japanese,German,Italien, Dutch	
+	}
+	
+	@Transient													// niet meenemen in tabel
+	Language[] yourEnums = Language.class.getEnumConstants();
+	
+	public void printEnumWaarden() {
+		for(int i = 0; i < yourEnums.length; i++) {
+		System.out.print(i+ 1 + ")" + yourEnums[i] + " ");
+		System.out.print("  ");
+		}	
+	}
 	
 	// getters & setters
 	public int getTrainingID() {
@@ -43,12 +84,6 @@ public class Training {
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
-	public String getLanguage() {
-		return language;
-	}
-	public void setLanguage(String language) {
-		this.language = language;
-	}
 	public String getResponsible() {
 		return responsible;
 	}
@@ -61,24 +96,28 @@ public class Training {
 	public void setSequentiality(int sequentiality) {
 		this.sequentiality = sequentiality;
 	}
-
-	public ArrayList<Book> getBooks() {
-		return books;
+	public Language getLanguage() {
+		return language;
 	}
-	public void setBooks(ArrayList<Book> books) {
-		this.books = books;
+	public void setLanguage(Language language) {
+		this.language = language;
 	}
-	public ArrayList<Employee> getStudentsEnrolled() {
-		return studentsEnrolled;
+	public int getArchive() {
+		return archive;
 	}
-	public void setStudentsEnrolled(ArrayList<Employee> studentsEnrolled) {
-		this.studentsEnrolled = studentsEnrolled;
+	public void setArchive(int archive) {
+		this.archive = archive;
 	}
 	
+
 	// constructors
-	public Training(int trainingID, String title, String subject, String language, String responsible,
-			int sequentiality, ArrayList<Book> books,
-			ArrayList<Employee> studentsEnrolled) {
+
+	public Training() {
+		
+	}
+
+	public Training(int trainingID, String title, String subject, Language language, String responsible,
+			int sequentiality) {
 		super();
 		this.trainingID = trainingID;
 		this.title = title;
@@ -86,120 +125,562 @@ public class Training {
 		this.language = language;
 		this.responsible = responsible;
 		this.sequentiality = sequentiality;
-		this.books = books;
-		this.studentsEnrolled = studentsEnrolled;
+		this.archive=0;
 	}
 	
-	public Training() {
-		
+	public Training(String title, String subject, Language language, String responsible, int sequentiality) {
+		super();
+		this.title = title;
+		this.subject = subject;
+		this.language = language;
+		this.responsible = responsible;
+		this.sequentiality = sequentiality;
+		this.archive=0;
 	}
-// toString
+
+	public Training(Training addTraining) {
+		super();
+		this.trainingID = addTraining.trainingID;
+		this.title = addTraining.title;
+		this.subject = addTraining.subject;
+		this.language = addTraining.language;
+		this.responsible = addTraining.responsible;
+		this.sequentiality = addTraining.sequentiality;
+		this.archive = addTraining.archive;	
+	}
+	
+	public Training(String title, String subject, Language language, String responsible, int sequentiality,
+			int archive) {
+		super();
+		this.title = title;
+		this.subject = subject;
+		this.language = language;
+		this.responsible = responsible;
+		this.sequentiality = sequentiality;
+		this.archive = archive;
+	}
+	
+	public Training(int trainingID, String title, String subject, Language language, String responsible,
+			int sequentiality, int archive) {
+		super();
+		this.trainingID = trainingID;
+		this.title = title;
+		this.subject = subject;
+		this.language = language;
+		this.responsible = responsible;
+		this.sequentiality = sequentiality;
+		this.archive = archive;
+	}
+
+	// toString
 	@Override
 	public String toString() {
 		return "Training [trainingID=" + trainingID + ", title=" + title + ", subject=" + subject + ", language="
-				+ language + ", responsible=" + responsible + ", sequentiality=" + sequentiality + ", books=" + books + ", studentsEnrolled=" + studentsEnrolled + "]";
-	}
+				+ language + ", responsible=" + responsible + ", sequentiality=" + sequentiality + "]";
+	}	
+	
 	
 	// methoden
 	
-	public void addBook(Book book) {
-		books.add(book);
-	}
-	
-	public void addStudent(Employee employee) {
-		studentsEnrolled.add(employee);
-	}
-
-	
-	
-	public void menuTraining(){
+	public void trainingMenu(int privilege) throws IOException{
 		
+		int option = 1;
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		
+		if (privilege == 1) {			// menu employee
 		System.out.println("MENU training");
-		System.out.println("Wat wilt u doen?");
-		System.out.println("1) trainingen bekijken");
-		System.out.println("2) training aanmaken");
+		System.out.println("What do you want to do");	
+		System.out.println("1) Watch all trainings");	//	ok
+		System.out.println("2) Watch my trainings");	//	ok
+		System.out.println("3) send message");			// 	TO DO
+		System.out.println("4) survey");				// ok
+		System.out.println("5) go back to menu");
+	
 		
-		Scanner scan = new Scanner(System.in);
-		int user_input_number = scan.nextInt();
-	
-	
-	
-		switch (user_input_number) {
-		case 1: trainingBekijken();
+		
+		/*
+		do {
+			option = br.read();
+		} while (option < 1 || option > 6);
+		*/
+		switch (option) {
+		case 1: watchAllTrainings(privilege);
+		 		break;
+		case 2: watchMyTrainings(privilege);
 				break;
-		case 2: trainingAanmaken();
+		case 3: sendMessage();
 				break;
-		default: System.out.println("U heeft foutieve invoer ingegeven");
-				menuTraining();
+		case 4: FillinSurvey(privilege);
 				break;
-
+	//case 5: {										// go back to menu
+	//	Main main = new Main();
+	//	main.menuAdmin(user);					
+	//	break;
+	//	}	
+			}
+		}
+		
+		
+		//TO DO
+		if (privilege == 2) {						// menu Trainer
+			System.out.println("MENU training");
+			System.out.println("1) Watch all trainings");	
+			System.out.println("3) send message");	
+			System.out.println("4) survey");
+			System.out.println("5) go back to menu");			
+		}
+		
+		
+		if (privilege == 3) {						// menu HR
+			System.out.println("MENU training");
+			System.out.println("1) Watch all trainings");	//ok
+			System.out.println("2) add new training"); 		//ok
+			System.out.println("3) survey");				// to do
+			System.out.println("4) inschrijven employee aan cursus");
+			System.out.println("5) bericht versturen");
+			System.out.println("6) history");
+			System.out.println("7) go back to menu");
+			
+			/*
+			do {
+				option = br.read();
+			} while (option < 1 || option > 7);
+			*/
+		
+			switch (option) {
+			case 1: watchAllTrainings(privilege);
+			 		break;
+			case 2: MakeNewTraining(privilege);
+					break;
+			case 3: surveyMenu(privilege);
+					break;
+			case 4: registrationEmployee(privilege);
+					break;
+			case 5: sendMessage();
+					break;
+			case 6: historyTrainings(privilege);
+					break;		
+					
+			case 7: // {										// go back to menu
+				//	Main main = new Main();
+				//	main.menuAdmin(user);					
+				//	break;
+				//	}	
+			}
 		}
 	}
+	
+
+	public void watchAllTrainings(int privilege) throws IOException{
 		
+		int option = 1;
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		Training watchTrainings = new Training();
+		List<Training> trainingen = new ArrayList<Training>();
+		TrainingDB watchTrainingsDB = new TrainingDB();
+		trainingen = watchTrainingsDB.getActiveTrainings();	
+		System.out.println(trainingen.toString());
+		
+		
+		
+		 if(privilege == 1) {
+				System.out.println("Wat wilt u doen?");
+				System.out.println("1) request registration"); 
+				System.out.println("2) go back to trainingsmenu"); 
+				
+		
+				/*
+				do {
+					option = br.read();
+				} while (option < 1 || option > 2);
+				*/
 
+		 switch (option) {
+			case 1: requestRegistration(privilege);
+			 		break;
+			case 2: trainingMenu(privilege);
+					break;
+		 		}
+		 }	 
+		 if(privilege == 2) {
+			 System.out.println("Wat wilt u doen?");
+			 System.out.println("1) session"); 
+			 System.out.println("2) go back to trainingsmenu"); 
+			
+			 /*
+				do {
+					option = br.read();
+				} while (option != 1);
+				*/
+				
+				 switch (option) {
+				 case 1:  watchSession(privilege);
+			 		break;
+					case 2: trainingMenu(privilege);
+					 		break;			
+		 }
+	}
+		 
+		 if(privilege == 3) {
+			 	System.out.println("Wat wilt u doen?");
+				System.out.println("1) edit training"); 
+				System.out.println("2) archive training"); 
+				System.out.println("3) go back to trainingsmenu"); 
+				/*
+				do {
+					option = br.read();
+				} while (option != 1);
+				*/
+
+				 switch (option) {
+					case 1: editTraining(privilege);
+					 		break;	
+					case 2: archiveTraining(privilege);
+							break;
+					case 3: trainingMenu(privilege);
+			 				break;			
+				 }	 
+		 }
+}	
+	
+	
+	public void requestRegistration(int privilege) throws IOException{
+		int option = 1;
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		TrainingDB registerDB = new TrainingDB();
+		Training gettraining = new Training();
+		
+		System.out.println("REQUEST REGISTRATION"); 
+		System.out.println("Give the id of the course you wish to follow");
+		
+		/*
+		do {
+			option = br.read();
+		} while ();			// controle boolean exists
+		*/
+		
+		System.out.println("watch sessions");	// ga naar sessiemenu
+		// ga naar sessie-> trainingsID meegeven
+		
+		
+		// melding naar baas voorgoedkeuring
+		
+		trainingMenu(privilege);
+	
+	}
+	
+	public void watchMyTrainings(int privilege) throws IOException{
+		System.out.println("MY TRAININGS"); 
+		ArrayList<Integer> mytrainingenID = new ArrayList<Integer>();
+		
+		// sessie
+		// sessieDB hql return list trainingsID
+		
+		 mytrainingenID = null;// functie van sessieDB
+				 
+				 
+				 
+		ArrayList<Training> mytrainingen = new ArrayList<Training>();
+		Training tr1 = new Training();
+		TrainingDB db1 = new TrainingDB();	
+		
+		for(int i = 0; i < mytrainingenID.size();i++) {
+		tr1 = db1.getTraining(mytrainingenID.get(i));
+			mytrainingen.add(tr1);
+		}
+		
+	for(int i = 0; i < mytrainingen.size(); i++) {
+		System.out.println(mytrainingen.get(i).toString());
+		System.out.println();
+	
+		}
+	System.out.println("What do you want to do?");
+	System.out.println("1) deregister for a training"); 
+	System.out.println("2) watch sessions"); 
+	System.out.println("3) watch books"); 
+	System.out.println("4) go back to trainingsmenu"); 
+	
+	int option = 1;
+	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	
+	/*
+	do {
+		option = br.read();
+	} while (option < 1 || option > 3);
+	*/
+	switch (option) {
+	case 1: deregisterTraining(privilege);
+	 		break;
+	case 2:watchSession(privilege);
+		break;
+	case 3:watchBooks(privilege);
+		break;	
+	case 4: trainingMenu(privilege);
+			break;
+		}
+	}
 	
 
-public  void trainingBekijken() {
-	// get limited info	(id subject #students enrolled )
+public void deregisterTraining( int privilege) throws IOException{
+		
+		System.out.println("DEREGISTER"); 
+		System.out.println("Give the id of the Training you wish to sign out"); 
+
+		int option = 1;
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		// option = br.read();
+		
+		/*
+		Training tr1 = new Training();
+		TrainingDB db1 = new TrainingDB();	
+		*/
+		
+		// uitschrijving voor alle sessies
+		// 
+		
+		watchMyTrainings(privilege);
+		 return;
+		
+	}
+
+public void watchSession(int privilege)  throws IOException{
+	System.out.println("WATCH SESSION"); 
+	System.out.println("Give the id of the Training you wish to watch the sessions"); 
 	
+	int option = 1;
+	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	// option = br.read();
+	// trainingsID exist
+	// sessies van training bekijken via id
 	
+	watchMyTrainings(privilege);
+	return;
 	
+}
+	
+public void watchBooks(int privilege) throws IOException{
+	System.out.println("BOOKS"); 
+	System.out.println("Give the id of the Training you wish to see the related books"); 
+	
+	int option = 1;
+	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	// option = br.read();
+	// trainingsID exist
+	// boeken van training bekijken via id
+	
+	watchMyTrainings(privilege);
+	return;
+	
+}	
+
+
+public void sendMessage(){
+	// TODO Auto-generated method stub
+	
+}
 	
 
+public void FillinSurvey(int privilege) throws IOException{
+	System.out.println("SURVEY"); 
+	System.out.println("your surveys");
 	
+	int option = 1;
+	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	
+		// option = br.read();
+		// trainingsID exist
+		// surveys van training bekijken via id
+	
+	watchMyTrainings(privilege);
+	return;	
+}
+	
+public void editTraining(int privilege) throws IOException{
+	int option = 1;
+	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	Scanner scan = new Scanner(System.in);
+	
+	TrainingDB registerDB = new TrainingDB();
+	Training uptatetraining = new Training();
+	
+	System.out.println("REQUEST REGISTRATION"); 
+	System.out.println("Give the id of the course you want to change");
+	option  = br.read();
+	
+	
+	
+	System.out.print("What is the title?");
+	String title = scan.nextLine();
+	uptatetraining.setTitle(title);
+	
+	System.out.print("What is the Subject?");
+	String subject = scan.nextLine();
+	uptatetraining.setSubject(subject);
+	
+	int language;
+	Language keuze;
+
+	System.out.print("What is the language?");
+	printEnumWaarden();
+	
+	do {
+		language = scan.nextInt();}
+		while(language < 1 || language > yourEnums.length);		
+	
+		 switch (language) {
+			case 1:uptatetraining.setLanguage(Language.Chinese);
+					break;
+			case 2:uptatetraining.setLanguage(Language.English);
+					break;
+			case 3:uptatetraining.setLanguage(Language.Spanish);
+					break;
+			case 4:uptatetraining.setLanguage(Language.Arabic);
+					break;
+			case 5:uptatetraining.setLanguage(Language.Russian);
+					break;
+			case 6:uptatetraining.setLanguage(Language.Portuguese);
+					break;
+			case 7:uptatetraining.setLanguage(Language.French);
+					break;
+			case 8:uptatetraining.setLanguage(Language.Japanese);
+					break;
+			case 9:uptatetraining.setLanguage(Language.German);
+					break;
+			case 10:uptatetraining.setLanguage(Language.Italien);
+					break;
+			case 11:uptatetraining.setLanguage(Language.Dutch);
+					break;
+		 }
+		
+		 System.out.print("Who is the responsible?");
+		 String responsible = scan.nextLine();
+		 uptatetraining.setResponsible(responsible);
+	
+		 System.out.print("What is the sequentiality?");
+		 int sequentiality = scan.nextInt();
+		 uptatetraining.setSequentiality(sequentiality);
+	
+		 registerDB.updateTrainingById(option, uptatetraining);
+		 trainingMenu(privilege);
+				
+}
+
+public void archiveTraining(int privilege)throws IOException {
+	System.out.print("Give the trainingID of the training you wish to archive");
+	Scanner scan = new Scanner(System.in);
+	int trainingsid = scan.nextInt();
+	
+	TrainingDB archiveDB = new TrainingDB();
+
+	archiveDB.archiveTrainingById(trainingsid);	
+	trainingMenu(privilege);
 	
 	}
 
-public  void trainingAanmaken() {
+public void MakeNewTraining(int privilege)throws IOException {
 	
-/*	
-	String title, String subject, String language, String responsible,
-	int sequentiality, ArrayList<Book> books,
-	ArrayList<Employee> studentsEnrolled) 
+	TrainingDB registerDB = new TrainingDB();
+	Training newtraining = new Training();
+	Scanner scan = new Scanner(System.in);
 	
-	*/
-	// int user_input_number = scan.nextInt(); int 
+	System.out.print("What is the title?");
 	
+	String title = scan.nextLine();
+	newtraining.setTitle(title);
 	
-Scanner scan = new Scanner(System.in);
+	System.out.print("What is the Subject?");
+	String subject = scan.nextLine();
+	newtraining.setSubject(subject);
+	
+	int language;
+	Language keuze;
 
-System.out.print("What is the title?");
-String title = scan.nextLine();
+	System.out.print("What is the language?");
+	printEnumWaarden();
+	
+	do {
+		language = scan.nextInt();}
+		while(language < 1 || language > yourEnums.length);		
+	
+		 switch (language) {
+			case 1:newtraining.setLanguage(Language.Chinese);
+					break;
+			case 2:newtraining.setLanguage(Language.English);
+					break;
+			case 3:newtraining.setLanguage(Language.Spanish);
+					break;
+			case 4:newtraining.setLanguage(Language.Arabic);
+					break;
+			case 5:newtraining.setLanguage(Language.Russian);
+					break;
+			case 6:newtraining.setLanguage(Language.Portuguese);
+					break;
+			case 7:newtraining.setLanguage(Language.French);
+					break;
+			case 8:newtraining.setLanguage(Language.Japanese);
+					break;
+			case 9:newtraining.setLanguage(Language.German);
+					break;
+			case 10:newtraining.setLanguage(Language.Italien);
+					break;
+			case 11:newtraining.setLanguage(Language.Dutch);
+					break;
+		 }
+		
+		 System.out.print("Who is the responsible?");
+		 String responsible = scan.nextLine();
+		 newtraining.setResponsible(responsible);
+	
+		 System.out.print("What is the sequentiality?");
+		 int sequentiality = scan.nextInt();
+		 newtraining.setSequentiality(sequentiality);
+	
+		 registerDB.insertTraining(newtraining);
+		 trainingMenu(privilege);
+	
+		}
 
-System.out.print("What is the Subject?");
-String subject = scan.nextLine();
-
-System.out.print("What is the language?");
-String language = scan.next();
-
-System.out.print("Who is the responsible?");
-String responsible = scan.nextLine();  
-
-System.out.print("What is the sequentiality?");
-int sequentiality = scan.nextInt();
-
-	// select alle employees welke wilt u toeveogen?
+public void surveyMenu(int privilege) {
 	
-	
-	
-	
-	
-	
-	
-	
+	System.out.print("to do");
 	
 	
 }
 
 
+
+public void registrationEmployee(int privilege){
+
+	// laten inschrijven bij sessies
+	
 }
+
+
+public void historyTrainings(int privilege) throws IOException {
+//	Training watchTrainings = new Training();
+	List<Training> trainingen = new ArrayList<Training>();
+	TrainingDB watchTrainingsDB = new TrainingDB();
+	trainingen = watchTrainingsDB.getNonActiveTrainings();
+	System.out.println(trainingen.toString());
+	
+	// voorgaande sessies bekijken
 	
 	
 	
 	
+	 trainingMenu(privilege);
 	
-	
-	
+	}
+}
+
+
+
+
+
 	
 	
 	
