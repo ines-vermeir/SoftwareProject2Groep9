@@ -37,6 +37,11 @@ import db.SessionDB;
 import db.UserDB;
 import logic.User.Privilege;
 import db.TestJackson;
+import db.TrainingDB;
+import db.SurveyDB;
+
+
+
 
 public class Main {
 	
@@ -122,9 +127,9 @@ public class Main {
 
 //----------------------------------------------------hoofdmenu (afhankelijk van privilege andere menu laten zien)------------------------------------------------------	
 
-	
 	/* MENU PRIVILEGE 1 (HR)  */
 	public static void menuHR (User user) throws IOException {
+  Training menuTraing = new Training();
 		System.out.println("Welkom" + user.getUsername());
 		System.out.println("1. training");
 		System.out.println("2. Certificate");
@@ -138,7 +143,7 @@ public class Main {
 		} while (input < 1 || input > 3);
 		
 		switch (input) {
-		case 1: /*trainingMenu(privilege);*/
+		case 1:// menuTraing.trainingMenu(privilege);
 		 		break;
 		case 2: /*certificateMenu(privilege)*/
 				break;
@@ -762,7 +767,137 @@ public class Main {
 	
 
 	public static void main(String[] args) throws SQLException, Exception {	
+
+
+//---------------------------------------------------Testcode Inès---------------------------------------------------------------------------------			
+
+//---------------------------------------------------Testcode Gill---------------------------------------------------------------------------------			
+
+//---------------------------------------------------Testcode Charles---------------------------------------------------------------------------------			
+
+//---------------------------------------------------Testcode Michiel---------------------------------------------------------------------------------			
 		
+//		/*
+//		int privilege = 1;
+//		
+//		Training t1 = new Training();
+//		Training t2 = new Training();
+//		Training t3 = new Training();
+//		Training t4 = new Training();
+//	
+//		t3.setTitle("testHibernate3");
+//		t3.setSubject("hibernate test poging 3");
+//		t3.setLanguage(Training.Language.German);
+//		t3.setResponsible("Michiel");
+//		t3.setSequentiality(4);
+//		
+//		ArrayList<Training> trainingen = new ArrayList<Training>();
+//		List<Training> TrainingList2 = new ArrayList<Training>(); 
+//		t1.setTitle("testHibernate3");
+//		t1.setSubject("hibernate test poging 3");
+//		t1.setLanguage(Training.Language.Dutch);
+//		t1.setResponsible("Michiel");
+//		t1.setSequentiality(4);
+//		
+//		TrainingDB db1 = new TrainingDB();		
+////		db1.insertTraining(t2);						//	 werkt
+////		db1.updateTraining(t1);						//   gaat niet		niet nodig
+////		db1.archiveTraining(t1);					//   gaat niet		niet nodig
+////		t2 = db1.getTraining(23);					//	 werkt
+////		trainingen = db1.getAllTrainings();			//	 werkt
+////		db1.updateTrainingById(23, t3);				// 	 werkt
+////		db1.archiveTrainingById(23);				//	 werkt
+////		TrainingList2 = db1.getActiveTrainings();	//	 werkt
+//		
+////	t4.trainingMenu(privilege);
+//		
+//		
+//		
+//		List<Question> questionsOBJ = new ArrayList<>();
+//		
+		/*
+		List<String> questionsSTR1 = new ArrayList<String>(); 
+		questionsSTR1.add("vraag 1 28/11");
+		questionsSTR1.add("vraag 2 28/11");
+		
+		List<String> questionsSTR2 = new ArrayList<String>(); 
+		questionsSTR2.add("vraag 3 28/11");
+		questionsSTR2.add("vraag 4 28/11");
+		*/
+//		Survey s3 = new Survey();
+//		Survey s1 = new Survey();
+//		s1.setTrainingsID(23);
+//		s1.setTitle("title");	
+//		s1.setDescription("description");	//  ok
+//		
+//		Question q1 = new Question();
+//		q1.setQuestion("vraag 1 28/11");	// 	ok
+//		q1.getAntwoorden().add("antwoord1");
+//		q1.getAntwoorden().add("antwoord2");
+//		q1.getAntwoorden().add("antwoord3");
+//		
+//		Question q2 = new Question();
+//		q2.setQuestion("vraag 2 29/11");// 		ok
+//		q2.getAntwoorden().add("antwoord4");
+//		q2.getAntwoorden().add("antwoord5");
+//		q2.getAntwoorden().add("antwoord6");
+//		
+//		s1.getMyListSurveysQuestions().add(q1);
+//		s1.getMyListSurveysQuestions().add(q2);
+//		
+//		q1.setSurvey(s1);
+//		q2.setSurvey(s1);
+//		
+//	//	System.out.println(s1.toString());
+//		SurveyDB surveydb = new SurveyDB();
+//	//	surveydb.addSurvey(s1);					// werkt
+//	//	s3 = surveydb.getSurvey(18);
+//	//	System.out.println(s3.toString());
+//		
+//		
+//		Survey s4 = new Survey();
+//		s4.setDescription("nieuwe descriptie");
+//		s4.setTitle("nieuwe titel");
+	// 	surveydb.updateSurveyByID(18, s4);	werkt
+		
+		
+		
+		
+	//	List<Question> questions = new ArrayList<Question>(); 
+	//	questions = surveydb.getAllAnswersByid(1);		werkt
+		
+	//	questions = surveydb.getAllQuestionsByid(18);
+	//	s3=	surveydb.getSurveyByID(18);
+		
+	//	s3 = surveydb.getSurveyByID(18);			// werkt
+		
+	//	List<Question> questions = new ArrayList<Question>(); 
+	//	questions = surveydb.getAllQuestionsByid(18);
+		
+		
+	//	s3 = surveydb.getSurveyByID(18);	// werkt
+		
+	//	List<String> questions = new ArrayList<String>(); 
+	//	questions = surveydb.getAllAnswersByid(1);
+	//	s3 = surveydb.getSurveyByID(18);
+		
+		
+		// werkt surveydb.archiveSurvey(18);		werkt
+		
+		
+	//	List<Survey> surveys = new ArrayList<Survey>();
+	//	surveys = surveydb.getAllSurveys();			werkt
+		
+	//	List<Survey> activeSurveys = new ArrayList<Survey>(); werkt
+	//	activeSurveys = surveydb.getAllActiveSurveys();
+	
+	//		System.out.println(activeSurveys .toString()); werkt
+		
+//		
+//		*/
+		
+		
+
 		//login();
 		
 	}
