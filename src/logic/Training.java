@@ -677,7 +677,42 @@ public void historyTrainings(int privilege) throws IOException {
 	}
 }
 
+//Testcode:
 
+///*
+//int privilege = 1;
+//
+//Training t1 = new Training();
+//Training t2 = new Training();
+//Training t3 = new Training();
+//Training t4 = new Training();
+//
+//t3.setTitle("testHibernate3");
+//t3.setSubject("hibernate test poging 3");
+//t3.setLanguage(Training.Language.German);
+//t3.setResponsible("Michiel");
+//t3.setSequentiality(4);
+//
+//ArrayList<Training> trainingen = new ArrayList<Training>();
+//List<Training> TrainingList2 = new ArrayList<Training>(); 
+//t1.setTitle("testHibernate3");
+//t1.setSubject("hibernate test poging 3");
+//t1.setLanguage(Training.Language.Dutch);
+//t1.setResponsible("Michiel");
+//t1.setSequentiality(4);
+//
+//TrainingDB db1 = new TrainingDB();		
+////db1.insertTraining(t2);						//	 werkt
+////db1.updateTraining(t1);						//   gaat niet		niet nodig
+////db1.archiveTraining(t1);					//   gaat niet		niet nodig
+////t2 = db1.getTraining(23);					//	 werkt
+////trainingen = db1.getAllTrainings();			//	 werkt
+////db1.updateTrainingById(23, t3);				// 	 werkt
+////db1.archiveTrainingById(23);				//	 werkt
+////TrainingList2 = db1.getActiveTrainings();	//	 werkt
+//
+////t4.trainingMenu(privilege);
+	
 
 
 
