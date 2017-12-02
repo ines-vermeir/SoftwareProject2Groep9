@@ -164,6 +164,9 @@ public class TestJackson {
 		public static ArrayList<BookGoogleAPI> getBooksByContent(String topic)  {
 		//BookApi b = new BookApi();
 			logger.info("Beginnen getBooksByContent methode om Boeken te zoeken ");
+			if(topic.equals("")) {
+				return null;
+			}
 			String	newTopic = topic.replaceAll(" ", "+");
 		URL jsonUrl=null;
 		try {
@@ -196,7 +199,7 @@ public class TestJackson {
 //	  JsonNode saleInfo = arrayItem.get("saleInfo");
 	//  JsonNode isbn = volumeInfo.path("industryIdentifiers").get(1).path("identifier");
 	  if(!root.path("error").isMissingNode()) {
-		  //Dat wil zeggen dat de user wss geen input heeft ingevuld waardoor de json een error teruggeeft
+		  //Dat wil zeggen dat de user wss geen input heeft ingevuld waardoor de json een error teruggeeft of dat er geen boek over de ingegeven topic bestaat
 		  return  null;
 	  }
 	  
@@ -265,6 +268,9 @@ public class TestJackson {
 		
 	public static BookGoogleAPI getBookByISBN(String isbn) {
 		
+		if(isbn.equals("")) {
+			return null;
+		}
 		//BookApi b = new BookApi();
 		logger.info("Beginnen getBooksByISBN methode");
 		String	newIsbn = isbn.replaceAll(" ", "+");
@@ -290,16 +296,17 @@ try {
 	e.printStackTrace();
 }
   //	  JsonNode item = root.path("items");
+if(root.path("totalItems").asInt()==0) {
+	  //Dat wil zeggen dat het boek met de ingegeven isbn niet bestaat 
+	  return  null;
+}
   JsonNode arrayItem = root.get("items");
 
 //  JsonNode identifier = volumeInfo.get("industryIdentifiers");
 //  JsonNode author = volumeInfo.get("authors");
 //  JsonNode saleInfo = arrayItem.get("saleInfo");
 //  JsonNode isbn = volumeInfo.path("industryIdentifiers").get(1).path("identifier");
-  if(!root.path("error").isMissingNode()) {
-	  //Dat wil zeggen dat de user wss geen input heeft ingevuld waardoor de json een error teruggeeft
-	  return  null;
-  }
+  
   
   if(arrayItem.isArray()) {
 	
