@@ -1,3 +1,7 @@
+
+2017-12-02 14:30:57.814 [main] INFO  db.TestJackson - Beginnen getBooksByISBN methode
+2017-12-02 14:30:58.657 [main] INFO  db.TestJackson - Er wordt een BookGoogleAPI object teruggegeven 
+2017-12-02 14:30:58.664 [main] INFO  db.TestJackson - Beginnen getBooksByISBN methode
 2017-11-29 20:12:29.000 [main] DEBUG org.jboss.logging - Logging Provider: org.jboss.logging.Log4j2LoggerProvider
 2017-11-29 20:12:29.000 [main] DEBUG org.hibernate.integrator.internal.IntegratorServiceImpl - Adding Integrator [org.hibernate.cfg.beanvalidation.BeanValidationIntegrator].
 2017-11-29 20:12:29.000 [main] DEBUG org.hibernate.integrator.internal.IntegratorServiceImpl - Adding Integrator [org.hibernate.secure.spi.JaccIntegrator].
