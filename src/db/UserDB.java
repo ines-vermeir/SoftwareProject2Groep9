@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+import logic.Location;
 import logic.User;
 
 //functies zijn getest en werken
@@ -27,8 +28,9 @@ public class UserDB {
 		myFactory = SingletonHibernate.getSessionFactory();
 	}
 	
-	public void insertUser (User myUser)
+	public boolean insertUser (User myUser)
 	{
+		boolean succes = false;
 		Session session = myFactory.openSession();
 		Transaction t = null;
 		try 
@@ -36,18 +38,22 @@ public class UserDB {
 			t = session.beginTransaction();
 			session.save(myUser);
 			t.commit();
+			succes = true;
 		}
 		catch (HibernateException e)
 		{
 			if (t != null) t.rollback();
 			e.printStackTrace();
+			succes = false;
 		} finally
 		{
 			session.close();
 		}
+		return succes;
 	}
 	
-	public void updateUser (User myUser) {
+	public boolean updateUser (User myUser) {
+		boolean succes = false;
 		Session session = myFactory.openSession();
 		Transaction t = null;
 		try
@@ -55,20 +61,26 @@ public class UserDB {
 			t = session.beginTransaction();
 			session.update(myUser);
 			t.commit();
+			succes = true;
 		}
 		catch (HibernateException e)
 		{
 			if (t != null) t.rollback();
 			e.printStackTrace();
+			succes = false;
 		}
 		finally
 		{
 			session.close();
 		}
+		return succes;
 	}
 	
+	
+	
 	//zelfde als update, maar eerst wordt de archive datamember aangepast waardoor die in de database op 1 komt te staan
-	public void archiveUser (User myUser) {
+	public boolean archiveUser (User myUser) {
+		boolean succes = false;
 		myUser.setArchive(1);
 		Session session = myFactory.openSession();
 		Transaction t = null;
@@ -77,16 +89,19 @@ public class UserDB {
 			t = session.beginTransaction();
 			session.update(myUser);
 			t.commit();
+			succes = true;
 		}
 		catch (HibernateException e)
 		{
 			if (t != null) t.rollback();
 			e.printStackTrace();
+			succes = false;
 		}
 		finally
 		{
 			session.close();
 		}
+		return succes;
 	}
 
 	public User getUser (String username)
