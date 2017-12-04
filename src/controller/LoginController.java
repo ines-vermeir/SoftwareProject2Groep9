@@ -14,7 +14,7 @@ public class LoginController implements Initializable{
 		@FXML protected void doLogin(ActionEvent e) {
 			Navigator.loadVista(Navigator.HomeView);
 			Navigator.loadUserVista(Navigator.UserSectionView);
-			Navigator.loadMenuVista(Navigator.MenuSectionView);
+			Navigator.loadMenuVista(Navigator.MenuHomeActiveView);
 		}
 
 		@Override

@@ -14,6 +14,7 @@
    <children>
       <GridPane prefHeight="322.0" prefWidth="200.0">
         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
@@ -26,7 +27,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="homeBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#toHome" prefHeight="39.0" prefWidth="305.0" text="Dashboard" textFill="#576271">
+            <Button fx:id="homeBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#toHome" prefHeight="39.0" prefWidth="305.0" text="Dashboard" textFill="#576271" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets left="50.0" right="20.0" />
                </GridPane.margin>
@@ -34,11 +35,11 @@
 				   <Cursor fx:constant="HAND" />
 			   </cursor>
                <styleClass>
-                  <String fx:value="navBtn" />
                   <String fx:value="activeNavBtn" />
+                  <String fx:value="navBtn" />
                </styleClass>
             </Button>
-            <Button fx:id="employeeBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#toEmployees" prefHeight="39.0" prefWidth="305.0" styleClass="navBtn" text="Employees" textFill="#576271" GridPane.rowIndex="1">
+            <Button fx:id="employeeBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#toEmployees" prefHeight="39.0" prefWidth="305.0" styleClass="navBtn" text="Employees" textFill="#576271" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="50.0" right="20.0" />
                </GridPane.margin>
@@ -46,7 +47,7 @@
 				   <Cursor fx:constant="HAND" />
 			   </cursor>
             </Button>
-            <Button fx:id="trainingBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#toTrainings" prefHeight="39.0" prefWidth="305.0" style="-: ;" styleClass="navBtn" text="Trainings" textFill="#576271" GridPane.rowIndex="2">
+            <Button fx:id="trainingBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#toTrainings" prefHeight="39.0" prefWidth="305.0" style="-: ;" styleClass="navBtn" text="Trainings" textFill="#576271" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="50.0" right="20.0" />
                </GridPane.margin>
@@ -56,7 +57,7 @@
             </Button>
             
             
-            <Button fx:id="homeBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#toBooks" prefHeight="39.0" prefWidth="305.0" styleClass="navBtn" text="Books" textFill="#576271" GridPane.rowIndex="3">
+            <Button fx:id="homeBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#toBooks" prefHeight="39.0" prefWidth="305.0" styleClass="navBtn" text="Books" textFill="#576271" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -64,7 +65,7 @@
                   <Insets left="50.0" right="20.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="surveyBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#toSurveys" prefHeight="39.0" prefWidth="305.0" styleClass="navBtn" text="Surveys" textFill="#576271" GridPane.rowIndex="4">
+            <Button fx:id="surveyBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#toSurveys" prefHeight="39.0" prefWidth="305.0" styleClass="navBtn" text="Surveys" textFill="#576271" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -72,7 +73,7 @@
                   <Insets left="50.0" right="20.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="certificateBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#toCertificates" prefHeight="39.0" prefWidth="305.0" styleClass="navBtn" text="Certificates" textFill="#576271" GridPane.rowIndex="5">
+            <Button fx:id="certificateBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#toCertificates" prefHeight="39.0" prefWidth="305.0" styleClass="navBtn" text="Certificates" textFill="#576271" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -80,7 +81,7 @@
                   <Insets left="50.0" right="20.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="settingsBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#toSettings" prefHeight="39.0" prefWidth="394.0" styleClass="navBtn" text="Settings" textFill="#576271" GridPane.rowIndex="6">
+            <Button fx:id="settingsBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#toSettings" prefHeight="39.0" prefWidth="394.0" styleClass="navBtn" text="Settings" textFill="#576271" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <GridPane.margin>
                   <Insets left="50.0" right="20.0" />
                </GridPane.margin>
@@ -88,6 +89,7 @@
 				   <Cursor fx:constant="HAND" />
 			   </cursor>
             </Button>
+            <Pane prefHeight="200.0" prefWidth="200.0" styleClass="activeNav" />
          </children>
       </GridPane>
       <Pane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
