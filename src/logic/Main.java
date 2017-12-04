@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import java.util.Scanner;
 
@@ -172,9 +173,10 @@ public static Stage mainStage;
 		{
 			System.out.println("ERROR");
 		}
-		if (user.getPrivilege() == Privilege.EMPLOYEE)
+
+		if (user.getPrivilege() == Privilege.ADMIN)
 		{
-			menuEmployee(user);
+			menuAdmin(user);
 		}
 		else if (user.getPrivilege() == Privilege.HR)
 		{
@@ -196,7 +198,7 @@ public static Stage mainStage;
 //----------------------------------------------------hoofdmenu (afhankelijk van privilege andere menu laten zien)------------------------------------------------------	
 
 
-	public static void menuHR (User user) throws IOException {
+	public static void menuAdmin (User user) throws IOException {
 		System.out.println("Welkom" + user.getUsername());
 		System.out.println("1. training");
 		System.out.println("2. Certificate");
@@ -271,7 +273,60 @@ public static Stage mainStage;
 //EVA-------------------------------------	methodes/menu klasse Session-------------------------------------------------------------------------	
 //(user meegeven als parameter en afhankelijk daarvan andere opties voorzien)
 
-	
+//	public void addNewSession (User u, int  trainingId)
+//	{
+//		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//		int trainingID = 0, locationID = 0, part = 0, archive = 0;
+//		String startTime, endTime;
+//		Calendar date;
+//		List<String> teachers;
+//		List<Integer> studentsEnrolled, studentsPresent;
+//		
+//		//onderstaande weglaten indien vanuit een training vertrokken wordt
+//		System.out.println("For which training do you want to create a new Session (give trainingID)?");
+//		try {
+//			trainingID = Integer.parseInt(br.readLine());
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		
+////		System.out.println("Give the date for the session:");
+////		try {
+////			//date = Calendar.parseCalendar(br.readLine());
+////		} catch (IOException e) {
+////			e.printStackTrace();
+////		}
+//		
+//		System.out.println("Give the times for the session:");
+//		System.out.println("Start time: ");
+//		try {
+//			startTime = br.readLine();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		System.out.println("End time: ");
+//		try {
+//			endTime = br.readLine();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		System.out.println("What location would you like to use?");
+//		System.out.println("Overview existing Locations: ");
+//		// functie getAllLocations aanspreken + alle locaties op scherm tonen
+//		System.out.println("Give the locationID of an existing location. If you would like to add a new location press '0'.");
+//		try {
+//			locationID = Integer.parseInt(br.readLine());
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		if (locationID == 0)
+//		{
+//			//addLocation();
+//			//locationID = ... id van nieuwe locatie
+//		}
+//		// check toevoegen om locaties die reeds ingepland zijn op die datum weg te laten?
+//	}
 	
 	
 	
@@ -592,6 +647,28 @@ public static Stage mainStage;
 	 */
 	
 	
+
+//-------------- Testen Encryption met Apache Commons Codecs-----------------------------
+
+		//UserDB myDB = new UserDB();
+		// SHA256 Encode
+		
+		//myDB.insertUser(new User("testEncode",DigestUtils.sha256Hex("EncodeThis") , User.Privilege.HR));
+		
+		
+		//System.out.println(myDB.getUser("testEncode").toString());
+	//Vergelijken ingevulde password met password op database
+		//Boolean gelijk = DigestUtils.sha256Hex("EncodeThis").equals(myDB.getUser("testEncode").getPassword());
+		//System.out.println(gelijk);
+		
+		// Base64 Encode
+		
+		//String pass ="EncodeThis64";
+	//	myDB.insertUser(new User("testEncode64",Base64.encodeBase64String(pass.getBytes()) , User.Privilege.HR));
+		
+		//Decode Base64
+		//String pass2 = new String( Base64.decodeBase64(myDB.getUser("testEncode64").getPassword().getBytes()));
+		//System.out.println(pass2);
 
 }
 
