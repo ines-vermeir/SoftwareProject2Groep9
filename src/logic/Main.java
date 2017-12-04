@@ -1,7 +1,5 @@
 
 
-package logic;
-
 import java.io.BufferedReader;
 import java.io.Console;
 import java.io.IOException;
@@ -129,7 +127,7 @@ public class Main {
 
 	/* MENU PRIVILEGE 1 (HR)  */
 	public static void menuHR (User user) throws IOException {
-  Training menuTraing = new Training();
+  //Training menuTraing = new Training();
 		System.out.println("Welkom" + user.getUsername());
 		System.out.println("1. training");
 		System.out.println("2. Certificate");
