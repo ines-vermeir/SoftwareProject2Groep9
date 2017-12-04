@@ -288,6 +288,7 @@ public class TestJackson {
 	
 	BookGoogleAPI myBook =null;
   JsonNode root=null;
+  
 try {
 	root = mapper.readTree(jsonUrl);
 } catch (IOException e) {
