@@ -1,5 +1,3 @@
-
-
 package logic;
 
 import java.io.BufferedReader;
@@ -129,7 +127,7 @@ public class Main {
 
 	/* MENU PRIVILEGE 1 (HR)  */
 	public static void menuHR (User user) throws IOException {
-  Training menuTraing = new Training();
+  //Training menuTraing = new Training();
 		System.out.println("Welkom" + user.getUsername());
 		System.out.println("1. training");
 		System.out.println("2. Certificate");
@@ -850,11 +848,10 @@ public class Main {
 
 	public static void main(String[] args) throws SQLException, Exception {		
 		
-		//login();
+		login();
 		
 	}
 }
-
 
 
 
