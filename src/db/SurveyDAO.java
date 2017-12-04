@@ -278,6 +278,7 @@ public class SurveyDAO extends BaseDAO{
 //}
 	
 	
+	/*
 	// werkt nog niet
 	public ArrayList<Survey> getAllSurveysbytrainingID(int trainingID) throws SQLException, Exception{
 		Statement stm = null; 
@@ -292,30 +293,30 @@ public class SurveyDAO extends BaseDAO{
 			}
 	
 			stm = getConnection().createStatement(); 
-			r = stm.executeQuery(sql);
-					
-			while(r.next()){
-				try {
-				survey = new Survey(r.getInt(1), r.getInt(2));
+		r = stm.executeQuery(sql);
+				
+		while(r.next()){
+			try {
+			survey = new Survey(r.getInt(1), r.getInt(2));
 				}catch(Exception e){
 					System.out.println("fout");
-				}
-				myListSurveys.add(survey);
 			}
+				myListSurveys.add(survey);
+		}
 		return myListSurveys;
 		
 		}finally{
-			try{
+		try{
 				if(stm != null){
-					stm.close();
-				}
-				if(r != null){
-					r.close();
-				}	
-			}catch(SQLException e){
+				stm.close();
+		}
+			if(r != null){
+				r.close();
+			}	
+		}catch(SQLException e){
 				System.out.println(e.getMessage());
 				throw new RuntimeException("fout");
-			}
+		}
 		}
 	}
 	
