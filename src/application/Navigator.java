@@ -16,28 +16,21 @@ public class Navigator {
     /**
      * Convenience constants for fxml layouts managed by the navigator.
      */
+    public static final String MAIN    = "view/";
+    public static final String VISTA_1 = "vista1.fxml";
+    public static final String VISTA_2 = "vista2.fxml";
+    
 	public static String MainView    = "/view/MainView.fxml";
 	public static String UserSectionView = "/view/UserSectionView.fxml";
 	public static String EmptyView = "/view/EmptyView.fxml";
-	
 	public static String MenuSectionView = "/view/MenuSectionView.fxml";
-	public static String MenuHomeActiveView = "/view/MenuHomeActiveView.fxml";
-	public static String MenuEmployeeActiveView = "/view/MenuEmployeeActiveView.fxml";
-	public static String MenuTrainingActiveView = "/view/MenuTrainingActiveView.fxml";
-	public static String MenuBookActiveView = "/view/MenuBookActiveView.fxml";
-	public static String MenuSurveyActiveView = "/view/MenuSurveyActiveView.fxml";
-	public static String MenuCertificateActiveView = "/view/MenuCertificateActiveView.fxml";
-	public static String MenuSettingsActiveView = "/view/MenuSettingsActiveView.fxml";
 	
 	public static String LoginView = "/view/LoginView.fxml";
 	
 	public static String HomeView = "/view/HomeView.fxml";
-	public static String EmployeeView = "/view/EmployeeView.fxml";
-	public static String TrainingView = "/view/TrainingView.fxml";
-	public static String BookView = "/view/BookView.fxml";
-	public static String SurveyView = "/view/SurveyView.fxml";
-	public static String CertificateView = "/view/CertificateView.fxml";
-	public static String SettingsView = "/view/SettingsView.fxml";
+	public static String StudentView = "/view/StudentView.fxml";
+	public static String CourseView = "/view/CourseView.fxml";
+	
 	
     /** The main application layout controller. */
     private static MainController mainController;
