@@ -20,7 +20,7 @@ public class Main extends Application {
 	public void start(Stage stage) throws Exception {
 		 
 		mainStage = stage;
-		mainStage.setTitle("Human Resource Team 9 Git");
+		mainStage.setTitle("Human Resource Team 9");
 		mainStage.setScene(createScene(loadMainPane()));
 		mainStage.setMaximized(true);
 		
