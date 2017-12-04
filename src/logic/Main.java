@@ -5,7 +5,8 @@ import java.io.Console;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
-
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -328,7 +329,249 @@ public static Stage mainStage;
 //		// check toevoegen om locaties die reeds ingepland zijn op die datum weg te laten?
 //	}
 	
+
+	public void addNewSession (User u, int  trainingId) throws IOException
+	{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		SessionDB db = new SessionDB();
+		int locationID = 0, part = 0;
+		String startTime = null, endTime = null, teacher, input;
+		Calendar date = null;
+		List<String> teachers = null;
+		List<Integer> studentsEnrolled = null, studentsPresent = null;
+		ArrayList<Session> allSessions;
+		boolean check = true;
+//		System.out.println("date:");
+//		try {
+//			//date = Calendar.parseCalendar(br.readLine());
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}	
+		System.out.println("Start time: ");
+		try {
+			startTime = br.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("End time: ");
+		try {
+			endTime = br.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
+		while(check == true)
+		{
+			System.out.println("Location");
+			System.out.println("Overview existing Locations: ");
+			// functie getAllLocations aanspreken + alle locaties op scherm tonen
+			System.out.println("Give the locationID of an existing location. If you would like to add a new location press '0'.");
+			check = false;
+			try {
+				locationID = Integer.parseInt(br.readLine());
+			}catch (IOException e) 
+			{
+			e.printStackTrace();
+			}
+			if (locationID == 0) {
+				//locationID = addLocation();
+				check = false;
+			}
+			else 
+			{
+		 		allSessions = db.getAllSessions();
+		 		for(Session s: allSessions){
+		 			if (s.getLocationID() == locationID){
+		 				if (s.getDate() == date) {
+		 					check = true;
+		 					System.out.println("This location is already in use for the chosen date. Please select another location.");
+		 				}
+		 			}
+		 		}
+			}
+		}
+		check = true;
+		while (check == true)
+		{
+			System.out.println("Name teacher: ");
+			try {
+				teacher = br.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+				return;
+			}
+			teachers.add(teacher);
+			do {
+				System.out.println("add another teacher: (Y/N)");
+				input = br.readLine();
+				if (input == "Y" || input == "y")
+					check = true;
+				else if (input == "N" || input == "n")
+					check = false;
+				else {
+					System.out.println("Wrong input. Try again: ");
+				}
+			} while (input != "Y" || input !="y" || input != "N" || input !="n" );
+		}
+		// employeeID's toevoegen aan session. Hoe doen we dit? Tonen we alle employees eerst?
+		// moet er dan voor elke employee automatisch een email naar zijn manager gestuurd worden?
+		Session s = new Session (trainingId, date, startTime, endTime, locationID, part, teachers, studentsEnrolled, studentsPresent);
+		if (saveUpdate() ==  true) {
+			if (db.insertSession(s) == true) {
+				System.out.println("INSERT SUCCESFULL");
+			}
+			else {
+				System.out.println("ERROR: INSERT UNSUCCESFULL");
+			}
+		}
+		else {
+			System.out.println("INSERT DELETED");
+		}
+	    return;
+	}
 	
+	public void deleteSession(int id) {
+		SessionDB db = new SessionDB();
+		Session s;
+		try {
+		s = db.getSessionByID(id);
+		System.out.println("DELETE: " + s.toString());
+		if (saveUpdate() ==  true) {
+			try {
+				if (db.archiveSession(s) == true) {
+					System.out.println("DELETE SUCCESFULL");
+				}
+				else {
+					System.out.println("ERROR: DELETE UNSUCCESFULL");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("CHANGES DELETED");
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return;
+	}
+	
+	public void changeSessionDate (int id) throws SQLException, Exception {
+		SessionDB db = new SessionDB();
+		Session s = db.getSessionByID(id);
+		System.out.println("What is the new date: ");
+		String input;
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
+	    try {
+			input = br.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return;
+		}
+		System.out.println(input);
+		if (saveUpdate() ==  true) {
+			DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+			Calendar cal  = Calendar.getInstance();
+			cal.setTime(df.parse(input));
+			s.setDate(cal);
+			if (db.updateSession(s) == true) {
+				System.out.println("UPDATE SUCCESFULL");
+			}
+			else {
+				System.out.println("ERROR: UPDATE UNSUCCESFULL");
+			}
+		}
+		else {
+			System.out.println("CHANGES DELETED");
+		}
+		return;
+	}
+	
+	public void changeSessionStartTime (int id) throws SQLException, Exception {
+		SessionDB db = new SessionDB();
+		Session s = db.getSessionByID(id);
+		System.out.println("What is the new start time: ");
+		String input;
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
+	    try {
+			input = br.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return;
+		}
+		System.out.println(input);
+		if (saveUpdate() ==  true) {
+			s.setStartTime(input);
+			if (db.updateSession(s) == true) {
+				System.out.println("UPDATE SUCCESFULL");
+			}
+			else {
+				System.out.println("ERROR: UPDATE UNSUCCESFULL");
+			}
+		}
+		else {
+			System.out.println("CHANGES DELETED");
+		}
+		return;
+	}
+	
+	public void changeSessionEndTime (int id) throws SQLException, Exception {
+		SessionDB db = new SessionDB();
+		Session s = db.getSessionByID(id);
+		System.out.println("What is the new end time: ");
+		String input;
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
+	    try {
+			input = br.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return;
+		}
+		System.out.println(input);
+		if (saveUpdate() ==  true) {
+			s.setStartTime(input);
+			if (db.updateSession(s) == true) {
+				System.out.println("UPDATE SUCCESFULL");
+			}
+			else {
+				System.out.println("ERROR: UPDATE UNSUCCESFULL");
+			}
+		}
+		else {
+			System.out.println("CHANGES DELETED");
+		}
+		return;
+	}
+	
+	public void changeSessionLocation (int id) throws SQLException, Exception {
+		SessionDB db = new SessionDB();
+		Session s = db.getSessionByID(id);
+		System.out.println("What is the id of the new location: ");
+		int input;
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
+	    try {
+			input = Integer.parseInt(br.readLine());
+		} catch (IOException e) {
+			e.printStackTrace();
+			return;
+		}
+		System.out.println(input);
+		if (saveUpdate() ==  true) {
+			
+			s.setLocationID(input);
+			if (db.updateSession(s) == true) {
+				System.out.println("UPDATE SUCCESFULL");
+			}
+			else {
+				System.out.println("ERROR: UPDATE UNSUCCESFULL");
+			}
+		}
+		else {
+			System.out.println("CHANGES DELETED");
+		}
+		return;
+	}
+
 	
 //INES-------------------------------------	methodes/menu klasse Location------------------------------------------------------------------------	
 	/*
@@ -648,6 +891,10 @@ public static Stage mainStage;
 	
 	
 
+}
+
+
+
 //-------------- Testen Encryption met Apache Commons Codecs-----------------------------
 
 		//UserDB myDB = new UserDB();
@@ -670,5 +917,4 @@ public static Stage mainStage;
 		//String pass2 = new String( Base64.decodeBase64(myDB.getUser("testEncode64").getPassword().getBytes()));
 		//System.out.println(pass2);
 
-}
 
