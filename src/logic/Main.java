@@ -263,7 +263,7 @@ public class Main {
 	/*
 	 * CHANGE LOCATION FUNCTIONS
 	 */
-	/*
+	
 	public void changeStreetName (int id) throws SQLException, Exception {
 		LocationDB db = new LocationDB();
 		Location l = db.getLocationById(id);
@@ -458,7 +458,7 @@ public class Main {
 	/* 
 	 * end CHANGE LOCATION FUNCTIONS
 	 */
-/*
+
 	public void deleteLocation(int id) {
 		LocationDB db = new LocationDB();
 		Location l;
@@ -486,7 +486,7 @@ public class Main {
 		}
 		return;
 	}
-/*	
+	
 	public void addLocation() throws SQLException, Exception {
 		String[] questions = new String[]{"What is the streetName: ","What is the number: ", "What is the postal code: ", "What is the city: ", "What is the country: ","What is the name: ","What is the info: " };
 		String[] input = new String[questions.length];
@@ -517,7 +517,7 @@ public class Main {
 	    return;
 	}
 	
-	*/
+	
 	/*
 	 * end LOCATION
 	 * 
@@ -543,7 +543,7 @@ public class Main {
 	 * SAVE methode
 	 * 
 	 */
-/*	public boolean saveUpdate() {
+	public boolean saveUpdate() {
 		String input = null;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
 		do {
@@ -564,7 +564,7 @@ public class Main {
 	}
 	
 	
-	*/
+	
 	/*
 	 * end SAVE
 	 * 
