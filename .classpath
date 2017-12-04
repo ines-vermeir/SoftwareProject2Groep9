@@ -24,5 +24,6 @@
 	<classpathentry kind="lib" path="lib/commons-codec-1.11-test-sources.jar"/>
 	<classpathentry kind="lib" path="lib/commons-codec-1.11-tests.jar"/>
 	<classpathentry kind="lib" path="lib/commons-codec-1.11.jar"/>
+	<classpathentry kind="lib" path="lib/jfoenix.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
