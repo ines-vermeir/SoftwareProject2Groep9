@@ -82,7 +82,7 @@ public class Main {
 				System.out.println(password);
 				while (check == false && attempt < 3)
 				{
-					if (user.getPassword().equals(DigestUtils.sha256Hex(password)))
+					if (user.getPassword().equals(password))
 					{
 						System.out.println("Login successful");
 						check = true;
