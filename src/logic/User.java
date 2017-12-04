@@ -17,7 +17,7 @@ import javax.persistence.Table;
 
 public class User{
 	
-	public enum Privilege {HR, ADMIN};
+	public enum Privilege {EMPLOYEE, TEACHER, HR};
 	
 	@Column(name ="userID") @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int userID;
