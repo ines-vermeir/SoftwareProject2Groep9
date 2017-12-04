@@ -1,12 +1,9 @@
-
-
 package logic;
 
 import java.io.BufferedReader;
 import java.io.Console;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.security.MessageDigest;
 import java.sql.SQLException;
 
 import java.util.ArrayList;
@@ -18,9 +15,9 @@ import java.util.Scanner;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
-
+import application.Navigator;
+import controller.MainController;
 import db.BookDAO;
-
 import db.BookDB;
 import db.LocationDB;
 /*import db.TestGson;
@@ -33,18 +30,97 @@ import java.util.Date;
 import db.SessionDB;
 /*import db.SurveyDAO;*/
 import db.UserDB;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import logic.User.Privilege;
 import db.TestJackson;
+import db.TrainingDB;
+import db.SurveyDB;
+import java.io.IOException;
+import controller.MainController;
+import javafx.application.Application;
 
-public class Main {
+
+public class Main extends Application {
+	
+public static Stage mainStage;
+	
+	@Override
+	public void start(Stage stage) throws Exception {
+		 
+		mainStage = stage;
+		mainStage.setTitle("Human Resource Team 9 Git");
+		mainStage.setScene(createScene(loadMainPane()));
+		mainStage.setMaximized(true);
+		
+		mainStage.show();
+		
+		mainStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent t) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
+		
+	}
+
+    /**
+     * Loads the main fxml layout.
+     * Sets up the vista switching VistaNavigator.
+     * Loads the first vista into the fxml layout.
+     *
+     * @return the loaded pane.
+     * @throws IOException if the pane could not be loaded.
+     */
+
+
+    private Pane loadMainPane() throws IOException {
+        
+		FXMLLoader loader = new FXMLLoader();
+
+        Pane mainPane = (Pane) loader.load(getClass().getResourceAsStream(Navigator.MainView));
+
+        MainController mainController = loader.getController();
+
+        Navigator.setMainController(mainController);
+
+        Navigator.loadVista(Navigator.LoginView);
+
+        return mainPane;
+    }
 	
 
+    /**
+     * Creates the main application scene.
+     *
+     * @param mainPane the main application layout.
+     *
+     * @return the created scene.
+     */
+    private Scene createScene(Pane mainPane) {
+        Scene scene = new Scene(
+            mainPane
+        );
+        
+        return scene;
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 	
 //----------------------------------------------------login functie----------------------------------------------------------------------------	
 	/*
 	 * LOGIN 
 	 * 
 	 */
+
 	
 	public static void login () throws IOException //wordt nog verder uitgewerkt (Eva)
 	{
@@ -97,6 +173,7 @@ public class Main {
 		{
 			System.out.println("ERROR");
 		}
+
 		if (user.getPrivilege() == Privilege.ADMIN)
 		{
 			menuAdmin(user);
@@ -105,7 +182,7 @@ public class Main {
 		{
 			//menuHR(user);
 		}
-		//else if (user.getPrivilege() == Privilege.TEACHER)
+		else if (user.getPrivilege() == Privilege.TEACHER)
 		{
 			//menuTeacher(user);
 		}
@@ -120,8 +197,7 @@ public class Main {
 
 //----------------------------------------------------hoofdmenu (afhankelijk van privilege andere menu laten zien)------------------------------------------------------	
 
-	
-	/* MENU PRIVILEGE 1 (EMPLOYEE)  */
+
 	public static void menuAdmin (User user) throws IOException {
 		System.out.println("Welkom" + user.getUsername());
 		System.out.println("1. training");
@@ -263,7 +339,7 @@ public class Main {
 	/*
 	 * CHANGE LOCATION FUNCTIONS
 	 */
-	
+	/*
 	public void changeStreetName (int id) throws SQLException, Exception {
 		LocationDB db = new LocationDB();
 		Location l = db.getLocationById(id);
@@ -458,7 +534,7 @@ public class Main {
 	/* 
 	 * end CHANGE LOCATION FUNCTIONS
 	 */
-
+/*
 	public void deleteLocation(int id) {
 		LocationDB db = new LocationDB();
 		Location l;
@@ -486,7 +562,7 @@ public class Main {
 		}
 		return;
 	}
-	
+/*	
 	public void addLocation() throws SQLException, Exception {
 		String[] questions = new String[]{"What is the streetName: ","What is the number: ", "What is the postal code: ", "What is the city: ", "What is the country: ","What is the name: ","What is the info: " };
 		String[] input = new String[questions.length];
@@ -517,7 +593,7 @@ public class Main {
 	    return;
 	}
 	
-	
+	*/
 	/*
 	 * end LOCATION
 	 * 
@@ -543,7 +619,7 @@ public class Main {
 	 * SAVE methode
 	 * 
 	 */
-	public boolean saveUpdate() {
+/*	public boolean saveUpdate() {
 		String input = null;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
 		do {
@@ -564,7 +640,7 @@ public class Main {
 	}
 	
 	
-	
+	*/
 	/*
 	 * end SAVE
 	 * 
@@ -572,173 +648,27 @@ public class Main {
 	
 	
 
-	public static void main(String[] args) throws SQLException, Exception {	
-		
-
-//---------------------------------------------------Testcode Inès---------------------------------------------------------------------------------			
-
-//---------------------------------------------------Testcode Gill---------------------------------------------------------------------------------			
-
-//---------------------------------------------------Testcode Charles---------------------------------------------------------------------------------			
-
-//---------------------------------------------------Testcode Michiel---------------------------------------------------------------------------------			
-		
-//---------------------------------------------------Testcode Sebastian---------------------------------------------------------------------------------			
-		
-//		Book b1 = new Book("9781328994967","Timothy Ferriss","Tribe of mentors",new GregorianCalendar(2017,11,21));
-//		Book b2 = new Book("9781501178139","Isabel Allende","In the midst of winter",new GregorianCalendar(2017,10,31));
-//		Book b3 = new Book("9780062820754","Marc Sumerak","The Art of Harry Potter",new GregorianCalendar(2017,11,21));
-//		Book b4 = new Book("test","test","testen",new GregorianCalendar(2017,8,16));	
-//		Book b5 = new Book("test1","test1","testen1",new GregorianCalendar(2017,8,16));
-//		BookDAO dao = new BookDAO();
-//		Book b5 = new Book("test1","test1","testen1",new GregorianCalendar(2017,8,16));
-//		BookDAO dao = new BookDAO();
-//		dao.insertBook(b1);
-//		dao.insertBook(b2);
-//		dao.insertBook(b3);
-//		dao.insertBook(b4);
-//		dao.insertBook(b5);		
-
-//		ArrayList<Book> lijst = dao.getAllBooks();
-//		
-//		for(Book b: lijst) {
-//			System.out.println(b.toString());
-//		}
-		//ArrayList<Book> lijst = dao.getAllBooks();
-		//System.out.println(lijst.toString());
-		
-//System.out.println("---- GET BOOK by ISBN------------");	
-//		if(dao.getBook("9780062820754") == null) {
-//			
-//			System.out.println("Sorry het boek dat jij zoekt bestaat niet");
-//		}else {
-//			System.out.println(dao.getBook("9780062820754").toString());
-//		}	
-		/*
-		System.out.println("---- UPDATE BOOK------------");
-		Book b6 = dao.getBook("test");
-	b6.setAuthor("testUpdated");
-		b6.setTitle("New title");
-		dao.updateBook(b6);
-		System.out.println(dao.getBook("test").toString());  */
-		
-		
-//------------ Volgende code is om de connectie met de database met Hibernate te testen (By Sebastian G)  ----------
-//		Calendar myCal =  new GregorianCalendar();
-//		
-//		myCal.set(GregorianCalendar.YEAR, 2015);
-//		myCal.set(GregorianCalendar.MONTH,8);
-//		myCal.set(GregorianCalendar.DATE,23);
-//	   Book myBook = new Book("test6","Last Title","Last Author", myCal);
-//		
-//		
-	//	BookDB db = new BookDB();
-		
-
-
-//		Book myBook = new Book("testH","testH","testH",new GregorianCalendar(2017,9,22));
-//		
-//		db1.insertBook(myBook);
-		
-//	 Book newBook = db.getBook("testH");
-
-		//System.out.println(dao.getBook("test").toString());
-		
-/*	 Book newBook = db.getBook("Last Book");
-branch 'SebastianG' of https://github.com/ines-vermeir/SoftwareProject2Groep9.git
-		
-	 if(newBook != null) {
-		 
-		 System.out.println(newBook.toString());
-	 }else {
-		 System.out.println("Sorry, het boek bestaat niet");
-		 
-	 }
-	
-		newBook.setTitle("Last Book Hier");
-	db.updateBook(newBook);
-		
-	System.out.println("-----UPDATE-------");		
-		System.out.println(newBook.toString());
-		*/
-		
-	//	db.deleteBook(myBook);
-		
-	/*	ArrayList<Book> booksDB = db.getAllBooks();
-		
-	for(int i=0; i< booksDB.size(); i++) {
-			System.out.println(booksDB.get(i).toString());
-		}
-		
-	*/	
-		
-//--------------- Odata lezen Employees---------------------------
-	/*	ArrayList<Employee> employees= (ArrayList<Employee>) TestJackson.getEmployees();
-	
-		System.out.println("--------ALLE INFO----------------");
-		for(int i=0; i< employees.size(); i++) {
-		
-		
-			System.out.println(employees.get(i).toString());
-			
-			
-			}
-		
-		  System.out.println("--------ID EN NAAM----------------");
-		for(Employee e: employees) {
-			
-			  System.out.println("ID employee= " + e.getEmployeeID() + "  Naam=  " + e.getLastName());
-		}
-	
-		
-*/
-		
- //Odata google Books Api test-----------------------------------------------------------------
-		
-
-
-	/*		
-
-   ArrayList<BookGoogleAPI> books = TestJackson.getBooksByContent("php programming");
-
-
-
-		for(BookGoogleAPI book : books) {
-						System.out.println(book.toString());
-							//System.out.println(book.getTitle());
-			}
-	
-
-		*/
-
 //-------------- Testen Encryption met Apache Commons Codecs-----------------------------
 
-		UserDB myDB = new UserDB();
+		//UserDB myDB = new UserDB();
 		// SHA256 Encode
 		
 		//myDB.insertUser(new User("testEncode",DigestUtils.sha256Hex("EncodeThis") , User.Privilege.HR));
 		
 		
-		System.out.println(myDB.getUser("testEncode").toString());
+		//System.out.println(myDB.getUser("testEncode").toString());
 	//Vergelijken ingevulde password met password op database
-		Boolean gelijk = DigestUtils.sha256Hex("EncodeThis").equals(myDB.getUser("testEncode").getPassword());
-		System.out.println(gelijk);
+		//Boolean gelijk = DigestUtils.sha256Hex("EncodeThis").equals(myDB.getUser("testEncode").getPassword());
+		//System.out.println(gelijk);
 		
 		// Base64 Encode
 		
-		String pass ="EncodeThis64";
+		//String pass ="EncodeThis64";
 	//	myDB.insertUser(new User("testEncode64",Base64.encodeBase64String(pass.getBytes()) , User.Privilege.HR));
 		
 		//Decode Base64
-		String pass2 = new String( Base64.decodeBase64(myDB.getUser("testEncode64").getPassword().getBytes()));
-		System.out.println(pass2);
-		
-	}
+		//String pass2 = new String( Base64.decodeBase64(myDB.getUser("testEncode64").getPassword().getBytes()));
+		//System.out.println(pass2);
+
 }
-
-
-
-
-
-
 
