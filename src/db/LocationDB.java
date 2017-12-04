@@ -8,14 +8,10 @@ import java.sql.Statement;*/
 
 
 import org.hibernate.SessionFactory;
-
-import java.util.ArrayList;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import logic.Book;
 import logic.Location;
 
 
@@ -80,26 +76,6 @@ public class LocationDB {
 		try {
 			t = session.beginTransaction();
 			l = (Location) session.get(Location.class, id);
-			t.commit();
-		}
-		catch(HibernateException e) {
-			if(t!= null ) t.rollback();
-			e.printStackTrace();
-		}
-		finally{
-			session.close();
-		}
-		return l;
-	}
-	
-	public ArrayList<Location> getAllLocations() {
-		ArrayList <Location> l = null;
-		Session session = myFactory.openSession();
-		Transaction t = null; 
-		
-		try {
-			t = session.beginTransaction();
-			l = (ArrayList<Location>) session.createCriteria(Location.class).list();
 			t.commit();
 		}
 		catch(HibernateException e) {
