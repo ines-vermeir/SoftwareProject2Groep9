@@ -16,8 +16,9 @@
     <Loggers>
     <!-- Loggerconfig levels: all,debug, fatal, trace, info, warn, error -->
         <Root level="all">
-     <!--   <AppenderRef ref="Console" /> -->     
-           <AppenderRef ref="MyFile"/> 
+     <!--   <AppenderRef ref="Console" /> -->  
+     <!-- AANZETEN ALS APPLICATIE KLAAR IS -->   
+     <!--      <AppenderRef ref="MyFile"/> -->
         </Root>
         
     

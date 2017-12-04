@@ -173,6 +173,34 @@ public class TestJackson {
 			
 		
 	}
+
+	mapper = new ObjectMapper(); 
+	
+	BookGoogleAPI myBook =null;
+  JsonNode root=null;
+  
+try {
+	root = mapper.readTree(jsonUrl);
+} catch (IOException e) {
+	logger.error("Error bij mappen van de Json rootnode  "+ e.getMessage());
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
+  //	  JsonNode item = root.path("items");
+if(root.path("totalItems").asInt()==0) {
+	  //Dat wil zeggen dat het boek met de ingegeven isbn niet bestaat 
+	  return  null;
+}
+  JsonNode arrayItem = root.get("items");
+
+//  JsonNode identifier = volumeInfo.get("industryIdentifiers");
+//  JsonNode author = volumeInfo.get("authors");
+//  JsonNode saleInfo = arrayItem.get("saleInfo");
+//  JsonNode isbn = volumeInfo.path("industryIdentifiers").get(1).path("identifier");
+  
+  
+  if(arrayItem.isArray()) {
+
 	
 	
 	

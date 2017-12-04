@@ -34,14 +34,14 @@ public class User{
 	public User(int userID, String username, String password, Privilege privilege){
 		this.userID = userID;
 		this.username = username;
-		this.password = password;
+		this.password = DigestUtils.sha256Hex(password);
 		this.privilege = privilege;
 		this.archive = 0;
 	}
 	
 	public User(String username, String password, Privilege privilege){
 		this.username = username;
-		this.password = password;
+		this.password = DigestUtils.sha256Hex(password);
 		this.privilege = privilege;
 		this.archive = 0;
 	}
@@ -109,7 +109,9 @@ public class User{
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		
+		
+		this.password = DigestUtils.sha256Hex(password);
 	}
 	
 	
