@@ -1,28 +1,24 @@
-
-
 package logic;
 
 import java.io.BufferedReader;
 import java.io.Console;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.security.MessageDigest;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.InputMismatchException;
 import java.util.List;
 
 import java.util.Scanner;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
-
+import application.Navigator;
+import controller.MainController;
 import db.BookDAO;
-
 import db.BookDB;
 import db.LocationDB;
 /*import db.TestGson;
@@ -33,24 +29,99 @@ import logic.User.Privilege;*/
 
 import java.util.Date;
 import db.SessionDB;
+/*import db.SurveyDAO;*/
 import db.UserDB;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import logic.User.Privilege;
 import db.TestJackson;
 import db.TrainingDB;
 import db.SurveyDB;
+import java.io.IOException;
+import controller.MainController;
+import javafx.application.Application;
 
 
+public class Main extends Application {
+	
+public static Stage mainStage;
+	
+	@Override
+	public void start(Stage stage) throws Exception {
+		 
+		mainStage = stage;
+		mainStage.setTitle("Human Resource Team 9 Git");
+		mainStage.setScene(createScene(loadMainPane()));
+		mainStage.setMaximized(true);
+		
+		mainStage.show();
+		
+		mainStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent t) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
+		
+	}
+
+    /**
+     * Loads the main fxml layout.
+     * Sets up the vista switching VistaNavigator.
+     * Loads the first vista into the fxml layout.
+     *
+     * @return the loaded pane.
+     * @throws IOException if the pane could not be loaded.
+     */
 
 
-public class Main {
+    private Pane loadMainPane() throws IOException {
+        
+		FXMLLoader loader = new FXMLLoader();
+
+        Pane mainPane = (Pane) loader.load(getClass().getResourceAsStream(Navigator.MainView));
+
+        MainController mainController = loader.getController();
+
+        Navigator.setMainController(mainController);
+
+        Navigator.loadVista(Navigator.LoginView);
+
+        return mainPane;
+    }
 	
 
+    /**
+     * Creates the main application scene.
+     *
+     * @param mainPane the main application layout.
+     *
+     * @return the created scene.
+     */
+    private Scene createScene(Pane mainPane) {
+        Scene scene = new Scene(
+            mainPane
+        );
+        
+        return scene;
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 	
 //----------------------------------------------------login functie----------------------------------------------------------------------------	
 	/*
 	 * LOGIN 
 	 * 
 	 */
+
 	
 	public static void login () throws IOException //wordt nog verder uitgewerkt (Eva)
 	{
@@ -103,15 +174,16 @@ public class Main {
 		{
 			System.out.println("ERROR");
 		}
+
 		if (user.getPrivilege() == Privilege.ADMIN)
 		{
-			menuHR(user);
+			menuAdmin(user);
 		}
 		else if (user.getPrivilege() == Privilege.HR)
 		{
 			//menuHR(user);
 		}
-		//else if (user.getPrivilege() == Privilege.TEACHER)
+		else if (user.getPrivilege() == Privilege.TEACHER)
 		{
 			//menuTeacher(user);
 		}
@@ -126,9 +198,8 @@ public class Main {
 
 //----------------------------------------------------hoofdmenu (afhankelijk van privilege andere menu laten zien)------------------------------------------------------	
 
-	/* MENU PRIVILEGE 1 (HR)  */
-	public static void menuHR (User user) throws IOException {
-  Training menuTraing = new Training();
+
+	public static void menuAdmin (User user) throws IOException {
 		System.out.println("Welkom" + user.getUsername());
 		System.out.println("1. training");
 		System.out.println("2. Certificate");
@@ -142,7 +213,7 @@ public class Main {
 		} while (input < 1 || input > 3);
 		
 		switch (input) {
-		case 1:// menuTraing.trainingMenu(privilege);
+		case 1: /*trainingMenu(privilege);*/
 		 		break;
 		case 2: /*certificateMenu(privilege)*/
 				break;
@@ -154,7 +225,7 @@ public class Main {
 	
 	
 	/*
-	 * MENU PRIVILEGE 2(ADMIN)
+	 * MENU PRIVILEGE 2(docent)
 	 * 
 	 */
 	
@@ -203,8 +274,62 @@ public class Main {
 //EVA-------------------------------------	methodes/menu klasse Session-------------------------------------------------------------------------	
 //(user meegeven als parameter en afhankelijk daarvan andere opties voorzien)
 
+//	public void addNewSession (User u, int  trainingId)
+//	{
+//		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//		int trainingID = 0, locationID = 0, part = 0, archive = 0;
+//		String startTime, endTime;
+//		Calendar date;
+//		List<String> teachers;
+//		List<Integer> studentsEnrolled, studentsPresent;
+//		
+//		//onderstaande weglaten indien vanuit een training vertrokken wordt
+//		System.out.println("For which training do you want to create a new Session (give trainingID)?");
+//		try {
+//			trainingID = Integer.parseInt(br.readLine());
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		
+////		System.out.println("Give the date for the session:");
+////		try {
+////			//date = Calendar.parseCalendar(br.readLine());
+////		} catch (IOException e) {
+////			e.printStackTrace();
+////		}
+//		
+//		System.out.println("Give the times for the session:");
+//		System.out.println("Start time: ");
+//		try {
+//			startTime = br.readLine();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		System.out.println("End time: ");
+//		try {
+//			endTime = br.readLine();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		System.out.println("What location would you like to use?");
+//		System.out.println("Overview existing Locations: ");
+//		// functie getAllLocations aanspreken + alle locaties op scherm tonen
+//		System.out.println("Give the locationID of an existing location. If you would like to add a new location press '0'.");
+//		try {
+//			locationID = Integer.parseInt(br.readLine());
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		if (locationID == 0)
+//		{
+//			//addLocation();
+//			//locationID = ... id van nieuwe locatie
+//		}
+//		// check toevoegen om locaties die reeds ingepland zijn op die datum weg te laten?
+//	}
 	
-	
+
 	public void addNewSession (User u, int  trainingId) throws IOException
 	{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -446,6 +571,7 @@ public class Main {
 		}
 		return;
 	}
+
 	
 //INES-------------------------------------	methodes/menu klasse Location------------------------------------------------------------------------	
 	/*
@@ -456,7 +582,7 @@ public class Main {
 	/*
 	 * CHANGE LOCATION FUNCTIONS
 	 */
-	
+	/*
 	public void changeStreetName (int id) throws SQLException, Exception {
 		LocationDB db = new LocationDB();
 		Location l = db.getLocationById(id);
@@ -651,7 +777,7 @@ public class Main {
 	/* 
 	 * end CHANGE LOCATION FUNCTIONS
 	 */
-
+/*
 	public void deleteLocation(int id) {
 		LocationDB db = new LocationDB();
 		Location l;
@@ -679,7 +805,7 @@ public class Main {
 		}
 		return;
 	}
-	
+/*	
 	public void addLocation() throws SQLException, Exception {
 		String[] questions = new String[]{"What is the streetName: ","What is the number: ", "What is the postal code: ", "What is the city: ", "What is the country: ","What is the name: ","What is the info: " };
 		String[] input = new String[questions.length];
@@ -710,7 +836,7 @@ public class Main {
 	    return;
 	}
 	
-	
+	*/
 	/*
 	 * end LOCATION
 	 * 
@@ -736,7 +862,7 @@ public class Main {
 	 * SAVE methode
 	 * 
 	 */
-	public boolean saveUpdate() {
+/*	public boolean saveUpdate() {
 		String input = null;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
 		do {
@@ -757,7 +883,7 @@ public class Main {
 	}
 	
 	
-	
+	*/
 	/*
 	 * end SAVE
 	 * 
@@ -765,16 +891,30 @@ public class Main {
 	
 	
 
-	public static void main(String[] args) throws SQLException, Exception {		
-		
-		//login();
-		
-	}
 }
 
 
 
+//-------------- Testen Encryption met Apache Commons Codecs-----------------------------
 
-
+		//UserDB myDB = new UserDB();
+		// SHA256 Encode
+		
+		//myDB.insertUser(new User("testEncode",DigestUtils.sha256Hex("EncodeThis") , User.Privilege.HR));
+		
+		
+		//System.out.println(myDB.getUser("testEncode").toString());
+	//Vergelijken ingevulde password met password op database
+		//Boolean gelijk = DigestUtils.sha256Hex("EncodeThis").equals(myDB.getUser("testEncode").getPassword());
+		//System.out.println(gelijk);
+		
+		// Base64 Encode
+		
+		//String pass ="EncodeThis64";
+	//	myDB.insertUser(new User("testEncode64",Base64.encodeBase64String(pass.getBytes()) , User.Privilege.HR));
+		
+		//Decode Base64
+		//String pass2 = new String( Base64.decodeBase64(myDB.getUser("testEncode64").getPassword().getBytes()));
+		//System.out.println(pass2);
 
 
