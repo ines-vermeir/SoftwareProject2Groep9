@@ -34,10 +34,8 @@
 			
  		<mapping class="logic.Location"/> 
 <!--	<mapping class="logic.Certificate"/> -->	
-		<mapping class="logic.Survey"/> 
-		<mapping class="logic.Question"/>
+<!--	<mapping class="logic.Survey"/> -->
 		<mapping class="logic.Training"/>
-
 		
 	</session-factory>
 </hibernate-configuration>
