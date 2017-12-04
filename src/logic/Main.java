@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
 import java.security.MessageDigest;
 import java.sql.SQLException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -104,13 +103,13 @@ public class Main {
 		{
 			System.out.println("ERROR");
 		}
-		if (user.getPrivilege() == Privilege.HR)
+		if (user.getPrivilege() == Privilege.ADMIN)
 		{
 			menuHR(user);
 		}
-		else if (user.getPrivilege() == Privilege.ADMIN)
+		else if (user.getPrivilege() == Privilege.HR)
 		{
-			//menuADMIN(user);
+			//menuHR(user);
 		}
 		//else if (user.getPrivilege() == Privilege.TEACHER)
 		{
@@ -206,25 +205,23 @@ public class Main {
 
 	
 	
-	public void addNewSession (User u, int  trainingId) throws IOException // nog niet af
-, ParseException
+	public void addNewSession (User u, int  trainingId) throws IOException
 	{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		SessionDB db = new SessionDB();
 		int locationID = 0, part = 0;
 		String startTime = null, endTime = null, teacher, input;
-		Calendar date = Calendar.getInstance();
+		Calendar date = null;
 		List<String> teachers = null;
 		List<Integer> studentsEnrolled = null, studentsPresent = null;
 		ArrayList<Session> allSessions;
 		boolean check = true;
-		System.out.println("date:");
-		try {
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-			date.setTime(format.parse(br.readLine()));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}	
+//		System.out.println("date:");
+//		try {
+//			//date = Calendar.parseCalendar(br.readLine());
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}	
 		System.out.println("Start time: ");
 		try {
 			startTime = br.readLine();
@@ -721,6 +718,8 @@ public class Main {
 	
 	
 	
+	
+	
 //MICHIEL-------------------------------------	methodes/menu klasses Survey&Question--------------------------------------------------------------
 //(user meegeven als parameter en afhankelijk daarvan andere opties voorzien)	
 
@@ -729,92 +728,10 @@ public class Main {
 //EVA-------------------------------------	methodes/menu klasse User--------------------------------------------------------------	
 	//(user meegeven als parameter en afhankelijk daarvan andere opties voorzien)	
 	
-
-	public void changePassword (String username) throws SQLException, Exception {
-		UserDB db = new UserDB();
-		User u = db.getUser(username);
-		System.out.println("Give the new password: ");
-		String input;
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
-	    try {
-			input = br.readLine();
-		} catch (IOException e) {
-			e.printStackTrace();
-			return;
-		}
-		System.out.println(input);
-		if (saveUpdate() ==  true) {
-			u.setPassword(input);
-			if (db.updateUser(u) == true) {
-				System.out.println("UPDATE SUCCESFULL");
-			}
-			else {
-				System.out.println("ERROR: UPDATE UNSUCCESFULL");
-			}
-		}
-		else {
-			System.out.println("CHANGES DELETED");
-		}
-		return;
-	}
 	
-	public void deleteUser(String username) {
-		UserDB db = new UserDB();
-		User u;
-		try {
-		u = db.getUser(username);
-		System.out.println("DELETE: " + u.toString());
-		if (saveUpdate() ==  true) {
-			try {
-				if (db.archiveUser(u) == true) {
-					System.out.println("DELETE SUCCESFULL");
-				}
-				else {
-					System.out.println("ERROR: DELETE UNSUCCESFULL");
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		else {
-			System.out.println("CHANGES DELETED");
-		}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return;
-	}
 	
-	public void addUser() throws SQLException, Exception {
-		String[] questions = new String[]{"What is the username: ","What is the password: ", "What is the privilege: " };
-		String[] input = new String[questions.length];
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
-		for (int i=0; i < questions.length; i++) {
-	    try {
-	    	System.out.println(questions[i]);
-			input[i] = br.readLine();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		}
-	    User u = new User (input[0], input[1], Privilege.valueOf(input[2]));
-	    UserDB db = new UserDB();
-	    System.out.println(u.toString());
-	    if (saveUpdate() ==  true) {
-			if ( db.insertUser(u) == true) {
-				System.out.println("INSERT SUCCESFULL");
-			}
-			else {
-				System.out.println("ERROR: INSERT UNSUCCESFULL");
-			}
-		}
-		else {
-			System.out.println("INSERT DELETED");
-		}
-	    return;
-	}
 	
-//--------------------------------------------------------------------	
+	
 	/*
 	 * SAVE methode
 	 * 
@@ -849,10 +766,9 @@ public class Main {
 	
 
 	public static void main(String[] args) throws SQLException, Exception {		
-
 		
-//		login();
-
+		//login();
+		
 	}
 }
 
