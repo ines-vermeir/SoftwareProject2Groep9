@@ -20,6 +20,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
 import application.Navigator;
 import controller.MainController;
+import db.BackupCsv;
 import db.BookDAO;
 import db.BookDB;
 import db.LocationDB;
@@ -113,7 +114,7 @@ public static Stage mainStage;
     }
 
     public static void main(String[] args) {
-        launch(args);
+        launch(args);	
     }
 	
 //----------------------------------------------------login functie----------------------------------------------------------------------------	
