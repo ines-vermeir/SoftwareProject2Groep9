@@ -25,7 +25,8 @@ import org.hibernate.query.*;
 import logic.Survey;
 import logic.Training;
 import logic.Question;
-
+import logic.Answer;
+import logic.Book;
 import db.Singleton;
 import db.BaseDAO;
 
@@ -34,7 +35,7 @@ import db.BaseDAO;
 
 import org.hibernate.SessionFactory;
 
-public class SurveyDB  extends BaseDAO{
+public class SurveyDB extends BaseDAO{ //extends BaseDAO{
 
 
 	private SessionFactory myFactory= null;
@@ -68,9 +69,59 @@ public  void  addSurvey(Survey mySurvey) {
 	}
 
 
+// werkt niet
+@SuppressWarnings("deprecation")
+public  Survey  getSurvey1(int surveyID) {
+	Survey s = null;
+	Session session = myFactory.openSession();
+	Transaction t = null;
+	
+	try {
+		t = session.beginTransaction();
+		@SuppressWarnings("rawtypes")
+		Query query = session.createNativeQuery("Select * from Survey_Surveys  WHERE surveyID = :surveyID",Survey.class).setParameter("surveyID", surveyID);
+		s = (Survey) query.getSingleResult();
+		
+		t.commit();
+	}catch(HibernateException e) {
+		if(t!= null ) t.rollback();
+		e.printStackTrace();
+	}finally {
+		session.close();
+	//	sessionFactory.close();
+	}
+		return s;
+		
+	}
+	
+	
+// werkt niet
+public Survey getSurvey(int surveyID) throws SQLException, Exception{
+	 Survey sur = null;
+	Session session = myFactory.openSession();
+	Transaction t = null; 
+	try {
+		t = session.beginTransaction();
+		//get by PRIMARY KEY 
+		
+		sur = (Survey) session.get(Survey.class,surveyID);
+		t.commit();
+		
+	}catch(HibernateException e) {
+		if(t!= null ) t.rollback();
+		e.printStackTrace();
+	}finally {
+		session.close();
+	//	sessionFactory.close();
+	}
+	
+	return sur;
+	
+}
+
 
 // werkt
-public  void archiveSurvey(int surveyID) {
+public  void archiveSurvey(int surveyID) throws SQLException, Exception{
 	
 	Survey sur = null;
 	Session session = myFactory.openSession();
@@ -95,14 +146,17 @@ public  void archiveSurvey(int surveyID) {
 	}
 
 
+
+
 // werkt
-public ArrayList<String> getAllAnswersByid(int questionID) throws SQLException, Exception{	
-String answer = null;
+public List<Answer> getAllAnswersByid(int questionID) throws SQLException, Exception{	
+	List<Answer> answers= new ArrayList<Answer>();
+	
 PreparedStatement p = null;
 ResultSet r = null;
 
-String sql= "SELECT answer FROM answers WHERE questionID= ?";
-ArrayList<String> answers = new ArrayList<String>();
+String sql= "SELECT answer, total FROM Survey_Answers WHERE questionID= ?";
+
 
 try {
 	if (getConnection().isClosed()) {
@@ -113,7 +167,7 @@ p.setInt(1,questionID);
 r = p.executeQuery();
 
 while(r.next()) {
-	answer = new String (r.getString("answer"));
+	Answer answer = new Answer (r.getString("answer"),r.getInt("total"));
 	answers.add(answer);
 }
 return answers;
@@ -129,8 +183,12 @@ return answers;
 	}	
 }
 
-// werkt
 
+
+
+
+
+// werkt  		
 public Survey getSurveyByID(int surveyID) throws SQLException, Exception{ 
 	Survey s = new Survey();
 	s.setSurveyID(surveyID);
@@ -142,7 +200,7 @@ public Survey getSurveyByID(int surveyID) throws SQLException, Exception{
 		if(getConnection().isClosed()){
 		throw new Exception("error");
 	}
-	ps = getConnection().prepareStatement("select * from Surveys where surveyID=?");
+	ps = getConnection().prepareStatement("select * from Survey_Surveys where surveyID=?");
 	ps.setInt(1, surveyID);
 	
 	rs = ps.executeQuery();		
@@ -152,7 +210,8 @@ public Survey getSurveyByID(int surveyID) throws SQLException, Exception{
 	s.setTrainingsID(rs.getInt(2));
 	s.setTitle(rs.getString(3));
 	s.setDescription(rs.getString(4));
-	
+	s.setAantalIngevuld(rs.getInt(5));
+
 	
 	
 	List <Question> questions = new ArrayList<Question>();
@@ -173,17 +232,19 @@ public Survey getSurveyByID(int surveyID) throws SQLException, Exception{
 			}
 		}
 	}
+//
+//
+//
+//// 
 
-
-
-// werkt
+//werkt
 
 public ArrayList<Question> getAllQuestionsByid(int surveyID) throws SQLException, Exception{	
 Question question = null;
 PreparedStatement p = null;
 ResultSet r = null;
 
-String sql= "SELECT questionID, question  FROM Survey_Questions_test WHERE surveyID= ?";
+String sql= "SELECT questionID, question  FROM Survey_Questions WHERE surveyID= ?";
 ArrayList<Question> questions = new ArrayList<Question>();
 
 try {
@@ -194,8 +255,9 @@ p = getConnection().prepareStatement(sql);
 p.setInt(1,surveyID);
 r = p.executeQuery();
 
+
 while(r.next()) {
-	question = new Question (r.getInt(1),r.getString("question"));
+	question = new Question (r.getInt(1),r.getString("question"),null);
 	question.setAntwoorden(getAllAnswersByid(question.getQuestionId()));
 	questions.add(question);
 }
@@ -217,7 +279,7 @@ return questions;
 public ArrayList <Survey> getAllSurveys() throws SQLException, Exception{ 
 	Statement stm = null; 
 	ResultSet r = null; 
-	String sql = "SELECT * FROM Surveys";
+	String sql = "SELECT * FROM Survey_Surveys";
 	ArrayList<Survey> myListSurveys = new ArrayList<Survey>();
 	
 	Survey survey = null;
@@ -233,7 +295,7 @@ public ArrayList <Survey> getAllSurveys() throws SQLException, Exception{
 		while(r.next()){
 		
 		try {
-			survey = new Survey(r.getInt(1), r.getInt(2),r.getString(3),r.getString(4),r.getInt(5));
+			survey = new Survey(r.getInt(1), r.getInt(2),r.getString(3),r.getString(4),r.getInt(5),r.getInt(6));
 			
 			List <Question> questions = new ArrayList<Question>();
 			 questions = getAllQuestionsByid(r.getInt(1));
@@ -271,7 +333,7 @@ public ArrayList <Survey> getAllSurveys() throws SQLException, Exception{
 public ArrayList <Survey> getAllActiveSurveys() throws SQLException, Exception{ 
 	Statement stm = null; 
 	ResultSet r = null; 
-	String sql = "SELECT * FROM Surveys where archive =0";
+	String sql = "SELECT * FROM Survey_Surveys where archive =0";
 	ArrayList<Survey> myListSurveys = new ArrayList<Survey>();
 	
 	Survey survey = null;
@@ -287,7 +349,7 @@ public ArrayList <Survey> getAllActiveSurveys() throws SQLException, Exception{
 		while(r.next()){
 		
 		try {
-			survey = new Survey(r.getInt(1), r.getInt(2),r.getString(3),r.getString(4),r.getInt(5));
+			survey = new Survey(r.getInt(1), r.getInt(2),r.getString(3),r.getString(4),r.getInt(5),r.getInt(6));
 			
 			List <Question> questions = new ArrayList<Question>();
 			 questions = getAllQuestionsByid(r.getInt(1));
@@ -317,11 +379,11 @@ public ArrayList <Survey> getAllActiveSurveys() throws SQLException, Exception{
 			}
 		}
 	}
-
+//
 public ArrayList <Survey> getAllNonActiveSurveys() throws SQLException, Exception{ 
 	Statement stm = null; 
 	ResultSet r = null; 
-	String sql = "SELECT * FROM Surveys where archive =1";
+	String sql = "SELECT * FROM Survey_Surveys where archive =1";
 	ArrayList<Survey> myListSurveys = new ArrayList<Survey>();
 	
 	Survey survey = null;
@@ -336,7 +398,7 @@ public ArrayList <Survey> getAllNonActiveSurveys() throws SQLException, Exceptio
 		while(r.next()){
 		
 		try {
-			survey = new Survey(r.getInt(1), r.getInt(2),r.getString(3),r.getString(4),r.getInt(5));
+			survey = new Survey(r.getInt(1), r.getInt(2),r.getString(3),r.getString(4),r.getInt(5),r.getInt(6));
 			
 			List <Question> questions = new ArrayList<Question>();
 			 questions = getAllQuestionsByid(r.getInt(1));
@@ -369,112 +431,132 @@ public ArrayList <Survey> getAllNonActiveSurveys() throws SQLException, Exceptio
 
 
 
-public boolean updateSurveys(Survey s1, int surveyID) throws SQLException, Exception{ 
-	boolean successvol = false;
-	PreparedStatement p = null; 
 
-	String sql= "UPDATE Surveys SET surveyID = ?, trainingID = ?, title =?, description=?"; 
 
-	try{
-		if(getConnection().isClosed() ){
-			throw new Exception("fout"); 
-		}
-		p= getConnection().prepareStatement(sql); 
-		p.setInt(1, s1.getSurveyID());
-		p.setInt(2, s1.getTrainingsID());
-		p.setString(3,s1.getTitle());
-		p.setString(4, s1.getDescription());
-		
-		if (p.executeUpdate() == 0){
-			successvol = true;
-		} 
-		return successvol;
-	}finally{
-		try{
-		if( p != null){
-			p.close();
-		}
-		}catch(SQLException e){
-			System.out.println(e.getMessage());
-			throw new RuntimeException("error");
-			}
-		}
-	}
 
-public boolean updateSurveyByID(int surveyID,Survey updatesur) throws SQLException, Exception{ 
-	
-	boolean successvol = false;
-	PreparedStatement p = null; 
-	
-	String sql= "UPDATE Surveys SET title =?, description=? where surveyID=?"; 
-	// "UPDATE Surveys SET surveyID = ?, trainingID = ?, title =?, description=? where surveyID=?"; 
-	try{
-		if(getConnection().isClosed() ){
-			throw new Exception("fout"); 
-		}
-		p= getConnection().prepareStatement(sql); 
-	//	p.setInt(1,  updatesur.getSurveyID());
-	//	p.setInt(2,  updatesur.getTrainingsID());
-		p.setString(1, updatesur.getTitle());
-		p.setString(2, updatesur.getDescription());
-		p.setInt(3, surveyID);
-		
-		
-		
-		if (p.executeUpdate() == 0){
-			successvol = true;
-		} 
-		return successvol;
-	
-	}finally{
-		try{
-		if( p != null){
-			p.close();
-		}
-		}catch(SQLException e){
-			System.out.println(e.getMessage());
-			throw new RuntimeException("error");
-			}
-		}	
-	}
-/*
 
-public boolean updateSurveyQuestionsID(int surveyID,List<Question> myListQuestions) throws SQLException, Exception{ 
 
-	Statement stm = null; 
-	ResultSet r = null; 
-	
-	boolean successvol = false;
-	PreparedStatement p = null; 
-	String sql= "DELETE * FROM Survey_Questions_test WHERE surveyID=?"; 
-	
-	try{
-		if(getConnection().isClosed() ){
-			throw new Exception("fout"); 
-		}
-		
-		stm = getConnection().createStatement(); 
-		r = sextm.executeQuery(sql);
-		while(r.next()){
-			
-		
-			
-			
-			
-		}
-	
-	return successvol;
-}finally{
-	try{
-	if( p != null){
-		p.close();
-	}
-	}catch(SQLException e){
-		System.out.println(e.getMessage());
-		throw new RuntimeException("error");
-			}
-		}	
-	}
-	
-	*/
+
+
+
+
+
+
+
+
+
+
+
+//
+//
+//
+//public boolean updateSurveys(Survey s1, int surveyID) throws SQLException, Exception{ 
+//	boolean successvol = false;
+//	PreparedStatement p = null; 
+//
+//	String sql= "UPDATE Surveys SET surveyID = ?, trainingID = ?, title =?, description=?"; 
+//
+//	try{
+//		if(getConnection().isClosed() ){
+//			throw new Exception("fout"); 
+//		}
+//		p= getConnection().prepareStatement(sql); 
+//		p.setInt(1, s1.getSurveyID());
+//		p.setInt(2, s1.getTrainingsID());
+//		p.setString(3,s1.getTitle());
+//		p.setString(4, s1.getDescription());
+//		
+//		if (p.executeUpdate() == 0){
+//			successvol = true;
+//		} 
+//		return successvol;
+//	}finally{
+//		try{
+//		if( p != null){
+//			p.close();
+//		}
+//		}catch(SQLException e){
+//			System.out.println(e.getMessage());
+//			throw new RuntimeException("error");
+//			}
+//		}
+//	}
+//
+//public boolean updateSurveyByID(int surveyID,Survey updatesur) throws SQLException, Exception{ 
+//	
+//	boolean successvol = false;
+//	PreparedStatement p = null; 
+//	
+//	String sql= "UPDATE Surveys SET title =?, description=? where surveyID=?"; 
+//	// "UPDATE Surveys SET surveyID = ?, trainingID = ?, title =?, description=? where surveyID=?"; 
+//	try{
+//		if(getConnection().isClosed() ){
+//			throw new Exception("fout"); 
+//		}
+//		p= getConnection().prepareStatement(sql); 
+//	//	p.setInt(1,  updatesur.getSurveyID());
+//	//	p.setInt(2,  updatesur.getTrainingsID());
+//		p.setString(1, updatesur.getTitle());
+//		p.setString(2, updatesur.getDescription());
+//		p.setInt(3, surveyID);
+//		
+//		
+//		
+//		if (p.executeUpdate() == 0){
+//			successvol = true;
+//		} 
+//		return successvol;
+//	
+//	}finally{
+//		try{
+//		if( p != null){
+//			p.close();
+//		}
+//		}catch(SQLException e){
+//			System.out.println(e.getMessage());
+//			throw new RuntimeException("error");
+//			}
+//		}	
+//	}
+///*
+//
+//public boolean updateSurveyQuestionsID(int surveyID,List<Question> myListQuestions) throws SQLException, Exception{ 
+//
+//	Statement stm = null; 
+//	ResultSet r = null; 
+//	
+//	boolean successvol = false;
+//	PreparedStatement p = null; 
+//	String sql= "DELETE * FROM Survey_Questions_test WHERE surveyID=?"; 
+//	
+//	try{
+//		if(getConnection().isClosed() ){
+//			throw new Exception("fout"); 
+//		}
+//		
+//		stm = getConnection().createStatement(); 
+//		r = sextm.executeQuery(sql);
+//		while(r.next()){
+//			
+//		
+//			
+//			
+//			
+//		}
+//	
+//	return successvol;
+//}finally{
+//	try{
+//	if( p != null){
+//		p.close();
+//	}
+//	}catch(SQLException e){
+//		System.out.println(e.getMessage());
+//		throw new RuntimeException("error");
+//			}
+//		}	
+//	}
+//	
+//	*/
+
 }

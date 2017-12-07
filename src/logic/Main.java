@@ -43,6 +43,7 @@ import logic.User.Privilege;
 import db.TestJackson;
 import db.TrainingDB;
 import db.SurveyDB;
+import db.SurveyPredefinedDB;
 import java.io.IOException;
 import controller.MainController;
 import javafx.application.Application;
@@ -112,8 +113,277 @@ public static Stage mainStage;
         return scene;
     }
 
-    public static void main(String[] args) {
-        launch(args);
+    public static void main(String[] args) throws Exception  {
+    	
+    	
+//    	SurveyPredefined surveyPredefined = new SurveyPredefined();
+//   	
+//   	surveyPredefined.setDescription("description");
+//   	surveyPredefined.setTitle("title");
+//    	
+//   	QuestionPredefined q1 = new QuestionPredefined();
+//    	q1.setQuestion("question 1");
+//    	q1.setSurvey(surveyPredefined);
+//    	
+//   	AnswerPredefined a1 = new AnswerPredefined();
+//   	a1.setAnswer("answer1");
+//  	a1.setQuestion(q1);
+//  	
+//   	q1.getAntwoorden().add(a1);
+//   	surveyPredefined.getMyListSurveysQuestions().add(q1);
+//  	
+//   	
+//   	//System.out.println(surveyPredefined.toString());
+//   	
+//   	SurveyDB sDB = new SurveyDB();
+//   	//sDB.addSurvey(surveyPredefined);
+//   	
+//   	Survey s1 = new Survey();
+////   	s1 =sDB.getSurvey(48);
+//   	
+// //  	List<String> answers = new ArrayList<String>();
+//   	List<Answer> answers= new ArrayList<Answer>();
+//   	answers = sDB.getAllAnswersByid(31);
+//   	
+//   	
+//   	
+//   	Survey s5 = new Survey();
+////   	s5=  sDB.getSurveyByID(48);
+//   	
+//   	
+//	List<Question> questions= new ArrayList<Question>();
+//	//s1 = sDB.getSurveyByID(48);
+//	
+//   	//sDB.archiveSurvey(48);
+//	
+//	List<Survey> surveys= new ArrayList<Survey>();
+//	surveys = sDB.getAllActiveSurveys();
+//   	System.out.println(	surveys.toString());
+//   	
+   	
+//   
+//    	SurveyPredefined surveyPredefined = new SurveyPredefined();
+//    	 surveyPredefined.setTitle("java");
+//    	 surveyPredefined.setDescription("java OO");
+//    	// surveyPredefined.setMyListSurveysQuestions(null);
+//    	 
+//    	 QuestionPredefined questionPredefined = new QuestionPredefined();
+//    	 questionPredefined.setQuestion("hoe was de leerstof");
+//    	 questionPredefined.setSurvey(surveyPredefined);
+//    	 
+//    	AnswerPredefined answerPredefined = new AnswerPredefined();
+//    	answerPredefined.setAnswer("1) goed");
+//    	answerPredefined.setQuestion(questionPredefined);
+//    	
+//    	
+//    	AnswerPredefined answerPredefined2 = new AnswerPredefined();
+//    	answerPredefined2 .setAnswer("2) niet goed");
+//    	answerPredefined2.setQuestion(questionPredefined);
+//    
+//
+//    	questionPredefined.getAntwoorden().add(answerPredefined);
+//    	questionPredefined.getAntwoorden().add(answerPredefined2);
+//    	
+//    	
+//    	surveyPredefined.getMyListSurveysQuestions().add(questionPredefined);
+//    	
+//    	
+//    	
+//    	
+//    	
+//    	
+//    	
+//    	SurveyPredefined surveyPredefined2 = new SurveyPredefined();
+//   	 surveyPredefined2.setTitle("java2");
+//   	 surveyPredefined2.setDescription("java2 OO");
+//   	// surveyPredefined.setMyListSurveysQuestions(null);
+//   	 
+//   
+   	
+   
+    //	Survey s1 = new Survey();
+   // 	s1.makeNewSurvey();
+    	
+    	
+   // 	System.out.println("test");
+    	
+    	
+    	
+    	
+    	
+    	//System.out.println(surveyPredefined.toString());
+    	
+    	
+//    	SurveyPredefinedDB 	surveyPredefinedDB = new SurveyPredefinedDB();
+//    	//surveyPredefinedDB.addSurvey(surveyPredefined);
+//    	
+//    	List<SurveyPredefined> surveys= new ArrayList<SurveyPredefined>();
+//    	//surveys = surveyPredefinedDB.getAllSurveys();
+//    	
+//    	
+//    	SurveyPredefined surveyPredefined1 = new SurveyPredefined();
+//    	//surveyPredefined1 = surveyPredefinedDB.getSurveyByID(16);
+//    	
+//    	
+//    	//surveyPredefinedDB.updateSurveyByID(16, surveyPredefined2);
+//    	
+//    	
+//    	surveyPredefinedDB.deleteSurveyQuestionsbyID(16, null);
+//    	
+//    	
+//    	surveyPredefinedDB.updateSurveyByID(16, surveyPredefined2);
+//    	//surveyPredefinedDB.deleteSurveyAnwersbyID(16);
+    	
+    	//System.out.println(surveyPredefined1.toString());
+    	
+    	
+    	////////////////////
+//    	Survey s1 = new Survey();
+//    	
+//    	s1.setTrainingsID(26);
+//    	s1.setTitle("HQL1");
+//    	s1.setDescription("Hibernate Query Language1");
+//    	
+//    	
+//    	Question q1 = new Question();
+//    	q1.setQuestion("score van leraar1");
+//    	q1.setSurvey(s1);
+//    	
+//    	Answer a1 = new Answer();
+//    	a1.setAnswer("1) slecht1");
+//    	a1.setQuestion(q1);
+//    	a1.setAantal(0);
+//    	
+//    	Answer a2 = new Answer();
+//    	a2.setAnswer("1) slecht1");
+//    	a2.setQuestion(q1);
+//    	a2.setAantal(0);
+//    	
+//    	
+//    	
+//    	Question q2 = new Question();
+//    	q2.setQuestion("score van leraar1");
+//    	q2.setSurvey(s1);
+//    	
+//    	Answer a3 = new Answer();
+//    	a3.setAnswer("1) slecht1");
+//    	a3.setQuestion(q2);
+//    	a3.setAantal(0);
+//    	
+//    	Answer a4 = new Answer();
+//    	a4.setAnswer("1) slecht5");
+//    	a4.setQuestion(q2);
+//    	a4.setAantal(0);
+//    	
+//    	
+//    	
+//    	
+//    	
+//    	
+//    	
+//    	
+//    	
+//    	
+//    	
+//    	
+//    	
+//    	
+//    	
+//    	
+//    	/*Question q2 = new Question();
+//    	q2.setQuestion("score leerstof");
+//    	q2.setSurvey(s1);
+//    	*/
+//    	
+//   	q1.getAntwoorden().add(a1);
+//   	q1.getAntwoorden().add(a2);
+//   	
+//   	q2.getAntwoorden().add(a3);
+//   	q2.getAntwoorden().add(a4);
+//   	
+//    s1.getMyListSurveysQuestions().add(q1);
+//    s1.getMyListSurveysQuestions().add(q2);
+////    	
+////    	
+//   	System.out.println(s1.toString());
+////   	s1.getMyListSurveysQuestions().add(q2);
+////    	
+//    	SurveyDB sDB = new SurveyDB();
+//      	sDB.addSurvey(s1);
+    	
+  
+
+    	
+    	
+    	
+      	
+    	
+    	
+    	
+    	
+    	/*
+    	Answer a1 = new Answer();
+    	Answer a2 = new Answer();
+    	Answer a3 = new Answer();
+    	
+    	a1.setAnswer("1) slecht");
+    	a1.setQuestion(q1);
+    	a2.setAnswer("2) matig");
+    	a2.setQuestion(q1);
+    	a3.setAnswer("3) goed");
+    	a3.setQuestion(q1);
+    	
+    	q1.getAntwoorden().add(a1);
+    	q1.getAntwoorden().add(a2);
+    	q1.getAntwoorden().add(a3);
+    	
+    	Question q2 = new Question();
+    	q2.setQuestion("score leerstof");
+    	q2.setSurvey(s1);
+    	
+    	
+    	Answer a4 = new Answer();
+    	Answer a5 = new Answer();
+    	Answer a6= new Answer();
+    	
+    	a4.setAnswer("1) slecht");
+    	a4.setQuestion(q2);
+    	a5.setAnswer("2) matig");
+    	a5.setQuestion(q2);
+    	a6.setAnswer("3) goed");
+    	a6.setQuestion(q2);
+    
+    	q2.getAntwoorden().add(a4);
+    	q2.getAntwoorden().add(a5);
+    	q2.getAntwoorden().add(a6);
+    	
+    	s1.getMyListSurveysQuestions().add(q1);
+    	s1.getMyListSurveysQuestions().add(q2);
+    	*/
+    	
+    	
+    	
+    	
+   // 	System.out.println(s1.toString());
+    	
+    //	SurveyDB sDB = new SurveyDB();
+    	//sDB.addSurvey(s1);
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+       launch(args);
     }
 	
 //----------------------------------------------------login functie----------------------------------------------------------------------------	
