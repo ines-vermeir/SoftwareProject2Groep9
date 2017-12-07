@@ -20,7 +20,6 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
 import application.Navigator;
 import controller.MainController;
-import db.BackupCsv;
 import db.BookDAO;
 import db.BookDB;
 import db.LocationDB;
@@ -114,7 +113,7 @@ public static Stage mainStage;
     }
 
     public static void main(String[] args) {
-        launch(args);	
+        launch(args);
     }
 	
 //----------------------------------------------------login functie----------------------------------------------------------------------------	
@@ -123,7 +122,7 @@ public static Stage mainStage;
 	 * 
 	 */
 	
-	public static void login () throws IOException //wordt nog verder uitgewerkt (Eva)
+	public static void login () throws IOException 
 	{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		User user = null;
