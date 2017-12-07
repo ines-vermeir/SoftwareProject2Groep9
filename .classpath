@@ -25,6 +25,5 @@
 	<classpathentry kind="lib" path="lib/commons-codec-1.11-tests.jar"/>
 	<classpathentry kind="lib" path="lib/commons-codec-1.11.jar"/>
 	<classpathentry kind="lib" path="lib/jfoenix.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

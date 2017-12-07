@@ -128,6 +128,29 @@ public class UserDB {
 		return u;
 	}
 	
+//	public User getUserByUsername (String username)
+//	{
+//		User u = new User();
+//		Session session = myFactory.openSession();
+//		Transaction t = null;
+//		try
+//		{
+//			
+//			t = session.beginTransaction();
+//			u = session.createCriteria(User.class).add(eq("username", username)).uniqueResult();
+//			t.commit();
+//		}
+//		catch (HibernateException e)
+//		{
+//			if (t != null) t.rollback();
+//			e.printStackTrace();
+//		}
+//		finally
+//		{
+//			session.close();
+//		}
+//		return u;
+//	}
 	
 	public ArrayList<User> getAllUsers()
 	{
