@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
 //Om te testen heb ik de klasse Employee moeten aanpassen met de parameters van de Odata - Sebastian G
 //@JsonIgnoreProperties(ignoreUnknown = true)
