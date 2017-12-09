@@ -17,6 +17,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 
 @Entity
 @Table(name="Predefined_questions")
@@ -27,16 +31,18 @@ public class QuestionPredefined {
 		@GeneratedValue(strategy=GenerationType.IDENTITY)
 		private Integer questionId;
 		
-		
 		@Column(name = "question")
 		private String question;
-			
-		
+									
+									
 		//@ElementCollection(targetClass=String.class)
 	//	@ElementCollection
 	//	@CollectionTable(name="Predefined_answers", joinColumns=@JoinColumn(name="questionID"))
 		@Column(name="answer")
-		@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE }, mappedBy = "question")
+		@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE }, mappedBy = "question",orphanRemoval=true)
+		@Cascade({org.hibernate.annotations.CascadeType.DELETE_ORPHAN,
+	        org.hibernate.annotations.CascadeType.PERSIST,
+	        org.hibernate.annotations.CascadeType.SAVE_UPDATE})
 		private List <AnswerPredefined> antwoorden = new ArrayList<AnswerPredefined>();
 		
 		@ManyToOne

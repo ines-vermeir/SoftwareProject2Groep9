@@ -25,10 +25,7 @@ public class AnswerPredefined {
 	@JoinColumn(name="questionID",referencedColumnName="questionID")
 	private QuestionPredefined question;
 
-	
-	
-	
-	
+
 	public AnswerPredefined(int answerID, String answer, QuestionPredefined question) {
 		super();
 		this.answerID = answerID;

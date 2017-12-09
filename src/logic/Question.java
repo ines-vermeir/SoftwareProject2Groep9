@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -43,7 +45,8 @@ public class Question {
 	
 	//@OneToMany(cascade=CascadeType.ALL,mappedBy="question")
 	@Column(name="answer")
-	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE }, mappedBy = "question")
+	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE }, mappedBy = "question")
+	@Fetch(value = FetchMode.SUBSELECT)
 //	@OneToMany(mappedBy="question", cascade={ CascadeType.ALL, }, orphanRemoval=true)
 	
 	private List <Answer> antwoorden = new ArrayList<Answer>();

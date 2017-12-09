@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+
 @Entity
 @Table(name="Predefined_surveys")
 public class SurveyPredefined {
@@ -28,7 +30,10 @@ public class SurveyPredefined {
 	@Column(name="description")
 	private String description;
 	
-	@OneToMany(cascade=CascadeType.ALL,mappedBy="survey",fetch = FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="survey",fetch = FetchType.EAGER,orphanRemoval=true)
+	@Cascade({org.hibernate.annotations.CascadeType.DELETE_ORPHAN,
+        org.hibernate.annotations.CascadeType.PERSIST,
+        org.hibernate.annotations.CascadeType.SAVE_UPDATE})
 	private List<QuestionPredefined> myListSurveysQuestions = new ArrayList<>();
 
 	public int getSurveyPrID() {
@@ -73,12 +78,6 @@ public class SurveyPredefined {
 		super();
 	}
 
-	
-	
-	
-	
-	
-	
 	public SurveyPredefined(String title, String description) {
 		super();
 		this.title = title;

@@ -165,7 +165,7 @@ public class Survey {
 	
 	
 	
-	void menuSurvey(int privilege) throws SQLException, Exception {
+	void menuSurvey(int privilege){
 		Scanner scan = new Scanner(System.in);
 		if(privilege == 1) {
 			System.out.println("MENU Survey");
@@ -180,7 +180,7 @@ public class Survey {
 				// print al zijn trainingen waarvoor hij een survey kan maken
 				// gebeurt via web
 				
-					surveyInvullen();
+					surveyInvullen(surveyID);
 					break;
 			case 2: // back to employeemenu
 					return;
@@ -203,7 +203,8 @@ public class Survey {
 			System.out.println("1) watch results");
 			System.out.println("2) make new survey");
 			System.out.println("3) predefined surveys");
-			System.out.println("4) back to Employee menu");
+			System.out.println("4) archive Survey");
+			System.out.println("5) back to Employee menu");
 			
 			int user_input_number = scan.nextInt();
 			
@@ -214,6 +215,11 @@ public class Survey {
 					break;
 			case 3: beherenvoorafGedefinieerdeSurveys();
 					break;
+					
+			case 4: archiveSurvey();		
+					break;
+			case 5:// back to employeeMenu		
+					break;
 			default: System.out.println("U heeft foutieve invoer ingegeven");
 			menuSurvey(privilege);
 			break;
@@ -221,15 +227,267 @@ public class Survey {
 		}
 	}
 		
+	// TO DO 
+	public void surveyInvullen(int SurveyID){
+		Scanner scan = new Scanner(System.in);
+		
+		SurveyDB surveydb = new SurveyDB();
+		Survey  si1 = new Survey();
+		
+		si1 = surveydb.getSurvey(SurveyID);
+		
+		System.out.println("TITLE");
+		System.out.println(si1.getTitle());
+		System.out.println("");
+		
+	
+		System.out.println("DESCRIPTION");
+		System.out.println(si1.getDescription());
+		System.out.println("");
+		
+		// herwerken optellen score !
+		
+		for(int i = 0; i < si1.getMyListSurveysQuestions().size();i++) {
+			System.out.println(si1.getMyListSurveysQuestions().get(i).getQuestion());
+			
+			for(int j = 0; j < si1.getMyListSurveysQuestions().get(i).getAntwoorden().size();j++) {
+				System.out.print(j +1 +") ");
+				System.out.print(si1.getMyListSurveysQuestions().get(i).getAntwoorden().get(j) + "         ");
+				
+				
+			 }	 
+	
+			System.out.println("");
+		boolean[] gekozenAnswers = new boolean[si1.getMyListSurveysQuestions().get(i).getAntwoorden().size()];
+		 Arrays.fill(gekozenAnswers,Boolean.FALSE);
+			 System.out.print("Wich answers do you wish to select press -1 to stop");
+			 
+		 int keuze5;
+			 
+			 do {
+				 
+				 keuze5 = scan.nextInt();
+				 if(keuze5 > 1) {
+				 gekozenAnswers[keuze5 -1] = true;
+				 }
+					 
+			 }while(keuze5 !=-1);
+			 
+//			 for (int a = 0; a < gekozenAnswers.length;a++) {
+//				 if( gekozenAnswers[a] == true) {
+//					 si1.getMyListSurveysQuestions().get(i).getAntwoorden().get(j).setAantal((si1.getMyListSurveysQuestions().get(i).getAntwoorden().get(j).getAantal()+1));	 
+//				 }		 				 
+//			}	
+		}
+		surveydb.updateSurveyById(SurveyID, si1);
+		System.out.println("");
+	}
+	
+	
+	
+	public void watchResults(){
+		SurveyDB 	surveydb = new SurveyDB();
+    	
+		List<Survey> surveys= new ArrayList<Survey>();
+		surveys = surveydb.getAllSurveys();
+		
+		System.out.println(surveys);
+	}
+	
+	
+	
+	
+	// TO DO
+	public void makeNewSurvey(){
+		Scanner scan = new Scanner(System.in);
+		int keuze;
+		System.out.println("1) make a new survey");
+		System.out.println("2) use a predifined survey");
+		keuze = scan.nextInt();
+//		do {
+//			keuze = scan.nextInt();
+//		}while(keuze > 1 || keuze < 2);
+		
+		if(keuze == 1) {
+			
+			System.out.println("Wat is the trainingsID");
+			
+			TrainingDB trainingdb = new TrainingDB();
+			List<Training> allTrainings = new ArrayList<>();
+			
+			allTrainings = trainingdb.getActiveTrainings();
+			
+			Survey  sur1= new Survey();
+			System.out.println(allTrainings);
+			int trainingIDn = scan.nextInt();
+			sur1.setTrainingsID(trainingIDn);
+			
+			System.out.println("what is the title");
+			String titlen = scan.nextLine();
+			sur1.setTitle(titlen);
+			
+			System.out.println("what is the description");
+			String description = scan.nextLine();
+			sur1.setDescription(description);
+			
+			System.out.println("Give questions, press 0 to stop");
+			
+			
+			
+			String question = "1";
+			String answer = "1";
+		
+			sur1.setArchive(0);
+			sur1.setAantalIngevuld(0);
+			
+			do {
+				Question Question = new Question();
+				question = scan.nextLine();
+				Question.setSurvey(sur1);
+				Question.setQuestion(question);
+			
+				do {
+					Answer Answer = new Answer();
+					answer = scan.nextLine();
+					Answer.setAantal(0);
+					Answer.setAnswer(answer);
+					Answer.setQuestion(Question);
+					
+					Question.getAntwoorden().add(Answer);
+					
+				}while(answer != "0");
+				sur1.getMyListSurveysQuestions().add(Question);
+						
+			} while(question !="0");
 
-	private void beherenvoorafGedefinieerdeSurveys() throws Exception {
+
+			System.out.println("Wilt u deze survey aanmaken? 1) yes   2) no");
+			sur1.toString();
+			
+			int keuzeAanmaken = scan.nextInt();
+			
+			
+			if( keuzeAanmaken == 1) {
+				SurveyDB surveydb = new SurveyDB();
+				surveydb.addSurvey(sur1);
+			}
+			menuSurvey(3);				
+		}
+		
+		if(keuze == 2) {
+			System.out.println("predefined Surveys");
+		
+			SurveyPredefinedDB surveydb = new SurveyPredefinedDB();
+			SurveyPredefined surveypr = new SurveyPredefined();
+			Survey survey2 = new Survey();
+			
+			List <SurveyPredefined> listsurveyPredefined = new ArrayList <SurveyPredefined>();
+			listsurveyPredefined = surveydb.getAllSurveys();
+			System.out.println(	listsurveyPredefined.toString());
+			
+			
+			
+			System.out.println("Wich predefined survey you want to use, give the id");
+			
+			int idPresur = scan.nextInt();
+			surveypr = surveydb.getSurvey(idPresur);
+			
+			survey2.setTitle(surveypr.getTitle());
+			survey2.setDescription(surveypr.getDescription());
+			survey2.setArchive(0);
+			survey2.setAantalIngevuld(0);
+			
+			
+			
+			System.out.println("What training you want to link, give the id");
+			TrainingDB trainingdb = new TrainingDB();
+			trainingdb.getActiveTrainings();
+			
+			int idtrain = scan.nextInt();
+			survey2.setTrainingsID(idtrain);
+			survey2.setAantalIngevuld(0);
+			survey2.setArchive(0);
+			
+			
+			survey2.setDescription(surveypr.getDescription());
+			survey2.setTitle(surveypr.getDescription());
+			
+			
+			for (int i = 0; i < surveypr.getMyListSurveysQuestions().size();i++) {
+				survey2.getMyListSurveysQuestions().get(i).setQuestion(surveypr.getMyListSurveysQuestions().get(i).getQuestion());
+				survey2.getMyListSurveysQuestions().get(i).setSurvey(survey2);
+	
+				
+				
+				
+				
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		//	List<Question> questions= new ArrayList<Question>();
+		//	List<QuestionPredefined> predefinedQuestions = new ArrayList<QuestionPredefined>();
+			
+
+//			for(int i = 0; i < surveypr.getMyListSurveysQuestions().size();i++) {
+//				Question q1 = new Question();
+//				q1.setQuestion(surveypr.getMyListSurveysQuestions().get(i).getQuestion());
+//				q1.setSurvey(survey2);
+//				List<Answer> answers = new ArrayList<Answer>();
+//				for(int j = 0; j < surveypr.getMyListSurveysQuestions().get(i).getAntwoorden().size();j++) {
+//				
+//					Answer a1 = new Answer();
+//					a1.setAantal(0);
+//					a1.setAnswer(surveypr.getMyListSurveysQuestions().get(i).getAntwoorden().get(j).getAnswer());
+//					a1.setQuestion(q1);
+//					answers.add(a1);
+//						
+//				}
+//				q1.setAntwoorden(answers);
+//				questions.add(q1);		
+//			}
+//	
+//			survey2.setMyListSurveysQuestions(questions);
+
+			System.out.println("Wilt u deze survey aanmaken? 1) yes   2) no");
+			survey2.toString();
+			
+			int keuzeAanmaken = scan.nextInt();
+			
+			
+			if( keuzeAanmaken == 1) {
+				SurveyDB surveydb2 = new SurveyDB();
+				surveydb2.addSurvey(survey2);
+			}
+			menuSurvey(3);	
+	}
+	
+	}
+	
+
+	private void beherenvoorafGedefinieerdeSurveys(){
 		Scanner scan = new Scanner(System.in);
 		int keuze;
 		System.out.println("MENU SURVEYPREDEFINED");
 		System.out.println("1) watch predefined Surveys");
 		System.out.println("2) add predefined Survey");
 		System.out.println("3) modify predefined Survey");
-		System.out.println("4) modify predefined Survey");
+		System.out.println("4) delete predefined Survey");
 		System.out.println("5) return");
 		
 		
@@ -265,290 +523,175 @@ public class Survey {
 			String description = scan.nextLine();
 			surveyPredefined.setTitle(description);
 			
-			
-			
 			System.out.println("Give question, press 0 to stop");
-			List<QuestionPredefined> allQuestions = new ArrayList<QuestionPredefined>();
-			QuestionPredefined questionnew = new QuestionPredefined();
-			String question ="1";
-			String answer = "1";
 			
-			List<AnswerPredefined> allAnswers = new ArrayList<AnswerPredefined>();
+			String question ="1";
+			String answer = "1";		
 			
 			do {
+				QuestionPredefined questionPredefined = new QuestionPredefined();
 				question = scan.nextLine();
-				questionnew.setQuestion(question);
+				questionPredefined.setSurvey(surveyPredefined);
+				questionPredefined.setQuestion(question);
+				
 				
 				do {
-					System.out.println("Give Answers, press 0 to stop");
+					AnswerPredefined anserpredefined = new AnswerPredefined();
+					answer= scan.nextLine(); 
+					anserpredefined.setAnswer(answer);
+					anserpredefined.setQuestion(questionPredefined);
 					
-					AnswerPredefined answern = new AnswerPredefined();
-					answer = scan.nextLine();
-					answern.setAnswer(answer);
-					allAnswers.add(answern);
-				
-				}while(answer != "0");
-				questionnew.setAntwoorden(allAnswers);
-				allQuestions.add(questionnew);
-				
-				
-			}while(question != "0");
-			surveyPredefined.setMyListSurveysQuestions(allQuestions);
-			
-			System.out.println("Do you wish to add this predefined Survey   1) yes    2) no");
-			int keuze3;
-			
-			
-			
-			do {
-				keuze3 = scan.nextInt();
-			}while(keuze3 > 1 || keuze < 2);
-			
-			
-			if( keuze3 == 1) {
-			
-			SurveyPredefinedDB surveyPredefinedDB =  new SurveyPredefinedDB(); 
-			surveyPredefinedDB.addSurvey(surveyPredefined);
-			}
-			
-			menuSurvey(3);
-		}
-		
-		case 3: // TO DO modify
-			
-		
-			
-			
-			
-		case 4: // TO DO DELETE
-		
-			
-		case 5: menuSurvey(3);
-		}
-		
-		
-	
-		
-		
-		
-		
-	}
-	// TO DO
-	public void surveyInvullen()  throws SQLException, Exception{
-		Scanner scan = new Scanner(System.in);
-		
-		SurveyDB surveydb = new SurveyDB();
-		Survey  si1 = new Survey();
-		si1 = surveydb.getSurveyByID(surveyID);
-		
-		System.out.println("TITLE");
-		System.out.println(si1.getTitle());
-		System.out.println("");
-		
-		System.out.println("DESCRIPTION");
-		System.out.println(si1.getDescription());
-		System.out.println("");
-		
-		// herwerken optellen score !
-		
-		for(int i = 0; i < si1.getMyListSurveysQuestions().size();i++) {
-			System.out.println(si1.getMyListSurveysQuestions().get(i).getQuestion());
-			
-			for(int j = 0; j < si1.getMyListSurveysQuestions().get(i).getAntwoorden().size();j++) {
-				System.out.print(j +1 +") ");
-				System.out.print(si1.getMyListSurveysQuestions().get(i).getAntwoorden().get(i) + "         ");
-				
-				 boolean[] gekozenAnswers = new boolean[si1.getMyListSurveysQuestions().get(i).getAntwoorden().size()];
-				 Arrays.fill(gekozenAnswers,Boolean.FALSE);
-				 System.out.print("Wich answers do you wish to select press -1 to stop");
-				 
-				 int keuze5;
-				 
-				 do {
-					 
-					 keuze5 = scan.nextInt();
-					 gekozenAnswers[keuze5 -1] = true;
-					 
-					 // TO DO SET aantal +1
-					 
-				 }while(keuze5 !=0);
-				 
-				 
-			
-			
-
-			}	
-		}
-	}
-	
-	
-	
-	public void watchResults() throws Exception {
-		SurveyDB 	surveydb = new SurveyDB();
-    	
-		List<Survey> surveys= new ArrayList<Survey>();
-		surveys = surveydb.getAllSurveys();
-		
-		System.out.println(surveys);
-	}
-	
-	
-	
-	public void makeNewSurvey() throws Exception {
-		Scanner scan = new Scanner(System.in);
-		int keuze;
-		System.out.println("1) make a new survey");
-		System.out.println("2) use a predifined survey");
-		 
-		do {
-			keuze = scan.nextInt();
-		}while(keuze > 1 || keuze < 2);
-		
-		if(keuze == 1) {
-			
-			System.out.println("Wat is the trainingsID");
-			
-			TrainingDB trainingdb = new TrainingDB();
-			List<Training> allTrainings = new ArrayList<>();
-			
-			allTrainings = trainingdb.getActiveTrainings();
-			
-			Survey  sur1= new Survey();
-			System.out.println(allTrainings);
-			int trainingIDn = scan.nextInt();
-			sur1.setTrainingsID(trainingIDn);
-			
-			System.out.println("what is the title");
-			String titlen = scan.nextLine();
-			sur1.setTitle(titlen);
-			
-			System.out.println("what is the description");
-			String description = scan.nextLine();
-			sur1.setDescription(description);
-			
-			System.out.println("Give question, press 0 to stop");
-			List<Question> allQuestions = new ArrayList<Question>();
-			Question questionnew = new Question();
-			String question ="1";
-			String answer = "1";
-			
-			List<Answer> allAnswers = new ArrayList<Answer>();
-			
-			do {
-				question = scan.nextLine();
-				questionnew.setQuestion(question);
-				
-				do {
-					System.out.println("Give Answers, press 0 to stop");
 					
-					Answer answern = new Answer();
-					answer = scan.nextLine();
-					answern.setAnswer(answer);
-					allAnswers.add(answern);
+					questionPredefined.getAntwoorden().add(anserpredefined);
+					
+				} while(answer != "0");
+				surveyPredefined.getMyListSurveysQuestions().add(questionPredefined);
 				
-				}while(answer != "0");
-				questionnew.setAntwoorden(allAnswers);
-				allQuestions.add(questionnew);
-				
-				
-			}while(question != "0");
-			sur1.setMyListSurveysQuestions(allQuestions);
-			
-			
+			} while (question != "0");
 			
 			
 			System.out.println("Wilt u deze survey aanmaken? 1) yes   2) no");
-			sur1.toString();
+			surveyPredefined.toString();
 			
 			int keuzeAanmaken = scan.nextInt();
 			
+			do {
+				keuzeAanmaken = scan.nextInt();
+			}while(keuzeAanmaken> 1 || keuzeAanmaken < 2);
+			
+			
+			
 			
 			if( keuzeAanmaken == 1) {
-				SurveyDB surveydb = new SurveyDB();
-				surveydb.addSurvey(sur1);
+				SurveyPredefinedDB surveydb = new SurveyPredefinedDB();
+				surveydb.addSurvey(surveyPredefined);
+			
+			menuSurvey(3);
 			}
-			menuSurvey(3);				
 		}
 		
-		if(keuze == 2) {
-			System.out.println("predefined Surveys");
-		
-			SurveyPredefinedDB surveydb = new SurveyPredefinedDB();
-			SurveyPredefined surveypr = new SurveyPredefined();
-			Survey survey2 = new Survey();
+		case 3: {
 			
+			SurveyPredefinedDB surveydb = new SurveyPredefinedDB();
 			List <SurveyPredefined> listsurveyPredefined = new ArrayList <SurveyPredefined>();
 			listsurveyPredefined = surveydb.getAllSurveys();
 			System.out.println(	listsurveyPredefined.toString());
 			
+			System.out.println("give the  id of the predefined survey you wish to modify");
+			Scanner scan2 = new Scanner(System.in);
+			int keuze2;
 			
-			
-			System.out.println("Wich predefined survey you want to use, give the id");
-			
-			int idPresur = scan.nextInt();
-			surveypr = surveydb.getSurveyByID(idPresur);
-			
-			survey2.setTitle(surveypr.getTitle());
-			survey2.setDescription(surveypr.getDescription());
-			survey2.setArchive(0);
+			keuze2 = scan.nextInt();
 			
 			
 			
 			
-			System.out.println("What training you want to link, give the id");
-			TrainingDB trainingdb = new TrainingDB();
-			trainingdb.getActiveTrainings();
-			
-			int idtrain = scan.nextInt();
-			survey2.setTrainingsID(idtrain);
-			
-			List<Question> questions= new ArrayList<Question>();
-		//	List<QuestionPredefined> predefinedQuestions = new ArrayList<QuestionPredefined>();
+SurveyPredefined surveyPredefined = new SurveyPredefined();
 			
 			
-		
-		
-			for(int i = 0; i < surveypr.getMyListSurveysQuestions().size();i++) {
-				Question q1 = new Question();
-				q1.setQuestion(surveypr.getMyListSurveysQuestions().get(i).getQuestion());
-				q1.setSurvey(survey2);
-				List<Answer> answers = new ArrayList<Answer>();
-				for(int j = 0; j < surveypr.getMyListSurveysQuestions().get(i).getAntwoorden().size();j++) {
+			System.out.println("What is the title");
+			String title = scan.nextLine();
+			surveyPredefined.setTitle(title );
+			
+			
+			System.out.println("What is the description");
+			String description = scan.nextLine();
+			surveyPredefined.setTitle(description);
+			
+			System.out.println("Give question, press 0 to stop");
+			
+			String question ="1";
+			String answer = "1";		
+			
+			do {
+				QuestionPredefined questionPredefined = new QuestionPredefined();
+				question = scan.nextLine();
+				questionPredefined.setSurvey(surveyPredefined);
+				questionPredefined.setQuestion(question);
 				
-					Answer a1 = new Answer();
-					a1.setAantal(0);
-					a1.setAnswer(surveypr.getMyListSurveysQuestions().get(i).getAntwoorden().get(j).getAnswer());
-					a1.setQuestion(q1);
-					answers.add(a1);
-						
-				}
-				q1.setAntwoorden(answers);
-				questions.add(q1);
 				
-			}
-	
-			survey2.setMyListSurveysQuestions(questions);
-
+				do {
+					AnswerPredefined anserpredefined = new AnswerPredefined();
+					answer= scan.nextLine(); 
+					anserpredefined.setAnswer(answer);
+					anserpredefined.setQuestion(questionPredefined);
+					
+					questionPredefined.getAntwoorden().add(anserpredefined);
+					
+				} while(answer != "0");
+				surveyPredefined.getMyListSurveysQuestions().add(questionPredefined);
+				
+			} while (question != "0");
 			
 			
-			System.out.println("Wilt u deze survey aanmaken? 1) yes   2) no");
-			survey2.toString();
+			System.out.println("Wilt u deze survey veranderen? 1) yes   2) no");
+			surveyPredefined.toString();
 			
 			int keuzeAanmaken = scan.nextInt();
 			
+			do {
+				keuzeAanmaken = scan.nextInt();
+			}while(keuzeAanmaken> 1 || keuzeAanmaken < 2);
 			
 			if( keuzeAanmaken == 1) {
-				SurveyDB surveydb2 = new SurveyDB();
-				surveydb2.addSurvey(survey2);
+			
+				surveydb.updatePredefinedSurvey(keuze2, surveyPredefined);
 			}
-			menuSurvey(3);	
+		}
+		case 4: 
+		SurveyPredefinedDB surveydb = new SurveyPredefinedDB();
+
+		List <SurveyPredefined> listsurveyPredefined = new ArrayList <SurveyPredefined>();
+		listsurveyPredefined = surveydb.getAllSurveys();
+		System.out.println(	listsurveyPredefined.toString());
+		
+		System.out.println("give the  id of the predefined survey you wish to delete");
+		
+		Scanner scan2 = new Scanner(System.in);
+		int keuze2;
+		
+		keuze2 = scan.nextInt();
+		surveydb.deletePredefinedSurvey(keuze2);
+		menuSurvey(3);
+			
+		case 5: menuSurvey(3);
+		}
+	
 	}
+	
+	
+	private void archiveSurvey(){
+		
+		SurveyDB surveyDB = new SurveyDB();
+		List<Survey> surveys = new ArrayList<Survey>();
+		surveys = surveyDB.getAllSurveys();
+	     	System.out.println(surveys);
+		
+	     	
+	     	System.out.println("Which Survey you want to archive?");
+	     	Scanner scan = new Scanner(System.in);
+			int keuze;
+			
+			keuze = scan.nextInt();
+	     	
+			surveyDB.archiveSurvey(keuze);
+			
+		}
+	}
+	
+	
+	
+	
+
+	
+	
+	
 	
 		
 	
 		
-	}
-}
+	
+
 	
 // Testcode:
 //
