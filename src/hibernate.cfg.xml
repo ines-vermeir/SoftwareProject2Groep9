@@ -37,6 +37,13 @@
 		<mapping class="logic.Survey"/> 
 		<mapping class="logic.Question"/>
 		<mapping class="logic.Training"/>
+		<mapping class="logic.Answer"/>
+		<mapping class="logic.SurveyPredefined"/>
+		<mapping class="logic.QuestionPredefined"/>
+		<mapping class="logic.AnswerPredefined"/>
+		
+		
+		
 
 		
 	</session-factory>
