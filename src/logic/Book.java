@@ -6,8 +6,6 @@ import java.util.Calendar;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.SqlResultSetMapping;
-import javax.persistence.SqlResultSetMappings;
 import javax.persistence.Table;
 
 //Deze annotation is voor uw klasse/tabel op uw database
