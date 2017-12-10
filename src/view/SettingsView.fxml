@@ -8,8 +8,8 @@
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SettingsController">
    <children>
       <Label alignment="CENTER" contentDisplay="TOP" prefHeight="454.0" prefWidth="600.0" text="Settings" />
-      <JFXButton fx:id="backup" text="Backup database" />
-      <JFXButton fx:id="passw" text="Change password" />
-      <JFXButton fx:id="colors" text="Change colors" />
+      <Button fx:id="backup" text="Backup database" />
+      <Button fx:id="passw" text="Change password" />
+      <Button fx:id="colors" text="Change colors" />
    </children>
 </VBox>
