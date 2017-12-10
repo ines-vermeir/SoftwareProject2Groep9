@@ -1,14 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<VBox fx:controller="controller.BookController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BookController">
    <children>
-      <Label alignment="CENTER" contentDisplay="TOP" prefHeight="454.0" prefWidth="600.0" text="Books" />
+      <AnchorPane prefHeight="800.0" prefWidth="1400.0">
+         <children>
+            <SplitPane layoutX="21.0" layoutY="173.0" prefHeight="600.0" prefWidth="1400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <items>
+                  <AnchorPane>
+                     <children>
+                        <TextField  fx:id="input" alignment="CENTER" layoutX="486.0" layoutY="81.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="285.0" promptText="Type topic here" />
+                     </children>
+                  </AnchorPane>
+               </items></SplitPane>
+            <Button fx:id="button" layoutX="102.0" layoutY="343.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="135.0" text="Ok" />
+            <TreeTableView fx:id="list" layoutX="326.0" layoutY="123.0" prefHeight="600.0" prefWidth="996.0">
+               <effect>
+                  <Blend mode="SCREEN" />
+               </effect></TreeTableView>
+            <Label alignment="CENTER" layoutX="558.0" layoutY="14.0" prefHeight="21.0" prefWidth="285.0" text="Link Book to Training " textAlignment="CENTER">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+            <Label layoutX="17.0" layoutY="134.0" prefHeight="52.0" prefWidth="304.0" text="Choose a training and a book and click Ok" />
+            <ChoiceBox fx:id="chosenTraining" layoutX="38.0" layoutY="269.0" prefHeight="31.0" prefWidth="261.0">
+               <effect>
+                  <Blend mode="DARKEN" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </ChoiceBox>
+            <Label alignment="CENTER" layoutX="119.0" layoutY="204.0" prefHeight="21.0" prefWidth="101.0" text="Trainings:">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="326.0" layoutY="87.0" prefHeight="21.0" prefWidth="155.0" text="Search Book by Topic: " />
+         </children>
+      </AnchorPane>
    </children>
 </VBox>
-
