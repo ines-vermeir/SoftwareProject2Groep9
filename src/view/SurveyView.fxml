@@ -5,9 +5,27 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<VBox fx:controller="controller.SurveyController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SurveyController">
    <children>
-      <Label alignment="CENTER" contentDisplay="TOP" prefHeight="454.0" prefWidth="600.0" text="Surveys" />
+      <AnchorPane prefHeight="182.0" prefWidth="1400.0">
+         <children>
+            <Button fx:id="newsurvey" onAction="#toNewSurvey" layoutX="55.0" layoutY="43.0" mnemonicParsing="false" text="new survey" />
+            <Label layoutX="23.0" layoutY="14.0" text="1. Make a new survey" />
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="428.0" prefWidth="1400.0">
+         <children>
+            <TreeTableView fx:id="list" layoutX="52.0" layoutY="44.0" prefHeight="208.0" prefWidth="574.0">
+               </TreeTableView>
+            <Label layoutX="52.0" layoutY="14.0" text="choose from predefined surveys: " />
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="250.0" prefWidth="1400.0">
+         <children>
+            <Button layoutX="56.0" layoutY="27.0" mnemonicParsing="false" text="training" />
+            <Label layoutX="21.0" text="2. check survey results" />
+            <Button layoutX="155.0" layoutY="27.0" mnemonicParsing="false" text="survey" />
+         </children>
+      </AnchorPane>
    </children>
 </VBox>

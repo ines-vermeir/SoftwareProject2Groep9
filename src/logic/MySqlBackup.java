@@ -44,7 +44,7 @@ public class MySqlBackup {
         	String port = "3306";
         	String user = "17SP2G9";
         	String password = "rtfVE254";
-        	String db = "17SP2G9";
+        	String db = "jdbc:mysql://dtsl.ehb.be/17SP2G9";
         	//String db = "jdbc:mysql://dtsl.ehb.be/17SP2G9";
         	String backupfile = "/backup/";
         	String mysqlDumpExePath = "/backup/mysqldump.exe";

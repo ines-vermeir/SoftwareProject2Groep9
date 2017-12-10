@@ -36,6 +36,7 @@ public class Navigator {
 	public static String TrainingView = "/view/TrainingView.fxml";
 	public static String BookView = "/view/BookView.fxml";
 	public static String SurveyView = "/view/SurveyView.fxml";
+	public static String SurveyViewNewSurvey = "/view/SurveyViewNewSurvey.fxml";
 	public static String CertificateView = "/view/CertificateView.fxml";
 	public static String SettingsView = "/view/SettingsView.fxml";
 	
