@@ -16,7 +16,7 @@ public class BookGoogleAPI {
 
 		@JsonProperty("title")
 		private String title;
-		
+		@JsonProperty("price")
 		private double price;
 		public double getPrice() {
 			return price;

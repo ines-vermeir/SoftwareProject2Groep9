@@ -9,8 +9,8 @@
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EmployeeController">
    <children>
       <Label stylesheets="@application.css" text="Employees" />
-      <JFXTextField fx:id="input" text="Zoek" />
+  <!--     <JFXTextField fx:id="input" text="Zoek" /> -->
       <JFXTreeTableView fx:id="table" layoutX="22.0" layoutY="23.0" prefHeight="700.0" prefWidth="900.0" />
-      <JFXButton text="New Student" />
+  <!--      <JFXButton text="New Student" /> -->
    </children>
 </VBox>
