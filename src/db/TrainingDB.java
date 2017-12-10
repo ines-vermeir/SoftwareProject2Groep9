@@ -13,7 +13,7 @@ import logic.Training;
 
 public class TrainingDB {
 	
-	private SessionFactory myFactory= null;
+	private  SessionFactory myFactory= null;
 //	private SessionFactory sessionFactory = null;
 	public TrainingDB() {
 
@@ -100,7 +100,7 @@ public Training getTraining(int trainingID) {
 }
 
 
-public ArrayList<Training> getAllTrainings(){
+public  ArrayList<Training> getAllTrainings(){
 	
 	   ArrayList<Training> list = null;
 	   Session session = myFactory.openSession();
@@ -151,7 +151,7 @@ public void updateTrainingById(int traingsID, Training training) {
 
 
 }
-public void archiveTrainingById(int traingsID) {
+public  void archiveTrainingById(int traingsID) {
 
 	Training tr = null;
 	Session session = myFactory.openSession();
@@ -186,7 +186,7 @@ public List<Training> getActiveTrainings() {
 	  return TrainingList;
 	}
 
-public List<Training> getNonActiveTrainings() {
+public  List<Training> getNonActiveTrainings() {
 	  List<Training> TrainingList = new ArrayList<Training>(); 
 	  Session session = myFactory.openSession();
 	  for (Object oneObject : session.createQuery("FROM Training where archive =1 ").getResultList()) {

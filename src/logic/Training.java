@@ -19,6 +19,8 @@ import logic.Training.Language;
 
 import java.util.Scanner;
 import db.TrainingDB;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 @Entity
 
@@ -64,6 +66,8 @@ public class Training {
 		System.out.print("  ");
 		}	
 	}
+	
+	
 	
 	// getters & setters
 	public int getTrainingID() {

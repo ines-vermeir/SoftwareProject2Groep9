@@ -13,7 +13,8 @@ public class Navigator {
 	 * 
 	 */
 
-    /**
+    public static String AddTrainingView = "/view/AddTrainingView.fxml";
+	/**
      * Convenience constants for fxml layouts managed by the navigator.
      */
 	public static String MainView    = "/view/MainView.fxml";
