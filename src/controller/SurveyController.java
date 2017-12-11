@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXTreeTableColumn;
 
 import application.Navigator;
+import db.SurveyDB;
 import db.SurveyPredefinedDB;
 import db.TestJackson;
 import javafx.beans.property.SimpleStringProperty;
@@ -16,15 +17,26 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.util.Callback;
+import logic.Answer;
+import logic.Question;
+import logic.Survey;
 import logic.SurveyPredefined;
 
 public class SurveyController implements Initializable {
+	
+	//Survey s = null;
+	//Alert alert = null;
+	//SurveyDB db = new SurveyDB();
 
 	@FXML
 	private TreeTableView<logic.SurveyPredefined> list;
@@ -32,11 +44,19 @@ public class SurveyController implements Initializable {
 	@FXML
 	private Button newsurvey;
 	
-	@FXML
+
+	
+	@FXML //functie voor button "new survey"
 	protected void toNewSurvey(ActionEvent e) {
 		Navigator.loadVista(Navigator.SurveyViewNewSurvey);
 		Navigator.loadMenuVista(Navigator.MenuSurveyActiveView);
 	}
+	
+
+//	@FXML //functie voor button "save survey"
+//	protected void toSaveSurvey(ActionEvent e) {
+//		db.addSurvey(s);
+//	}
 	
 	@Override
 	public void initialize (URL arg0, ResourceBundle arg1) {
@@ -100,6 +120,20 @@ public class SurveyController implements Initializable {
 		list.getColumns().setAll(surveyPrID, title, description);
 		list.setRoot(root);
 		list.setShowRoot(false);
+		
+		
+//		int trainingID = Integer.parseInt(t_trainingID.getText());
+//		String desc = description.getText();
+//		String ttle = t_title.getText();
+//		s = new Survey(trainingID, ttle, desc);
+//		String question = t_question.getText();
+//		Question q = new Question(question);
+//		Answer answ1 = new Answer(t_answer1.getText(), q);
+//		Answer answ2 = new Answer(t_answer2.getText(), q);
+//		Answer answ3 = new Answer(t_answer3.getText(), q);
+//		q.getAntwoorden().add(answ1);
+//		q.getAntwoorden().add(answ2);
+//		q.getAntwoorden().add(answ3);
 	}
 	
 }

@@ -145,7 +145,25 @@ public class Survey {
 		this.aantalIngevuld=0;
 	}
 	
+	public Survey(int trainingsID, String title, String description) {
+		super();
+		this.surveyID = surveyID;
+		this.trainingsID = trainingsID;
+		this.title = title;
+		this.description = description;
+		this.archive = 0;
+		this.aantalIngevuld=0;
+	}
 	
+	public Survey(int trainingsID, String title, String description, List<Question> myListSurveysQuestions) {
+		super();
+		this.trainingsID = trainingsID;
+		this.title = title;
+		this.description = description;
+		this.myListSurveysQuestions = myListSurveysQuestions;
+		this.archive = 0;
+		this.aantalIngevuld=0;
+	}
 	
 	
 	public Survey(int surveyID, int trainingsID, String title, String description, int aantalIngevuld, int archive) {
