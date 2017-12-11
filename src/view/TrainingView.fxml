@@ -21,23 +21,23 @@
             <RowConstraints maxHeight="23.0" minHeight="1.0" prefHeight="4.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="all" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#toAll" text="All" GridPane.rowIndex="1">
+            <Button fx:id="allBtn" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#toAll" text="All" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="50.0" />
                </GridPane.margin></Button>
-            <Button fx:id="passed" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#toPassed" text="Passed" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Button fx:id="passedBtn" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#toPassed" text="Passed" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="50.0" />
                </GridPane.margin></Button>
-            <Button fx:id="future" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#toFuture" text="Future" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Button fx:id="futureBtn" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#toFuture" text="Future" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="50.0" />
                </GridPane.margin></Button>
-            <Button fx:id="now" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#toNow" text="Now" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <Button fx:id="nowBtn" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#toNow" text="Now" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="50.0" />
                </GridPane.margin></Button>
-            <Button fx:id="add" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#addTraining" text="Add Training" GridPane.columnIndex="3">
+            <Button fx:id="addBtn" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#addTraining" text="Add Training" GridPane.columnIndex="3">
                <GridPane.margin>
                   <Insets left="50.0" />
                </GridPane.margin></Button>

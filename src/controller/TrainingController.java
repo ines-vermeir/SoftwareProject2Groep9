@@ -42,6 +42,7 @@ public class TrainingController implements Initializable {
 	@FXML private Button nowBtn;
 	@FXML private Button addBtn;
 
+	@FXML private TextField searchBar;
 	
 	@FXML private TableView<Training> allTrainingTable;
 	@FXML private TableView<Training> passedTrainingTable;

@@ -20,6 +20,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 import logic.Training;
 import logic.Training.Language;
 
@@ -35,47 +36,67 @@ public class addTrainingController  implements Initializable {
 	
 	@FXML private ChoiceBox<String> addLanguage;
 	
-	@FXML private Label errorAdd;
+	@FXML private Label errorMsg;
 	
 	@FXML protected void toAllTraining(ActionEvent e) {
 		Navigator.loadVista(Navigator.TrainingView);
 		Navigator.loadMenuVista(Navigator.MenuTrainingActiveView);
 	}
-	@FXML protected void checkTitle(ActionEvent e) {
+	/*@FXML protected void checkTitle(ActionEvent e) {
 		errorAdd.setVisible(true);
 		errorAdd.setText("Title is empty!");
-		if ((addTitle.getText() != null && !addTitle.getText().isEmpty())) {
+		if ((addTitle.getText() != null || !addTitle.getText().isEmpty())) {
             errorAdd.setText("Title is empty!");
-	 }
-	}
+	 	}
+	 }*/
+	
 	
 	// oplossen dat check uitgevoerd wordt
 	// training kan nog niet gesaved worden
 	@FXML protected void saveTraining(ActionEvent e) {
+		errorMsg.setText("");
 		TrainingDB tdb = new TrainingDB();
-		
-		 if ((addTitle.getText() != null && !addTitle.getText().isEmpty())) {
-	            errorAdd.setText("Title is empty!");
+		String title = null,subject= null,teacher=null,seq=null;
+		boolean check = true;
+
+		 if ((addTitle.getText()!= null && !addTitle.getText().isEmpty())) {
+			 title = addTitle.getText();
+		 }	 else {
+			 errorMsg.setText(errorMsg.getText() + "\nTitle is empty!");
+			 check = false;
 		 }
 		 if ((addSubject.getText() != null && !addSubject.getText().isEmpty())) {
-	            errorAdd.setText("Subjcet is empty!");
+			 subject = addSubject.getText();
+		 } else {
+			 errorMsg.setText(errorMsg.getText() + "\nSubject is empty!");
+			 check = false;
 		 }
 		 if ((addSeq.getText() != null && !addSeq.getText().isEmpty() )) {
-	            errorAdd.setText("Sequentility is empty!");
-		 } 
+			 seq = addSeq.getText();
+		 }  else {
+			 errorMsg.setText(errorMsg.getText() + "\nSequentility is empty!");
+			 check = false;
+		 }
 		 //check if seq number 
 		 if ((addTeacher.getText() != null && !addTeacher.getText().isEmpty() )) {
-	            errorAdd.setText("Teacher is empty!");
+			 teacher = addTeacher.getText();
+		 }else {
+			 errorMsg.setText(errorMsg.getText() + "\nTeacher is empty!");
+			 check = false;
 		 }
-		
-		 Training t = new Training (addTitle.getText(), addSubject.getText(), Language.valueOf(addLanguage.getValue()) , addTeacher.getText(), Integer.parseInt(addSeq.getText()));
+
+		 if (check == true ) {Training t = new Training (title, subject, Language.valueOf(addLanguage.getValue()) , teacher, 1, 0);
 		 tdb.insertTraining(t);
+		 Navigator.loadVista(Navigator.TrainingView);
+		 Navigator.loadMenuVista(Navigator.MenuTrainingActiveView);
+		 }
 	}
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		addLanguage.setItems(FXCollections.observableArrayList("Chinese","English", "Spanish", "Arabic", "Russian", "Portuguese" , "French","Japanese","German","Italien", "Dutch"));
-		
+		addLanguage.setValue("English");
+		}
 	}
-}
+

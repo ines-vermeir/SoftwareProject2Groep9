@@ -47,19 +47,19 @@
                         <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                      </GridPane.margin>
                   </ChoiceBox>
-                  <TextField fx:id="addTitle" GridPane.columnIndex="1">
+                  <TextField fx:id="addTitle" GridPane.columnIndex="1" GridPane.rowIndex="0">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="addSubject"  GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="addSubject" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="addSeq" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <TextField fx:id="addTeacher" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                </children>
             </GridPane>
             <Button fx:id="add" layoutX="575.0" layoutY="334.0" mnemonicParsing="false" onAction="#saveTraining" text="add" />
-            <Label fx:id="errorAdd" layoutX="357.0" layoutY="359.0" prefHeight="17.0" prefWidth="260.0" text="Error" textFill="#f00707" visible="false" />
             <Button fx:id="back" layoutX="19.0" layoutY="21.0" mnemonicParsing="false" onAction="#toAllTraining" text="Back" />
+            <Label fx:id="errorMsg" layoutX="346.0" layoutY="359.0" prefHeight="104.0" prefWidth="260.0" textFill="#f50505" />
          </children>
       </AnchorPane>
    </children>
