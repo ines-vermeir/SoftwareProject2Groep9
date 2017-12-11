@@ -25,7 +25,7 @@
                <GridPane.margin>
                   <Insets left="50.0" />
                </GridPane.margin></Button>
-            <Button fx:id="passedBtn" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#toPassed" text="Passed" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Button fx:id="passedBtn" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#addTraining" text="Passed" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="50.0" />
                </GridPane.margin></Button>

@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -28,13 +29,21 @@ public class addTrainingController  implements Initializable {
 
 	@FXML private Button add;
 	@FXML private Button back;
+	@FXML private Button addSession;
 
 	@FXML private TextField addTitle;
 	@FXML private TextField addSubject;
 	@FXML private TextField addSeq;
 	@FXML private TextField addTeacher;
+	@FXML private TextField part;
+	
+	@FXML private DatePicker addDate;
 	
 	@FXML private ChoiceBox<String> addLanguage;
+	@FXML private ChoiceBox<String> addStartHour;
+	@FXML private ChoiceBox<String> addStartMin;
+	@FXML private ChoiceBox<String> addEndHour;
+	@FXML private ChoiceBox<String> addEndMin;
 	
 	@FXML private Label errorMsg;
 	
@@ -42,17 +51,19 @@ public class addTrainingController  implements Initializable {
 		Navigator.loadVista(Navigator.TrainingView);
 		Navigator.loadMenuVista(Navigator.MenuTrainingActiveView);
 	}
-	/*@FXML protected void checkTitle(ActionEvent e) {
-		errorAdd.setVisible(true);
-		errorAdd.setText("Title is empty!");
-		if ((addTitle.getText() != null || !addTitle.getText().isEmpty())) {
-            errorAdd.setText("Title is empty!");
-	 	}
-	 }*/
+	@FXML protected void toAddTraining(ActionEvent e) {
+		Navigator.loadVista(Navigator.AddTrainingView);
+		Navigator.loadMenuVista(Navigator.MenuTrainingActiveView);
+	}
+	@FXML protected void toAddSession() {
+		Navigator.loadVista(Navigator.AddSessionView);
+		Navigator.loadMenuVista(Navigator.MenuTrainingActiveView);
+	}
 	
+	@FXML protected void saveSession(ActionEvent e) {
 	
-	// oplossen dat check uitgevoerd wordt
-	// training kan nog niet gesaved worden
+	}
+	
 	@FXML protected void saveTraining(ActionEvent e) {
 		errorMsg.setText("");
 		TrainingDB tdb = new TrainingDB();
@@ -94,8 +105,7 @@ public class addTrainingController  implements Initializable {
 
 		 if (check == true ) {Training t = new Training (title, subject, Language.valueOf(addLanguage.getValue()) , teacher, sessions, 0);
 		 tdb.insertTraining(t);
-		 Navigator.loadVista(Navigator.TrainingView);
-		 Navigator.loadMenuVista(Navigator.MenuTrainingActiveView);
+		 toAddSession();
 		 }
 	}
 	
