@@ -19,6 +19,8 @@ import logic.Training.Language;
 
 import java.util.Scanner;
 import db.TrainingDB;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 @Entity
 
@@ -44,8 +46,8 @@ public class Training {
 	@Column(name="responsible")
 	private String responsible;
 	
-	@Column(name="sequentiality")
-	private int sequentiality;
+	@Column(name="sessions")
+	private int sessions;
 	
 	@Column(name="archive")
 	private int archive;
@@ -64,6 +66,8 @@ public class Training {
 		System.out.print("  ");
 		}	
 	}
+	
+	
 	
 	// getters & setters
 	public int getTrainingID() {
@@ -90,11 +94,11 @@ public class Training {
 	public void setResponsible(String responsible) {
 		this.responsible = responsible;
 	}
-	public int getSequentiality() {
-		return sequentiality;
+	public int getSessions() {
+		return sessions;
 	}
-	public void setSequentiality(int sequentiality) {
-		this.sequentiality = sequentiality;
+	public void setSessions(int sessions) {
+		this.sessions = sessions;
 	}
 	public Language getLanguage() {
 		return language;
@@ -117,24 +121,24 @@ public class Training {
 	}
 
 	public Training(int trainingID, String title, String subject, Language language, String responsible,
-			int sequentiality) {
+			int sessions) {
 		super();
 		this.trainingID = trainingID;
 		this.title = title;
 		this.subject = subject;
 		this.language = language;
 		this.responsible = responsible;
-		this.sequentiality = sequentiality;
+		this.sessions = sessions;
 		this.archive=0;
 	}
 	
-	public Training(String title, String subject, Language language, String responsible, int sequentiality) {
+	public Training(String title, String subject, Language language, String responsible, int sessions) {
 		super();
 		this.title = title;
 		this.subject = subject;
 		this.language = language;
 		this.responsible = responsible;
-		this.sequentiality = sequentiality;
+		this.sessions = sessions;
 		this.archive=0;
 	}
 
@@ -145,30 +149,30 @@ public class Training {
 		this.subject = addTraining.subject;
 		this.language = addTraining.language;
 		this.responsible = addTraining.responsible;
-		this.sequentiality = addTraining.sequentiality;
+		this.sessions = addTraining.sessions;
 		this.archive = addTraining.archive;	
 	}
 	
-	public Training(String title, String subject, Language language, String responsible, int sequentiality,
+	public Training(String title, String subject, Language language, String responsible, int sessions,
 			int archive) {
 		super();
 		this.title = title;
 		this.subject = subject;
 		this.language = language;
 		this.responsible = responsible;
-		this.sequentiality = sequentiality;
+		this.sessions = sessions;
 		this.archive = archive;
 	}
 	
 	public Training(int trainingID, String title, String subject, Language language, String responsible,
-			int sequentiality, int archive) {
+			int sessions, int archive) {
 		super();
 		this.trainingID = trainingID;
 		this.title = title;
 		this.subject = subject;
 		this.language = language;
 		this.responsible = responsible;
-		this.sequentiality = sequentiality;
+		this.sessions = sessions;
 		this.archive = archive;
 	}
 
@@ -176,7 +180,7 @@ public class Training {
 	@Override
 	public String toString() {
 		return "Training [trainingID=" + trainingID + ", title=" + title + ", subject=" + subject + ", language="
-				+ language + ", responsible=" + responsible + ", sequentiality=" + sequentiality + "]";
+				+ language + ", responsible=" + responsible + ", sessions=" + sessions + "]";
 	}	
 	
 	
@@ -560,9 +564,9 @@ public void editTraining(int privilege) throws IOException{
 		 String responsible = scan.nextLine();
 		 uptatetraining.setResponsible(responsible);
 	
-		 System.out.print("What is the sequentiality?");
-		 int sequentiality = scan.nextInt();
-		 uptatetraining.setSequentiality(sequentiality);
+		 System.out.print("What is the sessions?");
+		 int sessions = scan.nextInt();
+		 uptatetraining.setSessions(sessions);
 	
 		 registerDB.updateTrainingById(option, uptatetraining);
 		 trainingMenu(privilege);
@@ -635,9 +639,9 @@ public void MakeNewTraining(int privilege)throws IOException {
 		 String responsible = scan.nextLine();
 		 newtraining.setResponsible(responsible);
 	
-		 System.out.print("What is the sequentiality?");
-		 int sequentiality = scan.nextInt();
-		 newtraining.setSequentiality(sequentiality);
+		 System.out.print("What is the sessions?");
+		 int sessions = scan.nextInt();
+		 newtraining.setSessions(sessions);
 	
 		 registerDB.insertTraining(newtraining);
 		 trainingMenu(privilege);

@@ -13,7 +13,8 @@ public class Navigator {
 	 * 
 	 */
 
-    /**
+    public static String AddTrainingView = "/view/AddTrainingView.fxml";
+	/**
      * Convenience constants for fxml layouts managed by the navigator.
      */
 	public static String MainView    = "/view/MainView.fxml";
@@ -36,7 +37,7 @@ public class Navigator {
 	public static String TrainingView = "/view/TrainingView.fxml";
 	public static String BookView = "/view/BookView.fxml";
 	public static String SurveyView = "/view/SurveyView.fxml";
-	public static String SurveyViewNewSurvey = "/view/SurveyViewNewSurvey.fxml";
+  public static String SurveyViewNewSurvey = "/view/SurveyViewNewSurvey.fxml";
 	public static String CertificateView = "/view/CertificateView.fxml";
 	public static String SettingsView = "/view/SettingsView.fxml";
 	
@@ -97,5 +98,4 @@ public class Navigator {
         }
     	
     }
-
 }
