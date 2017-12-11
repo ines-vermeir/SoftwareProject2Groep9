@@ -56,7 +56,8 @@ public class addTrainingController  implements Initializable {
 	@FXML protected void saveTraining(ActionEvent e) {
 		errorMsg.setText("");
 		TrainingDB tdb = new TrainingDB();
-		String title = null,subject= null,teacher=null,seq=null;
+		String title = null,subject= null,teacher=null,ses=null;
+		int sessions = 1;
 		boolean check = true;
 
 		 if ((addTitle.getText()!= null && !addTitle.getText().isEmpty())) {
@@ -72,7 +73,13 @@ public class addTrainingController  implements Initializable {
 			 check = false;
 		 }
 		 if ((addSeq.getText() != null && !addSeq.getText().isEmpty() )) {
-			 seq = addSeq.getText();
+			 ses = addSeq.getText();
+			 try {
+				 sessions = Integer.parseInt(ses);
+			 }catch( NumberFormatException numberex) {
+				 errorMsg.setText(errorMsg.getText() + "\nSession is not a number!");
+				 check = false;
+			 }
 		 }  else {
 			 errorMsg.setText(errorMsg.getText() + "\nSequentility is empty!");
 			 check = false;
@@ -85,7 +92,7 @@ public class addTrainingController  implements Initializable {
 			 check = false;
 		 }
 
-		 if (check == true ) {Training t = new Training (title, subject, Language.valueOf(addLanguage.getValue()) , teacher, 1, 0);
+		 if (check == true ) {Training t = new Training (title, subject, Language.valueOf(addLanguage.getValue()) , teacher, sessions, 0);
 		 tdb.insertTraining(t);
 		 Navigator.loadVista(Navigator.TrainingView);
 		 Navigator.loadMenuVista(Navigator.MenuTrainingActiveView);
