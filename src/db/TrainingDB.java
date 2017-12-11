@@ -136,7 +136,7 @@ public void updateTrainingById(int traingsID, Training training) {
 		 tr.setSubject(training.getSubject());
 		 tr.setLanguage(training.getLanguage());
 		 tr.setResponsible(training.getResponsible());
-		 tr.setSequentiality(training.getSequentiality());
+		 tr.setSessions(training.getSessions());
 		 tr.setArchive(0);
 		session.update(tr);
 		t.commit();
