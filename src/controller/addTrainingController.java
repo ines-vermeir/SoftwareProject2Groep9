@@ -27,7 +27,7 @@ import logic.Training.Language;
 
 public class addTrainingController  implements Initializable {
 
-	@FXML private Button add;
+	@FXML private Button save;
 	@FXML private Button back;
 	@FXML private Button addSession;
 
@@ -106,6 +106,8 @@ public class addTrainingController  implements Initializable {
 		 if (check == true ) {Training t = new Training (title, subject, Language.valueOf(addLanguage.getValue()) , teacher, sessions, 0);
 		 tdb.insertTraining(t);
 		 toAddSession();
+		 Navigator.loadVista(Navigator.AddSessionView);
+		 Navigator.loadMenuVista(Navigator.MenuTrainingActiveView);
 		 }
 	}
 	

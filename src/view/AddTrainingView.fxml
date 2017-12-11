@@ -57,7 +57,7 @@
                   <TextField fx:id="addTeacher" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                </children>
             </GridPane>
-            <Button fx:id="add" layoutX="575.0" layoutY="334.0" mnemonicParsing="false" onAction="#saveTraining" text="add" />
+            <Button fx:id="save" layoutX="575.0" layoutY="334.0" mnemonicParsing="false" onAction="#saveTraining" text="save" />
             <Button fx:id="back" layoutX="19.0" layoutY="21.0" mnemonicParsing="false" onAction="#toAllTraining" text="Back" />
             <Label fx:id="errorMsg" layoutX="346.0" layoutY="359.0" prefHeight="104.0" prefWidth="260.0" textFill="#f50505" />
          </children>
