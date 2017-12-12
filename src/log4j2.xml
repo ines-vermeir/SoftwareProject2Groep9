@@ -18,9 +18,7 @@
         <Root level="all">
      <!--   <AppenderRef ref="Console" /> -->     
       <!--  <AppenderRef ref="MyFile"/> -->
-      
-      
-   
+     
         </Root>
         
     
