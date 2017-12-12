@@ -17,11 +17,17 @@
                <items>
                   <AnchorPane>
                      <children>
-                        <TextField  fx:id="input" alignment="CENTER" layoutX="486.0" layoutY="81.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="285.0" promptText="Type topic here" />
+                        <TextField fx:id="input" alignment="CENTER" layoutX="486.0" layoutY="81.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="285.0" promptText="Type topic here" />
+                        <Button fx:id="searchB" layoutX="810.0" layoutY="81.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="110.0" text="Search" />
+                        <Label fx:id="feedback" alignment="CENTER" layoutX="49.0" layoutY="521.0" prefHeight="52.0" prefWidth="223.0" text="Label" textAlignment="CENTER" textFill="#f20000">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </items></SplitPane>
-            <Button fx:id="button" layoutX="102.0" layoutY="343.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="135.0" text="Ok" />
+            <Button fx:id="okB" layoutX="102.0" layoutY="343.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="135.0" text="Ok" />
             <TreeTableView fx:id="list" layoutX="326.0" layoutY="123.0" prefHeight="600.0" prefWidth="996.0">
                <effect>
                   <Blend mode="SCREEN" />
