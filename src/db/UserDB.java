@@ -2,6 +2,8 @@ package db;
 
 import java.util.ArrayList;
 
+import javax.persistence.Query;
+
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -128,6 +130,67 @@ public class UserDB {
 		return u;
 	}
 	
+	@SuppressWarnings("deprecation")
+	public User getUser2(String username) {
+		User u = null;
+		Session session = myFactory.openSession();
+		Transaction t = null;
+		
+		try {
+			t = session.beginTransaction();
+			@SuppressWarnings("rawTypes")
+		Query query = session.createNativeQuery("Select * from Users WHERE username = :username",User.class).setParameter("username", username);
+			u = (User) query.getSingleResult();
+			t.commit();
+		}
+		catch (HibernateException e)
+		{
+			if (t != null) t.rollback();
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+		return u;
+	}
+	
+	
+	
+	
+	
+	
+	@SuppressWarnings("deprecation")
+	public boolean userExists(String username) {
+		User u = null;
+	boolean exists = false;
+	
+		Session session = myFactory.openSession();
+		Transaction t = null;
+		try {
+			t = session.beginTransaction();
+			@SuppressWarnings("rawTypes")
+			Query query =  session.createQuery("from Users where username = :username",User.class).setParameter("username", username);
+			u = (User) query.getSingleResult();
+			if (u.getUsername() != username) {
+				exists = true;
+			}		
+		}catch (HibernateException e)
+			{
+				if (t != null) t.rollback();
+				e.printStackTrace();
+			}
+			finally
+			{
+				session.close();
+			}
+			return exists;
+	
+	}
+	
+	
+	
+	
 //	public User getUserByUsername (String username)
 //	{
 //		User u = new User();
@@ -174,6 +237,18 @@ public class UserDB {
 		}
 		return list;
 	}
+	
+	
+//	public boolean isLogin(String user, String pass) {
+//		
+//		
+//		
+//		
+//		
+//	}
+//	
+}
+	
 
 //	beter om archiveUser te gebruiken	
 //	public void deleteUser (User myUser)
@@ -197,7 +272,7 @@ public class UserDB {
 //		}
 //	}
 	
-}
+//}
 
 
 // Testcode
