@@ -17,10 +17,8 @@
     <!-- Loggerconfig levels: all,debug, fatal, trace, info, warn, error -->
         <Root level="all">
      <!--   <AppenderRef ref="Console" /> -->     
-        <AppenderRef ref="MyFile"/> 
-      
-      
-   
+      <!--  <AppenderRef ref="MyFile"/> -->
+     
         </Root>
         
     
