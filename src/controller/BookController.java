@@ -13,8 +13,11 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
@@ -36,7 +39,12 @@ public class BookController implements Initializable{
 	@FXML
 	private ChoiceBox chosenTraining;
 	
-
+   @FXML
+   private Button searchB; 
+   
+   @FXML
+   private Button okB; 
+   
 		
 	
 	
@@ -152,7 +160,8 @@ public class BookController implements Initializable{
 
 		ObservableList<BookGoogleAPI> bookList = FXCollections.observableArrayList();
 		
-		ArrayList<BookGoogleAPI> books = null;
+		
+	/*
 		//Here searchBook implementeren, voorlopig zo om te testen
 		books = (ArrayList<BookGoogleAPI>) TestJackson.getBooksByContent("php programming");
 		
@@ -167,6 +176,53 @@ public class BookController implements Initializable{
 			root.getChildren().add(item);
 			
 		}
+		*/
+		 final TreeItem<BookGoogleAPI> root = new TreeItem<BookGoogleAPI>();
+	//Search button handler
+	
+		searchB.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				if ((input.getText() != null && !input.getText().isEmpty())) {
+					
+					String zoek = input.getText();
+					ArrayList<BookGoogleAPI> books = (ArrayList<BookGoogleAPI>) TestJackson.getBooksByContent(zoek);
+					
+				       for(BookGoogleAPI book : books) {
+							
+							bookList.add(book);
+						}
+				     
+						
+						for(BookGoogleAPI  b:   bookList ) {
+							TreeItem<BookGoogleAPI> item = new TreeItem<>(b);
+							root.getChildren().add(item);
+							
+						}
+						
+						input.clear();
+						zoek = null; 
+						input.setText(null);
+						
+		            
+		        } else {
+		           //Here alert tonen of 
+		        }
+		     }
+				
+			
+			
+			
+			
+			
+			
+			
+		});
+		
+    		
+		
+		
 		
 	  list.getColumns().setAll(isbn,title,price,author,date,desc);	
 	  list.setRoot(root);
