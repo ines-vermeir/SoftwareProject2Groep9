@@ -159,35 +159,28 @@ public class BookController implements Initializable{
 		
 
 		ObservableList<BookGoogleAPI> bookList = FXCollections.observableArrayList();
+		final TreeItem<BookGoogleAPI> root= new TreeItem<BookGoogleAPI>();
 		
-		
-	/*
-		//Here searchBook implementeren, voorlopig zo om te testen
-		books = (ArrayList<BookGoogleAPI>) TestJackson.getBooksByContent("php programming");
-		
-       for(BookGoogleAPI book : books) {
-			
-			bookList.add(book);
-		}
-       final TreeItem<BookGoogleAPI> root = new TreeItem<BookGoogleAPI>();
-		
-		for(BookGoogleAPI  b:   bookList ) {
-			TreeItem<BookGoogleAPI> item = new TreeItem<>(b);
-			root.getChildren().add(item);
-			
-		}
-		*/
-		 final TreeItem<BookGoogleAPI> root = new TreeItem<BookGoogleAPI>();
+	//TODO proberen op te lossen probleem search
 	//Search button handler
 	
 		searchB.setOnAction(new EventHandler<ActionEvent>() {
-
+           
 			@Override
 			public void handle(ActionEvent arg0) {
+				//list.setRoot(null);
+				ArrayList<BookGoogleAPI> books = null;
+				for(int i=0; i< root.getChildren().size(); i++) {
+					root.getChildren().clear();
+				}
+				
+				bookList.clear();
+				
 				if ((input.getText() != null && !input.getText().isEmpty())) {
 					
+					
 					String zoek = input.getText();
-					ArrayList<BookGoogleAPI> books = (ArrayList<BookGoogleAPI>) TestJackson.getBooksByContent(zoek);
+					books = (ArrayList<BookGoogleAPI>) TestJackson.getBooksByContent(zoek);
 					
 				       for(BookGoogleAPI book : books) {
 							
@@ -204,6 +197,9 @@ public class BookController implements Initializable{
 						input.clear();
 						zoek = null; 
 						input.setText(null);
+						
+						
+						
 						
 		            
 		        } else {
@@ -223,10 +219,9 @@ public class BookController implements Initializable{
     		
 		
 		
-		
-	  list.getColumns().setAll(isbn,title,price,author,date,desc);	
-	  list.setRoot(root);
-	  list.setShowRoot(false);
+		  list.getColumns().setAll(isbn,title,price,author,date,desc);	
+		  list.setRoot(root);
+		  list.setShowRoot(false);	
 	}
 	
 }

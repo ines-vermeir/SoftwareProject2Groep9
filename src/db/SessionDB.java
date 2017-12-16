@@ -63,7 +63,7 @@ public class SessionDB {
 		}
 		finally
 		{
-			session.close();
+			//session.close();
 		}
 		return succes;
 	}
@@ -90,7 +90,7 @@ public class SessionDB {
 		}
 		finally
 		{
-			session.close();
+			//session.close();
 		}
 		return succes;
 	}
@@ -113,7 +113,7 @@ public class SessionDB {
 			e.printStackTrace();
 		} finally
 		{
-			session.close();
+			//session.close();
 		}
 		return s;
 	}
@@ -138,7 +138,7 @@ public class SessionDB {
 		}
 		finally
 		{
-			session.close();
+			//session.close();
 		}
 		return list;
 	}

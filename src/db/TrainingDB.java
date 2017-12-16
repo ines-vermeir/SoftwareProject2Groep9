@@ -195,7 +195,29 @@ public  List<Training> getNonActiveTrainings() {
 	  session.close();
 	  return TrainingList;
 	}
-
+  /////////////////////////////////////////////// 
+public void  linkBook(Training myTraining, String isbn) {
+	
+	Session session = myFactory.openSession();
+	Transaction t = null; 
+	try {
+		
+		t = session.beginTransaction();
+			@SuppressWarnings("rawtypes")
+		Query query =session.createNativeQuery("INSERT INTO Training_books VALUES (:isbn, :trainingID)");
+			query.setParameter("isbn", isbn);
+			query.setParameter("trainingID",myTraining.getTrainingID() ); 
+	        query.executeUpdate();
+		
+		t.commit();
+	}catch(HibernateException e) {
+		if(t!= null ) t.rollback();
+		e.printStackTrace();
+	}finally {
+		session.close();
+	//	sessionFactory.close();
+	}
+}
 
 
 

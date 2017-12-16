@@ -20,8 +20,7 @@ import java.util.Scanner;
 
 import javax.transaction.Transactional;
 
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.codec.digest.DigestUtils;
+
 import application.Navigator;
 import controller.MainController;
 import db.BookDAO;
@@ -53,7 +52,7 @@ import java.io.IOException;
 import controller.MainController;
 import javafx.application.Application;
 
-import org.mindrot.jbcrypt.BCrypt;
+
 
 
 public class Main extends Application {
@@ -314,7 +313,11 @@ public static Stage mainStage;
    //	System.out.println(user.toString());
     	
     	
-    launch(args);
+    	
+    	
+    	
+    	
+   launch(args);
     }
 	
 //----------------------------------------------------login functie----------------------------------------------------------------------------	
