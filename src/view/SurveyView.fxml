@@ -10,57 +10,39 @@
    <children>
       <AnchorPane prefHeight="800.0" prefWidth="1400.0">
          <children>
-            <AnchorPane layoutY="516.0" prefHeight="338.0" prefWidth="1400.0">
-               <children>           
-                  <TableView fx:id="allPredefinedSurveyTable" layoutX="68.0" layoutY="69.0" prefHeight="283.0" prefWidth="1224.0" AnchorPane.leftAnchor="68.0">
-                    <columns>
-                        <TableColumn fx:id="prsurveyIDCol" prefWidth="85.0" text="survey ID" />
-                      <TableColumn fx:id="prtitleCol" minWidth="0.0" prefWidth="316.0" text="Title" />
-                        <TableColumn fx:id="prdescriptionCol" prefWidth="766.0" text="Description" />
-                    </columns>
-                  </TableView>
-                  <Label layoutX="213.0" layoutY="-2.0" text="or choose from predefined surveys: " />
-                  <Button fx:id="newsurvey" layoutX="68.0" layoutY="-7.0" mnemonicParsing="false" onAction="#toNewSurvey" text="make new survey" />
-                  <Label layoutX="68.0" layoutY="32.0" prefHeight="21.0" prefWidth="482.0" text="Give the ID of the predefined survey you would like to add to a training:">
-                     <font>
-                        <Font name="System Italic" size="15.0" />
-                     </font>
-                  </Label>
-                  <TextField id="t_newprsurveyID" layoutX="538.0" layoutY="27.0" prefHeight="31.0" prefWidth="96.0" />
-                  <Button id="b_addprtotraining" layoutX="642.0" layoutY="27.0" mnemonicParsing="false" text="add to training" onAction="#toAddPrToTraining" />                
-               </children>
-            </AnchorPane>
-            <AnchorPane layoutY="780.0" prefHeight="221.0" prefWidth="1400.0">
-               <children>
-                  <Button id="b_newpresurvey" layoutX="67.0" layoutY="111.0" mnemonicParsing="false" text="make new predefined survey" onAction="#toNewPrSurvey" />
-               </children></AnchorPane>
-            <Label layoutX="74.0" layoutY="69.0" text="Search survey">
+            <Button id="b_checkResults" layoutX="155.0" layoutY="277.0" mnemonicParsing="false" onAction="#toCheckResults" prefHeight="38.0" prefWidth="242.0" text="check results" />
+            <Button fx:id="newsurvey" layoutX="743.0" layoutY="275.0" mnemonicParsing="false" onAction="#toNewSurvey" prefHeight="38.0" prefWidth="242.0" text="make new survey" />
+            <Button id="b_addprtotraining" layoutX="736.0" layoutY="491.0" mnemonicParsing="false" onAction="#toAddPrToTraining" prefHeight="38.0" prefWidth="242.0" text="add predefined survey to training" />
+            <Label layoutX="743.0" layoutY="414.0" prefHeight="70.0" prefWidth="229.0" text="Choose a predefined survey and add it to a training" textAlignment="CENTER" wrapText="true" />
+            <Button id="b_newpresurvey" layoutX="155.0" layoutY="491.0" mnemonicParsing="false" onAction="#toNewPrSurvey" prefHeight="38.0" prefWidth="242.0" text="make new predefined survey" />
+            <Label layoutX="768.0" layoutY="380.0" text="add predefined survey">
                <font>
                   <Font size="18.0" />
-               </font></Label>
-            <Label layoutX="74.0" layoutY="465.0" text="Make new survey">
+               </font>
+            </Label>
+            <Label layoutX="209.0" layoutY="138.0" prefHeight="27.0" prefWidth="136.0" text="Survey Results" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
-               </font></Label>
-         <AnchorPane prefHeight="382.0" prefWidth="631.0">
-               <children>
-                  <TableView fx:id="allSurveyTable" layoutX="68.0" layoutY="131.0" prefHeight="289.0" prefWidth="1224.0" AnchorPane.leftAnchor="68.0">
-                    <columns>
-                        <TableColumn fx:id="surveyIDCol" prefWidth="85.0" text="survey ID" />
-                      <TableColumn fx:id="trainingIDCol" prefWidth="102.0" text="Training ID" />
-                      <TableColumn fx:id="titleCol" minWidth="0.0" prefWidth="270.0" text="Title" />
-                        <TableColumn fx:id="descriptionCol" prefWidth="766.0" text="Description" />
-                    </columns>
-                  </TableView>
-                  <Label layoutX="79.0" layoutY="99.0" text="give the survey ID of the survey you would like to get results from: ">
-                     <font>
-                        <Font name="System Italic" size="15.0" />
-                     </font>
-                  </Label>
-                  <TextField id="t_checkresults" layoutX="508.0" layoutY="94.0" prefHeight="31.0" prefWidth="96.0" />
-                  <Button id="b_checkResults" layoutX="614.0" layoutY="94.0" mnemonicParsing="false" text="check results" onAction="#toCheckResults"/>
-               </children>
-            </AnchorPane>
+               </font>
+            </Label>
+            <Label layoutX="185.0" layoutY="380.0" text="New predefined survey">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="162.0" layoutY="414.0" prefHeight="70.0" prefWidth="229.0" text="make a new predefined survey that can later be added to several trainings" textAlignment="CENTER" wrapText="true" />
+            <Label layoutX="813.0" layoutY="138.0" text="new survey">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="163.0" layoutY="178.0" prefHeight="70.0" prefWidth="229.0" text="make a new predefined survey that can later be added to several trainings" textAlignment="CENTER" wrapText="true" />
+            <Label layoutX="743.0" layoutY="173.0" prefHeight="80.0" prefWidth="229.0" text="make a new survey and immediately add it to a training" textAlignment="CENTER" wrapText="true" />
+            <Label layoutX="524.0" layoutY="74.0" prefHeight="35.0" prefWidth="216.0" text="Manage Surveys">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

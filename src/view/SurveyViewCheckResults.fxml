@@ -5,13 +5,27 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SurveyCheckResultsController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SurveyCheckResultsController">
    <children>
-      <AnchorPane prefHeight="452.0" prefWidth="600.0">
-         <children>
-            <Label id="test" alignment="CENTER" contentDisplay="BOTTOM" layoutX="34.0" layoutY="57.0" prefHeight="21.0" prefWidth="195.0" />
-         </children>
-      </AnchorPane>
-      <Label alignment="CENTER" contentDisplay="TOP" prefHeight="454.0" prefWidth="600.0" text="Check Results" />
+     <AnchorPane prefHeight="836.0" prefWidth="1400.0">
+     <children>
+     <Button fx:id="back" layoutX="29.0" layoutY="23.0" mnemonicParsing="false" onAction="#backToSurvey" text="go back" />
+               
+                  <Label layoutX="68.0" layoutY="397.0" text="give the survey ID of the survey you would like to get results from: " />
+                  <TableView fx:id="allSurveyTable" layoutX="68.0" layoutY="131.0" prefHeight="243.0" prefWidth="775.0" AnchorPane.leftAnchor="68.0">
+                    <columns>
+                        <TableColumn fx:id="surveyIDCol1" prefWidth="85.0" text="survey ID" />
+                      <TableColumn fx:id="trainingIDCol1" prefWidth="102.0" text="Training ID" />
+                      <TableColumn fx:id="titleCol1" minWidth="0.0" prefWidth="208.0" text="Title" />
+                        <TableColumn fx:id="descriptionCol1" prefWidth="379.0" text="Description" />
+                    </columns>
+                  </TableView>
+                  <TextField fx:id="t_checkresults" layoutX="518.0" layoutY="392.0" prefHeight="31.0" prefWidth="96.0" />
+                  <Button fx:id="b_checkResults" layoutX="626.0" layoutY="392.0" mnemonicParsing="false" text="check results" onAction="#checkResult" />
+            <Label layoutX="68.0" layoutY="100.0" text="overview surveys:" />
+            <Label fx:id="errorMsg" layoutX="758.0" layoutY="392.0" prefHeight="104.0" prefWidth="260.0" textFill="#f50505" />
+            <Label fx:id="output" layoutX="74.0" layoutY="452.0" prefHeight="532.0" prefWidth="1097.0" textFill="#0d0b0b" />   
+               </children>
+            </AnchorPane>
    </children>
 </VBox>

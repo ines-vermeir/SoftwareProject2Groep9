@@ -292,7 +292,7 @@ public class SurveyNewSurveyController implements Initializable {
 	        a4a.setQuestion(q4);      
 	        Answer a4b = new Answer();
 	        a4b.setAantal(0);
-	        a4b.setAnswer(answer2b);
+	        a4b.setAnswer(answer4b);
 	        a4b.setQuestion(q4);  
 	        Answer a4c = new Answer();
 	        a4c.setAantal(0);

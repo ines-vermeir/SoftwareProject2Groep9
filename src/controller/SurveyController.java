@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -19,7 +20,10 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -32,6 +36,7 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import logic.Answer;
 import logic.Question;
@@ -45,7 +50,7 @@ public class SurveyController implements Initializable {
 	
 	@FXML private Button newsurvey;
 	@FXML private Button b_checkResults;
-	@FXML private static TextField t_checkresults;
+	
 	@FXML private Button b_newpresurvey;
 	@FXML private Button b_addprtotraining;
 	
@@ -62,12 +67,9 @@ public class SurveyController implements Initializable {
 	
 	public static Survey survey;
 	
+	@FXML private TextField t_checkresults;
 	
-	public static String getCheckResultsID()
-	{
-		String checkr = t_checkresults.getText();
-		return checkr;
-	}
+	
 	
 	@FXML //functie voor button "new survey"
 	protected void toNewSurvey(ActionEvent e) {
@@ -82,7 +84,6 @@ public class SurveyController implements Initializable {
 	}
 	@FXML //functie voor button "new pr survey"
 	protected void toCheckResults(ActionEvent e) {
-		getCheckResultsID();
 		Navigator.loadVista(Navigator.SurveyViewCheckResults);
 		Navigator.loadMenuVista(Navigator.MenuSurveyActiveView);
 	}
@@ -96,34 +97,34 @@ public class SurveyController implements Initializable {
 	@Override
 	public void initialize (URL arg0, ResourceBundle arg1) {
 		
-		//opvullen tabel voor search survey (toont alle surveys)
-		SurveyDB sdb = new SurveyDB();
-		if (sdb.getAllSurveys() != null) {
-			ObservableList<Survey> surveys = FXCollections.observableArrayList(sdb.getAllSurveys());
-		surveyIDCol.setCellValueFactory(new PropertyValueFactory<Survey, Integer>("surveyID"));
-		trainingIDCol.setCellValueFactory(new PropertyValueFactory<Survey, Integer>("trainingsID"));
-		titleCol.setCellValueFactory(new PropertyValueFactory<Survey, String>("title"));
-		descriptionCol.setCellValueFactory(new PropertyValueFactory<Survey, String>("description"));
-		FilteredList<Survey> filteredSurvey = new FilteredList<>(surveys, p -> true);
-
-		SortedList<Survey> sortedSurvey = new SortedList<>(filteredSurvey);		
-		sortedSurvey.comparatorProperty().bind(allSurveyTable.comparatorProperty());										
-		allSurveyTable.setItems(sortedSurvey);
-		}
-
-		//opvullen predefined surveys tabel (toont alle predefined surveys)
-		SurveyPredefinedDB prdb = new SurveyPredefinedDB();
-		if (prdb.getAllSurveys() != null) {
-			ObservableList<SurveyPredefined> prsurveys = FXCollections.observableArrayList(prdb.getAllSurveys());
-		prsurveyIDCol.setCellValueFactory(new PropertyValueFactory<SurveyPredefined, Integer>("surveyPrID"));
-		prtitleCol.setCellValueFactory(new PropertyValueFactory<SurveyPredefined, String>("title"));
-		prdescriptionCol.setCellValueFactory(new PropertyValueFactory<SurveyPredefined, String>("description"));
-		FilteredList<SurveyPredefined> filteredprSurvey = new FilteredList<>(prsurveys, p -> true);
-
-		SortedList<SurveyPredefined> sortedprSurvey = new SortedList<>(filteredprSurvey);		
-		sortedprSurvey.comparatorProperty().bind(allPredefinedSurveyTable.comparatorProperty());										
-		allPredefinedSurveyTable.setItems(sortedprSurvey);
-		}
+//		//opvullen tabel voor search survey (toont alle surveys)
+//		SurveyDB sdb = new SurveyDB();
+//		if (sdb.getAllSurveys() != null) {
+//			ObservableList<Survey> surveys = FXCollections.observableArrayList(sdb.getAllSurveys());
+//		surveyIDCol.setCellValueFactory(new PropertyValueFactory<Survey, Integer>("surveyID"));
+//		trainingIDCol.setCellValueFactory(new PropertyValueFactory<Survey, Integer>("trainingsID"));
+//		titleCol.setCellValueFactory(new PropertyValueFactory<Survey, String>("title"));
+//		descriptionCol.setCellValueFactory(new PropertyValueFactory<Survey, String>("description"));
+//		FilteredList<Survey> filteredSurvey = new FilteredList<>(surveys, p -> true);
+//
+//		SortedList<Survey> sortedSurvey = new SortedList<>(filteredSurvey);		
+//		sortedSurvey.comparatorProperty().bind(allSurveyTable.comparatorProperty());										
+//		allSurveyTable.setItems(sortedSurvey);
+//		}
+//
+//		//opvullen predefined surveys tabel (toont alle predefined surveys)
+//		SurveyPredefinedDB prdb = new SurveyPredefinedDB();
+//		if (prdb.getAllSurveys() != null) {
+//			ObservableList<SurveyPredefined> prsurveys = FXCollections.observableArrayList(prdb.getAllSurveys());
+//		prsurveyIDCol.setCellValueFactory(new PropertyValueFactory<SurveyPredefined, Integer>("surveyPrID"));
+//		prtitleCol.setCellValueFactory(new PropertyValueFactory<SurveyPredefined, String>("title"));
+//		prdescriptionCol.setCellValueFactory(new PropertyValueFactory<SurveyPredefined, String>("description"));
+//		FilteredList<SurveyPredefined> filteredprSurvey = new FilteredList<>(prsurveys, p -> true);
+//
+//		SortedList<SurveyPredefined> sortedprSurvey = new SortedList<>(filteredprSurvey);		
+//		sortedprSurvey.comparatorProperty().bind(allPredefinedSurveyTable.comparatorProperty());										
+//		allPredefinedSurveyTable.setItems(sortedprSurvey);
+//		}
 
 		
 	}
