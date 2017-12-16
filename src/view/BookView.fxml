@@ -19,11 +19,12 @@
                      <children>
                         <TextField fx:id="input" alignment="CENTER" layoutX="486.0" layoutY="81.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="285.0" promptText="Type topic here" />
                         <Button fx:id="searchB" layoutX="810.0" layoutY="81.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="110.0" text="Search" />
-                        <Label fx:id="feedback" alignment="CENTER" layoutX="49.0" layoutY="521.0" prefHeight="52.0" prefWidth="223.0" text="Label" textAlignment="CENTER" textFill="#f20000">
+                        <Label fx:id="feedback" alignment="CENTER" layoutX="25.0" layoutY="405.0" prefHeight="125.0" prefWidth="285.0" text="" textFill="#f20000" wrapText="true">
                            <font>
-                              <Font name="System Bold" size="16.0" />
+                              <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
+                        <ComboBox fx:id="trainingBox" layoutX="37.0" layoutY="274.0" prefHeight="31.0" prefWidth="261.0" />
                      </children>
                   </AnchorPane>
                </items></SplitPane>
@@ -38,14 +39,6 @@
                </font>
             </Label>
             <Label layoutX="17.0" layoutY="134.0" prefHeight="52.0" prefWidth="304.0" text="Choose a training and a book and click Ok" />
-            <ChoiceBox fx:id="chosenTraining" layoutX="38.0" layoutY="269.0" prefHeight="31.0" prefWidth="261.0">
-               <effect>
-                  <Blend mode="DARKEN" />
-               </effect>
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-            </ChoiceBox>
             <Label alignment="CENTER" layoutX="119.0" layoutY="204.0" prefHeight="21.0" prefWidth="101.0" text="Trainings:">
                <font>
                   <Font name="System Bold" size="15.0" />

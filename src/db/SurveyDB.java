@@ -39,21 +39,22 @@ public class SurveyDB { //extends BaseDAO{
 
 
 	private SessionFactory myFactory= null;
+	private Session session = null;
 //	private SessionFactory sessionFactory = null;
 	
 	
 	public SurveyDB(){
 
 		super();
-      myFactory = SingletonHibernate.getSessionFactory();
-	
+		myFactory = SingletonHibernate.getSessionFactory();
+		 session = myFactory.openSession();
 		// TODO Auto-generated constructor stub
 	}
 	
 	
 public  void  addSurvey(Survey mySurvey) {
 		
-		Session session = myFactory.openSession();
+		
 		Transaction t = null; 
 		try {
 			t = session.beginTransaction();
@@ -62,9 +63,6 @@ public  void  addSurvey(Survey mySurvey) {
 		}catch(HibernateException e) {
 			if(t!= null ) t.rollback();
 			e.printStackTrace();
-		}finally {
-			session.close();
-		//	sessionFactory.close();
 		}
 	}
 
@@ -73,7 +71,7 @@ public  void  addSurvey(Survey mySurvey) {
 @SuppressWarnings("deprecation")
 public  Survey  getSurvey1(int surveyID) {
 	Survey s = null;
-	Session session = myFactory.openSession();
+	
 	Transaction t = null;
 	
 	try {
@@ -86,9 +84,6 @@ public  Survey  getSurvey1(int surveyID) {
 	}catch(HibernateException e) {
 		if(t!= null ) t.rollback();
 		e.printStackTrace();
-	}finally {
-		session.close();
-	//	sessionFactory.close();
 	}
 		return s;
 		
@@ -98,7 +93,7 @@ public  Survey  getSurvey1(int surveyID) {
 // werkt
 public Survey getSurvey(int surveyID) {
 	 Survey sur = null;
-	Session session = myFactory.openSession();
+	
 	Transaction t = null; 
 	try {
 		t = session.beginTransaction();
@@ -110,9 +105,6 @@ public Survey getSurvey(int surveyID) {
 	}catch(HibernateException e) {
 		if(t!= null ) t.rollback();
 		e.printStackTrace();
-	}finally {
-		session.close();
-	//	sessionFactory.close();
 	}
 	
 	return sur;
@@ -123,7 +115,7 @@ public Survey getSurvey(int surveyID) {
 // werkt
 public  void archiveSurvey(int surveyID) {	
 	Survey sur = null;
-	Session session = myFactory.openSession();
+	
 	Transaction t = null; 
 	try {
 		t = session.beginTransaction();
@@ -138,10 +130,7 @@ public  void archiveSurvey(int surveyID) {
 		}catch(HibernateException e) {
 			if(t!= null ) t.rollback();
 			e.printStackTrace();
-		}finally {
-			session.close();
-		//	sessionFactory.close();
-		}	
+		}
 	}
 
 
@@ -149,7 +138,7 @@ public  void archiveSurvey(int surveyID) {
 public ArrayList<Survey> getAllSurveys(){
 	
 	   ArrayList<Survey> list = null;
-	   Session session = myFactory.openSession();
+	 
 		Transaction t = null; 
 		try {
 			t = session.beginTransaction();
@@ -160,10 +149,7 @@ public ArrayList<Survey> getAllSurveys(){
 		}catch(HibernateException e) {
 			if(t!= null ) t.rollback();
 			e.printStackTrace();
-		}finally {
-			session.close();
-		//	sessionFactory.close();
-		}	
+		}
 		return list;
 	}
 
@@ -173,7 +159,7 @@ public ArrayList<Survey> getAllSurveys(){
 // werkt niet
 public void  updateSurvey(Survey mySurvey) {
 
-	Session session = myFactory.openSession();
+
 	Transaction t = null; 
 	try {
 		t = session.beginTransaction();
@@ -182,9 +168,6 @@ public void  updateSurvey(Survey mySurvey) {
 	}catch(HibernateException e) {
 		if(t!= null ) t.rollback();
 		e.printStackTrace();
-	}finally {
-		session.close();
-	//	sessionFactory.close();
 	}
 	
 
@@ -194,7 +177,7 @@ public void  updateSurvey(Survey mySurvey) {
 public void updateSurveyById(int surveyID, Survey survey) {
 	
 	Survey  sur = null;
-	Session session = myFactory.openSession();
+
 	Transaction t = null; 
 	try {
 		t = session.beginTransaction();
@@ -212,10 +195,7 @@ public void updateSurveyById(int surveyID, Survey survey) {
 	}catch(HibernateException e) {
 		if(t!= null ) t.rollback();
 		e.printStackTrace();
-	}finally {
-		session.close();
-	//	sessionFactory.close();
-		}	
+	}
 	}
 }
 

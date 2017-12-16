@@ -41,7 +41,7 @@
 		<mapping class="logic.SurveyPredefined"/>
 		<mapping class="logic.QuestionPredefined"/>
 		<mapping class="logic.AnswerPredefined"/>
-		
+		<mapping class="logic.BookTraining"/>
 		
 		
 

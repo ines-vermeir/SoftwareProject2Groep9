@@ -5,10 +5,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
+import javax.swing.tree.TreeSelectionModel;
+
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
 
 import db.TestJackson;
+import db.TrainingDB;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -19,13 +24,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.control.TreeTableView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.util.Callback;
 import logic.BookGoogleAPI;
+import logic.Training;
 
 public class BookController implements Initializable{
 
@@ -37,7 +48,7 @@ public class BookController implements Initializable{
 	private TextField input;
 	
 	@FXML
-	private ChoiceBox chosenTraining;
+	private ComboBox trainingBox;
 	
    @FXML
    private Button searchB; 
@@ -45,13 +56,18 @@ public class BookController implements Initializable{
    @FXML
    private Button okB; 
    
-		
-	
+   @FXML
+   private Label feedback;
+   
+   private TreeItem<BookGoogleAPI> chosenBook;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		
+		list.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+		
+		//LIST BOEKEN
 		JFXTreeTableColumn<BookGoogleAPI,String> isbn = new JFXTreeTableColumn("ISBN");
 		isbn.setPrefWidth(150);
 
@@ -161,7 +177,7 @@ public class BookController implements Initializable{
 		ObservableList<BookGoogleAPI> bookList = FXCollections.observableArrayList();
 		final TreeItem<BookGoogleAPI> root= new TreeItem<BookGoogleAPI>();
 		
-	//TODO proberen op te lossen probleem search
+	
 	//Search button handler
 	
 		searchB.setOnAction(new EventHandler<ActionEvent>() {
@@ -178,7 +194,7 @@ public class BookController implements Initializable{
 				
 				if ((input.getText() != null && !input.getText().isEmpty())) {
 					
-					
+					feedback.setText(null);
 					String zoek = input.getText();
 					books = (ArrayList<BookGoogleAPI>) TestJackson.getBooksByContent(zoek);
 					
@@ -200,10 +216,12 @@ public class BookController implements Initializable{
 						
 						
 						
-						
+			        	
 		            
 		        } else {
-		           //Here alert tonen of 
+		          
+		        	feedback.setText("Please type a topic and press search");
+		      
 		        }
 		     }
 				
@@ -222,6 +240,94 @@ public class BookController implements Initializable{
 		  list.getColumns().setAll(isbn,title,price,author,date,desc);	
 		  list.setRoot(root);
 		  list.setShowRoot(false);	
+		  
+		  //Handle treeview selection 
+		  
+		   
+		  list.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				chosenBook = list.getSelectionModel().getSelectedItem();
+				
+			}
+			  
+			  
+			  
+		  });
+		 
+		  
+		  //Choicebox trainingen
+		  
+		  
+		  
+		  ObservableList<Training> trainingList = FXCollections.observableArrayList();
+		  
+		  
+		  TrainingDB db = new TrainingDB(); 
+		  
+		  
+		  for(Training training : db.getAllTrainings()) {
+				
+				trainingList.add(training);
+			}
+	     trainingBox.setValue(null);
+		  trainingBox.setItems(trainingList);
+		  
+		  
+		  //Handle training selection 
+		  
+		  //Link button okB
+		  
+		  
+		  okB.setOnAction(new EventHandler<ActionEvent>() {
+			
+			 
+			@Override
+			public void handle(ActionEvent arg0) {
+				
+				 String message = "";
+				
+				feedback.setText("");
+			
+				if(trainingBox.getValue()==null) {
+					message+="Please choose a training\n";
+				    
+				}
+				
+				if(chosenBook==null) {
+					message+="Please search and select a book\n";
+				}else {
+					
+					
+					db.linkBook((Training)trainingBox.getValue(), chosenBook.getValue().getIndustryIdentifiers());
+					
+					message+="A link has succesfully been made\n";
+					list.getRoot().getChildren().clear();
+				}
+
+				
+				feedback.setText(message);
+				 trainingBox.setValue(null);
+				 list.getSelectionModel().clearSelection();
+				 
+			}
+			
+			  
+			  
+			  
+			  
+			  
+			  
+		  });
+		  
+		  
+		  
+		  
+		  
+		  
+		  
 	}
 	
 }

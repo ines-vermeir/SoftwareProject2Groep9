@@ -34,6 +34,7 @@ import logic.User.Privilege;*/
 
 import java.util.Date;
 import db.SessionDB;
+import db.SingletonHibernate;
 import db.UserDB;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -72,8 +73,15 @@ public static Stage mainStage;
 		mainStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent t) {
+            	//Sluit singleton sessionFactory Hibernate hier
+            	
+            	  
+            	SingletonHibernate.closeSessionFactory();
+            	System.out.println("App wordt gesloten!");
                 Platform.exit();
                 System.exit(0);
+              
+            	
             }
         });
 		
@@ -311,9 +319,6 @@ public static Stage mainStage;
    	
    	
    //	System.out.println(user.toString());
-    	
-    	
-    	
     	
     	
     	
