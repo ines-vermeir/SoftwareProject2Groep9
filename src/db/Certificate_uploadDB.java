@@ -25,21 +25,25 @@ public Certificate_uploadDB(){
 }
 
 
-public  void  insertCertificate_upload(Certificate_upload cu) {
+public  boolean  insertCertificate_upload(Certificate_upload cu) {
 	
+	boolean check;
 	Session session = myFactory.openSession();
 	Transaction t = null; 
 	try {
 		t = session.beginTransaction();
 		session.save(cu);
 		t.commit();
+		check = true;
 	}catch(HibernateException e) {
 		if(t!= null ) t.rollback();
 		e.printStackTrace();
+		check = false;
 	}finally {
 		session.close();
 	//	sessionFactory.close();
 	}
+	return check;
 }
 
 //	public Certificate_uploadDB ()
