@@ -2,6 +2,9 @@ package logic;
 
 import java.io.BufferedReader;
 import java.io.Console;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.security.MessageDigest;
@@ -23,6 +26,7 @@ import application.Navigator;
 import controller.MainController;
 import db.BookDAO;
 import db.BookDB;
+import db.Certificate_uploadDB;
 import db.LocationDB;
 /*import db.TestGson;
 import db.TestJackson;
@@ -118,7 +122,7 @@ public static Stage mainStage;
     	
     	
     launch(args);
-
+    
 		
     }
 	
