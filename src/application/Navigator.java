@@ -37,9 +37,13 @@ public class Navigator {
 	public static String TrainingView = "/view/TrainingView.fxml";
 	public static String BookView = "/view/BookView.fxml";
 	public static String SurveyView = "/view/SurveyView.fxml";
-  public static String SurveyViewNewSurvey = "/view/SurveyViewNewSurvey.fxml";
+	public static String SurveyViewNewSurvey = "/view/SurveyViewNewSurvey.fxml";
+  	public static String SurveyViewNewPrSurvey = "/view/SurveyViewNewPrSurvey.fxml";
+  	public static String SurveyViewCheckResults = "/view/SurveyViewCheckResults.fxml";
+  	public static String SurveyViewAddPrtoTraining = "/view/SurveyViewAddPrtoTraining.fxml";
 	public static String CertificateView = "/view/CertificateView.fxml";
 	public static String SettingsView = "/view/SettingsView.fxml";
+	public static String SettingsAddUserView = "/view/SettingsAddUser.fxml";
 	
     /** The main application layout controller. */
     private static MainController mainController;

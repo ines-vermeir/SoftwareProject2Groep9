@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<ScrollPane prefHeight="1742.0" prefWidth="1296.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SurveyNewPrSurveyController">
+   <content>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+         <children>
+            <AnchorPane prefHeight="1716.0" prefWidth="1514.0">
+               <children>
+                  <AnchorPane layoutX="4.0" layoutY="355.0" prefWidth="1400.0">
+                     <children>
+                        <Label layoutX="97.0" layoutY="31.0" text="Question 1:" />
+                        <TextField fx:id="t_question1" layoutX="179.0" layoutY="26.0" prefHeight="31.0" prefWidth="1060.0" promptText="question 1" />
+                        <Label layoutX="97.0" layoutY="80.0" text="Answer a:" />
+                        <TextField fx:id="t_answer1a" layoutX="179.0" layoutY="75.0" prefHeight="31.0" prefWidth="1061.0" promptText="answer a" />
+                        <Label layoutX="97.0" layoutY="132.0" text="Answer b:" />
+                        <TextField fx:id="t_answer1b" layoutX="179.0" layoutY="127.0" prefHeight="31.0" prefWidth="1058.0" promptText="answer b" />
+                        <Label layoutX="97.0" layoutY="177.0" text="Answer c:" />
+                        <TextField fx:id="t_answer1c" layoutX="179.0" layoutY="172.0" prefHeight="31.0" prefWidth="1059.0" promptText="answer c" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutY="558.0" prefHeight="223.0" prefWidth="1400.0">
+                     <children>
+                        <Label layoutX="97.0" layoutY="31.0" text="Question 2:" />
+                        <TextField fx:id="t_question2" layoutX="179.0" layoutY="26.0" prefHeight="31.0" prefWidth="1064.0" promptText="question 2" />
+                        <Label layoutX="97.0" layoutY="80.0" text="Answer a:" />
+                        <TextField fx:id="t_answer2a" layoutX="179.0" layoutY="75.0" prefHeight="31.0" prefWidth="1060.0" promptText="answer a" />
+                        <Label layoutX="97.0" layoutY="132.0" text="Answer b:" />
+                        <TextField fx:id="t_answer2b" layoutX="179.0" layoutY="127.0" prefHeight="31.0" prefWidth="1058.0" promptText="answer a" />
+                        <Label layoutX="97.0" layoutY="177.0" text="Answer c:" />
+                        <TextField fx:id="t_answer2c" layoutX="179.0" layoutY="172.0" prefHeight="31.0" prefWidth="1057.0" promptText="answer b" />
+                     </children>
+                  </AnchorPane>
+                  <Label layoutX="100.0" layoutY="63.0" text="Make a new survey"/>
+                  <Label layoutX="102.0" layoutY="189.0" text="Title:" />
+                  <TextField fx:id="t_title" layoutX="188.0" layoutY="184.0" promptText="Give title of the survey" />
+                  <Label layoutX="101.0" layoutY="240.0" text="Description:" />
+                  <TextArea fx:id="description" layoutX="188.0" layoutY="234.0" prefHeight="71.0" prefWidth="228.0" promptText="description" />
+                  <AnchorPane layoutX="4.0" layoutY="781.0" prefHeight="235.0" prefWidth="1400.0">
+                     <children>
+                        <Label layoutX="97.0" layoutY="31.0" text="Question 3:" />
+                        <TextField fx:id="t_question3" layoutX="179.0" layoutY="26.0" prefHeight="31.0" prefWidth="1050.0" promptText="question 3" />
+                        <Label layoutX="97.0" layoutY="80.0" text="Answer a:" />
+                        <TextField fx:id="t_answer3a" layoutX="179.0" layoutY="75.0" prefHeight="31.0" prefWidth="1049.0" promptText="answer a" />
+                        <Label layoutX="97.0" layoutY="132.0" text="Answer b:" />
+                        <TextField fx:id="t_answer3b" layoutX="179.0" layoutY="127.0" prefHeight="31.0" prefWidth="1051.0" promptText="answer b" />
+                        <Label layoutX="97.0" layoutY="177.0" text="Answer c:" />
+                        <TextField fx:id="t_answer3c" layoutX="179.0" layoutY="172.0" prefHeight="31.0" prefWidth="1050.0" promptText="answer c" />
+                     </children>
+                  </AnchorPane>
+                  <Button fx:id="b_savesurvey" layoutX="82.0" layoutY="1517.0" mnemonicParsing="false" onAction="#toSaveSurvey" text="Save survey"/>
+                  <AnchorPane layoutY="1003.0" prefHeight="223.0" prefWidth="1400.0">
+                     <children>
+                        <Label layoutX="97.0" layoutY="31.0" text="Question 4:" />
+                        <TextField fx:id="t_question4" layoutX="179.0" layoutY="26.0" prefHeight="31.0" prefWidth="1052.0" promptText="question 4" />
+                        <Label layoutX="97.0" layoutY="80.0" text="Answer a:" />
+                        <TextField fx:id="t_answer4a" layoutX="179.0" layoutY="75.0" prefHeight="31.0" prefWidth="1051.0" promptText="answer a" />
+                        <Label layoutX="97.0" layoutY="132.0" text="Answer b:" />
+                        <TextField fx:id="t_answer4b" layoutX="179.0" layoutY="127.0" prefHeight="31.0" prefWidth="1051.0" promptText="answer b" />
+                        <Label layoutX="97.0" layoutY="177.0" text="Answer c:" />
+                        <TextField fx:id="t_answer4c" layoutX="179.0" layoutY="172.0" prefHeight="31.0" prefWidth="1049.0" promptText="answer c" />
+                     </children>
+                  </AnchorPane>
+                  <Label fx:id="errorMsg" layoutX="235.0" layoutY="1517.0" prefHeight="104.0" prefWidth="260.0" textFill="#f50505" />
+                  <AnchorPane layoutY="1226.0" prefHeight="223.0" prefWidth="1400.0">
+                     <children>
+                        <Label layoutX="97.0" layoutY="31.0" text="Question 5:" />
+                        <TextField fx:id="t_question5" layoutX="179.0" layoutY="26.0" prefHeight="31.0" prefWidth="1049.0" promptText="question 5" />
+                        <Label layoutX="97.0" layoutY="80.0" text="Answer a:" />
+                        <TextField fx:id="t_answer5a" layoutX="179.0" layoutY="75.0" prefHeight="31.0" prefWidth="1046.0" promptText="answer a" />
+                        <Label layoutX="97.0" layoutY="132.0" text="Answer b:" />
+                        <TextField fx:id="t_answer5b" layoutX="179.0" layoutY="127.0" prefHeight="31.0" prefWidth="1045.0" promptText="answer b" />
+                        <Label layoutX="97.0" layoutY="177.0" text="Answer c:" />
+                        <TextField fx:id="t_answer5c" layoutX="179.0" layoutY="172.0" prefHeight="31.0" prefWidth="1045.0" promptText="answer c" />
+                     </children>
+                  </AnchorPane>
+                  <Label layoutX="102.0" layoutY="334.0" prefHeight="21.0" prefWidth="441.0" text="A minimum of two questions (with 3 answers) need to be filled in"/>
+                  <Button fx:id="back" layoutX="29.0" layoutY="23.0" mnemonicParsing="false" onAction="#backToSurvey" text="go back" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>
