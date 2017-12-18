@@ -3,8 +3,6 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.jfoenix.controls.JFXButton;
-
 import application.Navigator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -59,7 +57,7 @@ public class MenuSectionController implements Initializable {
     @FXML
 	protected void toBooks(ActionEvent e) {
     	 
-		Navigator.loadVista(Navigator.BookOverview);	
+		Navigator.loadVista(Navigator.BookView);	
 		Navigator.loadMenuVista(Navigator.MenuBookActiveView);
 		
 	}

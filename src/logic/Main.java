@@ -2,6 +2,9 @@ package logic;
 
 import java.io.BufferedReader;
 import java.io.Console;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.security.MessageDigest;
@@ -20,11 +23,13 @@ import java.util.Scanner;
 
 import javax.transaction.Transactional;
 
-
+//import org.apache.commons.codec.binary.Base64;
+//import org.apache.commons.codec.digest.DigestUtils;
 import application.Navigator;
 import controller.MainController;
 import db.BookDAO;
 import db.BookDB;
+import db.Certificate_uploadDB;
 import db.LocationDB;
 /*import db.TestGson;
 import db.TestJackson;
@@ -53,7 +58,7 @@ import java.io.IOException;
 import controller.MainController;
 import javafx.application.Application;
 
-
+//import org.mindrot.jbcrypt.BCrypt;
 
 
 public class Main extends Application {
@@ -128,201 +133,7 @@ public static Stage mainStage;
     }
 
     public static void main(String[] args)   {
-    	
-//    	UserDB userdb =new UserDB();
-//    	User user = null;
-//    	 user = userdb.getUser("Michiel2");
-//    	
-//    	 
-//    	 if( user == null) {
-//    			System.out.println("error niet gevonden");	 
-//    		 
-//    	 }
-//    	 
-//    	System.out.println(user);
-    	
-//    	
-//    	UserDB userdb =new UserDB();
-//    	boolean exists = userdb.userExists("michiel");
-//    	
-//    	
-//    	System.out.println(exists);
-    	
-////    	UserDB userdb =new UserDB();
-////    	boolean exists = userdb.userExists("Michiel");
-////    	
-////    	System.out.println(exists);
-//    	
-//    	UserDB userdb =new UserDB();
-//    	User user = new User();
-//    	
-//    	user = userdb.getUser2("Michiel65");
-//    	
-//    	
-//    	if(user == null) {
-//    	System.out.println(user.toString());
-//    	}
-//    	
-//    	else {
-//        	System.out.println("error");
-//        	}
-//    	
-    	
-    	
-    	
-//		SurveyPredefined sur = new SurveyPredefined();
-//		SurveyPredefinedDB surveyDB = new SurveyPredefinedDB();
-//		
-//		sur.setTitle("title Junit");
-//		sur.setDescription("description Junit");
-//		
-//		QuestionPredefined q1 = new QuestionPredefined();
-//		q1.setSurvey(sur);
-//		q1.setQuestion("Junit vraag1");
-//		
-//		AnswerPredefined a1 = new AnswerPredefined();
-//		a1.setAnswer("Junit answer1");
-//		a1.setQuestion(q1);
-//		q1.getAntwoorden().add(a1);
-//		
-//		AnswerPredefined a2 = new AnswerPredefined();
-//		a2.setAnswer("Junit answer2");
-//		a2.setQuestion(q1);
-//		
-//		AnswerPredefined a3 = new AnswerPredefined();
-//		a3.setAnswer("Junit answer3");
-//		a3.setQuestion(q1);
-//		
-//		QuestionPredefined q2 = new QuestionPredefined();
-//		q2.setSurvey(sur);
-//		q2.setQuestion("Junit vraag2");
-//		
-//		AnswerPredefined a4 = new AnswerPredefined();
-//		a4.setAnswer("Junit answer1");
-//		a4.setQuestion(q2);
-//		q2.getAntwoorden().add(a1);
-//		
-//		AnswerPredefined a5 = new AnswerPredefined();
-//		a5.setAnswer("Junit answer1");
-//		a5.setQuestion(q2);
-//		q2.getAntwoorden().add(a5);
-//		
-//		sur.getMyListSurveysQuestions().add(q1);
-//		sur.getMyListSurveysQuestions().add(q2);
-//		
-//		System.out.println(sur.toString());
-//    	
-////		Survey sur = new Survey();
-////		SurveyDB surveyDB = new SurveyDB();
-////		
-////		sur.setTitle("title Junit");
-////		sur.setTrainingsID(1);
-////		sur.setDescription("description Junit");
-////		sur.setArchive(0);
-////		sur.setAantalIngevuld(0);
-////		
-////		Question q1 = new Question();
-////		q1.setSurvey(sur);
-////		q1.setQuestion("Junit vraag1");
-////		
-////		Answer a1 = new Answer();
-////		a1.setAantal(0);
-////		a1.setAnswer("Junit answer1");
-////		a1.setQuestion(q1);
-////		
-////		Answer a2 = new Answer();
-////		a2.setAantal(0);
-////		a2.setAnswer("Junit answer1");
-////		a2.setQuestion(q1);
-////		
-////		q1.getAntwoorden().add(a1);
-////		q1.getAntwoorden().add(a2);
-////		
-////		Question q2 = new Question();
-////		q2.setSurvey(sur);
-////		q2.setQuestion("Junit vraag2");
-////		
-////		Answer a3 = new Answer();
-////		a3.setAantal(0);
-////		a3.setAnswer("Junit answer1");
-////		a3.setQuestion(q2);
-////		
-////		Answer a4 = new Answer();
-////		a4.setAantal(0);
-////		a4.setAnswer("Junit answer2");
-////		a4.setQuestion(q2);
-////		
-////		q2.getAntwoorden().add(a3);
-////		q2.getAntwoorden().add(a4);
-////		
-////		sur.getMyListSurveysQuestions().add(q1);
-////		sur.getMyListSurveysQuestions().add(q2);
-////		
-////		System.out.println(sur.toString());
-//    	
-////    	boolean exists = false;
-////    	
-////    	
-////    	UserDB userdb = new UserDB();
-////   	    	User user1 = new User();
-////    	
-////////    	user1.setUsername("Michiel");
-////////    	user1.setPassword("azerty");
-////////    	user1.setPrivilege(Privilege.ADMIN);
-////////    	user1.setArchive(0);
-//////    	
-////// //   	System.out.println(user1.toString());
-//////    	
-////   	     user1= 	userdb.getUser("fout");
-////    	
-////    	
-////   	 if (user1.getUsername() == "Michiel")
-////   		exists = true;
-//////    
-////    	System.out.println(exists);
-//////    	
-////    	
-////    	
-//////    	Scanner scan = new Scanner(System.in);
-//////    	
-//////    	User user = null;
-//////    	
-//////    	String username = null;
-//////    	System.out.println("vul in username");
-//////    	username = scan.nextLine();
-//////    	
-//////    	String wachtwoord = null;
-//////    	System.out.println("vul in wachtwoord");
-//////    	wachtwoord = scan.nextLine();
-////// 	
-//////    UserDB userDB = new UserDB();
-//////   	user = userDB.getUser(username);
-//////   	
-//////   	
-//////   	
-//////   	System.out.println(user.toString());
-//////   	
-//////   	//
-//////   	boolean ingelogd = false;
-//////   	boolean foundName = false;
-//////   	  	
-//////   	if( username == user.getUsername() && wachtwoord == user.getPassword()) {
-//////   		ingelogd = true;
-//////   		System.out.println("juiste credentials");
-//////   	}
-//////   	
-////// 
-//////   	
-////   	
-////   	
-   	
-   	
-   	
-   //	System.out.println(user.toString());
-    	
-    	
-    	
-   launch(args);
+    launch(args);
     }
 	
 //----------------------------------------------------login functie----------------------------------------------------------------------------	
@@ -981,12 +792,12 @@ public static Stage mainStage;
 		//Location l = new Location("Nijverheidkaai","170","1080","Anderlecht","Belgium","campus Kaai","blok A, audi 1",0);
 	    System.out.println(l.toString());
 	    if (saveUpdate() ==  true) {
-			if ( db.insertLocation(l) == true) {
-				System.out.println("INSERT SUCCESFULL");
-			}
-			else {
-				System.out.println("ERROR: INSERT UNSUCCESFULL");
-			}
+//			if ( db.insertLocation(l) == true) {
+//				System.out.println("INSERT SUCCESFULL");
+//			}
+//			else {
+//				System.out.println("ERROR: INSERT UNSUCCESFULL");
+//			}
 		}
 		else {
 			System.out.println("INSERT DELETED");

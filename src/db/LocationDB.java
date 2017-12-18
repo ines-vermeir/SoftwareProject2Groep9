@@ -26,24 +26,23 @@ public class LocationDB {
 		super();
 		 session = SingletonHibernate.getSessionFactory().openSession();
 	}
-	
+
 	public boolean insertLocation(Location l)  {
 		boolean succes = false;
-		
 		Transaction t = null; 
 		
 		try {
 			t = session.beginTransaction();
 			session.save(l);
+			id = l.getID();
 			t.commit();
-			succes = true;
+			
 		}
 		catch(HibernateException e) {
 			if(t!= null ) t.rollback();
 			e.printStackTrace();
-			succes = false;
-		}
 		
+		}
 		return succes;
 		}
 
