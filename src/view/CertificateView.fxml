@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -15,6 +16,11 @@
             <Label layoutX="240.0" layoutY="211.0" prefHeight="21.0" prefWidth="100.0" text="employee ID: " />
             <TextField fx:id="t_empID" layoutX="352.0" layoutY="206.0" prefHeight="31.0" prefWidth="292.0" />
             <Button fx:id="b_save" layoutX="532.0" layoutY="341.0" mnemonicParsing="false" onAction="#saveFile" text="save certificate" />
+            <Label layoutX="378.0" layoutY="117.0" text="upload certificate">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>
