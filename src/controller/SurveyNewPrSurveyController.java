@@ -2,9 +2,7 @@ package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import application.Navigator;
-import db.SurveyDB;
 import db.SurveyPredefinedDB;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,11 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import logic.Answer;
 import logic.AnswerPredefined;
-import logic.Question;
 import logic.QuestionPredefined;
-import logic.Survey;
 import logic.SurveyPredefined;
 
 public class SurveyNewPrSurveyController implements Initializable {
@@ -67,8 +62,7 @@ public class SurveyNewPrSurveyController implements Initializable {
 				answer2a = null, answer2b = null, answer2c = null,
 				answer3a = null, answer3b = null, answer3c = null,
 				answer4a = null, answer4b = null, answer4c = null,
-				answer5a = null, answer5b = null, answer5c = null,
-				tid = null;
+				answer5a = null, answer5b = null, answer5c = null;
 		boolean check = true;
 		
 		if ((t_title.getText()!= null && !t_title.getText().isEmpty())) {
@@ -232,7 +226,7 @@ public class SurveyNewPrSurveyController implements Initializable {
 	        a2a.setQuestion(q2);
 	        q2.getAntwoorden().add(a2a);	        
 	        AnswerPredefined a2b = new AnswerPredefined();
-	        a2b.setAnswer(answer1b);
+	        a2b.setAnswer(answer2b);
 	        a2b.setQuestion(q1);
 	        q2.getAntwoorden().add(a2b);
 	        AnswerPredefined a2c = new AnswerPredefined();
@@ -288,7 +282,7 @@ public class SurveyNewPrSurveyController implements Initializable {
 		        a5a.setQuestion(q5);
 		        q5.getAntwoorden().add(a5a);	        
 		        AnswerPredefined a5b = new AnswerPredefined();
-		        a5b.setAnswer(answer4b);
+		        a5b.setAnswer(answer5b);
 		        a5b.setQuestion(q5);
 		        q5.getAntwoorden().add(a5b);
 		        AnswerPredefined a5c = new AnswerPredefined();

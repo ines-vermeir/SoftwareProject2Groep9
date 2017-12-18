@@ -1,16 +1,11 @@
 package logic;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-
-import javax.persistence.Access;
-import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,10 +17,6 @@ import javax.persistence.Table;
 import db.SurveyDB;
 import db.SurveyPredefinedDB;
 import db.TrainingDB;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-
-
 
 
 @Entity
