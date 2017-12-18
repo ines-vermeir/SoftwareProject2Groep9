@@ -1,12 +1,16 @@
 package db;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import java.util.List;
 
 import logic.Location;
+import logic.Training;
 
 
 public class SessionDB {
@@ -141,6 +145,17 @@ public class SessionDB {
 			session.close();
 		}
 		return list;
+	}
+	
+	public List<Session> getAllSessionsOfTrainingID(int tid) 
+	{
+		 List<Session> list = new ArrayList<Session>(); 
+		  Session session = myFactory.openSession();
+		  for (Object oneObject : session.createQuery("FROM Sessions where trainingID =  " + tid).getResultList()) {
+			  list.add((Session)oneObject);
+		    }
+		  session.close();
+		  return list;
 	}
 }
 

@@ -1,13 +1,21 @@
 package controller;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+
 import application.Navigator;
 import db.SessionDB;
 import db.TrainingDB;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +29,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.StringConverter;
 import logic.Session;
 import logic.Training;
 
@@ -41,7 +51,9 @@ public class PassedTrainingController implements Initializable {
 	@FXML private TableColumn <Session, Integer> idSessionTableCol;
 	@FXML private TableColumn <Session, Integer> idTrainingTableCol;
 	@FXML private TableColumn <Training, String> titleTrainingTableCol;
-	@FXML private TableColumn <Session, Date> dateTableCol;
+	@FXML private TableColumn <Session, Calendar> dateTableCol;
+	
+	final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
 	@FXML
 	protected void toAll(ActionEvent e) {
@@ -83,7 +95,9 @@ public class PassedTrainingController implements Initializable {
 				idSessionTableCol.setCellValueFactory(new PropertyValueFactory<Session, Integer>("sessionID"));
 				idTrainingTableCol.setCellValueFactory(new PropertyValueFactory<Session, Integer>("trainingID"));
 				//titleTrainingTableCol.setCellValueFactory(new PropertyValueFactory<Training, String>("title"));
-				dateTableCol.setCellValueFactory(new PropertyValueFactory<Session, Date>("date"));
+				dateTableCol.setCellValueFactory(new PropertyValueFactory<Session, Calendar>("date"));
+				//dateTableCol.setCellFactory(new ColumnFormatter<Session, Date>(new SimpleDateFormat("dd MMM YYYY")));
+		
 				
 				FilteredList<Session> session = new FilteredList<>(sessions, p -> true);
 				SortedList<Session> sessionn = new SortedList<>(session);

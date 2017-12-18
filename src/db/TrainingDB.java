@@ -23,13 +23,15 @@ public class TrainingDB {
 		// TODO Auto-generated constructor stub
 	}
 	
-public  void  insertTraining(Training myTraining) {
+public  int  insertTraining(Training myTraining) {
 		
+		int id = 0;
 		Session session = myFactory.openSession();
 		Transaction t = null; 
 		try {
 			t = session.beginTransaction();
 			session.save(myTraining);
+			id = myTraining.getTrainingID();
 			t.commit();
 		}catch(HibernateException e) {
 			if(t!= null ) t.rollback();
@@ -38,6 +40,7 @@ public  void  insertTraining(Training myTraining) {
 			session.close();
 		//	sessionFactory.close();
 		}
+		return id;
 	}
 
 

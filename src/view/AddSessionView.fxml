@@ -11,74 +11,105 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="631.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.addTrainingController">
-   <children>
-      <AnchorPane prefHeight="486.0" prefWidth="631.0">
+<ScrollPane prefHeight="900.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddSessionController">
+   <content>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
          <children>
-            <Text layoutX="19.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add sessions" wrappingWidth="102.13671875" />
-            <GridPane layoutX="14.0" layoutY="103.0" prefHeight="207.0" prefWidth="593.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.0" minWidth="10.0" prefWidth="327.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="393.0" minWidth="10.0" prefWidth="261.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+            <AnchorPane prefHeight="900.0" prefWidth="1000.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="part">
-                     <GridPane.margin>
-                        <Insets />
-                     </GridPane.margin>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" GridPane.rowIndex="1" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start time" GridPane.rowIndex="2" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="End time" textOrigin="CENTER" GridPane.rowIndex="3">
-                     <GridPane.margin>
-                        <Insets />
-                     </GridPane.margin>
-                  </Text>
-                  <TextField fx:id="part" editable="false" text="1" GridPane.columnIndex="1">
-                     <GridPane.margin>
-                        <Insets />
-                     </GridPane.margin>
-                  </TextField>
-                  <DatePicker fx:id="addDate" prefHeight="28.0" prefWidth="266.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Text layoutX="19.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add sessions" wrappingWidth="102.13671875" />
+                  <GridPane layoutX="35.0" layoutY="100.0" prefHeight="447.0" prefWidth="684.0">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.0" minWidth="10.0" prefWidth="327.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="393.0" minWidth="10.0" prefWidth="261.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <ChoiceBox fx:id="addStartHour" prefWidth="150.0" />
-                        <ChoiceBox fx:id="addStartMin" prefWidth="150.0" GridPane.columnIndex="1" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start time:" GridPane.rowIndex="1" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="End time:" textOrigin="CENTER" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Text>
+                        <DatePicker fx:id="addDate" prefHeight="28.0" prefWidth="365.0" GridPane.columnIndex="1" />
+                        <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <ChoiceBox fx:id="AmPmStart" prefWidth="150.0" GridPane.columnIndex="2" />
+                              <ChoiceBox fx:id="addStartMin" prefWidth="150.0" GridPane.columnIndex="1" />
+                              <ChoiceBox fx:id="addStartHour" prefWidth="150.0" />
+                           </children>
+                        </GridPane>
+                        <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <ChoiceBox fx:id="addEndHour" prefWidth="150.0" />
+                              <ChoiceBox fx:id="AmPmEnd" prefHeight="25.0" prefWidth="91.0" GridPane.columnIndex="2" />
+                              <ChoiceBox fx:id="addEndHour" prefWidth="150.0" />
+                              <ChoiceBox fx:id="addEndMin" prefWidth="150.0" GridPane.columnIndex="1" />
+                           </children>
+                        </GridPane>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Location:" GridPane.rowIndex="3" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Streetname:" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="4" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number:" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="5" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Postal code:" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="6" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="City:" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="7" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Country:" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="8" />
+                        <TextField fx:id="Streetname" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <TextField fx:id="Number" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <TextField fx:id="PostalCode" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <TextField fx:id="City" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <TextField fx:id="Country" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name (optional):" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="9" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Extra info (optional):" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="10" />
+                        <TextField fx:id="nameLoc" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                        <TextArea fx:id="ExtraInfo" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
                      </children>
                   </GridPane>
-                  <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <children>
-                        <ChoiceBox fx:id="addEndHour" prefWidth="150.0" />
-                        <ChoiceBox fx:id="addEndMin" prefWidth="150.0" GridPane.columnIndex="1" />
-                     </children>
-                  </GridPane>
+                  <Button fx:id="back" layoutX="19.0" layoutY="21.0" mnemonicParsing="false" onAction="#toAddTraining" text="Back" />
+                  <Label fx:id="trainingId" layoutX="156.0" layoutY="25.0" prefHeight="17.0" prefWidth="127.0" />
+                  <Text layoutX="89.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Training ID:" />
+                  <Text layoutX="365.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="part:" />
+                  <Button fx:id="addSession" layoutX="682.0" layoutY="746.0" mnemonicParsing="false" onAction="#saveSession" text="add" />
+                  <Label fx:id="part" layoutX="399.0" layoutY="25.0" prefHeight="17.0" prefWidth="86.0" />
+                  <ImageView fx:id="locationField" fitHeight="137.0" fitWidth="356.0" layoutX="363.0" layoutY="591.0" pickOnBounds="true" preserveRatio="true" />
+                  <ScrollPane layoutX="363.0" layoutY="784.0" prefViewportHeight="77.0" prefViewportWidth="356.0">
+                     <content>
+                        <Label fx:id="errorMsg" layoutX="363.0" layoutY="784.0" prefHeight="77.0" prefWidth="356.0" textFill="#f50505" />
+                     </content>
+                  </ScrollPane>
+                  <Button fx:id="checkLoc" layoutX="622.0" layoutY="557.0" mnemonicParsing="false" onAction="#checkLocation" text="Check Location" />
                </children>
-            </GridPane>
-            <Button fx:id="addSession" layoutX="575.0" layoutY="334.0" mnemonicParsing="false" onAction="#saveSession" text="add" />
-            <Button fx:id="back" layoutX="19.0" layoutY="21.0" mnemonicParsing="false" onAction="#toAddTraining" text="Back" />
-            <Label fx:id="errorMsg" layoutX="346.0" layoutY="359.0" prefHeight="104.0" prefWidth="260.0" textFill="#f50505" />
+            </AnchorPane>
          </children>
-      </AnchorPane>
-   </children>
-      
-</VBox>
+            
+      </VBox>
+   </content>
+</ScrollPane>

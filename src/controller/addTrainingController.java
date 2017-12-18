@@ -1,15 +1,11 @@
 package controller;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import application.Navigator;
 import db.TrainingDB;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,11 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.text.Text;
 import logic.Training;
 import logic.Training.Language;
 
@@ -46,6 +38,8 @@ public class addTrainingController  implements Initializable {
 	@FXML private ChoiceBox<String> addEndMin;
 	
 	@FXML private Label errorMsg;
+	
+	static int id;
 	
 	@FXML protected void toAllTraining(ActionEvent e) {
 		Navigator.loadVista(Navigator.TrainingView);
@@ -95,7 +89,6 @@ public class addTrainingController  implements Initializable {
 			 errorMsg.setText(errorMsg.getText() + "\nSequentility is empty!");
 			 check = false;
 		 }
-		 //check if seq number 
 		 if ((addTeacher.getText() != null && !addTeacher.getText().isEmpty() )) {
 			 teacher = addTeacher.getText();
 		 }else {
@@ -103,11 +96,17 @@ public class addTrainingController  implements Initializable {
 			 check = false;
 		 }
 
-		 if (check == true ) {Training t = new Training (title, subject, Language.valueOf(addLanguage.getValue()) , teacher, sessions, 0);
-		 tdb.insertTraining(t);
-		 toAddSession();
-		 Navigator.loadVista(Navigator.AddSessionView);
-		 Navigator.loadMenuVista(Navigator.MenuTrainingActiveView);
+		 if (check == true ) {
+			try {
+				Training t = new Training (title, subject, Language.valueOf(addLanguage.getValue()) , teacher, sessions, 0);
+				id = tdb.insertTraining(t);
+				toAddSession();
+							 
+			} catch (Exception e1) {
+				
+				e1.printStackTrace();
+				errorMsg.setText("Oops, something went wrong.");
+			}
 		 }
 	}
 	
@@ -116,6 +115,9 @@ public class addTrainingController  implements Initializable {
 
 		addLanguage.setItems(FXCollections.observableArrayList("Chinese","English", "Spanish", "Arabic", "Russian", "Portuguese" , "French","Japanese","German","Italien", "Dutch"));
 		addLanguage.setValue("English");
+		
 		}
+	
+	
 	}
 
