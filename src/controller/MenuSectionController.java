@@ -59,7 +59,7 @@ public class MenuSectionController implements Initializable {
     @FXML
 	protected void toBooks(ActionEvent e) {
     	 
-		Navigator.loadVista(Navigator.BookView);	
+		Navigator.loadVista(Navigator.BookOverview);	
 		Navigator.loadMenuVista(Navigator.MenuBookActiveView);
 		
 	}

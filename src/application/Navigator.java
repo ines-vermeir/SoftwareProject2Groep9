@@ -40,7 +40,7 @@ public class Navigator {
   public static String SurveyViewNewSurvey = "/view/SurveyViewNewSurvey.fxml";
 	public static String CertificateView = "/view/CertificateView.fxml";
 	public static String SettingsView = "/view/SettingsView.fxml";
-	
+	public static String  BookOverview = "/view/BookOverview.fxml";
     /** The main application layout controller. */
     private static MainController mainController;
 

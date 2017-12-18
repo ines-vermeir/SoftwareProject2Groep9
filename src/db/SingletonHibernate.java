@@ -31,11 +31,11 @@ public class SingletonHibernate {
 	}
 	
 	public static void closeSessionFactory() {
-
-		if(sessionFactory != null || !sessionFactory.isClosed()) {
+       
+		if(sessionFactory!=null) {
 			sessionFactory.close();
-		
 		}
+		
 		
 	}
 	

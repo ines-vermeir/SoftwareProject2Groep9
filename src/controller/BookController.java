@@ -59,8 +59,23 @@ public class BookController implements Initializable{
    @FXML
    private Label feedback;
    
-   private TreeItem<BookGoogleAPI> chosenBook;
-	
+   private TreeItem<BookGoogleAPI> chosenBook=null;
+   private String message = "";  
+
+  public void populateTraining() {
+	  ObservableList<Training> trainingList = FXCollections.observableArrayList();
+	  
+	  
+	  TrainingDB db = new TrainingDB(); 
+	  
+	  
+	  for(Training training : db.getAllTrainings()) {
+			
+			trainingList.add(training);
+		}
+	  
+  }
+   
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -262,6 +277,7 @@ public class BookController implements Initializable{
 		  
 		  
 		  
+		  
 		  ObservableList<Training> trainingList = FXCollections.observableArrayList();
 		  
 		  
@@ -272,46 +288,68 @@ public class BookController implements Initializable{
 				
 				trainingList.add(training);
 			}
-	     trainingBox.setValue(null);
+		  
+		  
+	   //  trainingBox.setValue(null);
 		  trainingBox.setItems(trainingList);
 		  
 		  
 		  //Handle training selection 
 		  
 		  //Link button okB
-		  
-		  
+		 
+		
 		  okB.setOnAction(new EventHandler<ActionEvent>() {
 			
 			 
 			@Override
 			public void handle(ActionEvent arg0) {
+				message="";
 				
-				 String message = "";
+				boolean valid= true;
 				
 				feedback.setText("");
-			
-				if(trainingBox.getValue()==null) {
+		
+				if( trainingBox==null || trainingBox.getValue()==null || trainingBox.getSelectionModel().isEmpty() ||trainingBox.getSelectionModel().getSelectedItem()==null ) {
 					message+="Please choose a training\n";
-				    
+					valid = false;
+					
 				}
 				
-				if(chosenBook==null) {
+				if(chosenBook==null || chosenBook.getValue()==null || chosenBook.getValue().getIndustryIdentifiers().isEmpty()) {
 					message+="Please search and select a book\n";
-				}else {
+					valid =false;
+			    }
+				
+				
+			/*
+			 
+			 				if(trainingBox.getSelectionModel().isEmpty() ||trainingBox.getSelectionModel().getSelectedItem()==null  ||  chosenBook.getValue()==null) {
+					message+="Please choose a training\nPlease search and select a book";
+				
+				
+				}
+				
+				*/
+				if(valid==true) {
 					
 					
 					db.linkBook((Training)trainingBox.getValue(), chosenBook.getValue().getIndustryIdentifiers());
-					
 					message+="A link has succesfully been made\n";
 					list.getRoot().getChildren().clear();
+					trainingBox.getSelectionModel().clearSelection();
+					chosenBook.setValue(null);
+					trainingBox.setValue(null);
+					
+					
 				}
 
 				
 				feedback.setText(message);
-				 trainingBox.setValue(null);
-				 list.getSelectionModel().clearSelection();
-				 
+				
+				list.getSelectionModel().clearSelection();
+				trainingBox.getSelectionModel().clearSelection();
+				
 			}
 			
 			  
