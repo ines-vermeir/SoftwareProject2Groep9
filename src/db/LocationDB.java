@@ -27,26 +27,27 @@ public class LocationDB {
 		  myFactory =  SingletonHibernate.getSessionFactory();
 	}
 	
-	public boolean insertLocation(Location l)  {
-		boolean succes = false;
+	public int insertLocation(Location l)  {
+		int id = 0;
 		Session session = myFactory.openSession();
 		Transaction t = null; 
 		
 		try {
 			t = session.beginTransaction();
 			session.save(l);
+			id = l.getID();
 			t.commit();
-			succes = true;
+			
 		}
 		catch(HibernateException e) {
 			if(t!= null ) t.rollback();
 			e.printStackTrace();
-			succes = false;
+		
 		}
 		finally{
 			session.close();
 		}
-		return succes;
+		return id;
 		}
 
 	public boolean updateLocation(Location l) {
