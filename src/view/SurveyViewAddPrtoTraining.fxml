@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SurveyAddPrSurveyToTraining">
+   <children>
+      <AnchorPane prefHeight="800.0" prefWidth="1400.0">
+               <children>           
+                  <TableView fx:id="allPredefinedSurveyTable" layoutX="62.0" layoutY="122.0" prefHeight="191.0" prefWidth="782.0" AnchorPane.leftAnchor="62.0">
+                    <columns>
+                        <TableColumn fx:id="prsurveyIDCol" prefWidth="85.0" text="survey ID" />
+                      	<TableColumn fx:id="prtitleCol" minWidth="0.0" prefWidth="316.0" text="Title" />
+                        <TableColumn fx:id="prdescriptionCol" prefWidth="380.0" text="Description" />
+                    </columns>
+                  </TableView>
+                  <Label layoutX="63.0" layoutY="636.0" prefHeight="21.0" prefWidth="482.0" text="Give the ID of the predefined survey you would like to add to a training:" />
+                  <TextField id="t_newprsurveyID" fx:id="t_surveyID" layoutX="545.0" layoutY="631.0" prefHeight="31.0" prefWidth="96.0" promptText="survey ID" />
+            	<Label layoutX="62.0" layoutY="94.0" prefHeight="21.0" prefWidth="368.0" text="overview predefined surveys">
+               <font>
+                  <Font name="System Italic" size="15.0" />
+               </font>
+            	</Label>  
+            	<TableView fx:id="allTrainingTable" layoutX="63.0" layoutY="400.0" prefHeight="191.0" prefWidth="782.0" AnchorPane.leftAnchor="63.0">
+              		<columns>
+                  		<TableColumn fx:id="idTableCol" prefWidth="40.0" text="ID" />
+                		<TableColumn fx:id="titleTableCol" prefWidth="180.0" text="Title" />
+                		<TableColumn fx:id="subjectTableCol" minWidth="0.0" prefWidth="130.0" text="Subject" />
+                  		<TableColumn fx:id="langTableCol" prefWidth="130.0" text="Language " />
+                  		<TableColumn fx:id="teacherTableCol" prefWidth="130.0" text="Teacher" />
+              		</columns>
+            	</TableView>
+            	<Label layoutX="62.0" layoutY="368.0" prefHeight="21.0" prefWidth="368.0" text="overview trainings">
+               	<font>
+                  	<Font name="System Italic" size="15.0" />
+               	</font>
+            	</Label>
+            	<Label layoutX="63.0" layoutY="673.0" prefHeight="21.0" prefWidth="482.0" text="Give the ID of the training you would like to add the survey to:" />
+            	<TextField fx:id="t_trainingID" layoutX="488.0" layoutY="668.0" prefHeight="31.0" prefWidth="96.0" promptText="traning ID" />
+            	<Button fx:id="add" layoutX="62.0" layoutY="729.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="205.0" text="add survey to training" onAction="#addToTraining" />
+            	<Label layoutX="360.0" layoutY="51.0" text="Add predefined survey to training" />   
+            	<Label fx:id="errorMsg" layoutX="323.0" layoutY="729.0" prefHeight="104.0" prefWidth="260.0" textFill="#f50505" />           
+         <Button fx:id="back" layoutX="24.0" layoutY="22.0" mnemonicParsing="false" onAction="#backToSurvey" text="go back" />
+         </children>
+     </AnchorPane>      
+   </children>
+</VBox>

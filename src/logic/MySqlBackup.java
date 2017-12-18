@@ -39,18 +39,19 @@ public class MySqlBackup {
      */
     public boolean backupDatabase() {
         try {
-        	String host = "localhost";
+        	String host = "DT-SRV-DT5";
+        	//String host = "jdbc:mysql://dtsl.ehb.be";
         	String port = "3306";
         	String user = "17SP2G9";
         	String password = "rtfVE254";
-        	String db = "jdbc:mysql://dtsl.ehb.be/17SP2G9";
+        	String db = "17SP2G9";
         	//String db = "jdbc:mysql://dtsl.ehb.be/17SP2G9";
         	String backupfile = "/backup/";
         	String mysqlDumpExePath = "/backup/mysqldump.exe";
         	
         	
             // Get MySQL DUMP data
-            String dump = getServerDumpData();
+            String dump = getServerDumpData(host, port, user, password, db, mysqlDumpExePath);
             //check the backup dump
             if (status) {
                 byte[] data = dump.getBytes();
@@ -84,13 +85,8 @@ public class MySqlBackup {
         return status;
     }
 
-    private String getServerDumpData() {
-    	String host = "localhost";
-    	String port = "3306";
-    	String user = "17SP2G9";
-    	String password = "rtfVE254";
-    	String db = "jdbc:mysql://dtsl.ehb.be/17SP2G9";
-    	String mysqlDumpExePath = "/backup/mysqldump.exe";
+    private String getServerDumpData(String host, String port, String user, String password, String db, String mysqlDumpExePath) {
+    	
     	StringBuilder dumpdata = new StringBuilder();
         String execlient = "";
         try {
