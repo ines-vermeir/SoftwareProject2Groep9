@@ -42,11 +42,11 @@ public class Navigator {
   	public static String SurveyViewAddPrtoTraining = "/view/SurveyViewAddPrtoTraining.fxml";
 	public static String CertificateView = "/view/CertificateView.fxml";
 	public static String SettingsView = "/view/SettingsView.fxml";
+	public static String  BookOverview = "/view/BookOverview.fxml";
 	public static String PassedTrainingView = "/view/PassedTrainingView.fxml";
 	public static String AddSessionView ="../view/AddSessionView.fxml";
 	public static String AddTrainingView = "/view/AddTrainingView.fxml";
 	public static String SettingsAddUserView = "/view/SettingsAddUser.fxml";
-	
     /** The main application layout controller. */
     private static MainController mainController;
 

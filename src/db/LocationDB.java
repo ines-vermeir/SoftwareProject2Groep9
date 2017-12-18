@@ -20,16 +20,15 @@ import logic.Location;
 
 
 public class LocationDB {
-	private SessionFactory myFactory =  null;
+	private Session session =  null;
 	
 	public LocationDB() {
 		super();
-		  myFactory =  SingletonHibernate.getSessionFactory();
+		 session = SingletonHibernate.getSessionFactory().openSession();
 	}
-	
-	public int insertLocation(Location l)  {
-		int id = 0;
-		Session session = myFactory.openSession();
+
+	public boolean insertLocation(Location l)  {
+		boolean succes = false;
 		Transaction t = null; 
 		
 		try {
@@ -44,15 +43,12 @@ public class LocationDB {
 			e.printStackTrace();
 		
 		}
-		finally{
-			session.close();
-		}
-		return id;
+		return succes;
 		}
 
 	public boolean updateLocation(Location l) {
 		boolean succes = false;
-		Session session = myFactory.openSession();
+		
 		Transaction t = null; 
 		
 		try {
@@ -66,16 +62,14 @@ public class LocationDB {
 			e.printStackTrace();
 			succes = false;
 		}
-		finally{
-			session.close();
-		}
+		
 		return succes;
 		
 	}
 
 	public Location getLocationById(int id) {
 		Location l = null;
-		Session session = myFactory.openSession();
+		
 		Transaction t = null; 
 		
 		try {
@@ -87,15 +81,13 @@ public class LocationDB {
 			if(t!= null ) t.rollback();
 			e.printStackTrace();
 		}
-		finally{
-			session.close();
-		}
+		
 		return l;
 	}
 	
 	public ArrayList<Location> getAllLocations(int id) {
 		ArrayList <Location> l = null;
-		Session session = myFactory.openSession();
+		
 		Transaction t = null; 
 		
 		try {
@@ -107,9 +99,7 @@ public class LocationDB {
 			if(t!= null ) t.rollback();
 			e.printStackTrace();
 		}
-		finally{
-			session.close();
-		}
+		
 		return l;
 	}
 	}
