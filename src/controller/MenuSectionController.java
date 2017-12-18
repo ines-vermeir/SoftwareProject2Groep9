@@ -3,8 +3,6 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.jfoenix.controls.JFXButton;
-
 import application.Navigator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

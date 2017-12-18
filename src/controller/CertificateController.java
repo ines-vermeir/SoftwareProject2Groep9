@@ -32,7 +32,7 @@ public class CertificateController implements Initializable {
 	{
 		t_label.setText("");
 		String tid;
-		int empID;
+		int empID = -1;
 		byte[] bFile = null;
 		boolean check = true;
 		if ((t_empID.getText()!= null && !t_empID.getText().isEmpty())) {
@@ -74,7 +74,7 @@ public class CertificateController implements Initializable {
 			if (bFile != null)
 			{
 				Certificate_upload cu = new Certificate_upload();
-				cu.setEmployeeID(123);
+				cu.setEmployeeID(empID);
 				cu.setFile(bFile);		
 				Certificate_uploadDB db = new Certificate_uploadDB();
 				if (db.insertCertificate_upload(cu) == true)
