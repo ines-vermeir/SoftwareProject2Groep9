@@ -93,7 +93,7 @@ public class LocationDB {
 		return l;
 	}
 	
-	public ArrayList<Location> getAllLocations(int id) {
+	public ArrayList<Location> getAllLocations() {
 		ArrayList <Location> l = null;
 		Session session = myFactory.openSession();
 		Transaction t = null; 

@@ -100,8 +100,7 @@ public class addTrainingController  implements Initializable {
 			try {
 				Training t = new Training (title, subject, Language.valueOf(addLanguage.getValue()) , teacher, sessions, 0);
 				id = tdb.insertTraining(t);
-				toAddSession();
-							 
+				toAddSession(); 
 			} catch (Exception e1) {
 				
 				e1.printStackTrace();

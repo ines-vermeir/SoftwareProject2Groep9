@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TrainingDetailsController">
+   <children>
+      <AnchorPane prefHeight="500.0" prefWidth="1073.0">
+         <children>
+            <GridPane layoutX="23.0" layoutY="72.0" prefHeight="113.0" prefWidth="712.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.0" minWidth="10.0" prefWidth="300.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="393.0" minWidth="10.0" prefWidth="300.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="393.0" minWidth="10.0" prefWidth="300.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="393.0" minWidth="10.0" prefWidth="300.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Datails Training: " wrappingWidth="102.13671875" />
+                  <Label fx:id="trainingId" prefHeight="17.0" prefWidth="127.0" GridPane.columnIndex="1" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Title:" wrappingWidth="40.44140625" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <TextField fx:id="titleTraining" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Subject:" wrappingWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <TextField fx:id="subjectTraining" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Language:" wrappingWidth="88.849609375" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <ChoiceBox fx:id="LanguageTraining" prefHeight="25.0" prefWidth="178.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Teacher:" wrappingWidth="103.13671875" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <TextField fx:id="teacherTraining" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Survey added:" wrappingWidth="118.63671875" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <ChoiceBox fx:id="survey" prefHeight="25.0" prefWidth="186.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+               </children>
+            </GridPane>
+            <Button fx:id="back" layoutX="19.0" layoutY="21.0" mnemonicParsing="false" onAction="#toAllTraining" text="Back" />
+            <ImageView fx:id="locationField" fitHeight="100.0" fitWidth="316.0" layoutX="735.0" layoutY="531.0" pickOnBounds="true" preserveRatio="true" />
+            <ScrollPane fx:id="errorPane" layoutX="95.0" layoutY="537.0" prefHeight="67.0" prefViewportHeight="67.0" prefViewportWidth="248.0" prefWidth="323.0">
+               <content>
+                  <Label fx:id="errorMsg" alignment="TOP_LEFT" prefHeight="65.0" prefWidth="282.0" textFill="#f50505" />
+               </content>
+            </ScrollPane>
+            <GridPane fx:id="SessionPane" layoutX="418.0" layoutY="201.0" prefHeight="325.0" prefWidth="632.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TextArea fx:id="ExtraInfo" prefHeight="16.0" prefWidth="316.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Extra info (optional):" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="11" />
+                  <TextField fx:id="nameLoc" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name (optional):" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="10" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Country:" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="9" />
+                  <TextField fx:id="Country" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="City:" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="8" />
+                  <TextField fx:id="City" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Postal code:" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="7" />
+                  <TextField fx:id="PostalCode" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number:" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="6" />
+                  <TextField fx:id="Number" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Streetname:" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="5" />
+                  <TextField fx:id="Streetname" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Location:" GridPane.rowIndex="4" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="End time:" textOrigin="CENTER" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Text>
+                  <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <ChoiceBox fx:id="AmPmEnd" prefHeight="25.0" prefWidth="91.0" GridPane.columnIndex="2" />
+                        <ChoiceBox fx:id="addEndMin" prefWidth="150.0" GridPane.columnIndex="1" />
+                        <ChoiceBox fx:id="addEndHour" prefWidth="150.0" />
+                     </children>
+                  </GridPane>
+                  <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <ChoiceBox fx:id="AmPmStart" prefWidth="150.0" GridPane.columnIndex="2" />
+                        <ChoiceBox fx:id="addStartMin" prefWidth="150.0" GridPane.columnIndex="1" />
+                        <ChoiceBox fx:id="addStartHour" prefWidth="150.0" />
+                     </children>
+                  </GridPane>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start time:" GridPane.rowIndex="2" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Session ID:" wrappingWidth="129.05859375" />
+                  <Label fx:id="sessionId" prefHeight="17.0" prefWidth="130.0" GridPane.columnIndex="1" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Text>
+                  <DatePicker fx:id="addDate" prefHeight="28.0" prefWidth="365.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="existLoc" prefHeight="25.0" prefWidth="367.0" promptText="Existing Location" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+               </children>
+            </GridPane>
+            <TableView fx:id="sessionTable" layoutX="14.0" layoutY="201.0" prefHeight="327.0" prefWidth="400.0">
+              <columns>
+                <TableColumn fx:id="sesionIdCol" prefWidth="100.0" text="Session ID" />
+                <TableColumn fx:id="dateCol" prefWidth="100.0" text="Date " />
+                  <TableColumn fx:id="starttimeCol" prefWidth="100.0" text="Start time" />
+                  <TableColumn fx:id="endtimeCol" prefWidth="100.0" text="End time" />
+              </columns>
+            </TableView>
+            <Button fx:id="update" layoutX="23.0" layoutY="579.0" mnemonicParsing="false" onAction="#updateFunct" text="Update" />
+         </children>
+      </AnchorPane>
+   </children>
+      
+      </VBox>
