@@ -785,12 +785,12 @@ public static Stage mainStage;
 		//Location l = new Location("Nijverheidkaai","170","1080","Anderlecht","Belgium","campus Kaai","blok A, audi 1",0);
 	    System.out.println(l.toString());
 	    if (saveUpdate() ==  true) {
-			if ( db.insertLocation(l) == true) {
-				System.out.println("INSERT SUCCESFULL");
-			}
-			else {
-				System.out.println("ERROR: INSERT UNSUCCESFULL");
-			}
+//			if ( db.insertLocation(l) == true) {
+//				System.out.println("INSERT SUCCESFULL");
+//			}
+//			else {
+//				System.out.println("ERROR: INSERT UNSUCCESFULL");
+//			}
 		}
 		else {
 			System.out.println("INSERT DELETED");

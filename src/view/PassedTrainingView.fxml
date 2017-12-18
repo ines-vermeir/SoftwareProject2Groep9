@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="631.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PassedTrainingController">
+   <children>
+      <GridPane alignment="TOP_CENTER" prefHeight="77.0" prefWidth="631.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="32.0" minHeight="5.0" prefHeight="29.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="23.0" minHeight="1.0" prefHeight="4.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="allBtn" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#toAll" text="All" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="50.0" />
+               </GridPane.margin></Button>
+            <Button fx:id="passedBtn" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#toPassed" text="Passed" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="50.0" />
+               </GridPane.margin></Button>
+            <Button fx:id="futureBtn" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#toFuture" text="Future" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="50.0" />
+               </GridPane.margin></Button>
+            <Button fx:id="nowBtn" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#toNow" text="Now" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="50.0" />
+               </GridPane.margin></Button>
+            <Button fx:id="addBtn" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#addTraining" text="Add Training" GridPane.columnIndex="3">
+               <GridPane.margin>
+                  <Insets left="50.0" />
+               </GridPane.margin></Button>
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </GridPane>
+      <TextField fx:id="searchBar" promptText="zoek" />
+  
+      <AnchorPane prefHeight="382.0" prefWidth="631.0">
+         <children>
+            <TableView fx:id="passedTrainingTable" layoutX="9.0" layoutY="12.0" prefHeight="364.0" prefWidth="613.0" AnchorPane.leftAnchor="9.0">
+              <columns>
+                  <TableColumn fx:id="idSessionTableCol" prefWidth="40.0" text="ID" />
+                <TableColumn fx:id="idTrainingTableCol" prefWidth="180.0" text="Title" />
+                <TableColumn fx:id="titleTrainingTableCol" minWidth="0.0" prefWidth="130.0" text="Subject" />
+                  <TableColumn fx:id="dateTableCol" prefWidth="130.0" text="Language " />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
