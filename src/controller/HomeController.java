@@ -11,6 +11,7 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
@@ -20,7 +21,9 @@ import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+import db.SessionDB;
 import db.TestJackson;
+import db.TrainingDB;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
@@ -33,31 +36,54 @@ import javafx.fxml.Initializable;
 import javafx.util.Callback;
 import logic.BookGoogleAPI;
 import logic.Employee;
+import logic.Session;
+import logic.Training;
 
 public class HomeController implements Initializable {
 
-	@FXML
-	private TreeTableView<logic.Employee> table;
+	@FXML private TreeTableView<logic.Employee> table;	
+	@FXML private JFXTextField input;
 	
-	
-	
-	@FXML
-	private JFXTextField input;
-	
-	@FXML
-	private Button b_trainings;
-	
-	@FXML
-	private Button b_certificates;
+	@FXML private Button b_trainings;	
+	@FXML private Button b_certificates;
+	@FXML private Label l_certificate;
+	@FXML private Label l_training;
+	@FXML private Label errorMsg;
 	
 	private TreeItem<logic.Employee> chosenEmployee=null;
-	private int empID;
+	private int empID = 0;
 	
 	@FXML
 	protected void showTrainings()
 	{
-		
-		
+		l_training.setText("");
+		SessionDB db = new SessionDB();
+		ArrayList<Integer> trainingIDs = new ArrayList<Integer>();
+		ArrayList<Training> allTrainings = new ArrayList<Training>();
+		int trainingID;
+		TrainingDB dbt = new TrainingDB();
+		ArrayList<Session> allSessions = db.getAllSessions();
+		boolean check = true;
+		for (Session s: allSessions)	{
+			trainingID = s.getTrainingID();
+			for (int i : s.getStudentsEnrolled()) {
+				if (i == empID)	{
+					for (int j : trainingIDs) {
+						if (j == trainingID) {
+							check = false;
+						}
+					}if (check == true)	{
+						trainingIDs.add(trainingID);
+					}					
+				}
+			}
+		}
+		for (int k : trainingIDs){
+			allTrainings.add(dbt.getTraining(k));
+		}
+		for (Training t: allTrainings) {
+			l_training.setText(l_training.getText() + "\nID: " + t.getTrainingID() + " - title: " + t.getTitle());
+		}		
 	}
 	
 	

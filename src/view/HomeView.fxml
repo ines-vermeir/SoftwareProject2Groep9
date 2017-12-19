@@ -22,8 +22,11 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button fx:id="b_trainings" layoutX="354.0" layoutY="600.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="204.0" text="overview all training" onAction="#showTrainings"/>
+            <Button fx:id="b_trainings" layoutX="354.0" layoutY="600.0" mnemonicParsing="false" onAction="#showTrainings" prefHeight="31.0" prefWidth="204.0" text="overview all training" />
             <Button fx:id="b_certificates" layoutX="811.0" layoutY="600.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="204.0" text="overview certificates" />
+            <Label fx:id="l_certificate" layoutX="813.0" layoutY="649.0" prefHeight="318.0" prefWidth="405.0" />
+            <Label fx:id="l_training" layoutX="152.0" layoutY="649.0" prefHeight="318.0" prefWidth="405.0" />
+            <Label fx:id="errorMsg" layoutX="570.0" layoutY="605.0" prefHeight="363.0" prefWidth="222.0" />
          </children>
       </AnchorPane>
   <!--      <JFXButton text="New Student" /> -->
