@@ -67,7 +67,7 @@ public class TestJackson {
 	
 
 		
-		public static ArrayList<BookGoogleAPI> getBooksByContent(String topic)  {
+	/*	public static ArrayList<BookGoogleAPI> getBooksByContent(String topic)  {
 		//BookApi b = new BookApi();
 			logger.info("Beginnen getBooksByContent methode om Boeken te zoeken ");
 			String	newTopic = topic.replaceAll(" ", "+");
@@ -116,15 +116,9 @@ public class TestJackson {
 			 
 			  myBook.setPublishedDate(node.get("volumeInfo").path("publishedDate").asText());
 			  myBook.setDescription(node.get("volumeInfo").path("description").asText());
-		/*	  if(node.get("volumeInfo").path("authors").isNull()) {
-				  //omdat het boek geen auteurs heeft
-				  listAuthors= new ArrayList<String>();
-				  listAuthors.add("Unknown authors");
-				
-			  }
 			  
 			  
-		*/
+		
 			  for(JsonNode author :node.get("volumeInfo").path("authors")) {
 				 
 				  listAuthors.add(author.asText());
@@ -162,18 +156,166 @@ public class TestJackson {
 	  
 	  logger.info("Er wordt een list teruggegeven ");
 	  return list;
-	  
-	  
-		
-		
-		
-
-		
-		
-			
+	  		
 		
 	}
+	*/
+
+		public static ArrayList<BookGoogleAPI> getBooksByContent(String topic)  {
+		//BookApi b = new BookApi();
+			logger.info("Beginnen getBooksByContent methode om Boeken te zoeken ");
+			if(topic.equals("")) {
+				return null;
+			}
+			String	newTopic = topic.replaceAll(" ", "+");
+		URL jsonUrl=null;
+		try {
+			jsonUrl = new URL(
+				
+				//"https://www.googleapis.com/books/v1/volumes?q=" + topic);
+					//"https://www.googleapis.com/books/v1/volumes?q=" + topic+"&maxResults=40&filter=full");
+"https://www.googleapis.com/books/v1/volumes?q=" + newTopic+"&maxResults=40");
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.error("Error bij lezen van URL "+ e.getMessage());
+		}
+		mapper = new ObjectMapper(); 
+		ArrayList<BookGoogleAPI> list = new ArrayList<BookGoogleAPI>();
+		BookGoogleAPI myBook =null;
+	  JsonNode root=null;
+	try {
+		root = mapper.readTree(jsonUrl);
+	} catch (IOException e) {
+		logger.error("Error bij mappen van de Json rootnode  "+ e.getMessage());
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	  //	  JsonNode item = root.path("items");
+	  JsonNode arrayItem = root.get("items");
 	
+//	  JsonNode identifier = volumeInfo.get("industryIdentifiers");
+//	  JsonNode author = volumeInfo.get("authors");
+//	  JsonNode saleInfo = arrayItem.get("saleInfo");
+	//  JsonNode isbn = volumeInfo.path("industryIdentifiers").get(1).path("identifier");
+	  if(!root.path("error").isMissingNode()) {
+		  //Dat wil zeggen dat de user wss geen input heeft ingevuld waardoor de json een error teruggeeft of dat er geen boek over de ingegeven topic bestaat
+		  return  null;
+	  }
+	  
+	  if(arrayItem.isArray()) {
+		//  ArrayList<String> listAuthors=new ArrayList<String>();
+		//  Iterator<JsonNode> items = item.elements();
+		  for(JsonNode node: arrayItem) {
+			if(fillBook(node).getIndustryIdentifiers()!=null ) {
+				list.add(fillBook(node));
+			}
+			  
+		  }
+		 
+	  }
+	  
+	  logger.info("Er wordt een list teruggegeven ");
+	  return list;
+	  		
+		
+	}
+    private static BookGoogleAPI fillBook(JsonNode node) {
+    	BookGoogleAPI  myBook = null;
+  	  ArrayList<String> listAuthors=null;
+  	
+    	if(node != null) {
+    
+    	listAuthors=new ArrayList<String>();
+		 myBook =new BookGoogleAPI();
+		 myBook.setTitle(node.get("volumeInfo").get("title").asText());
+		 
+		  myBook.setPublishedDate(node.get("volumeInfo").path("publishedDate").asText());
+		  myBook.setDescription(node.get("volumeInfo").path("description").asText());
+
+		  for(JsonNode author :node.get("volumeInfo").path("authors")) {
+			 
+			  listAuthors.add(author.asText());
+		  }
+		  myBook.setAuthors(listAuthors);
+		
+		 
+		 if(node.path("volumeInfo").path("industryIdentifiers").path(0).path("type").asText().equals("ISBN_13")) {
+			
+		  myBook.setIndustryIdentifiers(node.path("volumeInfo").path("industryIdentifiers").path(0).path("identifier").asText());
+	 }else if (node.path("volumeInfo").path("industryIdentifiers").path(0).path("type").asText().equals("ISBN_10")){
+		 myBook.setIndustryIdentifiers(node.path("volumeInfo").path("industryIdentifiers").path(1).path("identifier").asText());
+	 }
+		 
+		
+		 
+		
+//Als er geen retailPrice is in de Json wil dat zeggen dat het boek niet te koop is
+		  if(node.path("saleInfo").path("retailPrice").isNull()) {
+			  myBook.setPrice(0.0);
+			
+		  }else {
+			  myBook.setPrice(node.path("saleInfo").path("retailPrice").path("amount").asDouble());
+		  }
+    	}
+    	
+        return myBook;     	
+    
+	
+    }
+		
+	public static BookGoogleAPI getBookByISBN(String isbn) {
+		
+		if(isbn.equals("")) {
+			return null;
+		}
+		//BookApi b = new BookApi();
+		logger.info("Beginnen getBooksByISBN methode");
+		String	newIsbn = isbn.replaceAll(" ", "+");
+	URL jsonUrl=null;
+	try {
+		jsonUrl = new URL(
+			
+"https://www.googleapis.com/books/v1/volumes?q=isbn:" + newIsbn);
+	} catch (MalformedURLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		logger.error("Error bij lezen van URL "+ e.getMessage());
+	}
+	mapper = new ObjectMapper(); 
+	
+	BookGoogleAPI myBook =null;
+  JsonNode root=null;
+try {
+	root = mapper.readTree(jsonUrl);
+} catch (IOException e) {
+	logger.error("Error bij mappen van de Json rootnode  "+ e.getMessage());
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
+  //	  JsonNode item = root.path("items");
+if(root.path("totalItems").asInt()==0) {
+	  //Dat wil zeggen dat het boek met de ingegeven isbn niet bestaat 
+	  return  null;
+}
+  JsonNode arrayItem = root.get("items");
+
+//  JsonNode identifier = volumeInfo.get("industryIdentifiers");
+//  JsonNode author = volumeInfo.get("authors");
+//  JsonNode saleInfo = arrayItem.get("saleInfo");
+//  JsonNode isbn = volumeInfo.path("industryIdentifiers").get(1).path("identifier");
+  
+  
+  if(arrayItem.isArray()) {
+	
+	myBook= fillBook(arrayItem.get(0));
+	 
+  }
+  
+  logger.info("Er wordt een BookGoogleAPI object teruggegeven ");
+  return myBook;
+		
+	}
 	
 	
 }

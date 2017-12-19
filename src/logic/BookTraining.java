@@ -78,3 +78,4 @@ public class BookTraining implements Serializable{
 	
 
 }
+

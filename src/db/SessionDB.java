@@ -12,7 +12,6 @@ import java.util.List;
 import logic.Location;
 import logic.Training;
 
-
 public class SessionDB {
 
 	private Session session= null;
@@ -121,7 +120,6 @@ public class SessionDB {
 			t = session.beginTransaction();
 			list = (ArrayList<logic.Session>) session.createCriteria(logic.Session.class).list();
 			
-			
 			t.commit();
 		} catch (HibernateException e)
 		{
@@ -135,7 +133,7 @@ public class SessionDB {
 	public List<Session> getAllSessionsOfTrainingID(int tid) 
 	{
 		 List<Session> list = new ArrayList<Session>(); 
-		  Session session = myFactory.openSession();
+		  //Session session = myFactory.openSession();
 		  for (Object oneObject : session.createQuery("FROM Sessions where trainingID =  " + tid).getResultList()) {
 			  list.add((Session)oneObject);
 		    }
@@ -548,4 +546,3 @@ public class SessionDB {
 //	
 //
 //}
-

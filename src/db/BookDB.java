@@ -1,10 +1,16 @@
 package db;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
+import org.hibernate.transform.Transformers;
+
+import com.mysql.jdbc.PreparedStatement;
 
 import logic.Book;
 
@@ -13,20 +19,21 @@ import logic.Book;
 
 public class BookDB {
 	
-	private SessionFactory myFactory= null;
+	
+	private Session session = null;
 //	private SessionFactory sessionFactory = null;
 	public BookDB() {
 
 		super();
-      myFactory = SingletonHibernate.getSessionFactory();
-	
+		
+		 session = SingletonHibernate.getSessionFactory().openSession();
 		// TODO Auto-generated constructor stub
 	}
 
 	public  void  insertBook(Book myBook) {
 		
 		
-		Session session = myFactory.openSession();
+
 		Transaction t = null; 
 		try {
 			t = session.beginTransaction();
@@ -35,9 +42,6 @@ public class BookDB {
 		}catch(HibernateException e) {
 			if(t!= null ) t.rollback();
 			e.printStackTrace();
-		}finally {
-			session.close();
-		//	sessionFactory.close();
 		}
 		
 	
@@ -47,7 +51,7 @@ public class BookDB {
 	
 	public void  updateBook(Book myBook) {
 
-		Session session = myFactory.openSession();
+		
 		Transaction t = null; 
 		try {
 			t = session.beginTransaction();
@@ -56,18 +60,14 @@ public class BookDB {
 		}catch(HibernateException e) {
 			if(t!= null ) t.rollback();
 			e.printStackTrace();
-		}finally {
-			session.close();
-		//	sessionFactory.close();
 		}
-		
 	
 	}
 	
 	public void deleteBook(Book myBook) {
        
 
-		Session session = myFactory.openSession();
+		
 		Transaction t = null; 
 		try {
 			t = session.beginTransaction();
@@ -76,34 +76,34 @@ public class BookDB {
 		}catch(HibernateException e) {
 			if(t!= null ) t.rollback();
 			e.printStackTrace();
-		}finally {
-			session.close();
-		//	sessionFactory.close();
 		}
 		
 		
 		
 	}
 	
+	@SuppressWarnings("deprecation")
 	public Book getBook(String isbn) {
-        Book b = null;
-		Session session = myFactory.openSession();
+         Book b = null;
+	
 		Transaction t = null; 
 		try {
 			t = session.beginTransaction();
-			//get by PRIMARY KEY 
+	
+			//get by PRIMARY KEY met setParameter om SQL injection te voorkomen - similar to Prepared Statements 
+			@SuppressWarnings("rawtypes")
+			Query query =session.createNativeQuery("Select * from Books WHERE isbn = :isbn", Book.class).setParameter("isbn", isbn);
+		
+			b = (Book) query.getSingleResult();
 			
-			 b = (Book) session.get(Book.class,isbn);
+			
+			// b = (Book) session.get(Book.class,isbn);
 			t.commit();
 			
 		}catch(HibernateException e) {
 			if(t!= null ) t.rollback();
 			e.printStackTrace();
-		}finally {
-			session.close();
-		//	sessionFactory.close();
 		}
-		
 		return b;
 		
 				
@@ -115,7 +115,7 @@ public class BookDB {
 	public ArrayList<Book> getAllBooks(){
 		
 		   ArrayList<Book> list = null;
-		   Session session = myFactory.openSession();
+		 
 			Transaction t = null; 
 			try {
 				t = session.beginTransaction();
@@ -126,11 +126,7 @@ public class BookDB {
 			}catch(HibernateException e) {
 				if(t!= null ) t.rollback();
 				e.printStackTrace();
-			}finally {
-				session.close();
-			//	sessionFactory.close();
 			}
-			
 			return list;
 			
 		   
@@ -145,3 +141,4 @@ public class BookDB {
 	}
 
 }
+
