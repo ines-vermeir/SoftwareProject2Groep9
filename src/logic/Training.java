@@ -177,11 +177,14 @@ public class Training {
 	}
 
 	// toString
+	/*
 	@Override
 	public String toString() {
 		return "Training [trainingID=" + trainingID + ", title=" + title + ", subject=" + subject + ", language="
 				+ language + ", responsible=" + responsible + ", sessions=" + sessions + "]";
 	}	
+	
+	*/
 	
 	
 	// methoden
@@ -275,6 +278,13 @@ public class Training {
 		}
 	}
 	
+ //Note from Sebastian: Ik heb de toString voorlopig aangepast zodat ik Book view enkel id en title krijg op  Book view
+	@Override
+	public String toString() {
+		return "trainingID=" + trainingID + ", title=" + title ;
+	}
+
+
 
 	public void watchAllTrainings(int privilege) throws IOException{
 		

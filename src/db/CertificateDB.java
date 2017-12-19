@@ -15,17 +15,17 @@ import logic.Certificate;
 //Deze klasse gebruikt Hibernate voor de connectie met de database en de CRUD operations
 public class CertificateDB {
 	
-	private SessionFactory sessionFactory = null;
+	private Session session = null;
 	public CertificateDB() {
 		super();
-	 sessionFactory = new Configuration().configure().buildSessionFactory();
+		 session = SingletonHibernate.getSessionFactory().openSession();
 		// TODO Auto-generated constructor stub
 	}
 
 	public  void  insertCertificate(Certificate myCertificate) {
 		
 		
-		Session session = sessionFactory.openSession();
+		
 		Transaction t = null; 
 		try {
 			t = session.beginTransaction();
@@ -34,15 +34,12 @@ public class CertificateDB {
 		}catch(HibernateException e) {
 			if(t!= null ) t.rollback();
 			e.printStackTrace();
-		}finally {
-			session.close();
-			sessionFactory.close();
 		}
 	}
 	
 	public void  updateCertificate(Certificate myCertificate) {
 
-		Session session = sessionFactory.openSession();
+		
 		Transaction t = null; 
 		try {
 			t = session.beginTransaction();
@@ -51,16 +48,13 @@ public class CertificateDB {
 		}catch(HibernateException e) {
 			if(t!= null ) t.rollback();
 			e.printStackTrace();
-		}finally {
-			session.close();
-			sessionFactory.close();
 		}
 	}
 	
 	public void deleteCertificate(Certificate myCertificate) {
        
 
-		Session session = sessionFactory.openSession();
+	
 		Transaction t = null; 
 		try {
 			t = session.beginTransaction();
@@ -69,15 +63,12 @@ public class CertificateDB {
 		}catch(HibernateException e) {
 			if(t!= null ) t.rollback();
 			e.printStackTrace();
-		}finally {
-			session.close();
-			sessionFactory.close();
 		}
 	}
 	
 	public Certificate getCertificate(int Id) {
 		Certificate c = null;
-		Session session = sessionFactory.openSession();
+	
 		Transaction t = null; 
 		try {
 			t = session.beginTransaction();
@@ -89,9 +80,6 @@ public class CertificateDB {
 		}catch(HibernateException e) {
 			if(t!= null ) t.rollback();
 			e.printStackTrace();
-		}finally {
-			session.close();
-			sessionFactory.close();
 		}
 		
 		return c;
@@ -101,7 +89,7 @@ public class CertificateDB {
 	public ArrayList<Certificate> getAllCertificates(){
 		
 		   ArrayList<Certificate> list = null;
-		   Session session = sessionFactory.openSession();
+		 
 			Transaction t = null; 
 			try {
 				t = session.beginTransaction();
@@ -112,9 +100,6 @@ public class CertificateDB {
 			}catch(HibernateException e) {
 				if(t!= null ) t.rollback();
 				e.printStackTrace();
-			}finally {
-				session.close();
-				sessionFactory.close();
 			}
 			
 			return list;

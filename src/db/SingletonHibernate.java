@@ -30,5 +30,14 @@ public class SingletonHibernate {
 
 	}
 	
+	public static void closeSessionFactory() {
+       
+		if(sessionFactory!=null) {
+			sessionFactory.close();
+		}
+		
+		
+	}
+	
 
 }
