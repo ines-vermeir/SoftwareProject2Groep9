@@ -146,6 +146,7 @@ public class TrainingController implements Initializable {
 		    row.setOnMouseClicked(event -> {
 		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
 		            trainingRow = row.getItem();
+		            
 		            Navigator.loadVista(Navigator.TrainingDetailsView);
 		    		Navigator.loadMenuVista(Navigator.MenuTrainingActiveView);
 		        }

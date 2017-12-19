@@ -80,7 +80,14 @@ public class addTrainingController  implements Initializable {
 		 if ((addSeq.getText() != null && !addSeq.getText().isEmpty() )) {
 			 ses = addSeq.getText();
 			 try {
-				 sessions = Integer.parseInt(ses);
+				 int sesNull = Integer.parseInt(ses);
+				 if (sesNull > 0) {
+					 sessions = sesNull;
+				 }
+				 else {
+					 errorMsg.setText(errorMsg.getText() + "\nSession must be bigger than one!");
+					 check = false;
+				 }
 			 }catch( NumberFormatException numberex) {
 				 errorMsg.setText(errorMsg.getText() + "\nSession is not a number!");
 				 check = false;

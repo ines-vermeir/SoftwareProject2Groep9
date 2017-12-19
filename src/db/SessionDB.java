@@ -22,6 +22,7 @@ public class SessionDB {
 		super();
 		myFactory = SingletonHibernate.getSessionFactory();
 	}
+
 	
 	public boolean insertSession (logic.Session mySession)
 	{
@@ -151,7 +152,7 @@ public class SessionDB {
 	{
 		 List<logic.Session> list = new ArrayList<logic.Session>(); 
 		  org.hibernate.Session session = myFactory.openSession();
-		  for (Object oneObject : session.createQuery("FROM Session where trainingID =  " + tid).getResultList()) {
+		  for (Object oneObject : session.createQuery("FROM Session where archive =0 AND trainingID =  " + tid).getResultList()) {
 			  list.add((logic.Session)oneObject);
 		    }
 		  session.close();
