@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.*?>
 <?import javafx.geometry.*?>
@@ -25,6 +26,7 @@
                            </font>
                         </Label>
                         <ComboBox fx:id="trainingBox" layoutX="37.0" layoutY="274.0" prefHeight="31.0" prefWidth="261.0" />
+                        <Button fx:id="backB" layoutX="100.0" layoutY="50.0" mnemonicParsing="false" onAction="#toAll" prefHeight="31.0" prefWidth="135.0" text="Back to overview" />
                      </children>
                   </AnchorPane>
                </items></SplitPane>
@@ -38,13 +40,19 @@
                   <Font size="21.0" />
                </font>
             </Label>
-            <Label layoutX="17.0" layoutY="134.0" prefHeight="52.0" prefWidth="304.0" text="Choose a training and a book and click Ok" />
+            <Label layoutX="17.0" layoutY="134.0" prefHeight="52.0" prefWidth="304.0" text="Choose a training and a book and click Ok">
+               <font>
+                  <Font name="Arial Italic" size="15.0" />
+               </font></Label>
             <Label alignment="CENTER" layoutX="119.0" layoutY="204.0" prefHeight="21.0" prefWidth="101.0" text="Trainings:">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="326.0" layoutY="87.0" prefHeight="21.0" prefWidth="155.0" text="Search Book by Topic: " />
+            <Label layoutX="326.0" layoutY="87.0" prefHeight="21.0" prefWidth="155.0" text="Search Book by Topic: ">
+               <font>
+                  <Font name="System Italic" size="15.0" />
+               </font></Label>
          </children>
       </AnchorPane>
    </children>

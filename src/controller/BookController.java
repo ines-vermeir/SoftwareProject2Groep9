@@ -12,6 +12,7 @@ import javax.swing.tree.TreeSelectionModel;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
 
+import application.Navigator;
 import db.TestJackson;
 import db.TrainingDB;
 import javafx.beans.property.SimpleStringProperty;
@@ -57,8 +58,15 @@ public class BookController implements Initializable{
    private Button okB; 
    
    @FXML
-   private Label feedback;
+   private Button backB; 
    
+   @FXML
+   private Label feedback;
+   @FXML
+	protected void toAll(ActionEvent e) {
+		Navigator.loadVista(Navigator.BookOverview);
+	   Navigator.loadMenuVista(Navigator.MenuBookActiveView);
+	}
    private TreeItem<BookGoogleAPI> chosenBook=null;
    private String message = "";  
 

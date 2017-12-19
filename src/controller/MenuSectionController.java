@@ -55,13 +55,13 @@ public class MenuSectionController implements Initializable {
 	}
     
     @FXML
-	protected void toBooks(ActionEvent e) {
-    	 
-		Navigator.loadVista(Navigator.BookView);	
-		Navigator.loadMenuVista(Navigator.MenuBookActiveView);
-		
-	}
-    
+ 	protected void toBooks(ActionEvent e) {
+     	 
+ 		Navigator.loadVista(Navigator.BookOverview);	
+ 		Navigator.loadMenuVista(Navigator.MenuBookActiveView);
+ 		
+ 	}
+     
     @FXML
 	protected void toCertificates(ActionEvent e) {
 		Navigator.loadVista(Navigator.CertificateView);	
