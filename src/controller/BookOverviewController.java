@@ -1,6 +1,7 @@
 package controller;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -17,15 +18,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeView;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TreeTableView;
 import javafx.util.Callback;
 import logic.BookGoogleAPI;
 import logic.BookTraining;
+import logic.Training;
 
 public class BookOverviewController implements Initializable{
 
@@ -36,9 +40,8 @@ public class BookOverviewController implements Initializable{
 	private Button linkB; 
 	
 	@FXML
-	private TableView listBooks;
-	private TrainingDB trainingDB = new TrainingDB();
-	private TestJackson bookDB = new TestJackson();
+	private TreeTableView<BookTraining> list;
+	
 	
 	@FXML
 	protected void toNewLink(ActionEvent e) {
@@ -50,7 +53,7 @@ public class BookOverviewController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		
-		/*
+		
 				JFXTreeTableColumn<BookTraining,String> isbn = new JFXTreeTableColumn("ISBN");
 				isbn.setPrefWidth(150);
 
@@ -93,28 +96,7 @@ public class BookOverviewController implements Initializable{
 					@Override
 					public ObservableValue<String> call(CellDataFeatures<BookTraining, String> param) {
 						SimpleStringProperty simple = new SimpleStringProperty();
-						simple.setValue(trainingDB.getTraining(param.getValue().getValue().getTrainingID()).getTitle().toString());
-						return simple;
-					}
-
-					
-			   });
-				JFXTreeTableColumn<BookTraining,String> author = new JFXTreeTableColumn("Author(s)");
-				author.setPrefWidth(150);
-
-				author.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<BookTraining, String>, ObservableValue<String>>() {
-			          
-					
-					@Override
-					public ObservableValue<String> call(CellDataFeatures<BookTraining, String> param) {
-						SimpleStringProperty simple = new SimpleStringProperty();
-						
-						List<String> list= bookDB.getBookByISBN(param.getValue().getValue().getIsbn()).getAuthors();
-						
-						for(String s: list) {
-							simple.setValue(s +" ");
-						}
-						
+						simple.setValue(param.getValue().getValue().getTitleTraining());
 						return simple;
 					}
 
@@ -122,21 +104,8 @@ public class BookOverviewController implements Initializable{
 			   });
 				
 				
-				JFXTreeTableColumn<BookTraining,String> date = new JFXTreeTableColumn("Published date");
-				date.setPrefWidth(180);
-
-				date.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<BookTraining, String>, ObservableValue<String>>() {
-			          
-					
-					@Override
-					public ObservableValue<String> call(CellDataFeatures<BookTraining, String> param) {
-						SimpleStringProperty simple = new SimpleStringProperty();
-						simple.setValue(bookDB.getBookByISBN(param.getValue().getValue().getIsbn()).getPublishedDate());
-						return simple;
-					}
-
-					
-			   });
+				
+				
 				JFXTreeTableColumn<BookTraining,String> title = new JFXTreeTableColumn("Title Book");
 				title.setPrefWidth(180);
 
@@ -146,7 +115,7 @@ public class BookOverviewController implements Initializable{
 					@Override
 					public ObservableValue<String> call(CellDataFeatures<BookTraining, String> param) {
 						SimpleStringProperty simple = new SimpleStringProperty();
-						simple.setValue(bookDB.getBookByISBN(param.getValue().getValue().getIsbn()).getTitle());
+						simple.setValue(param.getValue().getValue().getTitleBook());
 						return simple;
 					}
 
@@ -154,34 +123,41 @@ public class BookOverviewController implements Initializable{
 			   });
 				
 				
-				
-				
-				
-				JFXTreeTableColumn<BookTraining,String> price = new JFXTreeTableColumn("Price");
-				price.setPrefWidth(100);
 
-				price.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<BookTraining, String>, ObservableValue<String>>() {
-			          
-					
-					@Override
-					public ObservableValue<String> call(CellDataFeatures<BookTraining, String> param) {
-						SimpleStringProperty simple = new SimpleStringProperty();
-						simple.setValue(Double.toString(bookDB.getBookByISBN(param.getValue().getValue().getIsbn()).getPrice()));
-						return simple;
-					}
-
-					
-			   });
-				
-				*/
-				ObservableList<BookTraining> bookList = FXCollections.observableArrayList();
-				final TreeItem<BookTraining> root= new TreeItem<BookTraining>();
+				list.getColumns().setAll(isbn,trainingID,trainingTitle,title);	
+			
 				
 				
-				//listBooks.getColumns().setAll(isbn,trainingID,trainingTitle,title,price,author,date);	
-		/*		listBooks.setRoot(root);
-				listBooks.setShowRoot(false);	
-		*/
+			
+				
+				TrainingDB trainingDB = new TrainingDB();
+				TestJackson bookDB = new TestJackson();
+				
+				ObservableList<BookTraining> tList = FXCollections.observableArrayList();
+			    final TreeItem<BookTraining> root= new TreeItem<BookTraining>();
+				
+			    ArrayList<BookTraining> bookTrainings = (ArrayList<BookTraining>) trainingDB.getBooksTrainings();
+			     
+			    for (BookTraining b:bookTrainings ) {
+			    	tList.add(b);
+			    }
+			    
+			    for(BookTraining b : tList) {
+			    	TreeItem<BookTraining> item = new TreeItem<>(b);
+			    	
+			    	root.getChildren().add(item);
+				}
+			    
+			    
+				
+				
+			    list.setRoot(root);
+			     list.setShowRoot(false);	
+		
+				
+				
+			
+				
 		
 	}
 

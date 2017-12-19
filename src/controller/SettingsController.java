@@ -18,7 +18,7 @@ public class SettingsController implements Initializable {
 	
 	@FXML //functie voor button "new survey"
 	protected void toAddUser(ActionEvent e) {
-		Navigator.loadVista(Navigator.SettingsAddUserView);
+	//	Navigator.loadVista(Navigator.SettingsAddUserView);
 		Navigator.loadMenuVista(Navigator.MenuSettingsActiveView);
 	}
 	

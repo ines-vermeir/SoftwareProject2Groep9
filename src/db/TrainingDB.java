@@ -185,15 +185,17 @@ public  List<Training> getNonActiveTrainings() {
   /////////////////////////////////////////////// 
 public void  linkBook(Training myTraining, String isbn) {
 	
-	
+	TestJackson j= new TestJackson();
 	Transaction t = null; 
 	try {
 		
 		t = session.beginTransaction();
 			@SuppressWarnings("rawtypes")
-		Query query =session.createNativeQuery("INSERT INTO Training_books VALUES (:isbn, :trainingID)");
+		Query query =session.createNativeQuery("INSERT INTO Training_books VALUES (:isbn, :trainingID, :titleTraining, :titleBook)");
 			query.setParameter("isbn", isbn);
 			query.setParameter("trainingID",myTraining.getTrainingID() ); 
+			query.setParameter("titleTraining",myTraining.getTitle()); 
+			query.setParameter("titleBook", j.getBookByISBN(isbn).getTitle());
 	        query.executeUpdate();
 		
 		t.commit();
@@ -202,6 +204,7 @@ public void  linkBook(Training myTraining, String isbn) {
 		e.printStackTrace();
 	}
 }
+
 
 
 public List<BookTraining> getBooksTrainings() {
@@ -230,3 +233,28 @@ public List<BookTraining> getBooksTrainings() {
 }
 
 }
+/*
+public void  linkBook(Training myTraining, String isbn) {
+	
+	TestJackson j= new TestJackson();
+	Transaction t = null; 
+	try {
+		
+		t = session.beginTransaction();
+			@SuppressWarnings("rawtypes")
+		Query query =session.createNativeQuery("INSERT INTO Training_books VALUES (:isbn, :trainingID, :titleTraining, :titleBook)");
+			query.setParameter("isbn", isbn);
+			query.setParameter("trainingID",myTraining.getTrainingID() ); 
+			query.setParameter("titleTraining",myTraining.getTitle()); 
+			query.setParameter("titleBook", j.getBookByISBN(isbn).getTitle());
+	        query.executeUpdate();
+		
+		t.commit();
+	}catch(HibernateException e) {
+		if(t!= null ) t.rollback();
+		e.printStackTrace();
+	}
+}
+
+*/
+

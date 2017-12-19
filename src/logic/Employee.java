@@ -15,7 +15,7 @@ public class Employee {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	@Override
+	
 //	public String toString() {
 //		return "Employee [employeeID=" + employeeID + ", lastName=" + lastName + ", firstName=" + firstName + ", title="
 //				+ title + ", titleOfCourtesy=" + titleOfCourtesy + ", birthDate=" + birthDate + ", hireDate=" + hireDate
@@ -24,16 +24,20 @@ public class Employee {
 //				+ ", notes=" + notes + ", reportsTo=" + reportsTo + ", photoPath=" + photoPath + "]";
 //	}
 
-	
-	  public String toString() {
+	  
+	/*  public String toString() {
 			return "Employee [employeeID=" + employeeID + ", lastName=" + lastName + ", firstName=" + firstName + ", title="
 					+ title + ", titleOfCourtesy=" + titleOfCourtesy + ", birthDate=" + birthDate + ", hireDate=" + hireDate
 					+ ", address=" + address +"]";
 		}
-		
-	
+	*/
+	 
 	private int employeeID; 
-	  private String lastName; 
+	  @Override
+	public String toString() {
+		return "Employee [employeeID=" + employeeID +  ", lastName=" + lastName + ", firstName=" + firstName+ "]";
+	}
+	private String lastName; 
 	  private String firstName; 
 	  private String title; 
 	  private String titleOfCourtesy; 
