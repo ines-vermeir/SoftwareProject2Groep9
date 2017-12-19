@@ -12,7 +12,6 @@ import java.util.List;
 import logic.Location;
 import logic.Training;
 
-
 public class SessionDB {
 
 	private Session session= null;
@@ -547,4 +546,3 @@ public class SessionDB {
 //	
 //
 //}
-

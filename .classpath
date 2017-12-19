@@ -21,17 +21,5 @@
 	<classpathentry kind="lib" path="lib/jfoenix.jar"/>
 	<classpathentry kind="lib" path="lib/jBCrypt-0.4.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="C:/Users/Charles/Downloads/itext5-5.5.12/itext5-itextpdf-5.5.12.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Charles/Downloads/itext5-5.5.12/itext5-itextpdf-5.5.12-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Charles/Downloads/itext5-5.5.12/itext5-itextpdf-5.5.12-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Charles/Downloads/itext5-5.5.12/itext5-itext-pdfa-5.5.12.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Charles/Downloads/itext5-5.5.12/itext5-itext-pdfa-5.5.12-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Charles/Downloads/itext5-5.5.12/itext5-itext-pdfa-5.5.12-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Charles/Downloads/itext5-5.5.12/itext5-itext-xtra-5.5.12.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Charles/Downloads/itext5-5.5.12/itext5-itext-xtra-5.5.12-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Charles/Downloads/itext5-5.5.12/itext5-itext-xtra-5.5.12-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Charles/Downloads/itext5-5.5.12/itext5-xmlworker-5.5.12.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Charles/Downloads/itext5-5.5.12/itext5-xmlworker-5.5.12-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Charles/Downloads/itext5-5.5.12/itext5-xmlworker-5.5.12-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
