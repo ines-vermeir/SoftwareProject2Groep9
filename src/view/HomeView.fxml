@@ -1,13 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1400.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeController">
    <children>
-      <Label alignment="CENTER" contentDisplay="TOP" prefHeight="454.0" prefWidth="600.0" text="Home" />
+      <AnchorPane prefHeight="1019.0" prefWidth="1400.0">
+         <children>
+            <Label layoutX="67.0" layoutY="143.0" text="Select employee (click on the row you would like to get information from):">
+               <font>
+                  <Font name="System Italic" size="15.0" />
+               </font>
+            </Label>
+        <!--     <JFXTextField fx:id="input" text="Zoek" /> -->
+            <TreeTableView fx:id="table" layoutX="60.0" layoutY="176.0" prefHeight="390.0" prefWidth="1271.0" />
+            <Label layoutX="661.0" layoutY="68.0" stylesheets="@application.css" text="Statistics">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Button layoutX="354.0" layoutY="600.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="204.0" text="overview all training" />
+            <Button layoutX="811.0" layoutY="600.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="204.0" text="overview certificates" />
+         </children>
+      </AnchorPane>
+  <!--      <JFXButton text="New Student" /> -->
    </children>
 </VBox>

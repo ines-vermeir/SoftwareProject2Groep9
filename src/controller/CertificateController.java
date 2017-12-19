@@ -3,46 +3,52 @@ package controller;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import db.Certificate_uploadDB;
+import db.TestJackson;
+import db.TrainingDB;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import logic.Certificate_upload;
+import logic.Employee;
+import logic.Training;
 
 public class CertificateController implements Initializable {
 
 	@FXML private Button b_search;
 	@FXML private ListView<String> l_list;
 	@FXML private Label t_label;
-	@FXML private TextField t_empID;
 	@FXML private Button b_save;
+	@FXML private TextField t_title;
+	@FXML private ComboBox c_empid;
+	
 	
 	File selectedFile;
 	
 	@FXML void saveFile(ActionEvent e)
 	{
 		t_label.setText("");
-		String tid;
+		String tid, title = null;
 		int empID = -1;
 		byte[] bFile = null;
 		boolean check = true;
-		if ((t_empID.getText()!= null && !t_empID.getText().isEmpty())) {
-			tid = t_empID.getText();
-			try {
-				empID = Integer.parseInt(tid);
-			 }catch( NumberFormatException numberex) {
-				 t_label.setText(t_label.getText() + "\nEmployee ID is not a number!");
-				 check = false;
-			 }
+		if ((t_title.getText()!= null && !t_title.getText().isEmpty())) {
+			title = t_title.getText();
 		}  else {
 		 t_label.setText(t_label.getText() + "\nEmployee ID is empty!");
 		 check = false;
@@ -74,20 +80,22 @@ public class CertificateController implements Initializable {
 			if (bFile != null)
 			{
 				Certificate_upload cu = new Certificate_upload();
-				cu.setEmployeeID(empID);
+				Employee emp = (Employee)c_empid.getValue();
+				int i = emp.getEmployeeID();
+				cu.setEmployeeID(i);
+				cu.setTitle(title);
 				cu.setFile(bFile);		
 				Certificate_uploadDB db = new Certificate_uploadDB();
 				if (db.insertCertificate_upload(cu) == true)
 				{
 					t_label.setText("\nFile uploaded succesfully!");
-					t_empID.clear();
+					t_title.clear();
 					l_list.getItems().remove(0);
 				}
 				else
 				{
 					t_label.setText("\nFile could not be uploaded!");
 				}
-				
 			}
 			else
 			{
@@ -128,6 +136,32 @@ public class CertificateController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		
+		TestJackson tj = new TestJackson();
+		try {
+			List<Employee> ae = tj.getEmployees();
+		} catch (MalformedURLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		ObservableList<Employee> employeeList = FXCollections.observableArrayList();
+		  
+		  
+		  
+		  
+		  try {
+			for(Employee e : tj.getEmployees()) {
+					
+					employeeList.add(e);
+				}
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		  
+		  
+	   //  trainingBox.setValue(null);
+		  c_empid.setItems(employeeList);	
 	}
 
 }

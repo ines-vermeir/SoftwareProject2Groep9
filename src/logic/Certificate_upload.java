@@ -13,7 +13,9 @@ import javax.persistence.Table;
 public class Certificate_upload {
 
 
-	    @Id
+	
+
+		@Id
 	    @GeneratedValue(strategy=GenerationType.IDENTITY)
 	    @Column(name="certificateID")
 	    private int certificateID;
@@ -21,9 +23,20 @@ public class Certificate_upload {
 	    @Column(name="employeeID")
 	    private int employeeID;
 	 
+	    @Column(name="title")
+	    private String title;
+	    
 	    @Column(name="file")
 	    private byte[] file;
 
+	    
+	    public String getTitle() {
+			return title;
+		}
+
+		public void setTitle(String title) {
+			this.title = title;
+		}
 	    
 		public Certificate_upload(int certificateID, int employeeID, byte[] file) {
 			super();
@@ -32,9 +45,10 @@ public class Certificate_upload {
 			this.file = file;
 		}
 		
-		public Certificate_upload(int employeeID, byte[] file) {
+		public Certificate_upload(int employeeID, String title, byte[] file) {
 			super();
 			this.employeeID = employeeID;
+			this.title = title;
 			this.file = file;
 		}
 		
