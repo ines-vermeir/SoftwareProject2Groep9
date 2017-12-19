@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SettingsAddUserController">
+   <children>
+      <AnchorPane prefHeight="1017.0" prefWidth="1400.0">
+         <children>
+            <Label layoutX="188.0" layoutY="336.0" text="password" />
+            <Label layoutX="615.0" layoutY="89.0" text="Add new user">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="188.0" layoutY="284.0" prefHeight="21.0" prefWidth="89.0" text="username" />
+            <Label layoutX="191.0" layoutY="392.0" text="Privilege" />
+            <ChoiceBox fx:id="c_privilege" layoutX="277.0" layoutY="387.0" prefHeight="31.0" prefWidth="209.0" />
+            <TextField fx:id="t_username" layoutX="277.0" layoutY="279.0" prefHeight="31.0" prefWidth="209.0" />
+            <TextField fx:id="t_password" layoutX="277.0" layoutY="331.0" prefHeight="31.0" prefWidth="209.0" />
+            <Button fx:id="saveuser" layoutX="200.0" layoutY="485.0" mnemonicParsing="false" text="save user" onAction="#saveUser"/>
+             <Button fx:id="back" layoutX="24.0" layoutY="22.0" mnemonicParsing="false" onAction="#backToSettings" text="go back" />
+             <Label fx:id="errorMsg" layoutX="323.0" layoutY="729.0" prefHeight="104.0" prefWidth="260.0" textFill="#f50505" />        
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

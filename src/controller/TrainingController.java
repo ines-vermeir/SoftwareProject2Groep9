@@ -1,6 +1,7 @@
 package controller;
 
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
@@ -29,7 +30,9 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
+import logic.Session;
 import logic.Training;
+import db.SessionDB;
 import db.TrainingDB;
 
 public class TrainingController implements Initializable {
@@ -51,6 +54,10 @@ public class TrainingController implements Initializable {
 	@FXML private TableColumn <Training, String> subjectTableCol;
 	@FXML private TableColumn <Training, String> langTableCol;
 	@FXML private TableColumn <Training, String> teacherTableCol;
+	@FXML private TableColumn <Training, Integer> idSessionTableCol;
+	@FXML private TableColumn <Training, String> idTrainingTableCol;
+	@FXML private TableColumn <Training, String> titleTrainingTableCol;
+	@FXML private TableColumn <Training, String> dateTableCol;
 	
 
 	
@@ -64,7 +71,7 @@ public class TrainingController implements Initializable {
 	
 	@FXML
 	protected void toPassed(ActionEvent e) {
-		Navigator.loadVista(Navigator.TrainingView);
+		Navigator.loadVista(Navigator.PassedTrainingView);
 		Navigator.loadMenuVista(Navigator.MenuTrainingActiveView);
 	}
 	
@@ -94,36 +101,20 @@ public class TrainingController implements Initializable {
 			ObservableList<Training> trainings = FXCollections.observableArrayList(tdb.getActiveTrainings());
 		
 		
-		idTableCol.setCellValueFactory(new PropertyValueFactory<Training, Integer>("trainingID"));
-		titleTableCol.setCellValueFactory(new PropertyValueFactory<Training, String>("title"));
-		subjectTableCol.setCellValueFactory(new PropertyValueFactory<Training, String>("subject"));
-		langTableCol.setCellValueFactory(new PropertyValueFactory<Training, String>("language"));
-		teacherTableCol.setCellValueFactory(new PropertyValueFactory<Training, String>("responsible"));
-		FilteredList<Training> filteredTraining = new FilteredList<>(trainings, p -> true);
-//		
-//				searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
-//					filteredTraining.setPredicate(training -> {
-//						
-//						// If filter text is empty, display all persons.
-//						if (newValue == null || newValue.isEmpty()) {
-//							return true;
-//						}
-//								
-//						if (training.getTrainingID() != -1) {
-//							return true; // Filter matches start time.
-//						} 
-//						
-//						return false; // Does not match.
-//					});
-//				});
-							SortedList<Training> sortedTraining = new SortedList<>(filteredTraining);
-		
-							sortedTraining.comparatorProperty().bind(allTrainingTable.comparatorProperty());
-											
-							allTrainingTable.setItems(sortedTraining);
-			}
+			idTableCol.setCellValueFactory(new PropertyValueFactory<Training, Integer>("trainingID"));
+			titleTableCol.setCellValueFactory(new PropertyValueFactory<Training, String>("title"));
+			subjectTableCol.setCellValueFactory(new PropertyValueFactory<Training, String>("subject"));
+			langTableCol.setCellValueFactory(new PropertyValueFactory<Training, String>("language"));
+			teacherTableCol.setCellValueFactory(new PropertyValueFactory<Training, String>("responsible"));
+			
+			FilteredList<Training> filteredTraining = new FilteredList<>(trainings, p -> true);
+			SortedList<Training> training = new SortedList<>(filteredTraining);
+			training.comparatorProperty().bind(allTrainingTable.comparatorProperty());								
+			allTrainingTable.setItems(training);
+		}
 
 		
+			
 	}
 
 }

@@ -30,18 +30,18 @@ public class TrainingDB {
 		// TODO Auto-generated constructor stub
 	}
 	
-public  void  insertTraining(Training myTraining) {
-		
-	
+public  int  insertTraining(Training myTraining) {
 		Transaction t = null; 
 		try {
 			t = session.beginTransaction();
 			session.save(myTraining);
+			id = myTraining.getTrainingID();
 			t.commit();
 		}catch(HibernateException e) {
 			if(t!= null ) t.rollback();
 			e.printStackTrace();
 		}
+		return id;
 	}
 
 
