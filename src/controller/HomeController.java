@@ -1,40 +1,38 @@
 package controller;
 
-import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
-import java.util.function.Predicate;
 
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-
-import com.jfoenix.controls.JFXTreeTableView;
-import com.jfoenix.controls.RecursiveTreeItem;
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-
+import db.Certificate_uploadDB;
 import db.SessionDB;
 import db.TestJackson;
 import db.TrainingDB;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.util.Callback;
-import logic.BookGoogleAPI;
+import logic.Certificate_upload;
 import logic.Employee;
 import logic.Session;
 import logic.Training;
@@ -50,13 +48,47 @@ public class HomeController implements Initializable {
 	@FXML private Label l_training;
 	@FXML private Label errorMsg;
 	
+	@FXML private TableView<Training> allTrainingTable;
+	@FXML private TableColumn <Training, Integer> idTableCol;
+	@FXML private TableColumn <Training, String> titleTableCol;
+	@FXML private TableColumn <Training, String> subjectTableCol;
+	@FXML private TableColumn <Training, String> langTableCol;
+	@FXML private TableColumn <Training, String> teacherTableCol;
+	
 	private TreeItem<logic.Employee> chosenEmployee=null;
 	private int empID = 0;
+	private Employee e = null;
+	
+	@FXML
+	protected void showCertificates()
+	{
+		errorMsg.setText("");		
+			
+		if (empID !=0)
+		{
+		Certificate_uploadDB db = new Certificate_uploadDB();	
+		List<Certificate_upload> allcertificates = db.getAllCertificate_uploads();
+		l_certificate.setText("Overview Certificates for employee with ID: " + empID);
+		for (Certificate_upload cu: allcertificates)
+		{
+			if (cu.getEmployeeID() == empID)
+			{
+				l_certificate.setText(l_certificate.getText() + "\nID: " + cu.getTitle());
+			}		
+		}
+		}
+		else {
+			errorMsg.setText(errorMsg.getText() + "\nYou need to select an employee ID!");
+		}
+	}
 	
 	@FXML
 	protected void showTrainings()
 	{
-		l_training.setText("");
+		if (empID != 0)
+		{
+		errorMsg.setText("");
+		l_training.setText("Overview Trainings for employee with ID: " + empID);
 		SessionDB db = new SessionDB();
 		ArrayList<Integer> trainingIDs = new ArrayList<Integer>();
 		ArrayList<Training> allTrainings = new ArrayList<Training>();
@@ -83,12 +115,35 @@ public class HomeController implements Initializable {
 		}
 		for (Training t: allTrainings) {
 			l_training.setText(l_training.getText() + "\nID: " + t.getTrainingID() + " - title: " + t.getTitle());
-		}		
+		}
+		}
+		else {
+			errorMsg.setText(errorMsg.getText() + "\nYou need to select an employee ID!");
+		}
 	}
 	
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		
+		TrainingDB tdb = new TrainingDB();
+		if (tdb.getActiveTrainings() != null) {
+			ObservableList<Training> trainings = FXCollections.observableArrayList(tdb.getNonActiveTrainings());
+		
+		
+			idTableCol.setCellValueFactory(new PropertyValueFactory<Training, Integer>("trainingID"));
+			titleTableCol.setCellValueFactory(new PropertyValueFactory<Training, String>("title"));
+			subjectTableCol.setCellValueFactory(new PropertyValueFactory<Training, String>("subject"));
+			langTableCol.setCellValueFactory(new PropertyValueFactory<Training, String>("language"));
+			teacherTableCol.setCellValueFactory(new PropertyValueFactory<Training, String>("responsible"));
+			
+			FilteredList<Training> filteredTraining = new FilteredList<>(trainings, p -> true);
+			SortedList<Training> training = new SortedList<>(filteredTraining);
+			training.comparatorProperty().bind(allTrainingTable.comparatorProperty());								
+			allTrainingTable.setItems(training);
+		}
+		
 		
 		ArrayList<logic.Employee> EmployeeOdata = null;
 		try {
@@ -208,8 +263,14 @@ public class HomeController implements Initializable {
 		table.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle (MouseEvent arg0) {
 				chosenEmployee = table.getSelectionModel().getSelectedItem();
-				Employee e = (Employee) chosenEmployee.getValue();
-				empID = e.getEmployeeID();
+				if (chosenEmployee != null)
+				{
+					e = (Employee) chosenEmployee.getValue();
+					if (e != null)
+					{
+						empID = e.getEmployeeID();
+					}
+				}
 			}
 		});
 

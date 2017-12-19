@@ -3,6 +3,8 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import application.Navigator;
 import db.UserDB;
 import javafx.collections.FXCollections;
@@ -54,6 +56,7 @@ public class SettingsAddUserController implements Initializable {
 		 }
 		 if ((t_password.getText() != null && !t_password.getText().isEmpty())) {
 			 password = t_password.getText();
+			 password = BCrypt.hashpw(t_password.getText(), BCrypt.gensalt());
 		 } else {
 			 errorMsg.setText(errorMsg.getText() + "\nPassword is empty!");
 			 check = false;

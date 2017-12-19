@@ -29,7 +29,6 @@ public class Certificate_upload {
 	    @Column(name="file")
 	    private byte[] file;
 
-	    
 	    public String getTitle() {
 			return title;
 		}

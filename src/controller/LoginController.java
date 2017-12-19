@@ -23,48 +23,56 @@ public class LoginController implements Initializable{
     private Label lblStatus;
     
     
-    
+    private static User userLogin;
     
     @SuppressWarnings("unused")
-    @FXML protected void doLogin(ActionEvent e) {
+    @FXML protected void doLogin(ActionEvent e) {        
         
-        
-        
-        boolean login = false;
+        boolean login = true;
         boolean usernameGevonden = true;
-         
-        User user = null;
-        UserDB userDB = new UserDB();
+        String password = passwordField.getText();            
+        userLogin = null;
+        UserDB userDB = new UserDB(); 
         
-        user = userDB.getUser(userField.getText());
-        
-        if (user == null) {
+        try {
+        	userLogin = userDB.getUser(userField.getText());
+        } catch (Exception exc)
+        {
+        	lblStatus.setText("Oops, something went wrong.");
+        }       
+        if (userLogin == null) {
             usernameGevonden = false;
             lblStatus.setText("user not found");
             lblStatus.setVisible(true);    
             userField.setStyle("-fx-background-color: red;");
+            login = false;
+        }  else {
+        	if ((BCrypt.checkpw(password,userLogin.getPassword())) == false) {
+        		lblStatus.setText("wrong password");
+        		lblStatus.setVisible(true);    
+        		userField.setStyle("-fx-background-color: orange;");
+        		passwordField.clear();
+        		login = false;
+        	}
         }
         
-        String password = passwordField.getText();
-        
-        // 
-        if(userField.getText().equals(user.getUsername()) && BCrypt.checkpw(password,user.getPassword())) {
+        if (login == true) {
+        if((userField.getText().equals(userLogin.getUsername())) && (BCrypt.checkpw(password,userLogin.getPassword()))) {
             login = true;
             System.out.println("welcome");
             userField.setStyle("-fx-background-color: green;");
-        }
-        
-        if(login == true) {
             Navigator.loadVista(Navigator.HomeView);
             Navigator.loadUserVista(Navigator.UserSectionView);
-            Navigator.loadMenuVista(Navigator.MenuHomeActiveView);        
+            Navigator.loadMenuVista(Navigator.MenuHomeActiveView); 
         }
+        else {
+        	lblStatus.setText("Oops, something went wrong.");
+        }
+      }
         
-        if (usernameGevonden == true) {
-            lblStatus.setText("wrong password");
-            lblStatus.setVisible(true);    
-            userField.setStyle("-fx-background-color: orange;");
-        }
+
+        
+        
     }
         @Override
         public void initialize(URL location, ResourceBundle resources) {

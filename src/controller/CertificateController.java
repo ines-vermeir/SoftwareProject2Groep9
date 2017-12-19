@@ -50,7 +50,7 @@ public class CertificateController implements Initializable {
 		if ((t_title.getText()!= null && !t_title.getText().isEmpty())) {
 			title = t_title.getText();
 		}  else {
-		 t_label.setText(t_label.getText() + "\nEmployee ID is empty!");
+		 t_label.setText(t_label.getText() + "\ntitle is empty!");
 		 check = false;
 		}
 		if (selectedFile != null)
