@@ -27,7 +27,8 @@ public class LocationDB {
 		 session = SingletonHibernate.getSessionFactory().openSession();
 	}
 
-	public boolean insertLocation(Location l)  {
+	public int insertLocation(Location l)  {
+		int id = 0;
 		boolean succes = false;
 		Transaction t = null; 
 		
@@ -43,7 +44,7 @@ public class LocationDB {
 			e.printStackTrace();
 		
 		}
-		return succes;
+		return id;
 		}
 
 	public boolean updateLocation(Location l) {
@@ -216,7 +217,6 @@ public class LocationDB {
 		}
 		
 	}
-
 	public static boolean insertLocation(Location l) throws SQLException, Exception{
 		
 		boolean successvol = false; 
@@ -253,7 +253,6 @@ public class LocationDB {
 		}
 		
 	}
-
 	public static boolean updateLocation(Location l) throws SQLException, Exception{
 		
 		boolean successvol = false; 
@@ -289,6 +288,4 @@ public class LocationDB {
 				throw new RuntimeException("error");
 			}
 		}
-
 	}*/
-

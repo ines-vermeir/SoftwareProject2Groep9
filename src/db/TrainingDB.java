@@ -31,6 +31,7 @@ public class TrainingDB {
 	}
 	
 public  int  insertTraining(Training myTraining) {
+		int id= 0;
 		Transaction t = null; 
 		try {
 			t = session.beginTransaction();
