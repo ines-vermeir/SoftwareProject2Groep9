@@ -50,7 +50,7 @@ public class addTrainingController  implements Initializable {
 		Navigator.loadMenuVista(Navigator.MenuTrainingActiveView);
 	}
 	@FXML protected void toAddSession() {
-		//Navigator.loadVista(Navigator.AddSessionView);
+		Navigator.loadVista(Navigator.AddSessionView);
 		Navigator.loadMenuVista(Navigator.MenuTrainingActiveView);
 	}
 	
