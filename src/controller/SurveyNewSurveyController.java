@@ -1,19 +1,26 @@
 package controller;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.Navigator;
 import db.SurveyDB;
+import db.TrainingDB;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import logic.Answer;
+import logic.Employee;
 import logic.Question;
 import logic.Survey;
+import logic.Training;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 
 public class SurveyNewSurveyController implements Initializable {
@@ -47,6 +54,7 @@ public class SurveyNewSurveyController implements Initializable {
 	@FXML private TextField t_answer5c;	
 	@FXML private Button b_savesurvey;
 	@FXML private Button back;
+	@FXML private ComboBox c_trainingID;
 
 	
 	@FXML //functie voor button "new survey"
@@ -68,19 +76,30 @@ public class SurveyNewSurveyController implements Initializable {
 				answer5a = null, answer5b = null, answer5c = null,
 				tid = null;
 		boolean check = true;
-		
-		if ((t_trainingID.getText()!= null && !t_trainingID.getText().isEmpty())) {
-			tid = t_trainingID.getText();
-			try {
-				 trainingID = Integer.parseInt(tid);
-			 }catch( NumberFormatException numberex) {
-				 errorMsg.setText(errorMsg.getText() + "\nTraining ID is not a number!");
-				 check = false;
-			 }
-		}  else {
-		 errorMsg.setText(errorMsg.getText() + "\nTraining ID is empty!");
-		 check = false;
+		if (c_trainingID.getValue() != null)
+		{
+			Training t = (Training)c_trainingID.getValue();
+			trainingID = t.getTrainingID();
 		}
+		else
+		{
+			errorMsg.setText(errorMsg.getText() + "\nNo training has been selected!");
+			check = false;
+		}
+		
+		
+//		if ((t_trainingID.getText()!= null && !t_trainingID.getText().isEmpty())) {
+//			tid = t_trainingID.getText();
+//			try {
+//				 trainingID = Integer.parseInt(tid);
+//			 }catch( NumberFormatException numberex) {
+//				 errorMsg.setText(errorMsg.getText() + "\nTraining ID is not a number!");
+//				 check = false;
+//			 }
+//		}  else {
+//		 errorMsg.setText(errorMsg.getText() + "\nTraining ID is empty!");
+//		 check = false;
+//		}
 		if ((t_title.getText()!= null && !t_title.getText().isEmpty())) {
 			title = t_title.getText();
 		 }	 else {
@@ -364,8 +383,17 @@ public class SurveyNewSurveyController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		
-		
+		TrainingDB tdb = new TrainingDB();
+		ObservableList<Training> trainingList = FXCollections.observableArrayList();		  
+		  
+		  for(Training t : tdb.getActiveTrainings()) {
+				
+				trainingList.add(t);
+			}
+		  
+		  
+	   //  trainingBox.setValue(null);
+		  c_trainingID.setItems(trainingList);
 	}
 
 }
