@@ -20,10 +20,42 @@ public class BookTraining implements Serializable{
 	@Id
 	@Column(name="isbn")
 	private String isbn;
+    
+	@Column(name="titleTraining")
+	private String titleTraining;
+
+	@Column(name="titleBook")
+	private String titleBook;
+
+
+	public String getTitleTraining() {
+		return titleTraining;
+	}
+
+	public void setTitleTraining(String titleTraining) {
+		this.titleTraining = titleTraining;
+	}
+
+	public String getTitleBook() {
+		return titleBook;
+	}
+
+	public void setTitleBook(String titleBook) {
+		this.titleBook = titleBook;
+	}
+
+	public BookTraining(int trainingID, String isbn, String titleTraining, String titleBook) {
+		super();
+		this.trainingID = trainingID;
+		this.isbn = isbn;
+		this.titleTraining = titleTraining;
+		this.titleBook = titleBook;
+	}
 
 	@Override
 	public String toString() {
-		return "BookTraining [trainingID=" + trainingID + ", isbn=" + isbn + "]";
+		return "BookTraining [trainingID=" + trainingID + ", isbn=" + isbn + ", titleTraining=" + titleTraining
+				+ ", titleBook=" + titleBook + "]";
 	}
 
 	public int getTrainingID() {
@@ -42,40 +74,7 @@ public class BookTraining implements Serializable{
 		this.isbn = isbn;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((isbn == null) ? 0 : isbn.hashCode());
-		result = prime * result + trainingID;
-		return result;
-	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		BookTraining other = (BookTraining) obj;
-		if (isbn == null) {
-			if (other.isbn != null)
-				return false;
-		} else if (!isbn.equals(other.isbn))
-			return false;
-		if (trainingID != other.trainingID)
-			return false;
-		return true;
-	}
-
-	public BookTraining(int trainingID, String isbn) {
-		super();
-		this.trainingID = trainingID;
-		this.isbn = isbn;
-	}
-	
 	
 
 }
