@@ -110,7 +110,10 @@ public Question(Integer questionId, String question, List<Answer> antwoorden) {
 	this.antwoorden = antwoorden;
 }
 
-
+public Question(String question) {
+	super();
+	this.question = question;
+}
 
 
 public Question() {

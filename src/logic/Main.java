@@ -2,6 +2,9 @@ package logic;
 
 import java.io.BufferedReader;
 import java.io.Console;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.security.MessageDigest;
@@ -17,12 +20,16 @@ import java.util.InputMismatchException;
 import java.util.List;
 
 import java.util.Scanner;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.codec.digest.DigestUtils;
+
+import javax.transaction.Transactional;
+
+//import org.apache.commons.codec.binary.Base64;
+//import org.apache.commons.codec.digest.DigestUtils;
 import application.Navigator;
 import controller.MainController;
 import db.BookDAO;
 import db.BookDB;
+import db.Certificate_uploadDB;
 import db.LocationDB;
 /*import db.TestGson;
 import db.TestJackson;
@@ -40,6 +47,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import logic.Training.Language;
 import logic.User.Privilege;
 import db.TestJackson;
 import db.TrainingDB;
@@ -48,6 +56,8 @@ import db.SurveyPredefinedDB;
 import java.io.IOException;
 import controller.MainController;
 import javafx.application.Application;
+
+//import org.mindrot.jbcrypt.BCrypt;
 
 
 public class Main extends Application {
@@ -116,10 +126,7 @@ public static Stage mainStage;
 
     public static void main(String[] args)   {
     	
-    	
     launch(args);
-
-		
     }
 	
 //----------------------------------------------------login functie----------------------------------------------------------------------------	
@@ -128,7 +135,7 @@ public static Stage mainStage;
 	 * 
 	 */
 	
-	public static void login () throws IOException 
+    public static void login () throws IOException //wordt nog verder uitgewerkt (Eva)
 	{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		User user = null;
@@ -159,12 +166,14 @@ public static Stage mainStage;
 				System.out.println(password);
 				while (check == false && attempt < 3)
 				{
-					if (user.getPassword().equals(password))
+					
+			//HIER WORDT DE INGEGEVEN PASSWORD encoded en vergeleken met de password op user tabel		
+				//	if (BCrypt.checkpw(password,user.getPassword()))
 					{
 						System.out.println("Login successful");
 						check = true;
 					}
-					else
+				//	else
 					{
 						attempt++;
 						if (attempt < 3)
@@ -193,6 +202,7 @@ public static Stage mainStage;
 		}
 
 	}
+	
 	
 	
 	/*
@@ -1431,9 +1441,4 @@ SurveyPredefined surveyPredefined = new SurveyPredefined();
 	
 	
 }
-
-
-
-
-
 
