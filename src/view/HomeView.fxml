@@ -22,8 +22,8 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button layoutX="354.0" layoutY="600.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="204.0" text="overview all training" />
-            <Button layoutX="811.0" layoutY="600.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="204.0" text="overview certificates" />
+            <Button fx:id="b_trainings" layoutX="354.0" layoutY="600.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="204.0" text="overview all training" onAction="#showTrainings"/>
+            <Button fx:id="b_certificates" layoutX="811.0" layoutY="600.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="204.0" text="overview certificates" />
          </children>
       </AnchorPane>
   <!--      <JFXButton text="New Student" /> -->

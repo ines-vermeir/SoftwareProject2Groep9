@@ -10,24 +10,24 @@
    <children>
       <AnchorPane prefHeight="729.0" prefWidth="1400.0">
          <children>
-            <Button fx:id="b_search" layoutX="209.0" layoutY="311.0" mnemonicParsing="false" onAction="#searchFile" prefHeight="31.0" prefWidth="131.0" text="search file" />
-            <Label fx:id="t_label" layoutX="240.0" layoutY="311.0" prefHeight="91.0" prefWidth="248.0" />
-            <ListView fx:id="l_list" layoutX="352.0" layoutY="311.0" prefHeight="31.0" prefWidth="292.0" />
-            <Label layoutX="240.0" layoutY="211.0" prefHeight="21.0" prefWidth="100.0" text="employee ID: " />
-            <Label layoutX="240.0" layoutY="264.0" prefHeight="21.0" prefWidth="100.0" text="title: " />
-            <TextField fx:id="t_title" layoutX="352.0" layoutY="259.0" prefHeight="31.0" prefWidth="292.0" />
+            <Button fx:id="b_search" layoutX="209.0" layoutY="206.0" mnemonicParsing="false" onAction="#searchFile" prefHeight="31.0" prefWidth="131.0" text="search file" />
+            <Label fx:id="t_label" layoutX="216.0" layoutY="373.0" prefHeight="91.0" prefWidth="248.0" />
+            <ListView fx:id="l_list" layoutX="352.0" layoutY="206.0" prefHeight="31.0" prefWidth="292.0" />
+            <Label layoutX="240.0" layoutY="264.0" prefHeight="21.0" prefWidth="100.0" text="employee ID: " />
+            <Label layoutX="240.0" layoutY="316.0" prefHeight="21.0" prefWidth="100.0" text="title: " />
+            <TextField fx:id="t_title" layoutX="352.0" layoutY="311.0" prefHeight="31.0" prefWidth="292.0" />
             <Button fx:id="b_save" layoutX="532.0" layoutY="387.0" mnemonicParsing="false" onAction="#saveFile" text="save certificate" />
             <Label layoutX="569.0" layoutY="121.0" text="upload certificate">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="358.0" layoutY="346.0" prefHeight="21.0" prefWidth="292.0" text="(only pdf upload is allowed)">
+            <Label layoutX="352.0" layoutY="174.0" prefHeight="21.0" prefWidth="292.0" text="(only pdf upload is allowed)">
                <font>
                   <Font name="System Italic" size="15.0" />
                </font>
             </Label>
-            <ComboBox fx:id="c_empid" layoutX="352.0" layoutY="206.0" prefHeight="31.0" prefWidth="292.0" />
+            <ComboBox fx:id="c_empid" layoutX="352.0" layoutY="259.0" prefHeight="31.0" prefWidth="292.0" />
          </children>
       </AnchorPane>
    </children>

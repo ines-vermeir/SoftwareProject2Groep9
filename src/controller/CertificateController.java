@@ -137,17 +137,14 @@ public class CertificateController implements Initializable {
 		// TODO Auto-generated method stub
 		
 		TestJackson tj = new TestJackson();
-		try {
-			List<Employee> ae = tj.getEmployees();
-		} catch (MalformedURLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+//		try {
+//			List<Employee> ae = tj.getEmployees();
+//		} catch (MalformedURLException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 		
-		ObservableList<Employee> employeeList = FXCollections.observableArrayList();
-		  
-		  
-		  
+		ObservableList<Employee> employeeList = FXCollections.observableArrayList();		  
 		  
 		  try {
 			for(Employee e : tj.getEmployees()) {

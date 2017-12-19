@@ -10,9 +10,11 @@ import java.util.function.Predicate;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
+import javafx.scene.input.MouseEvent;
 
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
@@ -25,6 +27,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.util.Callback;
@@ -36,15 +39,31 @@ public class HomeController implements Initializable {
 	@FXML
 	private TreeTableView<logic.Employee> table;
 	
-	private TreeItem<logic.Employee> chosenEmployee=null;
+	
 	
 	@FXML
 	private JFXTextField input;
 	
+	@FXML
+	private Button b_trainings;
+	
+	@FXML
+	private Button b_certificates;
+	
+	private TreeItem<logic.Employee> chosenEmployee=null;
+	private int empID;
+	
+	@FXML
+	protected void showTrainings()
+	{
+		
+		
+	}
+	
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-	//	Field[] fields = logic.Employee.class.getDeclaredFields();
 		ArrayList<logic.Employee> EmployeeOdata = null;
 		try {
 			EmployeeOdata = (ArrayList<logic.Employee>) TestJackson.getEmployees();
@@ -52,25 +71,7 @@ public class HomeController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	/*
-		for(int i= 0; i < fields.length; i++) {
-			   
-			JFXTreeTableColumn<Field,String> item = new JFXTreeTableColumn(fields.toString());
-			item.setPrefWidth(100);
-		
-			item.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Field, String>, ObservableValue<String>>() {
-		          
-				@Override
-	           public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Field, String> param) {
-					SimpleStringProperty column = new SimpleStringProperty();
-					column.setValue(param.getValue().getValue().getName());
-					return column;
-	           }
-	       });
-			
-			table.getColumns().set(i, item)
-		}
-		*/
+	
 		JFXTreeTableColumn<logic.Employee,String> id = new JFXTreeTableColumn("EmployeeID");
 		id.setPrefWidth(100);
 	
@@ -160,24 +161,12 @@ public class HomeController implements Initializable {
        });
 		
 		ObservableList<logic.Employee> Employees = FXCollections.observableArrayList();
-///////////////////////////////////////////
-		
 	
 		for(logic.Employee emp : EmployeeOdata) {
 			
 			Employees.add(emp);
 		}
-		/*
-		Employee.add(new Employee("Gill Steens","20","Halle"));
-		Employee.add(new Employee("Eva Bouton","20","Brussel"));
-		Employee.add(new Employee("Charles White","18","Gent"));
-		Employee.add(new Employee("Sebastian Garcia Martinez","21","Spanje"));
-		Employee.add(new Employee("Ines Vermeire","21","Antwerpen"));
-		Employee.add(new Employee("Michiel Roelants","31","Antwerpen"));
-		*/
-	/*	RecursiveTreeObject<Employee> r = new RecursiveTreeObject<Employee>();
-		r.setChildren(Employees);*/
-		//final TreeItem<logic.Employee> root = new RecursiveTreeItem<logic.Employee>(Employees, RecursiveTreeObject::getChildren);
+		
 		final TreeItem<logic.Employee> root = new TreeItem<logic.Employee>();
 		
 		for(Employee  e:  Employees) {
@@ -188,45 +177,18 @@ public class HomeController implements Initializable {
 		table.getColumns().setAll(id, fName,lName,city,title, birthday,address);
 		table.setRoot(root);
 		table.setShowRoot(false);
-/*		
- * 
- * 
-		input.textProperty().addListener(new ChangeListener<String>() {
 
-
-			@Override
-			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				table.setPressed(new Predicate<TreeItem<Employee>>() {
-					@Override
-					public boolean test(TreeItem<Employee> employee) {
-						Boolean flag = employee.getValue().getFirstName().toLowerCase().contains(newValue.toLowerCase());
-						return flag;
-					}
-				});
-				
+			
+		table.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			public void handle (MouseEvent arg0) {
+				chosenEmployee = table.getSelectionModel().getSelectedItem();
+				Employee e = (Employee) chosenEmployee.getValue();
+				empID = e.getEmployeeID();
 			}
-			
-			
 		});
+
 		
-		*/
 	
 	}
-/*
-	class Employee extends RecursiveTreeObject<Employee>{
-		StringProperty name;
-		StringProperty age;
-		StringProperty address;
-		
-		public Employee(String name,String age,String address)
-		{
-			this.name = new SimpleStringProperty(name);
-			this.age  = new SimpleStringProperty(age);
-			this.address = new SimpleStringProperty(address);
-			
-		}
-		
-		
-	}
-	*/
+
 }
