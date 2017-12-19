@@ -390,6 +390,7 @@ public class TrainingDetailsController  implements Initializable{
 				
 				Navigator.loadVista(Navigator.TrainingDetailsView);
 				Navigator.loadMenuVista(Navigator.MenuTrainingActiveView);
+				
 				errorMsg.setVisible(true);
 				errorMsg.setText(errorMsg.getText() + "Training updated!\n");
 			}
