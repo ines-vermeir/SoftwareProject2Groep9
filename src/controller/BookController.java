@@ -302,8 +302,6 @@ public class BookController implements Initializable{
 		  trainingBox.setItems(trainingList);
 		  
 		  
-		  //Handle training selection 
-		  
 		  //Link button okB
 		 
 		

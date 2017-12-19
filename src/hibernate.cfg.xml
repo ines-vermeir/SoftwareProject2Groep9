@@ -43,7 +43,7 @@
 		<mapping class="logic.AnswerPredefined"/>
 		<mapping class="logic.BookTraining"/>
 		<mapping class="logic.Certificate_upload"/>
-		
+		<mapping class="logic.Application"/>
 
 		
 	</session-factory>
