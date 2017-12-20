@@ -87,19 +87,6 @@ public class SurveyNewSurveyController implements Initializable {
 			check = false;
 		}
 		
-		
-//		if ((t_trainingID.getText()!= null && !t_trainingID.getText().isEmpty())) {
-//			tid = t_trainingID.getText();
-//			try {
-//				 trainingID = Integer.parseInt(tid);
-//			 }catch( NumberFormatException numberex) {
-//				 errorMsg.setText(errorMsg.getText() + "\nTraining ID is not a number!");
-//				 check = false;
-//			 }
-//		}  else {
-//		 errorMsg.setText(errorMsg.getText() + "\nTraining ID is empty!");
-//		 check = false;
-//		}
 		if ((t_title.getText()!= null && !t_title.getText().isEmpty())) {
 			title = t_title.getText();
 		 }	 else {
@@ -345,11 +332,9 @@ public class SurveyNewSurveyController implements Initializable {
 	        sur.getMyListSurveysQuestions().add(q2);
 	        
 	        
-	        
-	        surveyDB.addSurvey(sur);
-	        
+	        try {
+	        surveyDB.addSurvey(sur);        
 	        errorMsg.setText("Survey is saved!");
-	        
 	        t_trainingID.clear();
 	        t_title.clear();
 	        description.clear();
@@ -373,6 +358,11 @@ public class SurveyNewSurveyController implements Initializable {
 	        t_answer5a.clear();
 	        t_answer5b.clear();
 	        t_answer5c.clear();
+	        } catch (Exception exc)
+	        {
+	        	errorMsg.setText("Oops, something went wrong!");
+	        }        
+	        
 		}
 
 	}

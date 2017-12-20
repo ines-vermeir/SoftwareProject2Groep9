@@ -10,20 +10,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import logic.User;
+
 public class LoginController implements Initializable{
     
     
-    @FXML
-    private TextField userField; 
-    
-    @FXML 
-    private TextField passwordField;
-    
-    @FXML
-    private Label lblStatus;
+    @FXML private TextField userField;     
+    @FXML private TextField passwordField;   
+    @FXML private Label lblStatus;
     
     
-    private static User userLogin;
+    public static User userLogin;
     
     @SuppressWarnings("unused")
     @FXML protected void doLogin(ActionEvent e) {        
@@ -32,17 +28,30 @@ public class LoginController implements Initializable{
         boolean usernameGevonden = true;
         String password = passwordField.getText();            
         userLogin = null;
-        UserDB userDB = new UserDB(); 
-        
+        boolean check = false;
+        UserDB userDB = null; 
+            
         try {
-        	userLogin = userDB.getUser(userField.getText());
+        	userDB = new UserDB(); 
+        	if (userDB != null) {
+        		userLogin = userDB.getUser(userField.getText());
+        		check = true;
+        		}
+        	else {
+        		login = false;
+        		lblStatus.setText("Oops, something went wrong.");
+        	}
         } catch (Exception exc)
         {
         	lblStatus.setText("Oops, something went wrong.");
-        }       
+        	login = false;
+        }
+        
+        if (check == true)
+        {
         if (userLogin == null) {
             usernameGevonden = false;
-            lblStatus.setText("user not found");
+            lblStatus.setText("user not found.");
             lblStatus.setVisible(true);    
             userField.setStyle("-fx-background-color: red;");
             login = false;
@@ -54,6 +63,11 @@ public class LoginController implements Initializable{
         		passwordField.clear();
         		login = false;
         	}
+        }
+        }
+        else
+        {
+        	lblStatus.setText("Oops, something went wrong.");
         }
         
         if (login == true) {

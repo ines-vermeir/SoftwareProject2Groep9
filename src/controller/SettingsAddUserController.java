@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import logic.User;
 import logic.User.Privilege;
@@ -22,10 +23,10 @@ public class SettingsAddUserController implements Initializable {
 
 	@FXML private Button back;
 	@FXML private TextField t_username;
-	@FXML private TextField t_password;
 	@FXML private Button saveuser;
 	@FXML private ChoiceBox<String> c_privilege;
 	@FXML private Label errorMsg;
+	@FXML private PasswordField passField;
 	
 	@FXML
 	protected void backToSettings(ActionEvent e) {
@@ -54,9 +55,9 @@ public class SettingsAddUserController implements Initializable {
 			 errorMsg.setText(errorMsg.getText() + "\nUsername is empty!");
 			 check = false;
 		 }
-		 if ((t_password.getText() != null && !t_password.getText().isEmpty())) {
-			 password = t_password.getText();
-			 password = BCrypt.hashpw(t_password.getText(), BCrypt.gensalt());
+		 if ((passField.getText() != null && !passField.getText().isEmpty())) {
+			 password = passField.getText();
+			 password = BCrypt.hashpw(passField.getText(), BCrypt.gensalt());
 		 } else {
 			 errorMsg.setText(errorMsg.getText() + "\nPassword is empty!");
 			 check = false;

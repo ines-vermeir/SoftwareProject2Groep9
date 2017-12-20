@@ -141,8 +141,13 @@ public class SurveyAddPrSurveyToTraining implements Initializable {
 		        }
 			}
 			SurveyDB surveydb = new SurveyDB();
+			try {
 			surveydb.addSurvey(s);
 			 errorMsg.setText(errorMsg.getText() + "\nSurvey has been saved!");
+			} catch (Exception exc)
+			{
+				errorMsg.setText(errorMsg.getText() + "\nOops, something went wrong!");
+			}
 		}
 		
 	}
