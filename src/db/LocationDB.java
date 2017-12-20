@@ -86,7 +86,7 @@ public class LocationDB {
 		return l;
 	}
 	
-	public ArrayList<Location> getAllLocations(int id) {
+	public ArrayList<Location> getAllLocations() {
 		ArrayList <Location> l = null;
 		
 		Transaction t = null; 
