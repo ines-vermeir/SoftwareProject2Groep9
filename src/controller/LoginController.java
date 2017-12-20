@@ -18,20 +18,19 @@ public class LoginController implements Initializable{
     @FXML private TextField passwordField;   
     @FXML private Label lblStatus;
     
-    
     public static User userLogin;
     
     @SuppressWarnings("unused")
     @FXML protected void doLogin(ActionEvent e) {        
-        
+    
+    	try {
         boolean login = true;
         boolean usernameGevonden = true;
         String password = passwordField.getText();            
         userLogin = null;
         boolean check = false;
         UserDB userDB = null; 
-            
-        try {
+ 
         	userDB = new UserDB(); 
         	if (userDB != null) {
         		userLogin = userDB.getUser(userField.getText());
@@ -41,11 +40,7 @@ public class LoginController implements Initializable{
         		login = false;
         		lblStatus.setText("Oops, something went wrong.");
         	}
-        } catch (Exception exc)
-        {
-        	lblStatus.setText("Oops, something went wrong.");
-        	login = false;
-        }
+
         
         if (check == true)
         {
@@ -83,9 +78,10 @@ public class LoginController implements Initializable{
         	lblStatus.setText("Oops, something went wrong.");
         }
       }
-        
-
-        
+    	} catch (Exception ex)
+    	{
+    		lblStatus.setText("Oops, something went wrong.");
+    	}   
         
     }
         @Override
