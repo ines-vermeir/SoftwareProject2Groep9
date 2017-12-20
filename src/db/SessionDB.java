@@ -12,22 +12,21 @@ import java.util.List;
 import logic.Location;
 import logic.Training;
 
-
 public class SessionDB {
 
-	private SessionFactory myFactory = null;
+	private Session session= null;
 	
 	public SessionDB()
 	{
 		super();
-		myFactory = SingletonHibernate.getSessionFactory();
+		 session = SingletonHibernate.getSessionFactory().openSession();
 	}
 
 	
 	public boolean insertSession (logic.Session mySession)
 	{
 		boolean succes = false;
-		Session session = myFactory.openSession();
+		
 		Transaction t = null;
 		try 
 		{
@@ -40,10 +39,7 @@ public class SessionDB {
 			if (t != null) t.rollback();
 			e.printStackTrace();
 			succes = false;
-		} finally
-		{
-			session.close();
-		}
+		} 
 		return succes;
 	}
 	
@@ -52,7 +48,7 @@ public class SessionDB {
 	public boolean updateSession (logic.Session mySession)
 	{
 		boolean succes = false;
-		Session session = myFactory.openSession();
+		
 		Transaction t = null;
 		try
 		{
@@ -66,10 +62,7 @@ public class SessionDB {
 			e.printStackTrace();
 			succes = false;
 		}
-		finally
-		{
-			session.close();
-		}
+		
 		return succes;
 	}
 	
@@ -77,7 +70,7 @@ public class SessionDB {
 	public boolean archiveSession (logic.Session mySession)
 	{
 		mySession.setArchive(1);
-		Session session = myFactory.openSession();
+	
 		boolean succes = false;
 		Transaction t = null;
 		try
@@ -93,10 +86,7 @@ public class SessionDB {
 			e.printStackTrace();
 			succes = false;
 		}
-		finally
-		{
-			session.close();
-		}
+		
 		return succes;
 	}
 	
@@ -105,7 +95,7 @@ public class SessionDB {
 	public logic.Session getSessionByID (int sessionID)
 	{
 		logic.Session s = null;
-		Session session = myFactory.openSession();
+	
 		Transaction t = null;
 		try
 		{
@@ -116,10 +106,7 @@ public class SessionDB {
 		{
 			if (t != null) t.rollback();
 			e.printStackTrace();
-		} finally
-		{
-			session.close();
-		}
+		} 
 		return s;
 	}
 	
@@ -127,13 +114,12 @@ public class SessionDB {
 	public ArrayList<logic.Session> getAllSessions() 
 	{
 		ArrayList<logic.Session> list = null;
-		Session session = myFactory.openSession();
+	
 		Transaction t = null;
 		try
 		{
 			t = session.beginTransaction();
 			list = (ArrayList<logic.Session>) session.createCriteria(logic.Session.class).list();
-			
 			
 			t.commit();
 		} catch (HibernateException e)
@@ -141,10 +127,7 @@ public class SessionDB {
 			if (t != null) t.rollback();
 			e.printStackTrace();
 		}
-		finally
-		{
-			session.close();
-		}
+		
 		return list;
 	}
 	
@@ -564,4 +547,3 @@ public class SessionDB {
 //	
 //
 //}
-

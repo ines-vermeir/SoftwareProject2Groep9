@@ -12,6 +12,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import logic.Location;
+import logic.Training;
 import logic.User;
 
 //functies zijn getest en werken
@@ -22,18 +23,19 @@ import logic.User;
 
 public class UserDB {
 
-	private SessionFactory myFactory = null;
-	
+	private  SessionFactory myFactory= null;
+	private Session session = null;
 	public UserDB()
 	{
 		super();
 		myFactory = SingletonHibernate.getSessionFactory();
+		 session = myFactory.openSession();
 	}
 	
 	public boolean insertUser (User myUser)
 	{
 		boolean succes = false;
-		Session session = myFactory.openSession();
+	
 		Transaction t = null;
 		try 
 		{
@@ -47,16 +49,59 @@ public class UserDB {
 			if (t != null) t.rollback();
 			e.printStackTrace();
 			succes = false;
-		} finally
-		{
-			session.close();
-		}
+		} 
 		return succes;
 	}
 	
+	
+	
+	public void ChangePassword(String username, String wachtwoord) {
+		
+		User us = null;
+		
+		Transaction t = null; 
+		try {
+			t = session.beginTransaction();
+			//get by PRIMARY KEY 
+			
+			 us = (User) session.get(User.class,username);
+			 
+			 
+			 us.setPassword(wachtwoord);
+			
+			session.update(us);
+			t.commit();
+		
+		}catch(HibernateException e) {
+			if(t!= null ) t.rollback();
+			e.printStackTrace();
+		}
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public boolean updateUser (User myUser) {
 		boolean succes = false;
-		Session session = myFactory.openSession();
+		
 		Transaction t = null;
 		try
 		{
@@ -71,10 +116,7 @@ public class UserDB {
 			e.printStackTrace();
 			succes = false;
 		}
-		finally
-		{
-			session.close();
-		}
+		
 		return succes;
 	}
 	
@@ -84,7 +126,7 @@ public class UserDB {
 	public boolean archiveUser (User myUser) {
 		boolean succes = false;
 		myUser.setArchive(1);
-		Session session = myFactory.openSession();
+		
 		Transaction t = null;
 		try
 		{
@@ -99,17 +141,14 @@ public class UserDB {
 			e.printStackTrace();
 			succes = false;
 		}
-		finally
-		{
-			session.close();
-		}
+		
 		return succes;
 	}
 
 	public User getUser (String username)
 	{
 		User u = null;
-		Session session = myFactory.openSession();
+		
 		Transaction t = null;
 		try
 		{
@@ -123,17 +162,14 @@ public class UserDB {
 			if (t != null) t.rollback();
 			e.printStackTrace();
 		}
-		finally
-		{
-			session.close();
-		}
+		
 		return u;
 	}
 	
 	@SuppressWarnings("deprecation")
 	public User getUser2(String username) {
 		User u = null;
-		Session session = myFactory.openSession();
+		
 		Transaction t = null;
 		
 		try {
@@ -148,10 +184,7 @@ public class UserDB {
 			if (t != null) t.rollback();
 			e.printStackTrace();
 		}
-		finally
-		{
-			session.close();
-		}
+		
 		return u;
 	}
 	
@@ -165,7 +198,7 @@ public class UserDB {
 		User u = null;
 	boolean exists = false;
 	
-		Session session = myFactory.openSession();
+	
 		Transaction t = null;
 		try {
 			t = session.beginTransaction();
@@ -180,10 +213,7 @@ public class UserDB {
 				if (t != null) t.rollback();
 				e.printStackTrace();
 			}
-			finally
-			{
-				session.close();
-			}
+			
 			return exists;
 	
 	}
@@ -218,7 +248,7 @@ public class UserDB {
 	public ArrayList<User> getAllUsers()
 	{
 		ArrayList<User> list = null;
-		Session session = myFactory.openSession();
+		
 		Transaction t = null;
 		try
 		{
@@ -231,10 +261,7 @@ public class UserDB {
 			if (t != null) t.rollback();
 			e.printStackTrace();
 		}
-		finally
-		{
-			session.close();
-		}
+	
 		return list;
 	}
 	

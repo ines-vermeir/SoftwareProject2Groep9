@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BookOverviewController">
+   <children>
+      <AnchorPane prefHeight="800.0" prefWidth="1400.0">
+         <children>
+        
+            
+            <Label layoutX="545.0" layoutY="50.0" prefHeight="31.0" prefWidth="352.0" text="Books and Trainings Overview">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+            <Button fx:id="linkB" layoutX="75.0" layoutY="81.0" mnemonicParsing="false" onAction="#toNewLink" prefHeight="31.0" prefWidth="194.0" text="Create new link" />
+            <TreeTableView fx:id="list" layoutX="75.0" layoutY="136.0" prefHeight="593.0" prefWidth="1238.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
