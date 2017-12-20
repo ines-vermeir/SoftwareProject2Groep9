@@ -10,8 +10,8 @@
    <children>
       <AnchorPane prefHeight="765.0" prefWidth="1400.0">
          <children>
-            <Button fx:id="backup" layoutX="857.0" layoutY="298.0" prefHeight="31.0" prefWidth="179.0" text="Backup database" />
-            <Button fx:id="passw" layoutX="554.0" layoutY="297.0" prefHeight="31.0" prefWidth="179.0" text="Change password" />
+            <Button fx:id="backup" layoutX="857.0" layoutY="298.0" prefHeight="31.0" prefWidth="179.0" text="Backup database" onAction="#backup" />
+            <Button fx:id="passw" layoutX="554.0" layoutY="297.0" prefHeight="31.0" prefWidth="179.0" text="Change password" onAction="#gotochangePassword" />
             <Button fx:id="adduser" layoutX="261.0" layoutY="297.0" mnemonicParsing="false" onAction="#toAddUser" prefHeight="31.0" prefWidth="179.0" text="add user" />
             <Label layoutX="300.0" layoutY="199.0" text="add new user">
                <font>
