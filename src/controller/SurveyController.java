@@ -47,18 +47,18 @@ public class SurveyController implements Initializable {
 		Navigator.loadMenuVista(Navigator.MenuSurveyActiveView);
 	}
 	
-	@FXML //functie voor button "new pr survey"
+	@FXML //functie voor button "new predefined survey"
 	protected void toNewPrSurvey(ActionEvent e) {
 		Navigator.loadVista(Navigator.SurveyViewNewPrSurvey);
 		Navigator.loadMenuVista(Navigator.MenuSurveyActiveView);
 	}
-	@FXML //functie voor button "new pr survey"
+	@FXML //functie voor button "check results"
 	protected void toCheckResults(ActionEvent e) {
 		Navigator.loadVista(Navigator.SurveyViewCheckResults);
 		Navigator.loadMenuVista(Navigator.MenuSurveyActiveView);
 	}
 	
-	@FXML //functie voor button "new pr survey"
+	@FXML //functie voor button "add a predefined survey to a training"
 	protected void toAddPrToTraining(ActionEvent e) {
 		Navigator.loadVista(Navigator.SurveyViewAddPrtoTraining);
 		Navigator.loadMenuVista(Navigator.MenuSurveyActiveView);
@@ -66,99 +66,10 @@ public class SurveyController implements Initializable {
 
 	@Override
 	public void initialize (URL arg0, ResourceBundle arg1) {
-		
-//		//opvullen tabel voor search survey (toont alle surveys)
-//		SurveyDB sdb = new SurveyDB();
-//		if (sdb.getAllSurveys() != null) {
-//			ObservableList<Survey> surveys = FXCollections.observableArrayList(sdb.getAllSurveys());
-//		surveyIDCol.setCellValueFactory(new PropertyValueFactory<Survey, Integer>("surveyID"));
-//		trainingIDCol.setCellValueFactory(new PropertyValueFactory<Survey, Integer>("trainingsID"));
-//		titleCol.setCellValueFactory(new PropertyValueFactory<Survey, String>("title"));
-//		descriptionCol.setCellValueFactory(new PropertyValueFactory<Survey, String>("description"));
-//		FilteredList<Survey> filteredSurvey = new FilteredList<>(surveys, p -> true);
-//
-//		SortedList<Survey> sortedSurvey = new SortedList<>(filteredSurvey);		
-//		sortedSurvey.comparatorProperty().bind(allSurveyTable.comparatorProperty());										
-//		allSurveyTable.setItems(sortedSurvey);
-//		}
-//
-//		//opvullen predefined surveys tabel (toont alle predefined surveys)
-//		SurveyPredefinedDB prdb = new SurveyPredefinedDB();
-//		if (prdb.getAllSurveys() != null) {
-//			ObservableList<SurveyPredefined> prsurveys = FXCollections.observableArrayList(prdb.getAllSurveys());
-//		prsurveyIDCol.setCellValueFactory(new PropertyValueFactory<SurveyPredefined, Integer>("surveyPrID"));
-//		prtitleCol.setCellValueFactory(new PropertyValueFactory<SurveyPredefined, String>("title"));
-//		prdescriptionCol.setCellValueFactory(new PropertyValueFactory<SurveyPredefined, String>("description"));
-//		FilteredList<SurveyPredefined> filteredprSurvey = new FilteredList<>(prsurveys, p -> true);
-//
-//		SortedList<SurveyPredefined> sortedprSurvey = new SortedList<>(filteredprSurvey);		
-//		sortedprSurvey.comparatorProperty().bind(allPredefinedSurveyTable.comparatorProperty());										
-//		allPredefinedSurveyTable.setItems(sortedprSurvey);
-//		}
-
-		
+			
 	}
 	
 }
 
 
 
-//JFXTreeTableColumn<logic.SurveyPredefined,String> surveyPrID = new JFXTreeTableColumn("surveyID");
-//surveyPrID.setPrefWidth(100);
-//
-//surveyPrID.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<logic.SurveyPredefined, String>, ObservableValue<String>>() {
-//      
-//	@Override
-//   public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<logic.SurveyPredefined, String> param) {
-//		SimpleStringProperty simple = new SimpleStringProperty();
-//		simple.setValue(new Integer(param.getValue().getValue().getSurveyPrID()).toString());
-//		return simple;
-//   }
-//});
-//
-//JFXTreeTableColumn<logic.SurveyPredefined,String> title = new JFXTreeTableColumn("Title");
-//title.setPrefWidth(150);
-//
-//title.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<logic.SurveyPredefined,String>, ObservableValue<String>>() {
-//
-//
-//@Override
-//public ObservableValue<String> call(CellDataFeatures<logic.SurveyPredefined, String> param) {
-//	SimpleStringProperty simple = new SimpleStringProperty();
-//	simple.setValue(param.getValue().getValue().getTitle());
-//	return simple;
-//}
-//});
-//
-//JFXTreeTableColumn<logic.SurveyPredefined,String> description = new JFXTreeTableColumn("Description");
-//title.setPrefWidth(400);
-//
-//description.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<logic.SurveyPredefined,String>, ObservableValue<String>>() {
-//
-//
-//@Override
-//public ObservableValue<String> call(CellDataFeatures<logic.SurveyPredefined, String> param) {
-//	SimpleStringProperty simple = new SimpleStringProperty();
-//	simple.setValue(param.getValue().getValue().getDescription());
-//	return simple;
-//}
-//});
-//
-//ObservableList<logic.SurveyPredefined> surveyPrList = FXCollections.observableArrayList();
-//ArrayList<logic.SurveyPredefined> surveyPr = null;
-//SurveyPredefinedDB db = new SurveyPredefinedDB();
-//surveyPr = db.getAllSurveys();
-//
-//for (SurveyPredefined sp: surveyPr)
-//{
-//	surveyPrList.add(sp);
-//}
-//final TreeItem<SurveyPredefined> root = new TreeItem<SurveyPredefined>();
-//for (SurveyPredefined sp: surveyPrList)
-//{
-//	TreeItem<SurveyPredefined> item = new TreeItem<>(sp);
-//	root.getChildren().add(item);
-//}
-//list.getColumns().setAll(surveyPrID, title, description);
-//list.setRoot(root);
-//list.setShowRoot(false);
