@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
 
+import application.Navigator;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -145,18 +146,18 @@ public class HomeController implements Initializable {
 			allTrainingTable.setItems(training);
 		}
 		
-//		allTrainingTable.setRowFactory( trainingClick -> {
-//		    TableRow<Training> row = new TableRow<>();
-//		    row.setOnMouseClicked(event -> {
-//		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-//		            TrainingController.trainingrow = row.getItem();
-//		            
-//		            Navigator.loadVista(Navigator.TrainingDetailsView);
-//		    		Navigator.loadMenuVista(Navigator.MenuTrainingActiveView);
-//		        }
-//		    });
-//		    return row ;
-//		});
+		allTrainingTable.setRowFactory( trainingClick -> {
+		    TableRow<Training> row = new TableRow<>();
+		    row.setOnMouseClicked(event -> {
+		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+		            TrainingController.trainingRow = row.getItem();
+		            
+		            Navigator.loadVista(Navigator.TrainingDetailsView);
+		    		Navigator.loadMenuVista(Navigator.MenuTrainingActiveView);
+		        }
+		    });
+		    return row ;
+		});
 		
 		
 		ArrayList<logic.Employee> EmployeeOdata = null;
