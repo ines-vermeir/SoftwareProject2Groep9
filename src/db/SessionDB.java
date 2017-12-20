@@ -9,6 +9,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import java.util.List;
 
+import javax.persistence.Query;
+
 import logic.Location;
 import logic.Training;
 
@@ -130,17 +132,50 @@ public class SessionDB {
 		return list;
 	}
 	
-	public List<Session> getAllSessionsOfTrainingID(int tid) 
+	public List<logic.Session> getAllSessionsOfTrainingID(int tid) 
 	{
-		 List<Session> list = new ArrayList<Session>(); 
+		 List<logic.Session> list = new ArrayList<logic.Session>(); 
 		  //Session session = myFactory.openSession();
 		  for (Object oneObject : session.createQuery("FROM Sessions where trainingID =  " + tid).getResultList()) {
-			  list.add((Session)oneObject);
+			  list.add((logic.Session)oneObject);
 		    }
-		  session.close();
+		  //session.close();
 		  return list;
 	}
+	
+	//Added by Sebastian 
+	
+	public int  linkEmployee(int sessionID, int employeeIDenrolled) {
+		
+		int result = 0;
+		Transaction t = null; 
+		try {
+			
+			t = session.beginTransaction();
+				@SuppressWarnings("rawtypes")
+			Query query =session.createNativeQuery("INSERT INTO Students_enrolled_in_session VALUES(:sessionID, :employeeIDenrolled)");
+				query.setParameter("sessionID", sessionID);
+				query.setParameter("employeeIDenrolled",employeeIDenrolled ); 
+				
+		       result= query.executeUpdate();
+			
+			t.commit();
+			
+			return result;
+		}catch(HibernateException e) {
+			if(t!= null ) t.rollback();
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	
+	
+	
+	
+	
 }
+
 
 // Code SessionDAO:
 

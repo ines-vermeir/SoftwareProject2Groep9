@@ -14,7 +14,7 @@
    <children>
       <AnchorPane prefHeight="800.0" prefWidth="1400.0">
          <children>
-            <SplitPane layoutX="21.0" layoutY="173.0" prefHeight="600.0" prefWidth="1400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <SplitPane dividerPositions="0.9971387696709585" layoutX="21.0" layoutY="173.0" prefHeight="600.0" prefWidth="1400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <items>
                   <AnchorPane>
                      <children>
@@ -24,28 +24,39 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="trainingBox" layoutX="40.0" layoutY="257.0" prefHeight="31.0" prefWidth="261.0" />
-                        <Button fx:id="okB" layoutX="103.0" layoutY="356.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="135.0" text="Ok" />
+                        <Button fx:id="okB" layoutX="109.0" layoutY="337.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="135.0" text="Ok" />
                         <Label fx:id="trainingLabel" layoutX="625.0" layoutY="649.0" prefHeight="21.0" prefWidth="410.0" />
+                        <Label alignment="CENTER" layoutX="39.0" layoutY="168.0" prefHeight="21.0" prefWidth="188.0" text="Info application:">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="trainingText" layoutX="173.0" layoutY="210.0" prefHeight="21.0" prefWidth="143.0" />
+                        <Label fx:id="trainingLabel" layoutX="56.0" layoutY="210.0" prefHeight="21.0" prefWidth="84.0" text="TrainingID:" />
+                        <Label layoutX="55.0" layoutY="247.0" prefHeight="21.0" prefWidth="109.0" text="Status:" />
+                        <Label fx:id="authoText" layoutX="181.0" layoutY="247.0" prefHeight="21.0" prefWidth="135.0" />
+                        <TreeTableView fx:id="table" layoutX="334.0" layoutY="144.0" prefHeight="522.0" prefWidth="963.0">
+                           <effect>
+                              <Blend mode="SCREEN" />
+                           </effect>
+                        </TreeTableView>
+                        <Label layoutX="334.0" layoutY="83.0" prefHeight="21.0" prefWidth="312.0" text="Applications available:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="13.0" layoutY="123.0" text="Select an authorized employee and click Ok">
+                           <font>
+                              <Font name="System Italic" size="15.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
+                  <Label fx:id="trainingText1" prefHeight="21.0" prefWidth="143.0" />
                </items></SplitPane>
-            <TreeTableView fx:id="table" layoutX="359.0" layoutY="80.0" prefHeight="522.0" prefWidth="963.0">
-               <effect>
-                  <Blend mode="SCREEN" />
-               </effect></TreeTableView>
             <Label alignment="CENTER" layoutX="558.0" layoutY="14.0" prefHeight="21.0" prefWidth="285.0" text="Add employee to training" textAlignment="CENTER">
                <font>
                   <Font size="21.0" />
-               </font>
-            </Label>
-            <Label layoutX="17.0" layoutY="134.0" prefHeight="52.0" prefWidth="330.0" text="Select a training and an employee and click Ok">
-               <font>
-                  <Font name="Arial Italic" size="15.0" />
-               </font></Label>
-            <Label alignment="CENTER" layoutX="119.0" layoutY="204.0" prefHeight="21.0" prefWidth="101.0" text="Trainings:">
-               <font>
-                  <Font name="System Bold" size="15.0" />
                </font>
             </Label>
          </children>

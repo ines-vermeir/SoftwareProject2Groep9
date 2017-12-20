@@ -28,7 +28,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Proxy;
 
 import db.SessionDB;
-@Entity
+@Entity(name="Sessions")
 //@Entity(name="logic.Session")
 
 @Table(name="Sessions")

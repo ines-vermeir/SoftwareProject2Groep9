@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
@@ -23,6 +24,7 @@ import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+import db.SessionDB;
 import db.TestJackson;
 import db.TrainingDB;
 import javafx.beans.property.SimpleStringProperty;
@@ -38,6 +40,7 @@ import javafx.fxml.Initializable;
 import javafx.util.Callback;
 import logic.Application;
 import logic.Employee;
+import logic.Session;
 import logic.Training;
 
 public class EmployeeController implements Initializable{
@@ -50,7 +53,7 @@ public class EmployeeController implements Initializable{
 	
 	
 	@FXML
-	private ComboBox trainingBox;
+	private Label authoText;
 	
      @FXML
     private Button okB; 
@@ -59,16 +62,16 @@ public class EmployeeController implements Initializable{
      private Label feedback;
      
      @FXML
-     private Label trainingLabel;
+     private Label trainingText;
       
      private Employee chosenEmp=null; 
      
      private String message = "";  
    
      private TrainingDB db = new TrainingDB();
-     private int chosenTraining=0;
-     
-     
+     //chosen training by employee on applications
+     private int chosenTraining;
+    
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
@@ -198,132 +201,144 @@ public class EmployeeController implements Initializable{
 
 			@Override
 			public void handle(MouseEvent arg0) {
+				
+				ArrayList<Application> listAppl = (ArrayList<Application>) db.getApplications();
+				message="";
+				feedback.setText(message);
 				// TODO Auto-generated method stub
-				chosenEmp = table.getSelectionModel().getSelectedItem().getValue();
+				int userid= 0;
+				   String status="";
+				
 				
 
 				//First= check if employee has done an application or not
+			   boolean contains = false;
 			   
-				
-				
-				for(Application a: db.getApplications()) {
-					if((chosenEmp.getEmployeeID() == a.getUser_id())) {
-						
+				for(Application a: listAppl) {
+					if(a.getUser_id()==table.getSelectionModel().getSelectedItem().getValue().getEmployeeID()) {
+						contains = true;
+						userid =a.getUser_id();
+						status = a.getStatus();
 						chosenTraining= a.getTraining_id();
-						trainingLabel.setText("This employee wishes to follow training with ID=" + a.getTraining_id());
-						
-					}else {
-						trainingLabel.setText("This employee has not made an application yet");
-						chosenEmp=null;
-						chosenTraining=0;
+						chosenEmp = table.getSelectionModel().getSelectedItem().getValue();
+						break;
 					}
+					
 				}
+				if(contains==false) {
+					message="This employee has not made an application yet\n";
+					trainingText.setText("");
+					authoText.setText("");
+					feedback.setText(message);
+					table.getSelectionModel().clearSelection();
+					chosenEmp=null;
+				}
+				if(contains == true) {
+					trainingText.setText(""+chosenTraining);
+					authoText.setText(status);
+					
+				if(status.equals("deny")) {
+					
+							message = "This employee is not allowed to follow this training\n";
+						
+							feedback.setText(message);
+							table.getSelectionModel().clearSelection();
+							chosenEmp=null;
+				}	
+					
+				}
+				
+				
+		
 				
 			}
 			  
+			
 			  
 			  
 		  });
 		 
 		
-		
-		
-		
-		
-		
-		
-		
-		//Populate combobox and handle selection
-		
-		
-		
-			  ObservableList<Training> trainingList = FXCollections.observableArrayList();
-			  
-			  
-			  TrainingDB db = new TrainingDB(); 
-			  
-			  
-			  for(Training training : db.getAllTrainings()) {
-					
-					trainingList.add(training);
-				}
-			  
-		  
-			  trainingBox.setItems(trainingList);
 			  
 			  
 	    //Handle button to link employee to training 
 			//Link button okB
 				 
+		
+		ArrayList<Training> activeTrainings = (ArrayList<Training>) db.getActiveTrainings();
 				
 			  okB.setOnAction(new EventHandler<ActionEvent>() {
 				
 				 
 				@Override
 				public void handle(ActionEvent arg0) {
+					
+					System.out.println(""+chosenTraining);
 					message="";
 					
-					boolean valid= true;
+					 boolean valid= true;
 					
+				     
+					
+					boolean contain = false;
 					feedback.setText("");
 			
-					if( trainingBox==null || trainingBox.getValue()==null || trainingBox.getSelectionModel().isEmpty() ||trainingBox.getSelectionModel().getSelectedItem()==null  ) {
-						message+="Please choose the training the employee wishes to follow\n";
-						valid = false;
-						
-					}
 					
 					if(chosenEmp==null) {
 						
-						message+="Please select the employee that wishes to follow a training\n";
+						message="Please select a valid employee\n";
 						valid = false;
-						}
+						feedback.setText(message);
+					}else {
 					
-			
-						//First= check if employee has done an application to follow a training and he/she is allowed to follow that training
-					   
-						
-						Training chosenTraining = (Training)trainingBox.getValue();
-						for(Application a: db.getApplications()) {
-							if((chosenEmp.getEmployeeID() == a.getUser_id() && a.getStatus().equals("allow") && a.getTraining_id() == chosenTraining.getTrainingID() )) {
-								message+="The employee is not allowed to follow this training\n";
-								valid=false;
-							}else {
-								
-							}
-						}
+						//Second= Find out if training is active or not
+						//genomen uit https://stackoverflow.com/questions/23336169/condition-to-check-if-a-value-exists-in-list-containing-objects/23336285				
+										
+										for(Training t: activeTrainings) {
+											if(t.getTrainingID()==chosenTraining) {
+												
+												contain = true; 
+												break;
+											}
+										}
+										
+										if(contain==false) {
+											message+="The employee is allowed but the selected training is yet to be made\n";
+											valid=false;
+											feedback.setText(message);
+										}
+											
+										
+					}
+					
 						
 						
 						if(valid==true) {
 							
+							SessionDB sessiondb = new SessionDB();
+							ArrayList<logic.Session> listSessions =(ArrayList<Session>) sessiondb.getAllSessionsOfTrainingID(chosenTraining);
+							
+							//Third= Find out id sessions of this training
 						
-						//Second= Find the trainingid of the 
-						
-						
-						
-						
-						
-						
-						
-						
-						
+							for(Session s: listSessions ) {
+								
+								sessiondb.linkEmployee(s.getSessionID(), chosenEmp.getEmployeeID());
+							}
 						
 						
-						
-						
-						
-						
-						
+						//Finally add employee to the training by adding him/her to table Students_enrolled_in_session
+							
+							
 						
 						//Clear and showing confirmation
-						message+="The selected employee has successfully been added\nto the chosen training";
+						message+="The selected employee has successfully been added to the chosen training";
 						table.getSelectionModel().clearSelection();
-						trainingBox.getSelectionModel().clearSelection();
+						feedback.setText(message);
 						
 						
-						chosenEmp=null;
-						trainingBox.setValue(null);
+						//chosenEmp=null;
 						
+						//Eventueel application verwijderen van database of  archiveren 
 						
 					}
 
