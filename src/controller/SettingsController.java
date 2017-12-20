@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -9,6 +10,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 public class SettingsController implements Initializable {
 
@@ -16,6 +19,9 @@ public class SettingsController implements Initializable {
 	@FXML private Button colors;
 	@FXML private Button passw;
 	@FXML private Button adduser;
+	@FXML private Label LabelStatus;
+	@FXML private TextField txtPath;
+	@FXML private Label lblpath;
 	
 	@FXML //functie voor button "new user"
 	protected void toAddUser(ActionEvent e) {
@@ -23,63 +29,59 @@ public class SettingsController implements Initializable {
 		Navigator.loadMenuVista(Navigator.MenuSettingsActiveView);
 	}
 	
-	@FXML private Label LabelStatus;
-	@FXML private TextField txtPath;
-	@FXML private Label lblpath;
+	@FXML //functie voor button "change password"
+	protected void gotochangePassword(ActionEvent e) {
+		Navigator.loadVista(Navigator.SettingsChangePassword);
+		Navigator.loadMenuVista(Navigator.MenuSettingsActiveView);
+	}
 	
-	@FXML //functie voor button "new survey"
+	
+	
+	@FXML
 	protected void backup(ActionEvent e) throws IOException {
-		LabelStatus.setVisible(true);
-		
-		String inputPath = txtPath.getText()+"\\";
-		
-		System.out.println(inputPath);
-		
-		
+		LabelStatus.setVisible(true);				
 		boolean backupGelukt = false;
 		
-		HibernateCSV hibernateCSV = new HibernateCSV();
+		if (txtPath.getText() != null && !txtPath.getText().isEmpty())
+		{
+			try
+			{
+				String inputPath =  txtPath.getText()+"\\";
+				System.out.println(inputPath);		
+				HibernateCSV hibernateCSV = new HibernateCSV();
+				hibernateCSV.hibernateCSVAnswer(inputPath);
+				hibernateCSV.hibernateCSVBooks(inputPath);
+				hibernateCSV.hibernateCSVCertificate(inputPath);
+				hibernateCSV.hibernateCSVLocation(inputPath);
+				hibernateCSV.hibernateCSVPredefinedAnswers(inputPath);
+				hibernateCSV.hibernateCSVPredefinedQuestions(inputPath);
+				hibernateCSV.hibernateCSVPredefinedSurveys(inputPath);
+				hibernateCSV.hibernateCSVQuestion(inputPath);
+				hibernateCSV.hibernateCSVSessions(inputPath);
+				hibernateCSV.hibernateCSVSurvey(inputPath);
+				hibernateCSV.hibernateCSVTraining(inputPath);
+				hibernateCSV.hibernateCSVUser(inputPath);
+				hibernateCSV.sessionStudentsEnrolledCSV(inputPath);
+				hibernateCSV.sessionStudentsPresentCSV(inputPath);
+				backupGelukt = true;
+			} catch (Exception exc)
+			{
+				LabelStatus.setText("Oops, something went wrong...");
+				backupGelukt = false;
+			}
+		} else
+		{
+			LabelStatus.setText("You need to choose a file path!");
+			backupGelukt = false;
+		}
 		
-		// TO DO CONTROLE IS GELUKT !!!
-		
-		
-   // 	String pathGevonden = "C:\\hibernateoef\\";
-		
-//		if(txtPath.toString().contains("\\") == false){
-//			System.out.println("error");
-//			LabelStatus.setText("backup failed");
-//			LabelStatus.setVisible(true);	
-		
-		
-		
-//		else {
-			
-//			LabelStatus.setText("processing");
-//			LabelStatus.setVisible(true);	
-		
-		hibernateCSV.hibernateCSVAnswer(inputPath);
-		hibernateCSV.hibernateCSVBooks(inputPath);
-		hibernateCSV.hibernateCSVCertificate(inputPath);
-		hibernateCSV.hibernateCSVLocation(inputPath);
-		hibernateCSV.hibernateCSVPredefinedAnswers(inputPath);
-		hibernateCSV.hibernateCSVPredefinedQuestions(inputPath);
-		hibernateCSV.hibernateCSVPredefinedSurveys(inputPath);
-		hibernateCSV.hibernateCSVQuestion(inputPath);
-		hibernateCSV.hibernateCSVSessions(inputPath);
-		hibernateCSV.hibernateCSVSurvey(inputPath);
-		hibernateCSV.hibernateCSVTraining(inputPath);
-		hibernateCSV.hibernateCSVUser(inputPath);
-		hibernateCSV.sessionStudentsEnrolledCSV(inputPath);
-		hibernateCSV.sessionStudentsPresentCSV(inputPath);
-		
-		backupGelukt = true;
 		
 		if (backupGelukt) {	
 			LabelStatus.setText("backup succeeded");
 			LabelStatus.setVisible(true);	
 
 		}
-		
+	}	
 	
 	
 	@Override

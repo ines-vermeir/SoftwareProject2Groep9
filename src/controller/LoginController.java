@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import logic.User;
+
 public class LoginController implements Initializable{
     
     
@@ -23,7 +24,7 @@ public class LoginController implements Initializable{
     private Label lblStatus;
     
     
-    private static User userLogin;
+    public static User userLogin;
     
     @SuppressWarnings("unused")
     @FXML protected void doLogin(ActionEvent e) {        

@@ -12,6 +12,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import logic.Location;
+import logic.Training;
 import logic.User;
 
 //functies zijn getest en werken
@@ -51,6 +52,52 @@ public class UserDB {
 		} 
 		return succes;
 	}
+	
+	
+	
+	public void ChangePassword(String username, String wachtwoord) {
+		
+		User us = null;
+		
+		Transaction t = null; 
+		try {
+			t = session.beginTransaction();
+			//get by PRIMARY KEY 
+			
+			 us = (User) session.get(User.class,username);
+			 
+			 
+			 us.setPassword(wachtwoord);
+			
+			session.update(us);
+			t.commit();
+		
+		}catch(HibernateException e) {
+			if(t!= null ) t.rollback();
+			e.printStackTrace();
+		}
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public boolean updateUser (User myUser) {
 		boolean succes = false;
