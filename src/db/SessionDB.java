@@ -48,7 +48,7 @@ public class SessionDB {
 	public boolean updateSession (logic.Session mySession)
 	{
 		boolean succes = false;
-		
+		//Session session = myFactory.openSession();
 		Transaction t = null;
 		try
 		{
@@ -62,7 +62,6 @@ public class SessionDB {
 			e.printStackTrace();
 			succes = false;
 		}
-		
 		return succes;
 	}
 	
@@ -133,13 +132,16 @@ public class SessionDB {
 	
 	public List<logic.Session> getAllSessionsOfTrainingID(int tid) 
 	{
-		 List<logic.Session> list = new ArrayList<logic.Session>(); 
-		 // org.hibernate.Session session = myFactory.openSession();
-		  for (Object oneObject : session.createQuery("FROM Session where archive =0 AND trainingID =  " + tid).getResultList()) {
-			  list.add((logic.Session)oneObject);
-		    }
-		  session.close();
-		  return list;
+		List<logic.Session> list = new ArrayList<logic.Session>(); 
+		//org.hibernate.Session session = myFactory.openSession();
+		Transaction t = session.beginTransaction();
+		for (Object oneObject : session.createQuery("FROM Session where archive =0 AND trainingID =  " + tid).getResultList()) {
+			list.add((logic.Session)oneObject);
+		}
+		t.commit();
+		//session.close();
+
+		return list;
 	}
 }
 

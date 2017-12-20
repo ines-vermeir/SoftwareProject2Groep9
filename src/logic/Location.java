@@ -35,6 +35,74 @@ public class Location  {
 		@Column(name="archive")
 		public int archive;
 		
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + archive;
+			result = prime * result + ((city == null) ? 0 : city.hashCode());
+			result = prime * result + ((country == null) ? 0 : country.hashCode());
+			result = prime * result + ((info == null) ? 0 : info.hashCode());
+			result = prime * result + ((name == null) ? 0 : name.hashCode());
+			result = prime * result + ((number == null) ? 0 : number.hashCode());
+			result = prime * result + ((postalCode == null) ? 0 : postalCode.hashCode());
+			result = prime * result + ((streetName == null) ? 0 : streetName.hashCode());
+			return result;
+		}
+
+
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Location other = (Location) obj;
+			if (archive != other.archive)
+				return false;
+			if (city == null) {
+				if (other.city != null)
+					return false;
+			} else if (!city.equals(other.city))
+				return false;
+			if (country == null) {
+				if (other.country != null)
+					return false;
+			} else if (!country.equals(other.country))
+				return false;
+			if (info == null) {
+				if (other.info != null)
+					return false;
+			} else if (!info.equals(other.info))
+				return false;
+			if (name == null) {
+				if (other.name != null)
+					return false;
+			} else if (!name.equals(other.name))
+				return false;
+			if (number == null) {
+				if (other.number != null)
+					return false;
+			} else if (!number.equals(other.number))
+				return false;
+			if (postalCode == null) {
+				if (other.postalCode != null)
+					return false;
+			} else if (!postalCode.equals(other.postalCode))
+				return false;
+			if (streetName == null) {
+				if (other.streetName != null)
+					return false;
+			} else if (!streetName.equals(other.streetName))
+				return false;
+			return true;
+		}
+
+
+
 		public Location(int ID, String streetName, String number, String postalCode, String city, String country, String name, String info, int archive) {
 			super();
 			this.ID = ID;

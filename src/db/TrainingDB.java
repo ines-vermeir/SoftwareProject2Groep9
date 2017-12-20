@@ -60,6 +60,19 @@ public void  updateTraining(Training myTraining) {
 	}
 }
 
+public void  deleteTraining(Training myTraining) {
+
+	
+	Transaction t = null; 
+	try {
+		t = session.beginTransaction();
+		session.delete(myTraining);
+		t.commit();
+	}catch(HibernateException e) {
+		if(t!= null ) t.rollback();
+		e.printStackTrace();
+	}
+}
 
 public void archiveTraining(Training myTraining) {
 	 
