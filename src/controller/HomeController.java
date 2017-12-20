@@ -12,6 +12,7 @@ import com.jfoenix.controls.JFXTreeTableColumn;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
@@ -143,6 +144,19 @@ public class HomeController implements Initializable {
 			training.comparatorProperty().bind(allTrainingTable.comparatorProperty());								
 			allTrainingTable.setItems(training);
 		}
+		
+//		allTrainingTable.setRowFactory( trainingClick -> {
+//		    TableRow<Training> row = new TableRow<>();
+//		    row.setOnMouseClicked(event -> {
+//		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+//		            TrainingController.trainingrow = row.getItem();
+//		            
+//		            Navigator.loadVista(Navigator.TrainingDetailsView);
+//		    		Navigator.loadMenuVista(Navigator.MenuTrainingActiveView);
+//		        }
+//		    });
+//		    return row ;
+//		});
 		
 		
 		ArrayList<logic.Employee> EmployeeOdata = null;
