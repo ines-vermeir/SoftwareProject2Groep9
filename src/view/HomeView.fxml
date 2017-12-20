@@ -43,7 +43,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="248.0" layoutY="174.0" prefHeight="21.0" prefWidth="561.0" text="Select the training you would like to create:">
+                  <Label layoutX="248.0" layoutY="174.0" prefHeight="21.0" prefWidth="561.0" text="Double click the training you would like to create:">
                      <font>
                         <Font name="System Italic" size="15.0" />
                      </font>
@@ -53,7 +53,6 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Button layoutX="1029.0" layoutY="558.0" mnemonicParsing="false" text="create training" />
                </children>
             </AnchorPane>
         <!--      <JFXButton text="New Student" /> -->
