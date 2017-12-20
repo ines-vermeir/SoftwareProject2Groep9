@@ -134,7 +134,7 @@ public class SessionDB {
 	public List<logic.Session> getAllSessionsOfTrainingID(int tid) 
 	{
 		 List<logic.Session> list = new ArrayList<logic.Session>(); 
-		  org.hibernate.Session session = myFactory.openSession();
+		 // org.hibernate.Session session = myFactory.openSession();
 		  for (Object oneObject : session.createQuery("FROM Session where archive =0 AND trainingID =  " + tid).getResultList()) {
 			  list.add((logic.Session)oneObject);
 		    }
