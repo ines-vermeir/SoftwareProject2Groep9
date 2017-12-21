@@ -111,7 +111,9 @@ public class CertificateController implements Initializable {
 	public void searchFile(ActionEvent e)
 	{
 		FileChooser fc = new FileChooser();
-		fc.getExtensionFilters().addAll(new ExtensionFilter("PDF Files", "*.pdf"));
+		fc.getExtensionFilters().add(new ExtensionFilter("PDF Files", "*.pdf"));
+		fc.getExtensionFilters().add(new ExtensionFilter ("JPG", "*.jpg"));
+		fc.getExtensionFilters().add(new ExtensionFilter ("PNG", "*.png"));
 		selectedFile = fc.showOpenDialog(null);
 		
 		if (selectedFile != null)
