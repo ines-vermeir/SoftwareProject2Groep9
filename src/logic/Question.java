@@ -27,7 +27,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Table(name="Survey_Questions")
 public class Question {
 	@Id
-	@Column(name="questionID")
+	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer questionId;
 	
@@ -57,7 +57,7 @@ public class Question {
 	//@ManyToOne(fetch = FetchType.EAGER, 
      //       cascade = { CascadeType.ALL, CascadeType. }
 	@ManyToOne
-	@JoinColumn(name="surveyID",referencedColumnName="surveyID")
+	@JoinColumn(name="survey_id",referencedColumnName="id")
 	private Survey survey;
 	
 	

@@ -152,7 +152,7 @@ public class SessionDB {
 		List<logic.Session> list = new ArrayList<logic.Session>(); 
 		//org.hibernate.Session session = myFactory.openSession();
 		Transaction t = session.beginTransaction();
-		for (Object oneObject : session.createQuery("FROM Session where archive =0 AND trainingID =  " + tid).getResultList()) {
+		for (Object oneObject : session.createQuery("FROM Session where archive =0 AND training_id =  " + tid).getResultList()) {
 			list.add((logic.Session)oneObject);
 		}
 		t.commit();
@@ -165,7 +165,7 @@ public class SessionDB {
 		List<logic.Session> list = new ArrayList<logic.Session>(); 
 		//org.hibernate.Session session = myFactory.openSession();
 		Transaction t = session.beginTransaction();
-		for (Object oneObject : session.createQuery("FROM Session where trainingID =  " + tid).getResultList()) {
+		for (Object oneObject : session.createQuery("FROM Session where training_id =  " + tid).getResultList()) {
 			list.add((logic.Session)oneObject);
 		}
 		t.commit();
