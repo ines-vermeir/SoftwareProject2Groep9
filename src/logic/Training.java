@@ -54,7 +54,7 @@ public class Training {
 	
 	
 	public enum Language {
-		Chinese, English, Spanish, Arabic, Russian, Portuguese,French,Japanese,German,Italien, Dutch	
+		Chinese, English, Spanish, Arabic, Russian, Portuguese,French,Japanese,German,Italian, Dutch	
 	}
 	
 	@Transient													// niet meenemen in tabel
@@ -564,7 +564,7 @@ public void editTraining(int privilege) throws IOException{
 					break;
 			case 9:uptatetraining.setLanguage(Language.German);
 					break;
-			case 10:uptatetraining.setLanguage(Language.Italien);
+			case 10:uptatetraining.setLanguage(Language.Italian);
 					break;
 			case 11:uptatetraining.setLanguage(Language.Dutch);
 					break;
@@ -639,7 +639,7 @@ public void MakeNewTraining(int privilege)throws IOException {
 					break;
 			case 9:newtraining.setLanguage(Language.German);
 					break;
-			case 10:newtraining.setLanguage(Language.Italien);
+			case 10:newtraining.setLanguage(Language.Italian);
 					break;
 			case 11:newtraining.setLanguage(Language.Dutch);
 					break;
