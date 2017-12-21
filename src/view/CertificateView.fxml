@@ -22,7 +22,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="352.0" layoutY="174.0" prefHeight="21.0" prefWidth="292.0" text="(only pdf upload is allowed)">
+            <Label layoutX="352.0" layoutY="174.0" prefHeight="21.0" prefWidth="292.0" text="(pdf, jpg and png upload is allowed)">
                <font>
                   <Font name="System Italic" size="15.0" />
                </font>

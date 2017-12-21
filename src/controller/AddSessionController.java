@@ -119,6 +119,7 @@ public class AddSessionController  implements Initializable{
 			}
 			else {
 				errorPane.setVisible(true);
+				errorMsg.setVisible(true);
 				errorMsg.setText(errorMsg.getText() + "Date is not valid!\n");
 				check = false;
 			}
@@ -140,18 +141,20 @@ public class AddSessionController  implements Initializable{
 		} 
 		if ( AmPmStart.getValue() == "AM" && AmPmEnd.getValue() == "PM") {
 			checkhours = true;
-		}
+		} 
 		if (checkhours == true) {
 			startTime =  (addStartHour.getValue() + ":" + addStartMin.getValue() + AmPmStart.getValue());
 			endTime =  (addEndHour.getValue() + ":" + addEndMin.getValue() + AmPmEnd.getValue());
 		}
+		System.err.println("test1");
 		if (checkhours == false) {
 			errorPane.setVisible(true);
 			errorMsg.setText(errorMsg.getText() + "Hours are not valid!\n");
+			System.err.println("test2");
 			check = false;
 		}
 
-		if ( checkLocation(e) == true ) {
+		if ( checkLocation() == true ) {
 			if(existLoc.getValue().equals("Existing Location")) {
 				Location l = new Location(Streetname.getText(),Number.getText(),PostalCode.getText(),City.getText(),Country.getText(), nameLoc.getText() , ExtraInfo.getText() ,0 );
 				LocationDB ldb = new LocationDB();
@@ -160,6 +163,9 @@ public class AddSessionController  implements Initializable{
 			else {
 				lid = Integer.parseInt(idLocString);
 			}
+		}
+		else {
+			check = false;
 		}
 		if (check == true ) {
 			try {
@@ -184,16 +190,18 @@ public class AddSessionController  implements Initializable{
 				errorMsg.setText("Oops, something went wrong.");
 			}
 
+		}else {
+			errorPane.setVisible(true);
+			errorMsg.setText(errorMsg.getText() + "Can not add session.");
 		}
 	}
 
 
-	public boolean checkLocation(ActionEvent e) {
+	public boolean checkLocation() {
 
 		LocationDB ldb = new LocationDB();
 		boolean check = true;
 		Location place = new Location();
-
 		if (existLoc.getValue().equals("Existing Location")) {
 			if (Streetname.getText()!= null && !Streetname.getText().isEmpty()) {
 				place.setStreetName(Streetname.getText());
@@ -248,6 +256,7 @@ public class AddSessionController  implements Initializable{
 
 		}
 		if (check == true ) {
+
 			try {
 				String parsedAddress = place.getStreetName().replaceAll("\\s+","+") + "+" + place.getNumber() + "," + place.getPostalCode() + "," + place.getCity() + "," + place.getCountry();
 
@@ -265,8 +274,11 @@ public class AddSessionController  implements Initializable{
 			catch (Exception e1) {
 				errorMsg.setText(errorMsg.getText() + "Oops, something went wrong!\n");
 			}
+			return true;
 		}
-		return check;
+		else {
+		return false;
+		}
 	}
 
 	public void addLocation() {
@@ -278,10 +290,8 @@ public class AddSessionController  implements Initializable{
 		//		SessionDB sdb = new SessionDB();
 		//		TrainingDB tdb = new TrainingDB();
 		//		Training t = tdb.getTraining(addTrainingController.id);
-		//		int partsnr = t.getSessions(); 
-
+		
 		errorPane.setVisible(false);
-
 		addStartHour.setItems(FXCollections.observableArrayList("1","2","3","4","5","6","7","8","9","10","11","12"));
 		addStartHour.setValue("12");
 		addStartMin.setItems(FXCollections.observableArrayList("00","05","10","15","20","25", "30","35", "40","45","50","55"));

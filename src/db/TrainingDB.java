@@ -13,6 +13,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.*;
 
+import logic.Application;
 import logic.BookTraining;
 import logic.Training;
 
@@ -60,6 +61,19 @@ public void  updateTraining(Training myTraining) {
 	}
 }
 
+public void  deleteTraining(Training myTraining) {
+
+	
+	Transaction t = null; 
+	try {
+		t = session.beginTransaction();
+		session.delete(myTraining);
+		t.commit();
+	}catch(HibernateException e) {
+		if(t!= null ) t.rollback();
+		e.printStackTrace();
+	}
+}
 
 public void archiveTraining(Training myTraining) {
 	 
@@ -182,7 +196,7 @@ public  List<Training> getNonActiveTrainings() {
 	 
 	  return TrainingList;
 	}
-  /////////////////////////////////////////////// 
+  /////////////////////////////////////////////// Added by Sebastian 
 public void  linkBook(Training myTraining, String isbn) {
 	
 	TestJackson j= new TestJackson();
@@ -218,6 +232,31 @@ public List<BookTraining> getBooksTrainings() {
 	
 
 	   list = (List<BookTraining>) session.createQuery("FROM Training_books").list();
+	 
+
+	 
+
+		t.commit();
+	}catch(HibernateException e) {
+		if(t!= null ) t.rollback();
+		e.printStackTrace();
+	}
+	
+	return list; 
+
+}
+
+public List<Application> getApplications() {
+	List<Application> list= null;
+	Transaction t = null; 
+	try {
+		
+		t = session.beginTransaction();
+	
+	
+	
+
+	   list = (List<Application>) session.createQuery("FROM applications").list();
 	 
 
 	 

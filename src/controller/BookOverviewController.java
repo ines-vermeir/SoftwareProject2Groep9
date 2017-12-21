@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXTreeTableColumn;
+import com.jfoenix.controls.JFXTreeTableView;
 
 import application.Navigator;
 import db.TestJackson;
