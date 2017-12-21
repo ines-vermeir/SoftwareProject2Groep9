@@ -173,10 +173,16 @@ public class TrainingDetailsController  implements Initializable{
 	@FXML protected void deleteFunct() {
 		try {
 			TrainingDB tdb = new TrainingDB();
+			SessionDB sdb = new SessionDB();
 			
 			System.err.println("voor delete");
+			Training t = tdb.getTraining(Integer.parseInt(trainingId.getText()));
 			
-			tdb.deleteTraining(tdb.getTraining(Integer.parseInt(trainingId.getText())));
+			List <Session> s = sdb.getAllSessionsOfTrainingID2(t.getTrainingID());
+			for (Session session : s) {
+				sdb.deleteSession(session);
+			}
+			tdb.deleteTraining(t);
 			
 			System.err.println("na delete");
 			toAllTraining();
@@ -256,16 +262,16 @@ public class TrainingDetailsController  implements Initializable{
 		checkLocation();
 		if ( checkLoc == true ) {
 			//Location newLoc = new Location(Streetname.getText(), Number.getText(), PostalCode.getText(),City.getText(),Country.getText(), nameLoc.getText(), ExtraInfo.getText(),0);
-			Location newLoc = ldb.getLocationById(newSes.getLocationID());
-			lid = newLoc.getID();
-			newLoc.setStreetName(Streetname.getText());
-			newLoc.setNumber( Number.getText());
-			newLoc.setPostalCode(PostalCode.getText());
-			newLoc.setCity(City.getText());
-			newLoc.setCountry(Country.getText());
-			newLoc.setName(nameLoc.getText());
-			newLoc.setInfo(ExtraInfo.getText());
-			ldb.updateLocation(newLoc);
+//			Location newLoc = ldb.getLocationById(newSes.getLocationID());
+//			lid = newLoc.getID();
+//			newLoc.setStreetName(Streetname.getText());
+//			newLoc.setNumber( Number.getText());
+//			newLoc.setPostalCode(PostalCode.getText());
+//			newLoc.setCity(City.getText());
+//			newLoc.setCountry(Country.getText());
+//			newLoc.setName(nameLoc.getText());
+//			newLoc.setInfo(ExtraInfo.getText());
+//			ldb.updateLocation(newLoc);
 		} else {
 			errorPane.setVisible(true);
 			errorMsg.setText(errorMsg.getText() + "Adres is not valid!\n");
@@ -354,19 +360,36 @@ public class TrainingDetailsController  implements Initializable{
 		db.SessionDB sdb = new SessionDB();
 		TrainingDB tdb = new TrainingDB();
 		Training saveTr = saveTraining();
+		LocationDB ldb = new LocationDB();
+		if (sessionId.getText() != null && !sessionId.getText().isEmpty()) {
 		saveSession();
-		System.err.println("0");
+		}
 		try {
 			if (check == true) {
-				System.err.println("1");
-				if (trainingId.getText() != null && !trainingId.getText().isEmpty()) {
+				
 					System.err.println("2");
 					tdb.updateTraining(saveTr);
 					System.err.println(saveTr.toString());
 					System.err.println("3");
-				}
+				
 				if (sessionId.getText() != null && !sessionId.getText().isEmpty()) {
 					logic.Session saveSes = sdb.getSessionByID(Integer.parseInt(sessionId.getText()));
+					
+					
+					Location newLoc = ldb.getLocationById(saveSes.getLocationID());
+					System.err.println(newLoc.toString());
+					lid = newLoc.getID();
+					newLoc.setStreetName(Streetname.getText());
+					newLoc.setNumber( Number.getText());
+					newLoc.setPostalCode(PostalCode.getText());
+					newLoc.setCity(City.getText());
+					newLoc.setCountry(Country.getText());
+					newLoc.setName(nameLoc.getText());
+					newLoc.setInfo(ExtraInfo.getText());
+					System.err.println(newLoc.toString());
+					ldb.updateLocation(newLoc);
+					
+					
 					System.err.println("4");
 					System.err.println(saveSes.getLocationID());
 					saveSes.setDate(cal);
@@ -401,7 +424,7 @@ public class TrainingDetailsController  implements Initializable{
 	public void fillAll (Training t) {
 		db.SessionDB sdb = new SessionDB();
 		LocationDB ldb = new LocationDB();
-		locationField.setVisible(false);
+
 
 		List<logic.Session> s  = sdb.getAllSessionsOfTrainingID(t.getTrainingID());
 

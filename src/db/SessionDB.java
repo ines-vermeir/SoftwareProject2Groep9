@@ -22,6 +22,18 @@ public class SessionDB {
 		 session = SingletonHibernate.getSessionFactory().openSession();
 	}
 
+	public void deleteSession(logic.Session mySession) {    
+        Transaction t = null; 
+        try {
+            t = session.beginTransaction();
+            session.delete(mySession);
+            t.commit();
+        }catch(HibernateException e) {
+            if(t!= null ) t.rollback();
+            e.printStackTrace();
+        }    
+        
+    }
 	
 	public boolean insertSession (logic.Session mySession)
 	{
@@ -136,6 +148,19 @@ public class SessionDB {
 		//org.hibernate.Session session = myFactory.openSession();
 		Transaction t = session.beginTransaction();
 		for (Object oneObject : session.createQuery("FROM Session where archive =0 AND trainingID =  " + tid).getResultList()) {
+			list.add((logic.Session)oneObject);
+		}
+		t.commit();
+		//session.close();
+
+		return list;
+	}
+	public List<logic.Session> getAllSessionsOfTrainingID2(int tid) 
+	{
+		List<logic.Session> list = new ArrayList<logic.Session>(); 
+		//org.hibernate.Session session = myFactory.openSession();
+		Transaction t = session.beginTransaction();
+		for (Object oneObject : session.createQuery("FROM Session where trainingID =  " + tid).getResultList()) {
 			list.add((logic.Session)oneObject);
 		}
 		t.commit();
