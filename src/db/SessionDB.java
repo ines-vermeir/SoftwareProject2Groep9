@@ -138,7 +138,7 @@ public class SessionDB {
 		  for (Object oneObject : session.createQuery("FROM Session where archive =0 AND trainingID =  " + tid).getResultList()) {
 			  list.add((logic.Session)oneObject);
 		    }
-		  session.close();
+		  //session.close();
 		  return list;
 	}
 }

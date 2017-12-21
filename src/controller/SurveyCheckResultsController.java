@@ -2,9 +2,11 @@ package controller;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import application.Navigator;
+import db.ResultDB;
 import db.SurveyDB;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import logic.Answer;
 import logic.Question;
+import logic.Result;
 import logic.Survey;
 
 public class SurveyCheckResultsController implements Initializable {
@@ -77,21 +80,15 @@ public class SurveyCheckResultsController implements Initializable {
 		{
 		 errorMsg.setText(errorMsg.getText() + "\nSurvey ID is empty!");
 		 check = false;
-		}
-		
+		}		
 		if (check == true)
 		{
-			Survey s = db.getSurvey(surveyID);
-			output.setText("title: " + s.getTitle());
-			output.setText(output.getText() + "\ndescription: " + s.getDescription());
-			output.setText(output.getText() + "\nfilled in by: " + s.getAantalIngevuld() + " people");
-			for (Question q : s.getMyListSurveysQuestions())
+			ResultDB resultdb = new ResultDB();
+			List<Result> results = resultdb.getAllResultBySurveyId(surveyID);
+			for (Result r : results)
 			{
-				output.setText(output.getText() + "\nquestion: " + q.getQuestion());
-				for (Answer a: q.getAntwoorden())
-				{
-					output.setText(output.getText() + "\nanswer: " + a.getAnswer() + " - " + a.getAantal() + " times choosen.");	
-				}
+				output.setText("\nquestionid: " + r.getQuestion_id());
+				output.setText(output.getText() + " - answer: " + r.getAnswer());
 			}
 		}
 	}
