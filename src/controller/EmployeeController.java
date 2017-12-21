@@ -41,6 +41,7 @@ import javafx.util.Callback;
 import logic.Application;
 import logic.Employee;
 import logic.Session;
+import logic.Students_enrolled_in_session;
 import logic.Training;
 
 public class EmployeeController implements Initializable{
@@ -215,13 +216,24 @@ public class EmployeeController implements Initializable{
 			   boolean contains = false;
 			   
 				for(Application a: listAppl) {
-					if(a.getUser_id()==table.getSelectionModel().getSelectedItem().getValue().getEmployeeID()) {
-						contains = true;
-						userid =a.getUser_id();
-						status = a.getStatus();
-						chosenTraining= a.getTraining_id();
-						chosenEmp = table.getSelectionModel().getSelectedItem().getValue();
-						break;
+					if(table.getSelectionModel().getSelectedItem()!=null) {
+						if(a.getUser_id()==table.getSelectionModel().getSelectedItem().getValue().getEmployeeID()) {
+							contains = true;
+							userid =a.getUser_id();
+							status = a.getStatus();
+							chosenTraining= a.getTraining_id();
+							chosenEmp = table.getSelectionModel().getSelectedItem().getValue();
+							break;
+						}
+						
+						
+					}else {
+						message="Please select a valid employee\n";
+						trainingText.setText("");
+						authoText.setText("");
+						feedback.setText(message);
+						table.getSelectionModel().clearSelection();
+						chosenEmp=null;
 					}
 					
 				}
@@ -315,23 +327,60 @@ public class EmployeeController implements Initializable{
 						
 						if(valid==true) {
 							
+							
+							
 							SessionDB sessiondb = new SessionDB();
-							ArrayList<logic.Session> listSessions =(ArrayList<Session>) sessiondb.getAllSessionsOfTrainingID(chosenTraining);
+							
+							ArrayList<Students_enrolled_in_session> listStudents = (ArrayList<Students_enrolled_in_session>) sessiondb.getAllEmployeesInSession();
 							
 							//Third= Find out id sessions of this training
-						
-							for(Session s: listSessions ) {
+							
+							
+							ArrayList<logic.Session> listSessions =(ArrayList<Session>) sessiondb.getAllSessionsOfTrainingID(chosenTraining);
+							
+							
+							Students_enrolled_in_session st=null;
+						    System.out.println(listStudents.size());
+						        
+							   if(!listStudents.isEmpty()) {
+								   System.out.println(listStudents.size());
+								   for(int i=0; i < listSessions.size(); i++) {
+								    st = new Students_enrolled_in_session(listSessions.get(i).getSessionID(), chosenEmp.getEmployeeID());
+								    
+									  
+								   if(listStudents.contains(st)) {
+										message="The employee is already enrolled in this training\n";
+										
+										 feedback.setText(message);	
+									}else{
+										
+										   sessiondb.linkEmployee(listSessions.get(i).getSessionID(), chosenEmp.getEmployeeID());
+											message="The selected employee has successfully been added to the chosen training";
+											
+											 feedback.setText(message);	
+									}
+								   
+								   }
+							   }else {
+								   System.out.println(listStudents.size());
+								   for(int i=0; i < listSessions.size(); i++) {
+								   sessiondb.linkEmployee(listSessions.get(i).getSessionID(), chosenEmp.getEmployeeID());
+									message="The selected employee has successfully been added to the chosen training";
+									
+								   }
+							   }
 								
-								sessiondb.linkEmployee(s.getSessionID(), chosenEmp.getEmployeeID());
+								
 							}
-						
+						    
+							
 						
 						//Finally add employee to the training by adding him/her to table Students_enrolled_in_session
 							
 							
 						
 						//Clear and showing confirmation
-						message+="The selected employee has successfully been added to the chosen training";
+					
 						table.getSelectionModel().clearSelection();
 						feedback.setText(message);
 						
@@ -343,20 +392,19 @@ public class EmployeeController implements Initializable{
 					}
 
 					
-					feedback.setText(message);
+					//feedback.setText(message);
 					//table.getSelectionModel().clearSelection();
 					//chosenEmp=null;
 					//trainingBox.getSelectionModel().clearSelection();
 					
-				}
+				});
 				
 				  
 				  
 				  
 				  
 				  
-				  
-			  });
+		
 			  
 			  
 			  

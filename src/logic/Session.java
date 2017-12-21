@@ -29,6 +29,7 @@ import org.hibernate.annotations.Proxy;
 
 import db.SessionDB;
 @Entity(name="Sessions")
+
 //@Entity(name="logic.Session")
 
 @Table(name="Sessions")

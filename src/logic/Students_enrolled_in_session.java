@@ -11,10 +11,10 @@ import javax.persistence.Table;
 @Table(name="Students_enrolled_in_session")
 public class Students_enrolled_in_session implements Serializable{
 	@Id
-	@Column
+	@Column(name="sessionID")
 	private int sessionID; 
 	@Id
-	@Column
+	@Column(name="employeeIDenrolled")
 	private int employeeIDenrolled;
 	
 	

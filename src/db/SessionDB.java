@@ -12,6 +12,7 @@ import java.util.List;
 import javax.persistence.Query;
 
 import logic.Location;
+import logic.Students_enrolled_in_session;
 import logic.Training;
 
 public class SessionDB {
@@ -135,15 +136,26 @@ public class SessionDB {
 	public List<logic.Session> getAllSessionsOfTrainingID(int tid) 
 	{
 		 List<logic.Session> list = new ArrayList<logic.Session>(); 
-		  //Session session = myFactory.openSession();
 		  for (Object oneObject : session.createQuery("FROM Sessions where trainingID =  " + tid).getResultList()) {
 			  list.add((logic.Session)oneObject);
 		    }
-		  //session.close();
+	
 		  return list;
 	}
 	
 	//Added by Sebastian 
+	
+	
+	public List<Students_enrolled_in_session> getAllEmployeesInSession(){
+
+		 List<Students_enrolled_in_session> list = new ArrayList<Students_enrolled_in_session>(); 
+		  for (Object oneObject : session.createQuery("FROM Students_enrolled_in_session").getResultList()) {
+			  list.add((Students_enrolled_in_session)oneObject);
+		    }
+	
+		  return list;
+	}
+	
 	
 	public int  linkEmployee(int sessionID, int employeeIDenrolled) {
 		
