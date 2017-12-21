@@ -26,6 +26,18 @@ public class SessionDB {
 		 session = SingletonHibernate.getSessionFactory().openSession();
 	}
 
+	public void deleteSession(logic.Session mySession) {    
+        Transaction t = null; 
+        try {
+            t = session.beginTransaction();
+            session.delete(mySession);
+            t.commit();
+        }catch(HibernateException e) {
+            if(t!= null ) t.rollback();
+            e.printStackTrace();
+        }    
+        
+    }
 	
 	public boolean insertSession (logic.Session mySession)
 	{
@@ -52,7 +64,7 @@ public class SessionDB {
 	public boolean updateSession (logic.Session mySession)
 	{
 		boolean succes = false;
-		
+		//Session session = myFactory.openSession();
 		Transaction t = null;
 		try
 		{
@@ -66,7 +78,6 @@ public class SessionDB {
 			e.printStackTrace();
 			succes = false;
 		}
-		
 		return succes;
 	}
 	
@@ -137,14 +148,31 @@ public class SessionDB {
 	
 	public List<logic.Session> getAllSessionsOfTrainingID(int tid) 
 	{
-		 List<logic.Session> list = new ArrayList<logic.Session>(); 
-		  for (Object oneObject : session.createQuery("FROM Sessions where trainingID =  " + tid).getResultList()) {
-			  list.add((logic.Session)oneObject);
-		    }
-	
-		  return list;
+
+		List<logic.Session> list = new ArrayList<logic.Session>(); 
+		//org.hibernate.Session session = myFactory.openSession();
+		Transaction t = session.beginTransaction();
+		for (Object oneObject : session.createQuery("FROM Session where archive =0 AND trainingID =  " + tid).getResultList()) {
+			list.add((logic.Session)oneObject);
+		}
+		t.commit();
+		//session.close();
+
+		return list;
 	}
-	
+	public List<logic.Session> getAllSessionsOfTrainingID2(int tid) 
+	{
+		List<logic.Session> list = new ArrayList<logic.Session>(); 
+		//org.hibernate.Session session = myFactory.openSession();
+		Transaction t = session.beginTransaction();
+		for (Object oneObject : session.createQuery("FROM Session where trainingID =  " + tid).getResultList()) {
+			list.add((logic.Session)oneObject);
+		}
+		t.commit();
+		//session.close();
+
+		return list;
+	}
 	//Added by Sebastian 
 	
   public List<Students_enrolled_in_session> getAllEmployeesInSession(){
@@ -155,6 +183,7 @@ public class SessionDB {
 		    }
 	
 		  return list;
+
 	}
 	
 	
@@ -183,20 +212,7 @@ public class SessionDB {
 		return result;
 	}
 
-public void deleteSession(logic.Session mySession) {	
-		Transaction t = null; 
-		try {
-			t = session.beginTransaction();
-			session.delete(mySession);
-			t.commit();
-		}catch(HibernateException e) {
-			if(t!= null ) t.rollback();
-			e.printStackTrace();
-		}	
-		
-	}
-	
-	
+
 	
 	
 }

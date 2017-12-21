@@ -53,7 +53,7 @@ public class TrainingController implements Initializable {
 	@FXML private TableColumn <Training, String> idTrainingTableCol;
 	@FXML private TableColumn <Training, String> titleTrainingTableCol;
 	@FXML private TableColumn <Training, String> dateTableCol;
-
+	@FXML private TableColumn <Training, Integer> sessionsCol;
 
 
 	public static Training trainingRow;
@@ -90,7 +90,7 @@ public class TrainingController implements Initializable {
 			subjectTableCol.setCellValueFactory(new PropertyValueFactory<Training, String>("subject"));
 			langTableCol.setCellValueFactory(new PropertyValueFactory<Training, String>("language"));
 			teacherTableCol.setCellValueFactory(new PropertyValueFactory<Training, String>("responsible"));
-
+			sessionsCol.setCellValueFactory(new PropertyValueFactory<Training, Integer>("sessions"));
 			FilteredList<Training> filteredTraining = new FilteredList<>(trainings, p -> true);
 			SortedList<Training> training = new SortedList<>(filteredTraining);
 			training.comparatorProperty().bind(allTrainingTable.comparatorProperty());								
