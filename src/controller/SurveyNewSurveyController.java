@@ -332,37 +332,37 @@ public class SurveyNewSurveyController implements Initializable {
 	        sur.getMyListSurveysQuestions().add(q2);
 	        
 	        
-	        try {
-	        surveyDB.addSurvey(sur);        
+	        try {        	
+	        surveyDB.addSurvey(sur); 
 	        errorMsg.setText("Survey is saved!");
-	        t_trainingID.clear();
-	        t_title.clear();
-	        description.clear();
-	        t_question1.clear();
-	        t_question2.clear();
-	        t_question3.clear();
-	        t_question4.clear();
-	        t_question5.clear();
-	        t_answer1a.clear();
-	        t_answer1b.clear();
-	        t_answer1c.clear();
-	        t_answer2a.clear();
-	        t_answer2b.clear();
-	        t_answer2c.clear();
-	        t_answer3a.clear();
-	        t_answer3b.clear();
-	        t_answer3c.clear();
-	        t_answer4a.clear();
-	        t_answer4b.clear();
-	        t_answer4c.clear();
-	        t_answer5a.clear();
-	        t_answer5b.clear();
-	        t_answer5c.clear();
+//	        t_trainingID.clear();
+//	        t_title.clear();
+//	        description.clear();
+//	        t_question1.clear();
+//	        t_question2.clear();
+//	        t_question3.clear();
+//	        t_question4.clear();
+//	        t_question5.clear();
+//	        t_answer1a.clear();
+//	        t_answer1b.clear();
+//	        t_answer1c.clear();
+//	        t_answer2a.clear();
+//	        t_answer2b.clear();
+//	        t_answer2c.clear();
+//	        t_answer3a.clear();
+//	        t_answer3b.clear();
+//	        t_answer3c.clear();
+//	        t_answer4a.clear();
+//	        t_answer4b.clear();
+//	        t_answer4c.clear();
+//	        t_answer5a.clear();
+//	        t_answer5b.clear();
+//	        t_answer5c.clear();
 	        } catch (Exception exc)
 	        {
 	        	errorMsg.setText("Oops, something went wrong!");
 	        }        
-	        
+	     backToSurvey(e);   
 		}
 
 	}

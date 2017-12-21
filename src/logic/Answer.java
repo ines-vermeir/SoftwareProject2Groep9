@@ -22,7 +22,7 @@ public class Answer {
 
 	
 	@Id
-	@Column(name = "answerID")
+	@Column(name = "id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int answerID;
 	
@@ -34,7 +34,7 @@ public class Answer {
 	private int aantal;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="questionID",referencedColumnName="questionID")
+	@JoinColumn(name="question_id",referencedColumnName="id")
 	private Question question;
 
 	
