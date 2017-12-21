@@ -27,10 +27,10 @@ public class Survey {
 	// datamembers
 	@Id	 
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
-	@Column(name="surveyID")
+	@Column(name="id")
 	private int surveyID;
 	
-	@Column(name="trainingID")	
+	@Column(name="training_id")	
 	private int trainingsID;
 	
 	@Column(name="title")
