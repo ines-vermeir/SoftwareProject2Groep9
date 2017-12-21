@@ -44,11 +44,10 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="t_trainingID" layoutX="188.0" layoutY="131.0" promptText="Give the trainingID " />
                   <Label layoutX="102.0" layoutY="189.0" text="Title:" />
-                  <TextField fx:id="t_title" layoutX="188.0" layoutY="184.0" promptText="Give title of the survey" />
+                  <TextField fx:id="t_title" layoutX="188.0" layoutY="184.0" prefHeight="31.0" prefWidth="276.0" promptText="Give title of the survey" />
                   <Label layoutX="101.0" layoutY="240.0" text="Description:" />
-                  <TextArea fx:id="description" layoutX="188.0" layoutY="234.0" prefHeight="71.0" prefWidth="228.0" promptText="description" />
+                  <TextArea fx:id="description" layoutX="188.0" layoutY="234.0" prefHeight="71.0" prefWidth="275.0" promptText="description" />
                   <AnchorPane layoutX="4.0" layoutY="781.0" prefHeight="235.0" prefWidth="1400.0">
                      <children>
                         <Label layoutX="97.0" layoutY="31.0" text="Question 3:" />
@@ -97,6 +96,7 @@
                      </font>
                   </Label>
                   <Button fx:id="back" layoutX="29.0" layoutY="23.0" mnemonicParsing="false" onAction="#backToSurvey" text="go back" />
+                  <ComboBox fx:id="c_trainingID" layoutX="188.0" layoutY="131.0" prefHeight="31.0" prefWidth="276.0" />
                </children>
             </AnchorPane>
          </children>

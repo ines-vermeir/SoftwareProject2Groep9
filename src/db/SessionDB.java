@@ -24,6 +24,7 @@ public class SessionDB {
 		super();
 		 session = SingletonHibernate.getSessionFactory().openSession();
 	}
+
 	
 	public boolean insertSession (logic.Session mySession)
 	{
@@ -145,14 +146,23 @@ public class SessionDB {
 	
 	//Added by Sebastian 
 	
-	
-	public List<Students_enrolled_in_session> getAllEmployeesInSession(){
+  public List<Students_enrolled_in_session> getAllEmployeesInSession(){
 
 		 List<Students_enrolled_in_session> list = new ArrayList<Students_enrolled_in_session>(); 
 		  for (Object oneObject : session.createQuery("FROM Students_enrolled_in_session").getResultList()) {
 			  list.add((Students_enrolled_in_session)oneObject);
 		    }
 	
+		  return list;
+	}
+	
+	public List<Students_enrolled_in_session> getAllEmployeesInSession(int tid){
+
+		 List<Students_enrolled_in_session> list = new ArrayList<Students_enrolled_in_session>(); 
+		  for (Object oneObject : session.createQuery("FROM Session where archive =0 AND trainingID =  " + tid).getResultList()) {
+			  list.add((logic.Session)oneObject);
+		    }
+		  //session.close();
 		  return list;
 	}
 	

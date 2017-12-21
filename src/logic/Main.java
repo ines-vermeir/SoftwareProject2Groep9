@@ -35,7 +35,7 @@ import db.LocationDB;
 import db.TestJackson;
 import db.UserDB;
 import logic.User.Privilege;*/
-
+import db.ResultDB;
 
 import java.util.Date;
 import db.SessionDB;
@@ -133,10 +133,7 @@ public static Stage mainStage;
     }
 
     public static void main(String[] args)   {
-    launch(args);
-    
-    
-    
+    launch(args); 
     }
 	
 //----------------------------------------------------login functie----------------------------------------------------------------------------	

@@ -45,6 +45,7 @@
 		<mapping class="logic.Certificate_upload"/>
 		<mapping class="logic.Application"/>
 		<mapping class="logic.Students_enrolled_in_session"/>
+		<mapping class="logic.Result"/>
 
 		
 	</session-factory>

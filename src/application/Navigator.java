@@ -13,6 +13,7 @@ public class Navigator {
 	 * 
 	 */
 
+	public static String TrainingDetailsView = "/view/TrainingDetailsView.fxml";
 	/**
      * Convenience constants for fxml layouts managed by the navigator.
      */
@@ -47,6 +48,7 @@ public class Navigator {
 	public static String AddSessionView ="../view/AddSessionView.fxml";
 	public static String AddTrainingView = "/view/AddTrainingView.fxml";
 	public static String SettingsAddUserView = "/view/SettingsAddUser.fxml";
+	public static String SettingsChangePassword = "/view/SettingsChangePassword.fxml";
     /** The main application layout controller. */
     private static MainController mainController;
 

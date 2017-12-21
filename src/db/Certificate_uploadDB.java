@@ -1,6 +1,7 @@
 package db;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -9,12 +10,14 @@ import org.hibernate.Transaction;
 
 import logic.Certificate_upload;
 import logic.Survey;
+import logic.Training;
 
 
 
 public class Certificate_uploadDB {
 
 private SessionFactory myFactory = null;
+private Session session = null;
 
 public Certificate_uploadDB(){
 
@@ -23,6 +26,18 @@ public Certificate_uploadDB(){
 
 	// TODO Auto-generated constructor stub
 }
+
+
+//public List<Certificate_upload> getAllCertificatesByID(int empID) {
+//	  List<Certificate_upload> certificateList = new ArrayList<Certificate_upload>(); 
+//	 
+//	  for (Object oneObject : session.createQuery("FROM Certificates_upload where employeeID =" + empID).getResultList()) {
+//		  certificateList.add((Certificate_upload)oneObject);
+//	    }
+//	
+//	  return certificateList;
+//	}
+
 
 
 public  boolean  insertCertificate_upload(Certificate_upload cu) {

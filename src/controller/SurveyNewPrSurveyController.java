@@ -291,10 +291,13 @@ public class SurveyNewPrSurveyController implements Initializable {
 		        q5.getAntwoorden().add(a5c);	        
 		        sur.getMyListSurveysQuestions().add(q5);
 	        }
-	        
-	        surveyDB.addSurvey(sur);
-	        
+	        try {
+	        surveyDB.addSurvey(sur);        
 	        errorMsg.setText("Survey is saved!");
+	        } catch (Exception exc)
+	        {
+	        	 errorMsg.setText("Oops, something went wrong!");
+	        }
 	        
 	        t_title.clear();
 	        description.clear();

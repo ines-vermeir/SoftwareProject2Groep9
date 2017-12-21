@@ -20,8 +20,8 @@
             <Label layoutX="191.0" layoutY="392.0" text="Privilege" />
             <ChoiceBox fx:id="c_privilege" layoutX="277.0" layoutY="387.0" prefHeight="31.0" prefWidth="209.0" />
             <TextField fx:id="t_username" layoutX="277.0" layoutY="279.0" prefHeight="31.0" prefWidth="209.0" />
-            <TextField fx:id="t_password" layoutX="277.0" layoutY="331.0" prefHeight="31.0" prefWidth="209.0" />
-            <Button fx:id="saveuser" layoutX="200.0" layoutY="485.0" mnemonicParsing="false" text="save user" onAction="#saveUser"/>
+            <PasswordField fx:id="passField" layoutX="277.0" layoutY="331.0" prefHeight="31.0" prefWidth="209.0" />
+            <Button fx:id="saveuser" layoutX="200.0" layoutY="485.0" mnemonicParsing="false" onAction="#saveUser" text="save user" />
              <Button fx:id="back" layoutX="24.0" layoutY="22.0" mnemonicParsing="false" onAction="#backToSettings" text="go back" />
              <Label fx:id="errorMsg" layoutX="323.0" layoutY="729.0" prefHeight="104.0" prefWidth="260.0" textFill="#f50505" />        
          </children>

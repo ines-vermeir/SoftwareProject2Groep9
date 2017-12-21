@@ -10,8 +10,8 @@
    <children>
       <AnchorPane prefHeight="765.0" prefWidth="1400.0">
          <children>
-            <Button fx:id="backup" layoutX="857.0" layoutY="298.0" prefHeight="31.0" prefWidth="179.0" text="Backup database" />
-            <Button fx:id="passw" layoutX="554.0" layoutY="297.0" prefHeight="31.0" prefWidth="179.0" text="Change password" />
+            <Button fx:id="backup" layoutX="857.0" layoutY="352.0" onAction="#backup" prefHeight="31.0" prefWidth="179.0" text="Backup database" />
+            <Button fx:id="passw" layoutX="554.0" layoutY="297.0" onAction="#gotochangePassword" prefHeight="31.0" prefWidth="179.0" text="Change password" />
             <Button fx:id="adduser" layoutX="261.0" layoutY="297.0" mnemonicParsing="false" onAction="#toAddUser" prefHeight="31.0" prefWidth="179.0" text="add user" />
             <Label layoutX="300.0" layoutY="199.0" text="add new user">
                <font>
@@ -23,7 +23,11 @@
                   <Font size="18.0" />
                </font>
             </Label>
+             <Label fx:id="LabelStatus" layoutX="857.0" layoutY="447.0" prefHeight="35.0" prefWidth="232.0" text="Status" visible="false" />
             <Label layoutX="573.0" layoutY="199.0" text="change password">
+               <text>
+                <TextField fx:id="txtPath" layoutX="936.0" layoutY="354.0" />
+               </text>
                <font>
                   <Font size="18.0" />
                </font>
@@ -33,9 +37,11 @@
                   <Font size="24.0" />
                </font>
             </Label>
+            <TextField fx:id="txtPath" layoutX="853.0" layoutY="303.0" />
             <Label layoutX="263.0" layoutY="227.0" prefHeight="61.0" prefWidth="169.0" text="create a new user and save it to the database" textAlignment="CENTER" wrapText="true" />
             <Label layoutX="851.0" layoutY="231.0" prefHeight="61.0" prefWidth="169.0" text="make a backup file of the database data" textAlignment="CENTER" wrapText="true" />
             <Label layoutX="558.0" layoutY="231.0" prefHeight="61.0" prefWidth="169.0" text="create a new user and save it to the database" textAlignment="CENTER" wrapText="true" />
+            <Label layoutX="798.0" layoutY="308.0" text="path:" />
          </children>
       </AnchorPane>
    </children>
