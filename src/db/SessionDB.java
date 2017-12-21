@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import logic.Book;
 import logic.Location;
 import logic.Students_enrolled_in_session;
 import logic.Training;
@@ -182,7 +183,18 @@ public class SessionDB {
 		return result;
 	}
 
-	
+public void deleteSession(logic.Session mySession) {	
+		Transaction t = null; 
+		try {
+			t = session.beginTransaction();
+			session.delete(mySession);
+			t.commit();
+		}catch(HibernateException e) {
+			if(t!= null ) t.rollback();
+			e.printStackTrace();
+		}	
+		
+	}
 	
 	
 	
