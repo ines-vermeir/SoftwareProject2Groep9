@@ -156,15 +156,6 @@ public class SessionDB {
 		  return list;
 	}
 	
-	public List<Students_enrolled_in_session> getAllEmployeesInSession(int tid){
-
-		 List<Students_enrolled_in_session> list = new ArrayList<Students_enrolled_in_session>(); 
-		  for (Object oneObject : session.createQuery("FROM Session where archive =0 AND trainingID =  " + tid).getResultList()) {
-			  list.add((logic.Session)oneObject);
-		    }
-		  //session.close();
-		  return list;
-	}
 	
 	
 	public int  linkEmployee(int sessionID, int employeeIDenrolled) {
