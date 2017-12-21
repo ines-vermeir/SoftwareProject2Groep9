@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="140.0" prefWidth="200.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="140.0" prefWidth="200.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UserSectionViewController">
    <children>
       <GridPane prefHeight="174.0" prefWidth="240.0">
         <columnConstraints>
@@ -17,7 +17,7 @@
           <RowConstraints maxHeight="33.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label alignment="CENTER" prefHeight="82.0" prefWidth="200.0" styleClass="blauweBg" text="Gill Steens" textFill="WHITE" GridPane.rowIndex="1" />
+            <Label fx:id="user_label" alignment="CENTER" prefHeight="82.0" prefWidth="200.0" styleClass="blauweBg" textFill="WHITE" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </children>
