@@ -433,7 +433,7 @@ public class TrainingDetailsController  implements Initializable{
 
 		trainingId.setText(Integer.toString(t.getTrainingID()));
 		titleTraining.setText(t.getTitle());
-		LanguageTraining.setItems(FXCollections.observableArrayList("Chinese","English", "Spanish", "Arabic", "Russian", "Portuguese" , "French","Japanese","German","Italien", "Dutch"));
+		LanguageTraining.setItems(FXCollections.observableArrayList("Chinese","English", "Spanish", "Arabic", "Russian", "Portuguese" , "French","Japanese","German","Italian", "Dutch"));
 		LanguageTraining.setValue(t.getLanguage().toString());
 		teacherTraining.setText(t.getResponsible());
 		subjectTraining.setText(t.getSubject());

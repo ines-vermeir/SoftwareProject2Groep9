@@ -136,9 +136,6 @@ public class HomeController implements Initializable {
 		
 			idTableCol.setCellValueFactory(new PropertyValueFactory<Training, Integer>("trainingID"));
 			titleTableCol.setCellValueFactory(new PropertyValueFactory<Training, String>("title"));
-			subjectTableCol.setCellValueFactory(new PropertyValueFactory<Training, String>("subject"));
-			langTableCol.setCellValueFactory(new PropertyValueFactory<Training, String>("language"));
-			teacherTableCol.setCellValueFactory(new PropertyValueFactory<Training, String>("responsible"));
 			
 			FilteredList<Training> filteredTraining = new FilteredList<>(trainings, p -> true);
 			SortedList<Training> training = new SortedList<>(filteredTraining);

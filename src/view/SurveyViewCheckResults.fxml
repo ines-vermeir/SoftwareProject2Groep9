@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SurveyCheckResultsController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SurveyCheckResultsController">
    <children>
      <AnchorPane prefHeight="836.0" prefWidth="1400.0">
      <children>
@@ -21,7 +21,7 @@
                     </columns>
                   </TableView>
                   <TextField fx:id="t_checkresults" layoutX="518.0" layoutY="392.0" prefHeight="31.0" prefWidth="96.0" />
-                  <Button fx:id="b_checkResults" layoutX="626.0" layoutY="392.0" mnemonicParsing="false" text="check results" onAction="#checkResult" />
+                  <Button fx:id="b_checkResults" layoutX="626.0" layoutY="392.0" mnemonicParsing="false" onAction="#checkResult" text="check results" />
             <Label layoutX="68.0" layoutY="100.0" text="overview surveys:" />
             <Label fx:id="errorMsg" layoutX="758.0" layoutY="392.0" prefHeight="104.0" prefWidth="260.0" textFill="#f50505" />
             <Label fx:id="output" layoutX="74.0" layoutY="452.0" prefHeight="532.0" prefWidth="1097.0" textFill="#0d0b0b" />   
