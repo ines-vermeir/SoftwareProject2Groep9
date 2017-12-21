@@ -21,8 +21,8 @@ public class LoginController implements Initializable{
     public static User userLogin;
     
     @SuppressWarnings("unused")
-    @FXML protected void doLogin(ActionEvent e) {        
-    
+    @FXML protected void doLogin(ActionEvent e) {  
+    	lblStatus.setText("Logging in...");
     	try {
         boolean login = true;
         boolean usernameGevonden = true;
@@ -30,9 +30,10 @@ public class LoginController implements Initializable{
         userLogin = null;
         boolean check = false;
         UserDB userDB = null; 
- 
-        	userDB = new UserDB(); 
+        
+        userDB = new UserDB(); 
         	if (userDB != null) {
+        		
         		userLogin = userDB.getUser(userField.getText());
         		check = true;
         		}
@@ -87,6 +88,6 @@ public class LoginController implements Initializable{
         @Override
         public void initialize(URL location, ResourceBundle resources) {
             // TODO Auto-generated method stub
-            
+        	
         }
 }

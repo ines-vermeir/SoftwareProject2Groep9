@@ -28,7 +28,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Proxy;
 
 import db.SessionDB;
-@Entity(name="Sessions")
+@Entity
 
 //@Entity(name="logic.Session")
 
@@ -44,9 +44,9 @@ import db.SessionDB;
 })
 */
 public class Session {
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY) @Column(name="sessionID")
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY) @Column(name="id")
 	private int sessionID;
-	@Column(name="trainingID")
+	@Column(name="training_id")
 	private int trainingID;
 	@Column(name="date")
 	private Calendar date;
@@ -54,7 +54,7 @@ public class Session {
 	private String startTime;
 	@Column(name="endTime")
 	private String endTime;
-	@Column(name="locationID")
+	@Column(name="location_id")
 	private int locationID;
 	@Column(name="part")
 	private int part;

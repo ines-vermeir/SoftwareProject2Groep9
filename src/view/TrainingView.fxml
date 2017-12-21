@@ -6,23 +6,23 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TrainingController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TrainingController">
    <children>
   
-      <AnchorPane prefHeight="509.0" prefWidth="768.0">
+      <AnchorPane prefHeight="509.0" prefWidth="1000.0">
          <children>
-            <TableView fx:id="allTrainingTable" layoutX="25.0" layoutY="73.0" prefHeight="364.0" prefWidth="750.0">
+            <TableView fx:id="allTrainingTable" layoutX="25.0" layoutY="73.0" prefHeight="364.0" prefWidth="950.0">
               <columns>
                   <TableColumn fx:id="idTableCol" prefWidth="75.0" resizable="false" text="ID" />
                 <TableColumn fx:id="titleTableCol" prefWidth="200.0" resizable="false" text="Title" />
                 <TableColumn fx:id="subjectTableCol" minWidth="0.0" prefWidth="150.0" resizable="false" text="Subject" />
                   <TableColumn fx:id="langTableCol" prefWidth="150.0" resizable="false" text="Language " />
                   <TableColumn fx:id="teacherTableCol" prefWidth="150.0" resizable="false" text="Teacher" />
+                  <TableColumn fx:id="sessionsCol" prefWidth="150.0" resizable="false" text="Sessions" />
               </columns>
             </TableView>
-            <TextField fx:id="searchBar" layoutX="25.0" layoutY="47.0" onAction="#zoekFunct" prefHeight="25.0" prefWidth="750.0" promptText="zoek" />
-            <Button fx:id="allBtn" alignment="CENTER" layoutX="25.0" layoutY="10.0" mnemonicParsing="false" onAction="#toAll" prefHeight="25.0" prefWidth="76.0" text="All" />
-            <Button fx:id="addBtn" alignment="BASELINE_CENTER" layoutX="603.0" layoutY="10.0" mnemonicParsing="false" onAction="#addTraining" prefHeight="25.0" prefWidth="172.0" text="Add Training" />
+            <TextField fx:id="searchBar" layoutX="25.0" layoutY="47.0" onAction="#zoekFunct" prefHeight="25.0" prefWidth="950.0" promptText="zoek" />
+            <Button fx:id="addBtn" alignment="BASELINE_CENTER" layoutX="775.0" layoutY="14.0" mnemonicParsing="false" onAction="#addTraining" prefHeight="25.0" prefWidth="200.0" text="Add Training" />
          </children>
       </AnchorPane>
    </children>

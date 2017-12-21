@@ -68,26 +68,26 @@ public  void  addSurvey(Survey mySurvey) {
 
 
 // werkt niet
-@SuppressWarnings("deprecation")
-public  Survey  getSurvey1(int surveyID) {
-	Survey s = null;
-	
-	Transaction t = null;
-	
-	try {
-		t = session.beginTransaction();
-		@SuppressWarnings("rawtypes")
-		Query query = session.createNativeQuery("Select * from Survey_Surveys  WHERE surveyID = :surveyID",Survey.class).setParameter("surveyID", surveyID);
-		s = (Survey) query.getSingleResult();
-		
-		t.commit();
-	}catch(HibernateException e) {
-		if(t!= null ) t.rollback();
-		e.printStackTrace();
-	}
-		return s;
-		
-	}
+//@SuppressWarnings("deprecation")
+//public  Survey  getSurvey1(int surveyID) {
+//	Survey s = null;
+//	
+//	Transaction t = null;
+//	
+//	try {
+//		t = session.beginTransaction();
+//		@SuppressWarnings("rawtypes")
+//		Query query = session.createNativeQuery("Select * from Survey_Surveys  WHERE survey_id = :surveyID",Survey.class).setParameter("surveyID", surveyID);
+//		s = (Survey) query.getSingleResult();
+//		
+//		t.commit();
+//	}catch(HibernateException e) {
+//		if(t!= null ) t.rollback();
+//		e.printStackTrace();
+//	}
+//		return s;
+//		
+//	}
 	
 	
 // werkt

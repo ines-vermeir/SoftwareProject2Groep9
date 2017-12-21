@@ -42,6 +42,10 @@ public class addTrainingController  implements Initializable {
 	static int id;
 	
 	@FXML protected void toAllTraining(ActionEvent e) {
+		TrainingDB tdb = new TrainingDB();
+		if (tdb.getTraining(id) != null) {
+		tdb.deleteTraining(tdb.getTraining(id));
+		}
 		Navigator.loadVista(Navigator.TrainingView);
 		Navigator.loadMenuVista(Navigator.MenuTrainingActiveView);
 	}
@@ -107,6 +111,7 @@ public class addTrainingController  implements Initializable {
 			try {
 				Training t = new Training (title, subject, Language.valueOf(addLanguage.getValue()) , teacher, sessions, 0);
 				id = tdb.insertTraining(t);
+				AddSessionController.deel=0;
 				toAddSession(); 
 			} catch (Exception e1) {
 				
@@ -119,7 +124,7 @@ public class addTrainingController  implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
-		addLanguage.setItems(FXCollections.observableArrayList("Chinese","English", "Spanish", "Arabic", "Russian", "Portuguese" , "French","Japanese","German","Italien", "Dutch"));
+		addLanguage.setItems(FXCollections.observableArrayList("Chinese","English", "Spanish", "Arabic", "Russian", "Portuguese" , "French","Japanese","German","Italian", "Dutch"));
 		addLanguage.setValue("English");
 		
 		}

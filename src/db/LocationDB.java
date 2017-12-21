@@ -67,6 +67,8 @@ public class LocationDB {
 		return succes;
 		
 	}
+	
+	
 
 	public Location getLocationById(int id) {
 		Location l = null;

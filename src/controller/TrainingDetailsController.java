@@ -20,6 +20,7 @@ import db.SurveyDB;
 import db.TestJackson;
 import db.TrainingDB;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,8 +29,10 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -49,7 +52,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Paint;
 import javafx.util.Callback;
 import logic.Employee;
 import logic.Location;
@@ -57,6 +59,7 @@ import logic.Session;
 import logic.Survey;
 import logic.Training;
 import logic.Training.Language;
+import javafx.scene.paint.*;
 
 public class TrainingDetailsController  implements Initializable{
 
@@ -103,12 +106,12 @@ public class TrainingDetailsController  implements Initializable{
 
 	@FXML private GridPane SessionPane;
 
-	@FXML private TableView<Session> sessionTable;
-	@FXML private TableColumn <Session, Integer> sesionIdCol;
-	@FXML private TableColumn <Session, String> dateCol;
-	@FXML private TableColumn <Session, String> starttimeCol;
-	@FXML private TableColumn <Training, String> endtimeCol;
-	@FXML private TableColumn <Training, String> partCol;
+	@FXML private TableView<logic.Session> sessionTable;
+	@FXML private TableColumn <logic.Session, Integer> sesionIdCol;
+	@FXML private TableColumn <logic.Session, String> dateCol;
+	@FXML private TableColumn <logic.Session, String> starttimeCol;
+	@FXML private TableColumn <logic.Training, String> endtimeCol;
+	@FXML private TableColumn <logic.Training, String> partCol;
 
 
 	@FXML protected void toAllTraining() {
@@ -117,67 +120,90 @@ public class TrainingDetailsController  implements Initializable{
 	}
 
 	@FXML protected void addNewSesFunct() {
+		TrainingDB tdb = new TrainingDB();
 		SessionDB sdb = new SessionDB();
-		System.err.println(trainingId.getText());
+		Training t = tdb.getTraining(Integer.parseInt(trainingId.getText()));
+		t.setSessions(t.getSessions()+1);
+		tdb.updateTraining(t);
 		addTrainingController.id = Integer.parseInt(trainingId.getText());
-		System.err.println(addTrainingController.id);
-		List<Session> sesions = sdb.getAllSessionsOfTrainingID(addTrainingController.id);
+		List<logic.Session> sesions = sdb.getAllSessionsOfTrainingID(addTrainingController.id);
 		controller.AddSessionController.deel = sesions.size();
-		
+
 		Navigator.loadVista(Navigator.AddSessionView);
 		Navigator.loadMenuVista(Navigator.MenuTrainingActiveView);
 	}
-	
+
 	@FXML protected void deleteSes() {
+		errorMsg.setVisible(false);
 		try {
-		Session s = sessionTable.getSelectionModel().getSelectedItem();
-		int part = s.getPart();
-		SessionDB sdb = new SessionDB();
-		List<Session> sessions = sdb.getAllSessionsOfTrainingID(Integer.parseInt(trainingId.getText()));
-		for (int i = part; i < sessions.size(); i++) {
-			sessions.get(i).setPart(i);
-			sdb.updateSession(sessions.get(i));
-		}
-		s.setArchive(1);
-		sdb.updateSession(s);
-		Navigator.loadVista(Navigator.TrainingDetailsView);
-		Navigator.loadMenuVista(Navigator.MenuTrainingActiveView);
+			logic.Session s = sessionTable.getSelectionModel().getSelectedItem();
+			int part = s.getPart();
+			SessionDB sdb = new SessionDB();
+			TrainingDB tdb = new TrainingDB();
+			Training t = tdb.getTraining(s.getTrainingID());
+			List<logic.Session> sessions = sdb.getAllSessionsOfTrainingID(Integer.parseInt(trainingId.getText()));
+			System.err.println(sessions.size());
+			if (sessions.size() > 1) {
+				for (int i = part; i < sessions.size(); i++) {
+					System.out.println("Dit is " + i);
+					System.out.println("hahahaah" + sessions.size());
+					System.out.println(sessions.get(i).getSessionID());
+					sessions.get(i).setPart(i);
+					sdb.updateSession(sessions.get(i));
+				}
+			t.setSessions(t.getSessions()-1);
+			tdb.updateTraining(t);
+			logic.Session ses = sdb.getSessionByID(s.getSessionID());
+			//sdb.updateSession(s);
+			sdb.archiveSession(ses);
+			Navigator.loadVista(Navigator.TrainingDetailsView);
+			Navigator.loadMenuVista(Navigator.MenuTrainingActiveView);
+			}else {
+				System.err.println(sessions.size());
+				errorMsg.setVisible(true);
+				errorMsg.setText(errorMsg.getText() + "There must be at least one session.\n");
+			}
 		}
 		catch(Exception ex) {
 			errorPane.setVisible(true);
 			errorMsg.setText(errorMsg.getText() + "No session is deleted!\n");
-			
 		}
 	}
 
 	@FXML protected void deleteFunct() {
 		try {
-		TrainingDB t = new TrainingDB();
-		t.archiveTrainingById(Integer.parseInt(trainingId.getText()));
-		toAllTraining();
+			TrainingDB tdb = new TrainingDB();
+			SessionDB sdb = new SessionDB();
+			
+			System.err.println("voor delete");
+			Training t = tdb.getTraining(Integer.parseInt(trainingId.getText()));
+			
+			List <Session> s = sdb.getAllSessionsOfTrainingID2(t.getTrainingID());
+			for (Session session : s) {
+				sdb.deleteSession(session);
+			}
+			tdb.deleteTraining(t);
+			
+			System.err.println("na delete");
+			toAllTraining();
 		}
 		catch(Exception ex) {
 			errorPane.setVisible(true);
 			errorMsg.setText(errorMsg.getText() + "Training is not deleted!\n");
-			
+
 		}
 	}
 
 	private String idLocString;
-
-	@FXML protected Session saveSession() {
-
-		errorPane.setVisible(false);
-		errorMsg.setText("");
-
-		SessionDB sdb = new SessionDB();
-		String startTime = null,endTime= null;
-		LocalDate date;
-		LocalDate dateNow = LocalDate.now();
-		Calendar cal = null;
-		int lid = 1;
-		boolean check = true;
-
+	boolean check = true;
+	boolean checkLoc = true;
+	db.SessionDB sdb = new SessionDB();
+	String startTime = null,endTime= null;
+	LocalDate date;
+	LocalDate dateNow = LocalDate.now();
+	Calendar cal = null;
+	int lid = 1;
+	@FXML protected void saveSession() {
 
 		if ((addDate.getValue()!= null)) { 
 			if (addDate.getValue().isAfter(dateNow)){
@@ -185,232 +211,206 @@ public class TrainingDetailsController  implements Initializable{
 
 				cal = Calendar.getInstance();
 				cal.set(date.getYear(), date.getMonthValue(), date.getDayOfMonth());
-
-			}
-			else {
+			} else {
 				errorPane.setVisible(true);
 				errorMsg.setText(errorMsg.getText() + "Date is not valid!\n");
 				check = false;
 			}
-
-		}	 else {
+		} else {
 			errorPane.setVisible(true);
 			errorMsg.setText(errorMsg.getText() + "Date is not valid!\n");
 			check = false;
-
 		}
 
 
 
 		boolean checkhours = false;
-		if (AmPmStart.getValue() == AmPmEnd.getValue()) {
+
+		if (AmPmStart.getValue() == AmPmEnd.getValue()) {		
 			if (Integer.parseInt(addStartHour.getValue()) < Integer.parseInt(addEndHour.getValue())) {
 				checkhours = true;
+				System.err.println("start:"+ AmPmStart.getValue());
+				System.err.println("end:" + AmPmEnd.getValue());
+				System.err.println("starHt:" + addStartHour.getValue());
+				System.err.println("endH:"+ addEndHour.getValue());
 			}
 		} 
-		if ( AmPmStart.getValue() == "AM" && AmPmEnd.getValue() == "PM") {
+
+		else if ( AmPmStart.getValue() == "AM" && AmPmEnd.getValue() == "PM") {
 			checkhours = true;
+			System.err.println("start:"+ AmPmStart.getValue());
+			System.err.println("end: " + AmPmEnd.getValue());
+			System.err.println("starHt:" + addStartHour.getValue());
+			System.err.println("endH:"+ addEndHour.getValue());
 		}
+		else {
+			checkhours = false;
+		}
+
 		if (checkhours == true) {
 			startTime =  (addStartHour.getValue() + ":" + addStartMin.getValue() + AmPmStart.getValue());
 			endTime =  (addEndHour.getValue() + ":" + addEndMin.getValue() + AmPmEnd.getValue());
-		}
-		if (checkhours == false) {
+		}else {
 			errorPane.setVisible(true);
 			errorMsg.setText(errorMsg.getText() + "Hours are not valid!\n");
 			check = false;
 		}
 
-		if ( checkLocation() == true ) {
-			if(existLoc.getValue().equals("Existing Location")) {
-				Location l = new Location(Streetname.getText(),Number.getText(),PostalCode.getText(),City.getText(),Country.getText(), nameLoc.getText() , ExtraInfo.getText() ,0 );
-				LocationDB ldb = new LocationDB();
-				lid = ldb.insertLocation(l); 
-			}
-			else {
-				lid = Integer.parseInt(idLocString);
-			}
+		logic.Session newSes = new Session();
+		newSes = sdb.getSessionByID(Integer.parseInt(sessionId.getText()));
+		LocationDB ldb = new LocationDB();
+		checkLocation();
+		if ( checkLoc == true ) {
+			//Location newLoc = new Location(Streetname.getText(), Number.getText(), PostalCode.getText(),City.getText(),Country.getText(), nameLoc.getText(), ExtraInfo.getText(),0);
+//			Location newLoc = ldb.getLocationById(newSes.getLocationID());
+//			lid = newLoc.getID();
+//			newLoc.setStreetName(Streetname.getText());
+//			newLoc.setNumber( Number.getText());
+//			newLoc.setPostalCode(PostalCode.getText());
+//			newLoc.setCity(City.getText());
+//			newLoc.setCountry(Country.getText());
+//			newLoc.setName(nameLoc.getText());
+//			newLoc.setInfo(ExtraInfo.getText());
+//			ldb.updateLocation(newLoc);
 		} else {
 			errorPane.setVisible(true);
 			errorMsg.setText(errorMsg.getText() + "Adres is not valid!\n");
 			check = false;
 		}
 
-		Session newSes = new Session();
-		if (check == true ) {
-			newSes = sdb.getSessionByID(Integer.parseInt(trainingId.getText()));
-			newSes.setDate(cal);
-			newSes.setEndTime(endTime);
-			newSes.setStartTime(startTime);
-			newSes.setLocationID(lid);
-			return newSes;
-		}
-		else {
-			errorPane.setVisible(true);
-			errorMsg.setText(errorMsg.getText() + "Something is wrong in session!\n");
-			check = false;
-		}
-		return newSes;
 	}
 
 
-	public boolean checkLocation() {
-
-		LocationDB ldb = new LocationDB();
-		boolean check = true;
-		Location place = new Location();
-
-		if (existLoc.getValue().equals("Existing Location")) {
-			if (Streetname.getText()!= null && !Streetname.getText().isEmpty()) {
-				place.setStreetName(Streetname.getText());
-			}	 else {
-				errorPane.setVisible(true);
-				errorMsg.setText(errorMsg.getText() + "Streetname is empty!\n");
-				check = false;
-			}
-			if ((City.getText() != null && !City.getText().isEmpty())) {
-				place.setCity(City.getText());
-			} else {
-				errorPane.setVisible(true);
-				errorMsg.setText(errorMsg.getText() + "City is empty!\n");
-				check = false;
-			}
-			if ((Number.getText() != null && !Number.getText().isEmpty() )) {
-				place.setNumber(Number.getText());
-			}  else {
-				errorPane.setVisible(true);
-				errorMsg.setText(errorMsg.getText() + "Number is empty!\n");
-				check = false;
-			}
-			if ((PostalCode.getText() != null && !PostalCode.getText().isEmpty() )) {
-				place.setPostalCode(PostalCode.getText());
-			}else {
-				errorPane.setVisible(true);
-				errorMsg.setText(errorMsg.getText() + "Postal Code is empty!\n");
-				check = false;
-			}
-			if ((Country.getText() != null && !Country.getText().isEmpty() )) {
-				place.setCountry(Country.getText());
-			}else {
-				errorPane.setVisible(true);
-				errorMsg.setText(errorMsg.getText() + "Country is empty!\n");
-				check = false;
-			}
+	public void checkLocation() {
+		if (Streetname.getText()!= null && !Streetname.getText().isEmpty()) {
+		}	 else {
+			errorPane.setVisible(true);
+			errorMsg.setText(errorMsg.getText() + "Streetname is empty!\n");
+			checkLoc = false;
 		}
-		else {
-			int first = existLoc.getValue().toString().indexOf("ID=");
-			int last = existLoc.getValue().toString().indexOf(",");
-
-			idLocString = existLoc.getValue().toString().substring(first+3, last);
-			place = ldb.getLocationById(Integer.parseInt(idLocString));
-
-			Streetname.setText(place.getStreetName());
-			Number.setText(place.getNumber());
-			PostalCode.setText(place.getPostalCode());
-			City.setText(place.getCity());
-			Country.setText(place.getCountry());
-			ExtraInfo.setText(place.getInfo());
-			nameLoc.setText(place.getName());
-
+		if ((City.getText() != null && !City.getText().isEmpty())) {
+		} else {
+			errorPane.setVisible(true);
+			errorMsg.setText(errorMsg.getText() + "City is empty!\n");
+			checkLoc = false;
 		}
-		if (check == true ) {
-			try {
-				String parsedAddress = place.getStreetName().replaceAll("\\s+","+") + "+" + place.getNumber() + "," + place.getPostalCode() + "," + place.getCity() + "," + place.getCountry();
-
-				int width =(int) locationField.getFitWidth();
-				int height =(int) locationField.getFitHeight();
-
-				Image map = new Image("https://maps.googleapis.com/maps/api/staticmap?zoom=14"
-						+ "&center=" + parsedAddress
-						+ "&size=" + width + "x" + height
-						+ "&markers=color:red%7Clabel:A%7C" + parsedAddress
-						+ "&key=AIzaSyBNGYCltDm0bAbk0OWAkD1Mi7VXbat_vIc");
-
-				locationField.setImage(map);
-			}
-			catch (Exception e1) {
-				errorMsg.setVisible(true);
-				errorMsg.setText(errorMsg.getText() + "Oops, something went wrong!\n");
-			}
+		if ((Number.getText() != null && !Number.getText().isEmpty() )) {
+		}  else {
+			errorPane.setVisible(true);
+			errorMsg.setText(errorMsg.getText() + "Number is empty!\n");
+			checkLoc = false;
 		}
-		return check;
+		if ((PostalCode.getText() != null && !PostalCode.getText().isEmpty() )) {
+		}else {
+			errorPane.setVisible(true);
+			errorMsg.setText(errorMsg.getText() + "Postal Code is empty!\n");
+			checkLoc = false;
+		}
+		if ((Country.getText() != null && !Country.getText().isEmpty() )) {
+		}else {
+			errorPane.setVisible(true);
+			errorMsg.setText(errorMsg.getText() + "Country is empty!\n");
+			checkLoc = false;
+		}
 	}
 	@FXML protected Training saveTraining() {
-		errorMsg.setText("");
+
 		TrainingDB tdb = new TrainingDB();
-		String title = null,subject= null,teacher=null,ses=null;
-		int sessions = 1;
-		boolean check = true;
+		String title = null,subject= null,teacher=null;
 
 		if ((titleTraining.getText()!= null && !titleTraining.getText().isEmpty())) {
 			title = titleTraining.getText();
 		}	 else {
-			errorMsg.setText(errorMsg.getText() + "\nTitle is empty!");
+			errorMsg.setText(errorMsg.getText() + "Title is empty!\n");
 			check = false;
 		}
 		if ((subjectTraining.getText() != null && !subjectTraining.getText().isEmpty())) {
 			subject = subjectTraining.getText();
 		} else {
-			errorMsg.setText(errorMsg.getText() + "\nSubject is empty!");
+			errorMsg.setText(errorMsg.getText() + "Subject is empty!\n");
 			check = false;
 		}
 		if ((teacherTraining.getText() != null && !teacherTraining.getText().isEmpty() )) {
 			teacher = teacherTraining.getText();
 		}else {
-			errorMsg.setText(errorMsg.getText() + "\nTeacher is empty!");
+			errorMsg.setText(errorMsg.getText() + "Teacher is empty!\n");
 			check = false;
 		}
 
 		Training newtr = new Training();
-		if (check == true ) {
-			try {
-				newtr = tdb.getTraining(Integer.parseInt(trainingId.getText()));
-				newtr.setLanguage(Language.valueOf(LanguageTraining.getValue()));
-				newtr.setResponsible(teacher);
-				newtr.setSubject(subject);
-				newtr.setTitle(title);
-				return newtr;
-			} catch (Exception e1) {
+		try {
+			newtr = tdb.getTraining(Integer.parseInt(trainingId.getText()));
+			newtr.setLanguage(Language.valueOf(LanguageTraining.getValue()));
+			newtr.setResponsible(teacher);
+			newtr.setSubject(subject);
+			newtr.setTitle(title);
+			newtr.setArchive(0);
+			return newtr;
+		} catch (Exception e1) {
 
-				e1.printStackTrace();
-				errorMsg.setText("Oops, something went wrong.");
-			}
+			e1.printStackTrace();
+
 		}
 		return newtr;
 	}
 
 	public void updateFunct() {
-		SessionDB sdb = new SessionDB();
+		check = true;
+		errorMsg.setText("");
+		db.SessionDB sdb = new SessionDB();
 		TrainingDB tdb = new TrainingDB();
-
 		Training saveTr = saveTraining();
+		LocationDB ldb = new LocationDB();
+		if (sessionId.getText() != null && !sessionId.getText().isEmpty()) {
+		saveSession();
+		}
 		try {
-			if (trainingId.getText() != null && !trainingId.getText().isEmpty()) {
-				tdb.updateTraining(saveTr);
+			if (check == true) {
 				
-				Navigator.loadVista(Navigator.TrainingDetailsView);
-				Navigator.loadMenuVista(Navigator.MenuTrainingActiveView);
+					System.err.println("2");
+					tdb.updateTraining(saveTr);
+					System.err.println(saveTr.toString());
+					System.err.println("3");
 				
+				if (sessionId.getText() != null && !sessionId.getText().isEmpty()) {
+					logic.Session saveSes = sdb.getSessionByID(Integer.parseInt(sessionId.getText()));
+					
+					
+					Location newLoc = ldb.getLocationById(saveSes.getLocationID());
+					System.err.println(newLoc.toString());
+					lid = newLoc.getID();
+					newLoc.setStreetName(Streetname.getText());
+					newLoc.setNumber( Number.getText());
+					newLoc.setPostalCode(PostalCode.getText());
+					newLoc.setCity(City.getText());
+					newLoc.setCountry(Country.getText());
+					newLoc.setName(nameLoc.getText());
+					newLoc.setInfo(ExtraInfo.getText());
+					System.err.println(newLoc.toString());
+					ldb.updateLocation(newLoc);
+					
+					
+					System.err.println("4");
+					System.err.println(saveSes.getLocationID());
+					saveSes.setDate(cal);
+					saveSes.setEndTime(endTime);
+					saveSes.setStartTime(startTime);
+					saveSes.setLocationID(lid);
+					System.err.println(saveSes.getLocationID());
+					saveSes.setArchive(0);
+					System.err.println(saveSes.toString());
+					sdb.updateSession(saveSes);
+					System.err.println("5");
+				}
+				System.err.println("6");
 				errorMsg.setVisible(true);
-				errorMsg.setText(errorMsg.getText() + "Training updated!\n");
+				errorMsg.setTextFill(javafx.scene.paint.Color.BLACK);
+				errorMsg.setText(errorMsg.getText() + "Update succesfull!\n");
+				fillAll(saveTr);
 			}
 			else {
 				errorMsg.setVisible(true);
-				errorMsg.setText(errorMsg.getText() + "No Training was updated!\n");
-			}
-			if (sessionId.getText() != null && !sessionId.getText().isEmpty()) {
-				Session saveSes = saveSession();
-				sdb.updateSession(saveSes);
-				
-				Navigator.loadVista(Navigator.TrainingDetailsView);
-				Navigator.loadMenuVista(Navigator.MenuTrainingActiveView);
-				
-				errorMsg.setVisible(true);
-				errorMsg.setText(errorMsg.getText() + "Session updated!\n");
-			}
-			else {
-				errorMsg.setVisible(true);
-				errorMsg.setText(errorMsg.getText() + "No session was updated!\n");
+				errorMsg.setText(errorMsg.getText() + "Nothing was updated!\n");
 			}
 		}
 		catch (Exception ex) {
@@ -419,130 +419,139 @@ public class TrainingDetailsController  implements Initializable{
 		}
 	}
 
-	@SuppressWarnings({ "unchecked" })
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
 
-		SessionDB sdb = new SessionDB();
+	@SuppressWarnings("unchecked")
+	public void fillAll (Training t) {
+		db.SessionDB sdb = new SessionDB();
 		LocationDB ldb = new LocationDB();
-		Training t = TrainingController.trainingRow;
-		List<Session> s  = sdb.getAllSessionsOfTrainingID(t.getTrainingID());
 
-		errorPane.setVisible(false);
+
+		List<logic.Session> s  = sdb.getAllSessionsOfTrainingID(t.getTrainingID());
+
+		errorMsg.setTextFill(javafx.scene.paint.Color.RED);
 		SessionPane.setVisible(false);
 
 		trainingId.setText(Integer.toString(t.getTrainingID()));
 		titleTraining.setText(t.getTitle());
-		LanguageTraining.setItems(FXCollections.observableArrayList("Chinese","English", "Spanish", "Arabic", "Russian", "Portuguese" , "French","Japanese","German","Italien", "Dutch"));
+		LanguageTraining.setItems(FXCollections.observableArrayList("Chinese","English", "Spanish", "Arabic", "Russian", "Portuguese" , "French","Japanese","German","Italian", "Dutch"));
 		LanguageTraining.setValue(t.getLanguage().toString());
 		teacherTraining.setText(t.getResponsible());
 		subjectTraining.setText(t.getSubject());
 
 		if (s != null) {
-			ObservableList<Session> sessions = FXCollections.observableArrayList(s);
+			ObservableList<logic.Session> sessions = FXCollections.observableArrayList(s);
 
 
-			sesionIdCol.setCellValueFactory(new PropertyValueFactory<Session, Integer>("sessionID"));
+			sesionIdCol.setCellValueFactory(new PropertyValueFactory<logic.Session, Integer>("sessionID"));
 			//dateCol.setCellValueFactory(new PropertyValueFactory<Session, LocalDate>("date"));
-			dateCol.setCellValueFactory(new Callback<CellDataFeatures<Session, String>, ObservableValue<String>>() {
+			dateCol.setCellValueFactory(new Callback<CellDataFeatures<logic.Session, String>, ObservableValue<String>>() {
 				@Override
-				public ObservableValue<String> call(CellDataFeatures<Session, String> data) {
+				public ObservableValue<String> call(CellDataFeatures<logic.Session, String> data) {
 					Calendar cal = data.getValue().getDate();
 					LocalDate ld = LocalDate.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH)+1, cal.get(Calendar.DAY_OF_MONTH));
 					return new SimpleStringProperty(ld.toString());
 				}
 			});
-			starttimeCol.setCellValueFactory(new PropertyValueFactory<Session, String>("startTime"));
+			starttimeCol.setCellValueFactory(new PropertyValueFactory<logic.Session, String>("startTime"));
 			endtimeCol.setCellValueFactory(new PropertyValueFactory<Training, String>("endTime"));
 			partCol.setCellValueFactory(new PropertyValueFactory<Training, String>("part"));
 
-			
-			
-			FilteredList<Session> filteredSession= new FilteredList<>(sessions, p -> true);
-			SortedList<Session> ses = new SortedList<>(filteredSession);
+
+
+			FilteredList<logic.Session> filteredSession= new FilteredList<>(sessions, p -> true);
+			SortedList<logic.Session> ses = new SortedList<>(filteredSession);
 			ses.comparatorProperty().bind(sessionTable.comparatorProperty());								
 			sessionTable.setItems(ses);
 		}
 
 		sessionTable.setRowFactory( sessionClick -> {
-			TableRow<Session> row = new TableRow<>();
+			TableRow<logic.Session> row = new TableRow<logic.Session>();
 			row.setOnMouseClicked(event -> {
 				if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-					Session sessionRow = row.getItem();
-					Session sesShow = sdb.getSessionByID(sessionRow.getSessionID());
-					SessionPane.setVisible(true);
+					try {
+						logic.Session sessionRow = row.getItem();
+						logic.Session sesShow = sdb.getSessionByID(sessionRow.getSessionID());
+						SessionPane.setVisible(true);
 
-					partSes.setText(Integer.toString(sesShow.getPart()));
-					
-					Calendar cal = sesShow.getDate();
-					LocalDate ld = LocalDate.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH)+1, cal.get(Calendar.DAY_OF_MONTH));
-					addDate.setValue(ld);
+						partSes.setText(Integer.toString(sesShow.getPart()));
 
-					sessionId.setText(Integer.toString(sesShow.getSessionID()));
-					addStartHour.setItems(FXCollections.observableArrayList("1","2","3","4","5","6","7","8","9","10","11","12"));		            
-					int first = sesShow.getStartTime().toString().indexOf("");
-					int last = sesShow.getStartTime().toString().indexOf(":");
-					String startHours = sesShow.getStartTime().toString().substring(first, last);
-					addStartHour.setValue(startHours);
+						Calendar cal = sesShow.getDate();
+						LocalDate ld = LocalDate.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH)+1, cal.get(Calendar.DAY_OF_MONTH));
+						addDate.setValue(ld);
 
-					addStartMin.setItems(FXCollections.observableArrayList("00","05","10","15","20","25", "30","35", "40","45","50","55"));
-					first = sesShow.getStartTime().toString().indexOf(":");
-					last = sesShow.getStartTime().toString().indexOf("M");
-					String startMin = sesShow.getStartTime().toString().substring(first+1, last-1);
-					addStartMin.setValue(startMin);
+						sessionId.setText(Integer.toString(sesShow.getSessionID()));
+						addStartHour.setItems(FXCollections.observableArrayList("1","2","3","4","5","6","7","8","9","10","11","12"));		            
+						int first = sesShow.getStartTime().toString().indexOf("");
+						int last = sesShow.getStartTime().toString().indexOf(":");
+						String startHours = sesShow.getStartTime().toString().substring(first, last);
+						addStartHour.setValue(startHours);
 
-					AmPmStart.setItems(FXCollections.observableArrayList("AM","PM"));
-					String ampmstart = sesShow.getStartTime().toString().substring(last-1);
-					AmPmStart.setValue(ampmstart);
+						addStartMin.setItems(FXCollections.observableArrayList("00","05","10","15","20","25", "30","35", "40","45","50","55"));
+						first = sesShow.getStartTime().toString().indexOf(":");
+						last = sesShow.getStartTime().toString().indexOf("M");
+						String startMin = sesShow.getStartTime().toString().substring(first+1, last-1);
+						addStartMin.setValue(startMin);
 
-					addEndHour.setItems(FXCollections.observableArrayList("1","2","3","4","5","6","7","8","9","10","11","12"));    		 
-					first = sesShow.getEndTime().toString().indexOf("");
-					last = sesShow.getEndTime().toString().indexOf(":");
-					String endHours = sesShow.getEndTime().toString().substring(first, last);
-					addEndHour.setValue(endHours);
+						AmPmStart.setItems(FXCollections.observableArrayList("AM","PM"));
+						String ampmstart = sesShow.getStartTime().toString().substring(last-1);
+						AmPmStart.setValue(ampmstart);
 
-					addEndMin.setItems(FXCollections.observableArrayList("00","05","10","15","20","25", "30","35", "40","45","50","55"));
-					first = sesShow.getEndTime().toString().indexOf(":");
-					last = sesShow.getEndTime().toString().indexOf("M");
-					String endMin = sesShow.getEndTime().toString().substring(first+1, last-1);
-					addEndMin.setValue(endMin);
+						addEndHour.setItems(FXCollections.observableArrayList("1","2","3","4","5","6","7","8","9","10","11","12"));    		 
+						first = sesShow.getEndTime().toString().indexOf("");
+						last = sesShow.getEndTime().toString().indexOf(":");
+						String endHours = sesShow.getEndTime().toString().substring(first, last);
+						addEndHour.setValue(endHours);
 
-					AmPmEnd.setItems(FXCollections.observableArrayList("AM","PM"));
-					String ampmend = sesShow.getEndTime().toString().substring(last-1);
-					AmPmEnd.setValue(ampmend);
+						addEndMin.setItems(FXCollections.observableArrayList("00","05","10","15","20","25", "30","35", "40","45","50","55"));
+						first = sesShow.getEndTime().toString().indexOf(":");
+						last = sesShow.getEndTime().toString().indexOf("M");
+						String endMin = sesShow.getEndTime().toString().substring(first+1, last-1);
+						addEndMin.setValue(endMin);
+
+						AmPmEnd.setItems(FXCollections.observableArrayList("AM","PM"));
+						String ampmend = sesShow.getEndTime().toString().substring(last-1);
+						AmPmEnd.setValue(ampmend);
 
 
-					Location place = ldb.getLocationById(sesShow.getLocationID());
+						Location place = ldb.getLocationById(sesShow.getLocationID());
 
-					if (place != null) {
-						Streetname.setText(place.getStreetName());
-						Number.setText(place.getNumber());
-						PostalCode.setText(place.getPostalCode());
-						City.setText(place.getCity());
-						Country.setText(place.getCountry());
-						ExtraInfo.setText(place.getInfo());
-						nameLoc.setText(place.getName());
-						try {
-							String parsedAddress = place.getStreetName().replaceAll("\\s+","+") + "+" + place.getNumber() + "," + place.getPostalCode() + "," + place.getCity() + "," + place.getCountry();
+						locationField.setVisible(true);
+						if (place != null) {
+							Streetname.setText(place.getStreetName());
+							Number.setText(place.getNumber());
+							PostalCode.setText(place.getPostalCode());
+							City.setText(place.getCity());
+							Country.setText(place.getCountry());
+							ExtraInfo.setText(place.getInfo());
+							nameLoc.setText(place.getName());
+							try {
+								String parsedAddress = place.getStreetName().replaceAll("\\s+","+") + "+" + place.getNumber() + "," + place.getPostalCode() + "," + place.getCity() + "," + place.getCountry();
 
-							int width =(int) locationField.getFitWidth();
-							int height =(int) locationField.getFitHeight();
+								int width =(int) locationField.getFitWidth();
+								int height =(int) locationField.getFitHeight();
 
-							Image map = new Image("https://maps.googleapis.com/maps/api/staticmap?zoom=14"
-									+ "&center=" + parsedAddress
-									+ "&size=" + width + "x" + height
-									+ "&markers=color:red%7Clabel:A%7C" + parsedAddress
-									+ "&key=AIzaSyBNGYCltDm0bAbk0OWAkD1Mi7VXbat_vIc");
+								Image map = new Image("https://maps.googleapis.com/maps/api/staticmap?zoom=14"
+										+ "&center=" + parsedAddress
+										+ "&size=" + width + "x" + height
+										+ "&markers=color:red%7Clabel:A%7C" + parsedAddress
+										+ "&key=AIzaSyBNGYCltDm0bAbk0OWAkD1Mi7VXbat_vIc");
 
-							locationField.setImage(map);
+								locationField.setImage(map);
+							}
+							catch (Exception e1) {
+								errorMsg.setVisible(true);
+								errorMsg.setText(errorMsg.getText() + "Oops, something went wrong!\n");
+							}
 						}
-						catch (Exception e1) {
-							errorMsg.setText(errorMsg.getText() + "Oops, something went wrong!\n");
-						}
+					}
+					catch(Exception ex) {
+						ex.printStackTrace();
+						errorMsg.setVisible(true);
+						errorMsg.setText(errorMsg.getText() + "Oops, something went wrong!\n");
 					}
 				}
 			});
-			return row ;
+			return row;
 		});
 
 		//fill combobox with locations
@@ -562,7 +571,66 @@ public class TrainingDetailsController  implements Initializable{
 
 
 
-	}	
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		existLoc.setVisible(false);
+		Training t = TrainingController.trainingRow;
+		fillAll(t);
+
+		LocationDB ldb = new LocationDB();
+		existLoc.valueProperty().addListener(new ChangeListener() {
+
+			@Override
+			public void changed(ObservableValue ov, Object oldLoc, Object newLoc) {
+				try {
+					if(!newLoc.toString().equals("Existing Location")) {
+						int first = newLoc.toString().indexOf("ID=");
+						int last = newLoc.toString().indexOf(",");
+
+						String idLocString = newLoc.toString().substring(first+3, last);
+						Location place = ldb.getLocationById(Integer.parseInt(idLocString));
+
+						Streetname.setText(place.getStreetName());
+						Number.setText(place.getNumber());
+						PostalCode.setText(place.getPostalCode());
+						City.setText(place.getCity());
+						Country.setText(place.getCountry());
+						ExtraInfo.setText(place.getInfo());
+						nameLoc.setText(place.getName());
+
+						try {
+							String parsedAddress = place.getStreetName().replaceAll("\\s+","+") + "+" + place.getNumber() + "," + place.getPostalCode() + "," + place.getCity() + "," + place.getCountry();
+
+							int width =(int) locationField.getFitWidth();
+							int height =(int) locationField.getFitHeight();
+
+							Image map = new Image("https://maps.googleapis.com/maps/api/staticmap?zoom=14"
+									+ "&center=" + parsedAddress
+									+ "&size=" + width + "x" + height
+									+ "&markers=color:red%7Clabel:A%7C" + parsedAddress
+									+ "&key=AIzaSyBNGYCltDm0bAbk0OWAkD1Mi7VXbat_vIc");
+
+							locationField.setImage(map);
+						}
+						catch (Exception e1) {
+							errorMsg.setVisible(true);
+							errorMsg.setText(errorMsg.getText() + "Oops, something went wrong!\n");
+						}
+					}
+				}
+				catch (NullPointerException ex) {
+					//System.out.println("error locatie weergeven");
+				}
+
+			}
+
+		});
+
+
+	}
 }
 
 
