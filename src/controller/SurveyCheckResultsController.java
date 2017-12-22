@@ -83,21 +83,60 @@ public class SurveyCheckResultsController implements Initializable {
 		}		
 		if (check == true)
 		{
+			SurveyDB surveydb = new SurveyDB();
 			ResultDB resultdb = new ResultDB();
+			Question question = null;		
 			List<Result> results = resultdb.getAllResultBySurveyId(surveyID);
+//			Survey survey = surveydb.getSurvey(r.getSurvey_id());
+//			int answer0 = 0, answer1 = 0, answer2 = 0;
+			
+//			for (Result r : results)
+//			{					
+//				for (Question qtest : survey.getMyListSurveysQuestions())
+//				{
+//					
+//					if (qtest.getQuestionId() == r.getQuestion_id());
+//					question = qtest;
+//					if (question.getAntwoorden().get(0).getAnswer() == r.getAnswer())
+//					{
+//						answer0++;
+//					}
+//					if (question.getAntwoorden().get(1).getAnswer() == r.getAnswer())
+//					{
+//						answer1++;
+//					}
+//					if (question.getAntwoorden().get(2).getAnswer() == r.getAnswer())
+//					{
+//						answer2++;
+//					}
+//					output.setText("\nquestion: " + question.getQuestion());
+//					output.setText("\nAnswer: " + question.getAntwoorden().get(0).getAnswer() + " - " + answer0 + " times choosen");
+//					output.setText("\nAnswer: " + question.getAntwoorden().get(1).getAnswer() + " - " + answer1 + " times choosen");
+//					output.setText("\nAnswer: " + question.getAntwoorden().get(2).getAnswer() + " - " + answer2 + " times choosen");
+//				}
+//			}
+			output.setText("Results for survey met id: " + surveyID);
 			for (Result r : results)
-			{
-				output.setText("\nquestionid: " + r.getQuestion_id());
+			{		
+				Survey survey = surveydb.getSurvey(r.getSurvey_id());
+						
+				for (Question qtest : survey.getMyListSurveysQuestions())
+				{
+					if (qtest.getQuestionId() == r.getQuestion_id());
+					question = qtest;
+				}
+				output.setText(output.getText() + "\nquestion: " + question.getQuestion());
 				output.setText(output.getText() + " - answer: " + r.getAnswer());
 			}
-		}
+		}	
 	}
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 				SurveyDB sdb2 = new SurveyDB();
-				if (sdb2.getAllSurveys() != null) {
-					ObservableList<Survey> surveys = FXCollections.observableArrayList(sdb2.getAllSurveys());
+				List<Survey> surveys2 = sdb2.getAllSurveys(); 
+				if (surveys2 != null) {
+					ObservableList<Survey> surveys = FXCollections.observableArrayList(surveys2);
 				surveyIDCol1.setCellValueFactory(new PropertyValueFactory<Survey, Integer>("surveyID"));
 				trainingIDCol1.setCellValueFactory(new PropertyValueFactory<Survey, Integer>("trainingsID"));
 				titleCol1.setCellValueFactory(new PropertyValueFactory<Survey, String>("title"));
@@ -107,6 +146,11 @@ public class SurveyCheckResultsController implements Initializable {
 				SortedList<Survey> sortedSurvey = new SortedList<>(filteredSurvey);		
 				sortedSurvey.comparatorProperty().bind(allSurveyTable.comparatorProperty());										
 				allSurveyTable.setItems(sortedSurvey);
+				}
+				
+				for (Survey s: surveys2)
+				{
+					System.out.println(s.getSurveyID());
 				}
 	}
 
