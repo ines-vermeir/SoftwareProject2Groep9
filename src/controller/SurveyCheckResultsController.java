@@ -134,8 +134,9 @@ public class SurveyCheckResultsController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 				SurveyDB sdb2 = new SurveyDB();
-				if (sdb2.getAllSurveys() != null) {
-					ObservableList<Survey> surveys = FXCollections.observableArrayList(sdb2.getAllSurveys());
+				List<Survey> surveys2 = sdb2.getAllSurveys(); 
+				if (surveys2 != null) {
+					ObservableList<Survey> surveys = FXCollections.observableArrayList(surveys2);
 				surveyIDCol1.setCellValueFactory(new PropertyValueFactory<Survey, Integer>("surveyID"));
 				trainingIDCol1.setCellValueFactory(new PropertyValueFactory<Survey, Integer>("trainingsID"));
 				titleCol1.setCellValueFactory(new PropertyValueFactory<Survey, String>("title"));
@@ -145,6 +146,11 @@ public class SurveyCheckResultsController implements Initializable {
 				SortedList<Survey> sortedSurvey = new SortedList<>(filteredSurvey);		
 				sortedSurvey.comparatorProperty().bind(allSurveyTable.comparatorProperty());										
 				allSurveyTable.setItems(sortedSurvey);
+				}
+				
+				for (Survey s: surveys2)
+				{
+					System.out.println(s.getSurveyID());
 				}
 	}
 
