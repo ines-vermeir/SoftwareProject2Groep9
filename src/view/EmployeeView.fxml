@@ -12,9 +12,9 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EmployeeController">
    <children>
-      <AnchorPane prefHeight="800.0" prefWidth="1400.0">
+      <AnchorPane prefHeight="500.0" prefWidth="1000.0">
          <children>
-            <AnchorPane>
+            <AnchorPane prefHeight="500.0" prefWidth="993.0">
                <children>
                   
                         <Label fx:id="feedback" alignment="CENTER" layoutX="18.0" layoutY="273.0" prefHeight="207.0" prefWidth="188.0" text="" textFill="#f20000" wrapText="true">
@@ -29,24 +29,24 @@
                      </font>
                   </Label>
                   <Label fx:id="trainingText" layoutX="173.0" layoutY="210.0" prefHeight="21.0" prefWidth="143.0" />
-                 <Label layoutX="50.0" layoutY="169.0" prefHeight="21.0" prefWidth="109.0" text="Status:" />
+                 <Label layoutX="25.0" layoutY="169.0" prefHeight="21.0" prefWidth="109.0" text="Status:" />
                   <Label fx:id="authoText" layoutX="92.0" layoutY="169.0" prefHeight="21.0" prefWidth="135.0" />
-                  <TreeTableView fx:id="table" layoutX="218.0" layoutY="131.0" prefHeight="350.0" prefWidth="760.0">
+                  <TreeTableView fx:id="table" layoutX="212.0" layoutY="102.0" prefHeight="360.0" prefWidth="775.0">
                      <effect>
                         <Blend mode="SCREEN" />
                      </effect>
                   </TreeTableView>
-                  <Label layoutX="25.0" layoutY="70.0" prefHeight="21.0" prefWidth="312.0" text="Applications available:">
+                  <Label layoutX="219.0" layoutY="45.0" prefHeight="21.0" prefWidth="312.0" text="Applications available:">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="218.0" layoutY="110.0" text="Select an authorized employee and click Ok">
+                  <Label layoutX="227.0" layoutY="81.0" text="Select an authorized employee and click Ok">
                      <font>
                         <Font name="System Italic" size="15.0" />
                      </font>
                   </Label>
-                   <Label fx:id="trainingLabel" layoutX="51.0" layoutY="140.0" prefHeight="21.0" prefWidth="84.0" text="TrainingID:" />
+                   <Label fx:id="trainingLabel" layoutX="25.0" layoutY="140.0" prefHeight="21.0" prefWidth="84.0" text="TrainingID:" />
                   <Label fx:id="trainingText" layoutX="110.0" layoutY="140.0" prefHeight="21.0" prefWidth="109.0" />
                   <Label alignment="CENTER" layoutX="348.0" layoutY="14.0" prefHeight="21.0" prefWidth="285.0" text="Add employee to training" textAlignment="CENTER">
                      <font>
