@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import logic.Certificate;
 import logic.Certificate_upload;
 import logic.Survey;
 import logic.Training;
@@ -23,7 +24,7 @@ public Certificate_uploadDB(){
 
 	super();
   myFactory = SingletonHibernate.getSessionFactory();
-
+ session= myFactory.openSession();
 	// TODO Auto-generated constructor stub
 }
 
@@ -136,15 +137,32 @@ public  boolean  insertCertificate_upload(Certificate_upload cu) {
 		}
 		return cu;
 	}
-
-	public ArrayList<Certificate_upload> getAllCertificate_uploads()
+	
+	//Added by Sebastian 
+	public ArrayList<Certificate_upload> getCertificatesByEmployee(int Id) {
+		Certificate c = null;
+		ArrayList<Certificate_upload> list = new ArrayList<Certificate_upload>();
+		
+	
+		
+			
+			for (Object oneObject : session.createQuery("FROM Certificates_upload where employeeID = " + Id).getResultList()) {
+				list.add((Certificate_upload)oneObject);
+			}
+			
+		
+		
+		return list;
+		
+	}
+	/*public ArrayList<Certificate_upload> getAllCertificate_uploads()
 	{
 		ArrayList<Certificate_upload> list = null;
 		Session session = myFactory.openSession();
 		Transaction t = null;
 		try
 		{
-			t = session.beginTransaction();
+			
 			list = (ArrayList<Certificate_upload>) session.createCriteria(Certificate_upload.class).list();
 			t.commit();
 		} catch (HibernateException e)
@@ -156,7 +174,17 @@ public  boolean  insertCertificate_upload(Certificate_upload cu) {
 			session.close();
 		}
 		return list;
+	}*/
+	public ArrayList<Certificate_upload> getAllCertificate_uploads()
+	{
+		ArrayList<Certificate_upload> list = new ArrayList<Certificate_upload>();
+	
+		for (Object oneObject : session.createQuery("FROM Certificates_upload").getResultList()) {
+			list.add((Certificate_upload)oneObject);
+		}
+		
+		
+		return list;
 	}
-
 	
 }
