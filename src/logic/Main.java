@@ -1,13 +1,8 @@
 package logic;
 
 import java.io.BufferedReader;
-import java.io.Console;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.security.MessageDigest;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -15,29 +10,17 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.InputMismatchException;
 import java.util.List;
-
 import java.util.Scanner;
 
-import javax.transaction.Transactional;
-
-//import org.apache.commons.codec.binary.Base64;
-//import org.apache.commons.codec.digest.DigestUtils;
 import application.Navigator;
 import controller.MainController;
-import db.BookDAO;
-import db.BookDB;
-import db.Certificate_uploadDB;
 import db.LocationDB;
 /*import db.TestGson;
 import db.TestJackson;
 import db.UserDB;
 import logic.User.Privilege;*/
-import db.ResultDB;
 
-import java.util.Date;
 import db.SessionDB;
 import db.SingletonHibernate;
 import db.UserDB;
@@ -50,16 +33,10 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import logic.Training.Language;
 import logic.User.Privilege;
-import db.TestJackson;
 import db.TrainingDB;
 import db.SurveyDB;
 import db.SurveyPredefinedDB;
-import java.io.IOException;
-import controller.MainController;
 import javafx.application.Application;
-
-//import org.mindrot.jbcrypt.BCrypt;
-
 
 public class Main extends Application {
 	
@@ -92,14 +69,6 @@ public static Stage mainStage;
 		
 	}
 
-    /**
-     * Loads the main fxml layout.
-     * Sets up the vista switching VistaNavigator.
-     * Loads the first vista into the fxml layout.
-     *
-     * @return the loaded pane.
-     * @throws IOException if the pane could not be loaded.
-     */
 
     private Pane loadMainPane() throws IOException {
         
