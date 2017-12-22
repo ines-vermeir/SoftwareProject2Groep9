@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import application.Navigator;
 import db.UserDB;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +20,13 @@ public class SettingsChangePassword implements Initializable {
 	@FXML private PasswordField passFieldConfirm;
 	@FXML private Label errorMsg;
 	@FXML private Button save;
+	@FXML private Button back;
+	
+	@FXML
+	protected void backToSettings(ActionEvent e) {
+		Navigator.loadVista(Navigator.SettingsView);
+		Navigator.loadMenuVista(Navigator.MenuSettingsActiveView);
+	}
 	
 	@FXML
 	protected void changePassword(ActionEvent e) {

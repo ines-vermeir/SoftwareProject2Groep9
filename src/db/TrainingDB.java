@@ -219,6 +219,56 @@ public void  linkBook(Training myTraining, String isbn) {
 	}
 }
 
+public int  deleteBook(BookTraining b) {
+	
+	int result = 0;
+	Transaction t = null; 
+	try {
+		
+		t = session.beginTransaction();
+			@SuppressWarnings("rawtypes")
+		Query query =session.createNativeQuery("DELETE FROM Training_books WHERE isbn = :isbn AND trainingID = :trainingID");
+			query.setParameter("isbn", b.getIsbn());
+			query.setParameter("trainingID", b.getTrainingID()); 
+		
+	     result= query.executeUpdate();
+		
+		t.commit();
+		
+		return result;
+	}catch(HibernateException e) {
+		if(t!= null ) t.rollback();
+		e.printStackTrace();
+	}
+	
+	return result;
+}
+
+public int  deleteApplication(Application a) {
+	
+	int result = 0;
+	Transaction t = null; 
+	try {
+		
+		t = session.beginTransaction();
+			@SuppressWarnings("rawtypes")
+		Query query =session.createNativeQuery("DELETE FROM applications WHERE id = :id");
+			query.setParameter("id", a.getId());
+		
+		
+	     result= query.executeUpdate();
+		
+		t.commit();
+		
+		return result;
+	}catch(HibernateException e) {
+		if(t!= null ) t.rollback();
+		e.printStackTrace();
+	}
+	
+	return result;
+}
+
 
 
 public List<BookTraining> getBooksTrainings() {
@@ -270,6 +320,8 @@ public List<Application> getApplications() {
 	return list; 
 
 }
+
+
 
 }
 /*
