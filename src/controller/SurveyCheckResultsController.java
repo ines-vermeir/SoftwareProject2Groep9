@@ -83,14 +83,52 @@ public class SurveyCheckResultsController implements Initializable {
 		}		
 		if (check == true)
 		{
+			SurveyDB surveydb = new SurveyDB();
 			ResultDB resultdb = new ResultDB();
+			Question question = null;		
 			List<Result> results = resultdb.getAllResultBySurveyId(surveyID);
+//			Survey survey = surveydb.getSurvey(r.getSurvey_id());
+//			int answer0 = 0, answer1 = 0, answer2 = 0;
+			
+//			for (Result r : results)
+//			{					
+//				for (Question qtest : survey.getMyListSurveysQuestions())
+//				{
+//					
+//					if (qtest.getQuestionId() == r.getQuestion_id());
+//					question = qtest;
+//					if (question.getAntwoorden().get(0).getAnswer() == r.getAnswer())
+//					{
+//						answer0++;
+//					}
+//					if (question.getAntwoorden().get(1).getAnswer() == r.getAnswer())
+//					{
+//						answer1++;
+//					}
+//					if (question.getAntwoorden().get(2).getAnswer() == r.getAnswer())
+//					{
+//						answer2++;
+//					}
+//					output.setText("\nquestion: " + question.getQuestion());
+//					output.setText("\nAnswer: " + question.getAntwoorden().get(0).getAnswer() + " - " + answer0 + " times choosen");
+//					output.setText("\nAnswer: " + question.getAntwoorden().get(1).getAnswer() + " - " + answer1 + " times choosen");
+//					output.setText("\nAnswer: " + question.getAntwoorden().get(2).getAnswer() + " - " + answer2 + " times choosen");
+//				}
+//			}
+			output.setText("Results for survey met id: " + surveyID);
 			for (Result r : results)
-			{
-				output.setText("\nquestionid: " + r.getQuestion_id());
+			{		
+				Survey survey = surveydb.getSurvey(r.getSurvey_id());
+						
+				for (Question qtest : survey.getMyListSurveysQuestions())
+				{
+					if (qtest.getQuestionId() == r.getQuestion_id());
+					question = qtest;
+				}
+				output.setText(output.getText() + "\nquestion: " + question.getQuestion());
 				output.setText(output.getText() + " - answer: " + r.getAnswer());
 			}
-		}
+		}	
 	}
 	
 	@Override
