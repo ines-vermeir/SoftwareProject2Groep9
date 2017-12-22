@@ -10,6 +10,10 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
 
 import application.Navigator;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -40,7 +44,19 @@ import logic.Session;
 import logic.Training;
 
 public class HomeController implements Initializable {
+	
+	//chart
+	@FXML
+	private BarChart<?, ?> chart;
 
+	@FXML
+	private NumberAxis  y;
+
+	@FXML
+	private CategoryAxis x;
+	
+	////
+	
 	@FXML private TreeTableView<logic.Employee> table;	
 	@FXML private JFXTextField input;
 	
@@ -60,6 +76,11 @@ public class HomeController implements Initializable {
 	private TreeItem<logic.Employee> chosenEmployee=null;
 	private int empID = 0;
 	private Employee e = null;
+	
+	
+     
+	
+	
 	
 	@FXML
 	protected void showCertificates()
@@ -128,7 +149,24 @@ public class HomeController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
+		//chart
+		XYChart.Series series = new XYChart.Series<>();
+		Certificate_uploadDB db = new Certificate_uploadDB(); 
 		
+		
+		
+		for(Certificate_upload c: db.getAllCertificate_uploads()) {
+			
+				series.getData().add(new XYChart.Data(Integer.toString(c.getEmployeeID()), db.getCertificatesByEmployee(c.getEmployeeID()).size()));
+			
+			
+			
+		}
+		
+		chart.getData().addAll(series);
+		
+		
+		/////
 		TrainingDB tdb = new TrainingDB();
 		if (tdb.getActiveTrainings() != null) {
 			ObservableList<Training> trainings = FXCollections.observableArrayList(tdb.getNonActiveTrainings());

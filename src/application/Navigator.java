@@ -33,6 +33,7 @@ public class Navigator {
 	public static String LoginView = "/view/LoginView.fxml";
 	
 	public static String HomeView = "/view/HomeView.fxml";
+	//public static String HomeView = "/view/Chart.fxml";
 	public static String EmployeeView = "/view/EmployeeView.fxml";
 	public static String TrainingView = "/view/TrainingView.fxml";
 	public static String BookView = "/view/BookView.fxml";
