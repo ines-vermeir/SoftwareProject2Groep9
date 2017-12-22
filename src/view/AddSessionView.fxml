@@ -26,7 +26,8 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="3.0" minHeight="8.0" prefHeight="3.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="66.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -75,21 +76,37 @@
                      </children>
                   </GridPane>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Location:" GridPane.rowIndex="3" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Streetname:" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="4" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number:" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="5" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Postal code:" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="6" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="City:" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="7" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Country:" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="8" />
-                  <TextField fx:id="Streetname" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField fx:id="Number" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <TextField fx:id="PostalCode" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <TextField fx:id="City" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                  <TextField fx:id="Country" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name (optional):" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="9" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Extra info (optional):" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="10" />
-                  <TextField fx:id="nameLoc" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                  <TextArea fx:id="ExtraInfo" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Streetname:" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="5" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number:" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="6" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Postal code:" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="7" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="City:" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="8" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Country:" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="9" />
+                  <TextField fx:id="Streetname" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="Number" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField fx:id="PostalCode" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <TextField fx:id="City" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <TextField fx:id="Country" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name (optional):" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="10" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Extra info (optional):" textAlignment="RIGHT" wrappingWidth="150.0" GridPane.rowIndex="11" />
+                  <TextField fx:id="nameLoc" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                  <TextArea fx:id="ExtraInfo" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
                   <ComboBox fx:id="existLoc" prefHeight="25.0" prefWidth="367.0" promptText="Existing Location" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <GridPane GridPane.rowIndex="3">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="159.0" minWidth="10.0" prefWidth="55.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="272.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose existing location OR fill in the text fields" textOrigin="BOTTOM" wrappingWidth="250.0" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="System Italic" size="10.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </GridPane>
                </children>
             </GridPane>
             <Button fx:id="back" layoutX="19.0" layoutY="21.0" mnemonicParsing="false" onAction="#toAddTraining" text="Back" />
