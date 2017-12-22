@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -7,47 +8,49 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<ScrollPane prefHeight="1500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeController">
+<ScrollPane prefHeight="1900.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeController">
    <content>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1500.0" prefWidth="990.0" stylesheets="@application.css">
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1900.0" prefWidth="990.0" stylesheets="@application.css">
+         
          <children>
-            <AnchorPane prefHeight="1600.0" prefWidth="1400.0">
+            <AnchorPane prefHeight="1900.0" prefWidth="1400.0">
                <children>
-               <TableView fx:id="allTrainingTable" layoutX="72.0" layoutY="220.0" prefHeight="323.0" prefWidth="900.0" AnchorPane.leftAnchor="72.0">
+              
+               <TableView fx:id="allTrainingTable" layoutX="71.0" layoutY="230.0" prefHeight="323.0" prefWidth="900.0" AnchorPane.leftAnchor="71.0">
               <columns>
                   <TableColumn fx:id="idTableCol" prefWidth="40.0" text="ID" />
-                <TableColumn fx:id="titleTableCol" prefWidth="900.0" text="Title" />
+                <TableColumn fx:id="titleTableCol" prefWidth="860.0" text="Title" />
               </columns>
             </TableView>
-                  <Label layoutX="72.0" layoutY="599.0" prefHeight="21.0" prefWidth="463.0" text="Select employee you would like to request information of:">
+                  <Label layoutX="65.0" layoutY="1116.0" prefHeight="21.0" prefWidth="463.0" text="Select employee you would like to request information of:">
                      <font>
                         <Font name="System Italic" size="15.0" />
                      </font>
                   </Label>
               <!--     <JFXTextField fx:id="input" text="Zoek" /> -->
-                  <TreeTableView fx:id="table" layoutX="74.0" layoutY="620.0" prefHeight="349.0" prefWidth="900.0" />
-                  <Label layoutX="73.0" layoutY="564.0" prefHeight="35.0" prefWidth="113.0" stylesheets="@application.css" text="Statistics">
+                  <TreeTableView fx:id="table" layoutX="63.0" layoutY="1170.0" prefHeight="349.0" prefWidth="900.0" />
+                  <Label layoutX="74.0" layoutY="579.0" prefHeight="35.0" prefWidth="113.0" stylesheets="@application.css" text="Statistics">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Button fx:id="b_trainings" layoutX="72.0" layoutY="1001.0" mnemonicParsing="false" onAction="#showTrainings" prefHeight="31.0" prefWidth="450.0" text="overview all training" />
-                  <Button fx:id="b_certificates" layoutX="522.0" layoutY="1001.0" mnemonicParsing="false" onAction="#showCertificates" prefHeight="31.0" prefWidth="450.0" text="overview certificates" />
-                  <Label fx:id="l_certificate" alignment="TOP_LEFT" layoutX="525.0" layoutY="1088.0" prefHeight="285.0" prefWidth="450.0">
+                  <Button fx:id="b_trainings" layoutX="63.0" layoutY="1569.0" mnemonicParsing="false" onAction="#showTrainings" prefHeight="31.0" prefWidth="450.0" text="overview all training" />
+                  <Button fx:id="b_certificates" layoutX="504.0" layoutY="1569.0" mnemonicParsing="false" onAction="#showCertificates" prefHeight="31.0" prefWidth="450.0" text="overview certificates" />
+                  <Label fx:id="l_certificate" alignment="TOP_LEFT" layoutX="504.0" layoutY="1638.0" prefHeight="234.0" prefWidth="450.0">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding></Label>
-                  <Label fx:id="l_training" alignment="TOP_LEFT" layoutX="75.0" layoutY="1083.0" prefHeight="294.0" prefWidth="450.0" wrapText="true">
+                  <Label fx:id="l_training" alignment="TOP_LEFT" layoutX="71.0" layoutY="1634.0" prefHeight="242.0" prefWidth="450.0" wrapText="true">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding></Label>
-                  <Label fx:id="errorMsg" alignment="CENTER" layoutX="74.0" layoutY="1418.0" prefHeight="38.0" prefWidth="390.0" />
-                  <Label layoutX="75.0" layoutY="164.0" prefHeight="35.0" prefWidth="221.0" stylesheets="@application.css" text="Training requests">
+                  <Label fx:id="errorMsg" alignment="CENTER" layoutX="64.0" layoutY="1531.0" prefHeight="38.0" prefWidth="439.0" textFill="#f50505" />
+                  <Label layoutX="83.0" layoutY="110.0" prefHeight="35.0" prefWidth="221.0" stylesheets="@application.css" text="Training requests">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="73.0" layoutY="199.0" prefHeight="21.0" prefWidth="561.0" text="Double click the training you would like to create:">
+                  <Label layoutX="83.0" layoutY="154.0" prefHeight="21.0" prefWidth="561.0" text="Double click the training you would like to create:">
                      <font>
                         <Font name="System Italic" size="15.0" />
                      </font>
@@ -57,7 +60,18 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
+                  <BarChart fx:id="chart" layoutX="74.0" layoutY="653.0" prefHeight="432.0" prefWidth="893.0" title="Certificates of employees">
+                    <xAxis>
+                      <CategoryAxis label="Employee ID" side="BOTTOM" fx:id="x" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis fx:id="y" label="Number of certificates" side="LEFT" />
+                    </yAxis>
+                  </BarChart>
+                  
+                  
                </children>
+                
             </AnchorPane>
         <!--      <JFXButton text="New Student" /> -->
          </children>

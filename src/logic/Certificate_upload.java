@@ -8,13 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 
-@Entity
+@Entity(name="Certificates_upload")
 @Table(name="Certificates_upload")
 public class Certificate_upload {
-
-
 	
-
 		@Id
 	    @GeneratedValue(strategy=GenerationType.IDENTITY)
 	    @Column(name="certificateID")
