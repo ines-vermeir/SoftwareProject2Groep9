@@ -151,13 +151,13 @@ public class TrainingDetailsController  implements Initializable{
 					sessions.get(i).setPart(i);
 					sdb.updateSession(sessions.get(i));
 				}
-			t.setSessions(t.getSessions()-1);
-			tdb.updateTraining(t);
-			logic.Session ses = sdb.getSessionByID(s.getSessionID());
-			//sdb.updateSession(s);
-			sdb.archiveSession(ses);
-			Navigator.loadVista(Navigator.TrainingDetailsView);
-			Navigator.loadMenuVista(Navigator.MenuTrainingActiveView);
+				t.setSessions(t.getSessions()-1);
+				tdb.updateTraining(t);
+				logic.Session ses = sdb.getSessionByID(s.getSessionID());
+				//sdb.updateSession(s);
+				sdb.archiveSession(ses);
+				Navigator.loadVista(Navigator.TrainingDetailsView);
+				Navigator.loadMenuVista(Navigator.MenuTrainingActiveView);
 			}else {
 				System.err.println(sessions.size());
 				errorMsg.setVisible(true);
@@ -174,16 +174,16 @@ public class TrainingDetailsController  implements Initializable{
 		try {
 			TrainingDB tdb = new TrainingDB();
 			SessionDB sdb = new SessionDB();
-			
+
 			System.err.println("voor delete");
 			Training t = tdb.getTraining(Integer.parseInt(trainingId.getText()));
-			
+
 			List <Session> s = sdb.getAllSessionsOfTrainingID2(t.getTrainingID());
 			for (Session session : s) {
 				sdb.deleteSession(session);
 			}
 			tdb.deleteTraining(t);
-			
+
 			System.err.println("na delete");
 			toAllTraining();
 		}
@@ -262,16 +262,16 @@ public class TrainingDetailsController  implements Initializable{
 		checkLocation();
 		if ( checkLoc == true ) {
 			//Location newLoc = new Location(Streetname.getText(), Number.getText(), PostalCode.getText(),City.getText(),Country.getText(), nameLoc.getText(), ExtraInfo.getText(),0);
-//			Location newLoc = ldb.getLocationById(newSes.getLocationID());
-//			lid = newLoc.getID();
-//			newLoc.setStreetName(Streetname.getText());
-//			newLoc.setNumber( Number.getText());
-//			newLoc.setPostalCode(PostalCode.getText());
-//			newLoc.setCity(City.getText());
-//			newLoc.setCountry(Country.getText());
-//			newLoc.setName(nameLoc.getText());
-//			newLoc.setInfo(ExtraInfo.getText());
-//			ldb.updateLocation(newLoc);
+			//			Location newLoc = ldb.getLocationById(newSes.getLocationID());
+			//			lid = newLoc.getID();
+			//			newLoc.setStreetName(Streetname.getText());
+			//			newLoc.setNumber( Number.getText());
+			//			newLoc.setPostalCode(PostalCode.getText());
+			//			newLoc.setCity(City.getText());
+			//			newLoc.setCountry(Country.getText());
+			//			newLoc.setName(nameLoc.getText());
+			//			newLoc.setInfo(ExtraInfo.getText());
+			//			ldb.updateLocation(newLoc);
 		} else {
 			errorPane.setVisible(true);
 			errorMsg.setText(errorMsg.getText() + "Adres is not valid!\n");
@@ -313,100 +313,94 @@ public class TrainingDetailsController  implements Initializable{
 			checkLoc = false;
 		}
 	}
-	@FXML protected Training saveTraining() {
-
-		TrainingDB tdb = new TrainingDB();
-		String title = null,subject= null,teacher=null;
-
-		if ((titleTraining.getText()!= null && !titleTraining.getText().isEmpty())) {
-			title = titleTraining.getText();
+	@FXML protected void saveTraining() {
+		System.err.println("1");
+		if (titleTraining.getText()!= null && !titleTraining.getText().isEmpty() && !titleTraining.getText().equals("")) {
+			System.err.println("2");
 		}	 else {
 			errorMsg.setText(errorMsg.getText() + "Title is empty!\n");
 			check = false;
 		}
-		if ((subjectTraining.getText() != null && !subjectTraining.getText().isEmpty())) {
-			subject = subjectTraining.getText();
+		if (subjectTraining.getText() != null && !subjectTraining.getText().isEmpty() && !subjectTraining.getText().equals("")) {
+			System.err.println("3");
 		} else {
 			errorMsg.setText(errorMsg.getText() + "Subject is empty!\n");
 			check = false;
 		}
-		if ((teacherTraining.getText() != null && !teacherTraining.getText().isEmpty() )) {
-			teacher = teacherTraining.getText();
+		if (teacherTraining.getText() != null && !teacherTraining.getText().isEmpty() && !subjectTraining.getText().equals("")) {
+			System.err.println("4");
 		}else {
 			errorMsg.setText(errorMsg.getText() + "Teacher is empty!\n");
 			check = false;
 		}
-
-		Training newtr = new Training();
-		try {
-			newtr = tdb.getTraining(Integer.parseInt(trainingId.getText()));
-			newtr.setLanguage(Language.valueOf(LanguageTraining.getValue()));
-			newtr.setResponsible(teacher);
-			newtr.setSubject(subject);
-			newtr.setTitle(title);
-			newtr.setArchive(0);
-			return newtr;
-		} catch (Exception e1) {
-
-			e1.printStackTrace();
-
-		}
-		return newtr;
 	}
 
 	public void updateFunct() {
 		check = true;
 		errorMsg.setText("");
-		db.SessionDB sdb = new SessionDB();
+		SessionDB sdb = new SessionDB();
 		TrainingDB tdb = new TrainingDB();
-		Training saveTr = saveTraining();
 		LocationDB ldb = new LocationDB();
+		System.err.println(check);
+		saveTraining();
+		System.err.println(check);
 		if (sessionId.getText() != null && !sessionId.getText().isEmpty()) {
-		saveSession();
+			System.err.println("1");
+			saveSession();
 		}
+		
+		Training newtr = new Training();
 		try {
 			if (check == true) {
-				
-					System.err.println("2");
-					tdb.updateTraining(saveTr);
-					System.err.println(saveTr.toString());
-					System.err.println("3");
-				
-				if (sessionId.getText() != null && !sessionId.getText().isEmpty()) {
-					logic.Session saveSes = sdb.getSessionByID(Integer.parseInt(sessionId.getText()));
-					
-					
-					Location newLoc = ldb.getLocationById(saveSes.getLocationID());
-					System.err.println(newLoc.toString());
-					lid = newLoc.getID();
-					newLoc.setStreetName(Streetname.getText());
-					newLoc.setNumber( Number.getText());
-					newLoc.setPostalCode(PostalCode.getText());
-					newLoc.setCity(City.getText());
-					newLoc.setCountry(Country.getText());
-					newLoc.setName(nameLoc.getText());
-					newLoc.setInfo(ExtraInfo.getText());
-					System.err.println(newLoc.toString());
-					ldb.updateLocation(newLoc);
-					
-					
-					System.err.println("4");
-					System.err.println(saveSes.getLocationID());
-					saveSes.setDate(cal);
-					saveSes.setEndTime(endTime);
-					saveSes.setStartTime(startTime);
-					saveSes.setLocationID(lid);
-					System.err.println(saveSes.getLocationID());
-					saveSes.setArchive(0);
-					System.err.println(saveSes.toString());
-					sdb.updateSession(saveSes);
-					System.err.println("5");
+				try {
+					newtr = tdb.getTraining(Integer.parseInt(trainingId.getText()));
+					newtr.setLanguage(Language.valueOf(LanguageTraining.getValue()));
+					newtr.setResponsible(teacherTraining.getText());
+					newtr.setSubject(subjectTraining.getText());
+					newtr.setTitle(titleTraining.getText());
+					newtr.setArchive(0);
+					tdb.updateTraining(newtr);
+
+					if (sessionId.getText() != null && !sessionId.getText().isEmpty()) {
+						logic.Session saveSes = sdb.getSessionByID(Integer.parseInt(sessionId.getText()));
+
+
+						Location newLoc = ldb.getLocationById(saveSes.getLocationID());
+						System.err.println(newLoc.toString());
+						lid = newLoc.getID();
+						newLoc.setStreetName(Streetname.getText());
+						newLoc.setNumber( Number.getText());
+						newLoc.setPostalCode(PostalCode.getText());
+						newLoc.setCity(City.getText());
+						newLoc.setCountry(Country.getText());
+						newLoc.setName(nameLoc.getText());
+						newLoc.setInfo(ExtraInfo.getText());
+						System.err.println(newLoc.toString());
+						ldb.updateLocation(newLoc);
+
+
+						System.err.println("4");
+						System.err.println(saveSes.getLocationID());
+						saveSes.setDate(cal);
+						saveSes.setEndTime(endTime);
+						saveSes.setStartTime(startTime);
+						saveSes.setLocationID(lid);
+						System.err.println(saveSes.getLocationID());
+						saveSes.setArchive(0);
+						System.err.println(saveSes.toString());
+						sdb.updateSession(saveSes);
+						System.err.println("5");
+					}
+					System.err.println("6");
+					errorMsg.setVisible(true);
+					errorMsg.setTextFill(javafx.scene.paint.Color.BLACK);
+					errorMsg.setText(errorMsg.getText() + "Update succesfull!\n");
+					fillAll(newtr);
+				} catch (Exception e1) {
+
+					e1.printStackTrace();
+
 				}
-				System.err.println("6");
-				errorMsg.setVisible(true);
-				errorMsg.setTextFill(javafx.scene.paint.Color.BLACK);
-				errorMsg.setText(errorMsg.getText() + "Update succesfull!\n");
-				fillAll(saveTr);
 			}
 			else {
 				errorMsg.setVisible(true);

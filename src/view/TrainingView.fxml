@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -23,6 +24,11 @@
             </TableView>
             <TextField fx:id="searchBar" layoutX="25.0" layoutY="47.0" onAction="#zoekFunct" prefHeight="25.0" prefWidth="950.0" promptText="zoek" />
             <Button fx:id="addBtn" alignment="BASELINE_CENTER" layoutX="775.0" layoutY="14.0" mnemonicParsing="false" onAction="#addTraining" prefHeight="25.0" prefWidth="200.0" text="Add Training" />
+            <Text layoutX="25.0" layoutY="450.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Double click on a training to see more details or to update/delete" wrappingWidth="578.13671875">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </children>

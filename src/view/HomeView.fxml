@@ -19,7 +19,7 @@
                <TableView fx:id="allTrainingTable" layoutX="71.0" layoutY="230.0" prefHeight="323.0" prefWidth="900.0" AnchorPane.leftAnchor="71.0">
               <columns>
                   <TableColumn fx:id="idTableCol" prefWidth="40.0" text="ID" />
-                <TableColumn fx:id="titleTableCol" prefWidth="900.0" text="Title" />
+                <TableColumn fx:id="titleTableCol" prefWidth="860.0" text="Title" />
               </columns>
             </TableView>
                   <Label layoutX="65.0" layoutY="1116.0" prefHeight="21.0" prefWidth="463.0" text="Select employee you would like to request information of:">
@@ -44,7 +44,7 @@
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding></Label>
-                  <Label fx:id="errorMsg" alignment="CENTER" layoutX="74.0" layoutY="1418.0" prefHeight="38.0" prefWidth="390.0" />
+                  <Label fx:id="errorMsg" alignment="CENTER" layoutX="64.0" layoutY="1531.0" prefHeight="38.0" prefWidth="439.0" textFill="#f50505" />
                   <Label layoutX="83.0" layoutY="110.0" prefHeight="35.0" prefWidth="221.0" stylesheets="@application.css" text="Training requests">
                      <font>
                         <Font size="18.0" />
@@ -62,10 +62,10 @@
                   </Label>
                   <BarChart fx:id="chart" layoutX="74.0" layoutY="653.0" prefHeight="432.0" prefWidth="893.0" title="Certificates of employees">
                     <xAxis>
-                      <CategoryAxis fx:id="x" label="Employee ID" side="BOTTOM" />
+                      <CategoryAxis label="Employee ID" side="BOTTOM" fx:id="x" />
                     </xAxis>
                     <yAxis>
-                      <NumberAxis fx:id="y" label="Amount of certificates" side="LEFT" />
+                      <NumberAxis fx:id="y" label="Number of certificates" side="LEFT" />
                     </yAxis>
                   </BarChart>
                   
