@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ChartController">
+   <children>
+      <AnchorPane prefHeight="800.0" prefWidth="1200.0">
+         <children>
+          <!--   <PieChart fx:id="piechart" layoutX="634.0" layoutY="109.0" prefHeight="607.0" prefWidth="546.0" title="Amount of Employees in training" /> -->
+            <BarChart fx:id="chart" layoutX="14.0" layoutY="101.0" prefHeight="447.0" prefWidth="569.0" title="Certificates of  Employees">
+              <xAxis>
+                <CategoryAxis label="Employee" side="BOTTOM" fx:id="x" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis fx:id="y" label="Amount of certificates" side="LEFT" />
+              </yAxis>
+            </BarChart>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

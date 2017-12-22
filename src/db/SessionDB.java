@@ -173,6 +173,20 @@ public class SessionDB {
 
 		return list;
 	}
+	//added by Sebastian
+/*	public List<Students_enrolled_in_session> getAllSessionsByEmployeeId(int id) 
+	{
+		List<Students_enrolled_in_session> list = new ArrayList<Students_enrolled_in_session>(); 
+		//org.hibernate.Session session = myFactory.openSession();
+		Transaction t = session.beginTransaction();
+		for (Object oneObject : session.createQuery("FROM Students_enrolled_in_session where sessionID =  " + id).getResultList()) {
+			list.add((Students_enrolled_in_session)oneObject);
+		}
+		t.commit();
+		//session.close();
+
+		return list;
+	}*/
 	//Added by Sebastian 
 	
   public List<Students_enrolled_in_session> getAllEmployeesInSession(){
