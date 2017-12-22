@@ -138,7 +138,7 @@ public  void archiveSurvey(int surveyID) {
 public ArrayList<Survey> getAllSurveys(){
 	
 	   ArrayList<Survey> list = null;
-	 
+	   ArrayList<Survey> listsurveys = new ArrayList<Survey>();
 		Transaction t = null; 
 		try {
 			t = session.beginTransaction();
@@ -150,7 +150,23 @@ public ArrayList<Survey> getAllSurveys(){
 			if(t!= null ) t.rollback();
 			e.printStackTrace();
 		}
-		return list;
+		boolean check = true;
+		for (Survey s: list)
+		{
+			for (Survey s2: listsurveys)
+			{
+				if (s2 == s)
+				{
+					check = false;
+				}
+			}
+			if (check == true)
+			{
+				listsurveys.add(s);
+			}
+			check = true;
+		}
+		return listsurveys;
 	}
 
 
