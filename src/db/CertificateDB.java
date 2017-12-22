@@ -12,6 +12,7 @@ import org.hibernate.cfg.Configuration;
 
 import antlr.collections.List;
 import logic.Certificate;
+import logic.Certificate_upload;
 //Deze klasse gebruikt Hibernate voor de connectie met de database en de CRUD operations
 public class CertificateDB {
 	
