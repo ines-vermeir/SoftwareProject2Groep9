@@ -210,7 +210,7 @@ public class TrainingDetailsController  implements Initializable{
 				date = addDate.getValue();
 
 				cal = Calendar.getInstance();
-				cal.set(date.getYear(), date.getMonthValue(), date.getDayOfMonth());
+				cal.set(date.getYear(), date.getMonthValue()-1, date.getDayOfMonth());
 			} else {
 				errorPane.setVisible(true);
 				errorMsg.setText(errorMsg.getText() + "Date is not valid!\n");
@@ -364,6 +364,9 @@ public class TrainingDetailsController  implements Initializable{
 					if (sessionId.getText() != null && !sessionId.getText().isEmpty()) {
 						logic.Session saveSes = sdb.getSessionByID(Integer.parseInt(sessionId.getText()));
 
+						saveSes.setDate(cal);
+						saveSes.setEndTime(endTime);
+						saveSes.setStartTime(startTime);
 
 						Location newLoc = ldb.getLocationById(saveSes.getLocationID());
 						System.err.println(newLoc.toString());
