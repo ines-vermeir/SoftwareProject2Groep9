@@ -72,6 +72,8 @@ public class EmployeeController implements Initializable{
      private TrainingDB db = new TrainingDB();
      //chosen training by employee on applications
      private int chosenTraining;
+     //applicationID
+     Application appID=null;
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -228,6 +230,7 @@ public class EmployeeController implements Initializable{
 							status = a.getStatus();
 							chosenTraining= a.getTraining_id();
 							chosenEmp = table.getSelectionModel().getSelectedItem().getValue();
+							appID= a;
 							break;
 						}
 						
@@ -369,7 +372,7 @@ public class EmployeeController implements Initializable{
 										
 										   sessiondb.linkEmployee(listSessions.get(i).getSessionID(), chosenEmp.getEmployeeID());
 											message="The selected employee has successfully been added to the chosen training";
-											
+											  db.deleteApplication(appID);
 											 feedback.setText(message);	
 									}
 								   
@@ -378,6 +381,7 @@ public class EmployeeController implements Initializable{
 								   System.out.println(listStudents.size());
 								   for(int i=0; i < listSessions.size(); i++) {
 								   sessiondb.linkEmployee(listSessions.get(i).getSessionID(), chosenEmp.getEmployeeID());
+								   db.deleteApplication(appID);
 									message="The selected employee has successfully been added to the chosen training";
 									
 								   }
